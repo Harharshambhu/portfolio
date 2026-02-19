@@ -2,6 +2,7 @@
 import { motion, useAnimationFrame, useMotionValue } from "framer-motion";
 import Image from "next/image";
 import { useState, useRef } from "react";
+import { prefix } from "@/utils/prefix";
 
 export default function HeroImage() {
     const [isHovered, setIsHovered] = useState(false);
@@ -57,7 +58,7 @@ export default function HeroImage() {
                 style={{ rotate: imageRotation }}
             >
                 <Image
-                    src="/images/hero.png"
+                    src={prefix("/images/hero.png")}
                     alt="Anirudh Singh"
                     width={120}
                     height={160}

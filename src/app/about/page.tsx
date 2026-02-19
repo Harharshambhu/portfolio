@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import ScrollReveal from "@/components/ScrollReveal";
+import { prefix } from "@/utils/prefix";
 
 export default function About() {
     const experiences = [
@@ -55,7 +56,7 @@ export default function About() {
                     </p>
                     <ScrollReveal className="w-full md:w-1/2 flex justify-end -mt-24 md:-mt-60">
                         <Image
-                            src="/images/profile.png"
+                            src={prefix("/images/profile.png")}
                             alt="Anirudh Singh"
                             width={600}
                             height={400}
