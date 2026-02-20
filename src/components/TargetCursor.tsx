@@ -13,7 +13,7 @@ interface TargetCursorProps {
 }
 
 const TargetCursor: React.FC<TargetCursorProps> = ({
-    targetSelector = '.cursor-target, a, button', // Added default selectors for convenience
+    targetSelector = '.cursor-target, a:not(.no-cursor-interaction), button:not(.no-cursor-interaction)', // Added default selectors for convenience
     spinDuration = 2,
     hideDefaultCursor = true,
     hoverDuration = 0.2,
