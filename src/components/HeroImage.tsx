@@ -58,7 +58,7 @@ export default function HeroImage() {
                 style={{ rotate: imageRotation }}
             >
                 <Image
-                    src={prefix("/images/hero.png")}
+                    src={prefix("/images/hero.webp")}
                     alt="Anirudh Singh"
                     width={120}
                     height={160}
