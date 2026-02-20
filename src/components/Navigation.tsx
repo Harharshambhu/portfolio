@@ -112,14 +112,20 @@ export default function Navigation() {
                     marginTop: isScrolled ? -24 : 24,
                     marginBottom: isScrolled ? 0 : 32
                 }}
-                className={`flex w-full justify-end cursor-pointer ${!isScrolled ? "min-h-[12vw]" : ""}`}
+                className={`flex w-full justify-end cursor-pointer`}
                 transition={{ type: "spring", stiffness: 100, damping: 20 }}
                 onMouseEnter={() => {
-                    const nextState = !isHovered;
-                    setIsHovered(nextState);
-                    scramble(nextState ? "Sokimevi" : "Singh.");
+                    if (!isHovered) {
+                        setIsHovered(true);
+                        scramble("Sokimevi");
+                    }
                 }}
-                onMouseLeave={() => { }}
+                onMouseLeave={() => {
+                    if (isHovered) {
+                        setIsHovered(false);
+                        scramble("Singh.");
+                    }
+                }}
             >
                 <Link href="/" className={`block ${!isScrolled ? "no-cursor-interaction" : ""}`}>
                     <motion.span
