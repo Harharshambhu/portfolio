@@ -184,6 +184,9 @@ const TargetCursor: React.FC<TargetCursorProps> = ({
         window.addEventListener('mouseup', mouseUpHandler);
 
         const enterHandler = (e: MouseEvent) => {
+            // Ensure target is an Element (not Text node, etc.)
+            if (!(e.target instanceof Element)) return;
+
             const directTarget = e.target as Element;
             const allTargets: Element[] = [];
             let current: Element | null = directTarget;
