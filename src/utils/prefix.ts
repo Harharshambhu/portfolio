@@ -1,5 +1,5 @@
 const isProd = process.env.NODE_ENV === 'production';
-const basePath = isProd ? '/portfolio' : '';
+const basePath = '';
 
 export const prefix = (path: string) => {
     // Ensure path starts with /
