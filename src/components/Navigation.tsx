@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 import { motion, useScroll, useMotionValueEvent } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 const links = [
     { href: "/", label: "Home" },
@@ -36,12 +36,21 @@ export default function Navigation() {
 
     const [displayText, setDisplayText] = useState("Singh.");
     const [isHovered, setIsHovered] = useState(false);
+    const intervalRef = useRef<NodeJS.Timeout | null>(null);
+
+    useEffect(() => {
+        return () => {
+            if (intervalRef.current) clearInterval(intervalRef.current);
+        };
+    }, []);
 
     const scramble = (finalText: string) => {
         let iterations = 0;
         const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+";
 
-        const interval = setInterval(() => {
+        if (intervalRef.current) clearInterval(intervalRef.current);
+
+        intervalRef.current = setInterval(() => {
             setDisplayText(prev =>
                 finalText.split("")
                     .map((letter, index) => {
@@ -54,7 +63,7 @@ export default function Navigation() {
             );
 
             if (iterations >= finalText.length) {
-                clearInterval(interval);
+                if (intervalRef.current) clearInterval(intervalRef.current);
             }
 
             iterations += 1 / 2; // Speed of decoding
@@ -110,7 +119,7 @@ export default function Navigation() {
                     scramble(nextState ? "Sokimevi" : "Singh.");
                 }}
             >
-                <Link href="/" className="contents">
+                <Link href="/" className="block">
                     <motion.span
                         animate={{
                             fontSize: isScrolled ? "0.875rem" : (isHovered ? "8vw" : "12vw"),
