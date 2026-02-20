@@ -115,24 +115,18 @@ export default function Navigation() {
                 className={`flex w-full justify-end cursor-pointer`}
                 transition={{ type: "spring", stiffness: 100, damping: 20 }}
                 onMouseEnter={() => {
-                    if (!isHovered) {
-                        setIsHovered(true);
-                        scramble("Sokimevi");
-                    }
+                    const nextState = !isHovered;
+                    setIsHovered(nextState);
+                    scramble(nextState ? "Sokimevi" : "Singh.");
                 }}
-                onMouseLeave={() => {
-                    if (isHovered) {
-                        setIsHovered(false);
-                        scramble("Singh.");
-                    }
-                }}
+                onMouseLeave={() => { }}
             >
                 <Link href="/" className={`block ${!isScrolled ? "no-cursor-interaction" : ""}`}>
                     <motion.span
                         animate={{
                             fontSize: isScrolled ? "0.875rem" : (isHovered ? "8vw" : "12vw"),
                             fontWeight: isScrolled ? 600 : (isHovered ? 700 : 700),
-                            letterSpacing: isScrolled ? "0em" : (isHovered ? "0.38em" : "-0.05em"),
+                            letterSpacing: isScrolled ? "0em" : (isHovered ? "0.35em" : "-0.05em"),
                             color: isHovered ? "#1F51FF" : "var(--foreground)"
                         }}
                         className={`leading-none block text-right transition-all duration-300`}
