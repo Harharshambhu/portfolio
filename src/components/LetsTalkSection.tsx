@@ -90,6 +90,12 @@ export default function LetsTalkSection() {
                     >
                         anirudhsingh1441@gmail.com
                     </a>
+                    <a
+                        href="/resume"
+                        className="text-lg underline underline-offset-4 text-gray-400 hover:text-white transition-colors w-fit"
+                    >
+                        View resume <span className="no-underline">-&gt;</span>
+                    </a>
                 </div>
 
                 {/* Parent container is flex so the button can grow */}
