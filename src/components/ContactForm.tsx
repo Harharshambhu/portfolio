@@ -1,24 +1,22 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useForm, ValidationError } from '@formspree/react';
 import { motion } from 'framer-motion';
 
 export default function ContactForm() {
     const [state, handleSubmit] = useForm("mzdaawdy");
     const [isHovered, setIsHovered] = useState(false);
+    const formRef = useRef<HTMLFormElement>(null);
 
-    if (state.succeeded) {
-        return (
-            <div className="flex flex-col items-center justify-center p-8 bg-green-500/10 border border-green-500/20 rounded-xl text-center w-full h-full min-h-[300px]">
-                <h3 className="text-2xl font-medium text-green-400 mb-3">Message Sent!</h3>
-                <p className="text-muted">Thanks for reaching out. I'll get back to you soon.</p>
-            </div>
-        );
-    }
+    useEffect(() => {
+        if (state.succeeded) {
+            formRef.current?.reset();
+        }
+    }, [state.succeeded]);
 
     return (
-        <form onSubmit={handleSubmit} className="flex flex-col gap-8 w-full max-w-2xl mx-auto">
+        <form ref={formRef} onSubmit={handleSubmit} className="flex flex-col gap-8 w-full max-w-2xl mx-auto">
             <div className="flex flex-col gap-2 text-center items-center">
                 <input
                     id="email"
@@ -84,7 +82,7 @@ export default function ContactForm() {
                         animate={isHovered ? "hover" : "initial"}
                     >
                         <motion.div layout className="flex w-full justify-center whitespace-nowrap px-4 tracking-tighter font-bold uppercase">
-                            {state.submitting ? "Sending..." : "Send Message"}
+                            {state.submitting ? "Sending..." : state.succeeded ? "Got your message!" : "Send Message"}
                         </motion.div>
                     </motion.button>
                 </div>
