@@ -56,7 +56,7 @@ export default function About() {
                     </p>
                     <ScrollReveal className="w-full md:w-1/2 flex justify-end -mt-24 md:-mt-60">
                         <Image
-                            src={prefix("/images/profile.png")}
+                            src={prefix("/images/profile.webp")}
                             alt="Anirudh Singh"
                             width={600}
                             height={400}
