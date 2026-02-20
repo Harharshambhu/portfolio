@@ -50,7 +50,7 @@ export default function Navigation() {
 
         if (intervalRef.current) clearInterval(intervalRef.current);
 
-        intervalRef.current = setInterval(() => {
+        const id = setInterval(() => {
             setDisplayText(prev =>
                 finalText.split("")
                     .map((letter, index) => {
@@ -63,11 +63,12 @@ export default function Navigation() {
             );
 
             if (iterations >= finalText.length) {
-                if (intervalRef.current) clearInterval(intervalRef.current);
+                clearInterval(id);
             }
 
             iterations += 1 / 2; // Speed of decoding
         }, 30);
+        intervalRef.current = id;
     };
 
     return (
@@ -114,9 +115,16 @@ export default function Navigation() {
                 className={`flex w-full justify-end cursor-pointer`}
                 transition={{ type: "spring", stiffness: 100, damping: 20 }}
                 onMouseEnter={() => {
-                    const nextState = !isHovered;
-                    setIsHovered(nextState);
-                    scramble(nextState ? "Sokimevi" : "Singh.");
+                    if (!isHovered) {
+                        setIsHovered(true);
+                        scramble("Sokimevi");
+                    }
+                }}
+                onMouseLeave={() => {
+                    if (isHovered) {
+                        setIsHovered(false);
+                        scramble("Singh.");
+                    }
                 }}
             >
                 <Link href="/" className={`block ${!isScrolled ? "no-cursor-interaction" : ""}`}>
