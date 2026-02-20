@@ -112,7 +112,7 @@ export default function Navigation() {
                     marginTop: isScrolled ? -24 : 24,
                     marginBottom: isScrolled ? 0 : 32
                 }}
-                className={`flex w-full justify-end cursor-pointer`}
+                className={`flex w-full justify-end cursor-pointer ${!isScrolled ? "min-h-[12vw]" : ""}`}
                 transition={{ type: "spring", stiffness: 100, damping: 20 }}
                 onMouseEnter={() => {
                     const nextState = !isHovered;
