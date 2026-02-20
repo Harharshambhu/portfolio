@@ -119,7 +119,7 @@ export default function Navigation() {
                     scramble(nextState ? "Sokimevi" : "Singh.");
                 }}
             >
-                <Link href="/" className="block">
+                <Link href="/" className={`block ${!isScrolled ? "no-cursor-interaction" : ""}`}>
                     <motion.span
                         animate={{
                             fontSize: isScrolled ? "0.875rem" : (isHovered ? "8vw" : "12vw"),
