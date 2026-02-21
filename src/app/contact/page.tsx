@@ -4,16 +4,16 @@ import BackgroundGrid from "@/components/BackgroundGrid";
 export default function Contact() {
     return (
         <div className="flex flex-col w-full">
-            <div className="flex flex-col gap-16 items-center w-full px-6 min-h-[60vh] justify-center mb-24">
-                <section className="flex flex-col gap-6 items-center text-center w-full">
-                    <h1 className="text-6xl md:text-[150px] font-medium tracking-tighter leading-none">Contact</h1>
+            <div className="flex flex-col gap-10 items-center w-full px-6 min-h-[50vh] justify-center mb-12 mt-4 md:mt-8">
+                <section className="flex flex-col gap-4 items-center text-center w-full">
+                    <h1 className="text-6xl md:text-[120px] font-medium tracking-tighter leading-none">Contact</h1>
                     <p className="max-w-xl text-lg leading-relaxed text-muted">
                         Feel free to reach out for collaborations or just say hi.
                     </p>
                 </section>
 
                 <section className="flex flex-col items-center w-full max-w-md">
-                    <div className="flex flex-col gap-10 items-center w-full bg-white/5 rounded-2xl p-8 md:p-12 backdrop-blur-sm border border-white/10">
+                    <div className="flex flex-col gap-6 items-center w-full bg-white/5 rounded-2xl py-6 px-8 md:py-8 md:px-12 backdrop-blur-sm border border-white/10">
                         <div className="flex flex-col gap-2 items-center text-center">
                             <span className="text-sm font-mono text-muted uppercase tracking-wider mb-2">
                                 Email
