@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
+import ScrollMagnifier from "@/components/ScrollMagnifier";
 import SectionLabel from "@/components/SectionLabel";
 
 const fade = {
@@ -77,14 +78,18 @@ export default function XRProximityProjectPage() {
             >
                 <div className="flex flex-col gap-3 items-center">
                     <span className="text-sm font-semibold text-accent-blue uppercase tracking-widest">M.Des. XR Design · IIT Jodhpur · April 2026</span>
-                    <h1 className="text-5xl md:text-[80px] font-bold tracking-tighter leading-none">Proximity-Based<br />Presence</h1>
+                    <h1 className="text-6xl md:text-[100px] font-black tracking-tighter leading-none">Proximity-Based<br />Presence</h1>
                 </div>
-                <p className="max-w-2xl text-xl leading-relaxed text-muted">
+                <ScrollMagnifier>
+<p className="max-w-2xl text-base leading-relaxed text-muted">
                     Procedural environments that respond to user proximity, gaze, and movement — sustaining engagement more effectively than static, high-fidelity alternatives without exceeding standalone VR hardware limits.
                 </p>
-                <p className="max-w-2xl text-base leading-relaxed text-muted">
+</ScrollMagnifier>
+                <ScrollMagnifier>
+<p className="max-w-2xl text-base leading-relaxed text-muted">
                     An A/B study across eight participants showed a <strong className="text-foreground">35% increase in session duration</strong> and a <strong className="text-foreground">77% increase in interaction events</strong> in the reactive condition, with no perceptible performance degradation.
                 </p>
+</ScrollMagnifier>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-px border border-border rounded-xl overflow-hidden w-full max-w-2xl mt-2">
                     {[
                         { label: "Role", value: "Solo Researcher" },
@@ -115,7 +120,7 @@ export default function XRProximityProjectPage() {
                 ].map((item) => (
                     <div key={item.label} className="flex flex-col gap-2 p-8 bg-background">
                         <span className="text-xs font-mono text-muted uppercase tracking-wider">{item.label}</span>
-                        <span className="text-2xl font-semibold tracking-tight">{item.value}</span>
+                        <span className="text-[20px] md:text-[25px] font-semibold leading-tight">{item.value}</span>
                         <span className="text-sm text-muted leading-relaxed">{item.sub}</span>
                     </div>
                 ))}
@@ -131,13 +136,17 @@ export default function XRProximityProjectPage() {
             >
                 <div className="flex flex-col gap-4">
                     <SectionLabel>The Problem</SectionLabel>
-                    <h2 className="text-5xl font-semibold tracking-tight">The Immersion Gap in Standalone VR</h2>
-                    <p className="max-w-2xl text-muted leading-relaxed">
+                    <h2 className="text-[28px] md:text-[50px] font-extrabold leading-tight">The Immersion Gap in Standalone VR</h2>
+                    <ScrollMagnifier>
+<p className="max-w-2xl text-muted leading-relaxed">
                         Standalone VR has become affordable — but accessibility has not resolved a fundamental issue. Users report shorter sessions, more cognitive friction, and &ldquo;headset awareness&rdquo; far more frequently than in PC-based environments.
                     </p>
-                    <p className="max-w-2xl text-muted leading-relaxed">
+</ScrollMagnifier>
+                    <ScrollMagnifier>
+<p className="max-w-2xl text-muted leading-relaxed">
                         A standalone headset must drive <strong className="text-foreground">two independent stereo displays simultaneously at 72–120 FPS</strong> within a combined 220° field of view, all from a mobile chip with strict power and thermal limits.
                     </p>
+</ScrollMagnifier>
                 </div>
 
                 <div className="relative w-full aspect-video rounded-xl overflow-hidden border border-border">
@@ -150,9 +159,11 @@ export default function XRProximityProjectPage() {
                 </div>
 
                 <div className="p-6 rounded-xl border border-border bg-background">
-                    <p className="text-muted leading-relaxed italic">
+                    <ScrollMagnifier>
+<p className="text-muted leading-relaxed italic">
                         &ldquo;Low-fidelity PC games like Minecraft and Roblox consistently outperform high-fidelity standalone VR in session duration. If graphical power determined immersion, this would be impossible.&rdquo;
                     </p>
+</ScrollMagnifier>
                     <span className="text-xs font-mono text-muted mt-3 block">Research premise — informed by Jin (2024) and Slater &amp; Wilbur (1997)</span>
                 </div>
 
@@ -167,7 +178,9 @@ export default function XRProximityProjectPage() {
                                 className="object-cover"
                             />
                         </div>
-                        <p className="text-sm text-muted">Engagement via atmosphere, not graphical fidelity.</p>
+                        <ScrollMagnifier>
+<p className="text-sm text-muted">Engagement via atmosphere, not graphical fidelity.</p>
+</ScrollMagnifier>
                     </div>
                     <div className="flex flex-col gap-3">
                         <span className="text-xs font-mono text-muted uppercase tracking-wider">Reference — Minecraft</span>
@@ -179,7 +192,9 @@ export default function XRProximityProjectPage() {
                                 className="object-cover"
                             />
                         </div>
-                        <p className="text-sm text-muted">World-record engagement on minimum graphical budget.</p>
+                        <ScrollMagnifier>
+<p className="text-sm text-muted">World-record engagement on minimum graphical budget.</p>
+</ScrollMagnifier>
                     </div>
                 </div>
 
@@ -191,7 +206,7 @@ export default function XRProximityProjectPage() {
                         { num: "40 yrs", label: "Of 2D screen animation paradigms inherited by VR without questioning fit" },
                     ].map((s) => (
                         <div key={s.num} className="flex flex-col gap-2 p-6 bg-background">
-                            <span className="text-3xl font-semibold tracking-tight">{s.num}</span>
+                            <span className="text-[28px] md:text-[50px] font-extrabold leading-tight">{s.num}</span>
                             <span className="text-xs text-muted leading-relaxed">{s.label}</span>
                         </div>
                     ))}
@@ -208,10 +223,12 @@ export default function XRProximityProjectPage() {
             >
                 <div className="flex flex-col gap-4">
                     <SectionLabel>The Inherited Paradigm</SectionLabel>
-                    <h2 className="text-5xl font-semibold tracking-tight">Why 2D Animation Logic Fails in VR</h2>
-                    <p className="max-w-2xl text-muted leading-relaxed">
+                    <h2 className="text-[28px] md:text-[50px] font-extrabold leading-tight">Why 2D Animation Logic Fails in VR</h2>
+                    <ScrollMagnifier>
+<p className="max-w-2xl text-muted leading-relaxed">
                         Standalone VR has copied its animation logic from 40 years of 2D screen game development — keyframed loops, repeating cycles, fixed timelines. On monitors, cameras cut and shift before patterns repeat. In VR, there is no controlled camera.
                     </p>
+</ScrollMagnifier>
                 </div>
 
                 <div className="relative w-full aspect-[16/9] rounded-xl overflow-hidden border border-border bg-background">
@@ -222,7 +239,9 @@ export default function XRProximityProjectPage() {
                         className="object-contain"
                     />
                 </div>
-                <p className="text-sm text-muted">Fig. 1.1 — Field of View Comparison: 2D Camera vs. VR User · VR&apos;s expanded peripheral FoV (~220°) exposes keyframed loops that 2D cameras hide</p>
+                <ScrollMagnifier>
+<p className="text-sm text-muted">Fig. 1.1 — Field of View Comparison: 2D Camera vs. VR User · VR&apos;s expanded peripheral FoV (~220°) exposes keyframed loops that 2D cameras hide</p>
+</ScrollMagnifier>
             </motion.section>
 
             {/* ── KEY INSIGHTS ── */}
@@ -235,7 +254,7 @@ export default function XRProximityProjectPage() {
             >
                 <div className="flex flex-col gap-2">
                     <SectionLabel>Key Insights</SectionLabel>
-                    <h2 className="text-5xl font-semibold tracking-tight">What the Problem Analysis Revealed</h2>
+                    <h2 className="text-[28px] md:text-[50px] font-extrabold leading-tight">What the Problem Analysis Revealed</h2>
                 </div>
 
                 <div className="flex flex-col gap-4">
@@ -260,7 +279,9 @@ export default function XRProximityProjectPage() {
                             <span className="font-mono text-sm text-muted shrink-0 pt-0.5">{finding.num}</span>
                             <div className="flex flex-col gap-2">
                                 <span className="font-semibold">{finding.title}</span>
-                                <p className="text-sm text-muted leading-relaxed">{finding.body}</p>
+                                <ScrollMagnifier>
+<p className="text-sm text-muted leading-relaxed">{finding.body}</p>
+</ScrollMagnifier>
                             </div>
                         </div>
                     ))}
@@ -274,7 +295,9 @@ export default function XRProximityProjectPage() {
                         className="object-contain p-4"
                     />
                 </div>
-                <p className="text-sm text-muted">Prioritisation Matrix — comparing problems across user impact, feasibility of intervention, and developer control</p>
+                <ScrollMagnifier>
+<p className="text-sm text-muted">Prioritisation Matrix — comparing problems across user impact, feasibility of intervention, and developer control</p>
+</ScrollMagnifier>
             </motion.section>
 
             {/* ── RESEARCH DIRECTION ── */}
@@ -287,13 +310,17 @@ export default function XRProximityProjectPage() {
             >
                 <div className="flex flex-col gap-4">
                     <SectionLabel>Research Direction</SectionLabel>
-                    <h2 className="text-5xl font-semibold tracking-tight">Reframing the Question</h2>
-                    <p className="max-w-2xl text-muted leading-relaxed">
+                    <h2 className="text-[28px] md:text-[50px] font-extrabold leading-tight">Reframing the Question</h2>
+                    <ScrollMagnifier>
+<p className="max-w-2xl text-muted leading-relaxed">
                         Rather than pursuing graphical fidelity — an arms race standalone hardware cannot win — this research asks whether environments that respond dynamically to user presence can sustain immersion more effectively.
                     </p>
-                    <p className="max-w-2xl text-muted leading-relaxed">
+</ScrollMagnifier>
+                    <ScrollMagnifier>
+<p className="max-w-2xl text-muted leading-relaxed">
                         Slater and Wilbur (1997) establish the critical distinction: <strong className="text-foreground">immersion</strong> is a technical property — resolution, FoV, tracking latency — but <strong className="text-foreground">presence</strong> is a subjective experience that can be optimised independently of hardware.
                     </p>
+</ScrollMagnifier>
                 </div>
 
                 <div className="relative w-full max-w-2xl mx-auto aspect-[4/3] rounded-xl overflow-hidden border border-border bg-background">
@@ -304,7 +331,9 @@ export default function XRProximityProjectPage() {
                         className="object-contain p-4"
                     />
                 </div>
-                <p className="text-sm text-muted">Presence vs. Immersion Framework · Slater &amp; Wilbur (1997); Jin (2024); Kelsey et al. (2023)</p>
+                <ScrollMagnifier>
+<p className="text-sm text-muted">Presence vs. Immersion Framework · Slater &amp; Wilbur (1997); Jin (2024); Kelsey et al. (2023)</p>
+</ScrollMagnifier>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                     {[
@@ -330,7 +359,9 @@ export default function XRProximityProjectPage() {
                         <div key={obj.num} className="flex flex-col gap-4 p-6 rounded-xl border border-border">
                             <span className="text-sm font-medium font-mono" style={{ color: obj.color }}>{obj.num}</span>
                             <span className="font-semibold">{obj.title}</span>
-                            <p className="text-sm text-muted leading-relaxed">{obj.body}</p>
+                            <ScrollMagnifier>
+<p className="text-sm text-muted leading-relaxed">{obj.body}</p>
+</ScrollMagnifier>
                         </div>
                     ))}
                 </div>
@@ -346,21 +377,25 @@ export default function XRProximityProjectPage() {
             >
                 <div className="flex flex-col gap-2">
                     <SectionLabel>Methodology</SectionLabel>
-                    <h2 className="text-5xl font-semibold tracking-tight">Four-Phase Research Process</h2>
-                    <p className="max-w-2xl text-muted leading-relaxed">
+                    <h2 className="text-[28px] md:text-[50px] font-extrabold leading-tight">Four-Phase Research Process</h2>
+                    <ScrollMagnifier>
+<p className="max-w-2xl text-muted leading-relaxed">
                         The methodology was iterative by necessity. Any technique dropping frame rate below 72 FPS on standalone hardware triggers motion sickness, making the experience unusable as a research instrument.
                     </p>
+</ScrollMagnifier>
                 </div>
 
                 {/* Phase 01 */}
                 <div className="flex flex-col gap-6 p-8 rounded-xl border border-border bg-background">
                     <div className="flex flex-col gap-1">
                         <span className="text-xs font-mono text-muted uppercase tracking-wider">Phase 01 — Exploration &amp; Architectural Pivot</span>
-                        <h3 className="text-2xl font-semibold tracking-tight">Audio-Reactive Pipeline: TouchDesigner → Unity</h3>
+                        <h3 className="text-[20px] md:text-[25px] font-semibold leading-tight">Audio-Reactive Pipeline: TouchDesigner → Unity</h3>
                     </div>
-                    <p className="text-muted leading-relaxed text-sm">
+                    <ScrollMagnifier>
+<p className="text-muted leading-relaxed text-sm">
                         TouchDesigner was linked to Unity via NDI/Spout/OSC protocols. Live audio was decomposed via FFT into spectral frequency bands driving Unity shader parameters and mesh vertex displacements in real time — bass drove torch flicker intensity, mid-frequencies drove particle emission, highs drove colour modulation.
                     </p>
+</ScrollMagnifier>
                     <div className="relative w-full max-w-2xl mx-auto aspect-[16/9] rounded-xl overflow-hidden border border-border bg-background">
                         <Image
                             src="/projects/xr-proximity-based-presence/webp-m/Audio-Reactive Pipeline.webp"
@@ -369,15 +404,21 @@ export default function XRProximityProjectPage() {
                             className="object-contain p-4"
                         />
                     </div>
-                    <p className="text-xs text-muted">Fig. 4.1 — Audio-Reactive Pipeline Architecture (Abandoned) · TouchDesigner → NDI/Spout/OSC → Unity VR → Meta Quest 2: 15–35 FPS</p>
+                    <ScrollMagnifier>
+<p className="text-xs text-muted">Fig. 4.1 — Audio-Reactive Pipeline Architecture (Abandoned) · TouchDesigner → NDI/Spout/OSC → Unity VR → Meta Quest 2: 15–35 FPS</p>
+</ScrollMagnifier>
                     <div className="flex flex-col gap-2">
                         <div className="flex items-start gap-3 p-4 rounded-lg bg-red-950/20 border border-red-900/30">
                             <span className="text-red-400 font-mono text-sm shrink-0">✕</span>
-                            <p className="text-sm text-muted">Abandoned — Meta Quest 2 output: 15–35 FPS. Inter-application GPU texture sharing and audio-driven physics consumed the entire processing budget.</p>
+                            <ScrollMagnifier>
+<p className="text-sm text-muted">Abandoned — Meta Quest 2 output: 15–35 FPS. Inter-application GPU texture sharing and audio-driven physics consumed the entire processing budget.</p>
+</ScrollMagnifier>
                         </div>
                         <div className="flex items-start gap-3 p-4 rounded-lg bg-emerald-950/20 border border-emerald-900/30">
                             <span className="text-emerald-400 font-mono text-sm shrink-0">✓</span>
-                            <p className="text-sm text-muted">Principle retained — Dynamic environmental responsiveness is the correct direction. Scale of computation must be reduced dramatically for standalone deployment.</p>
+                            <ScrollMagnifier>
+<p className="text-sm text-muted">Principle retained — Dynamic environmental responsiveness is the correct direction. Scale of computation must be reduced dramatically for standalone deployment.</p>
+</ScrollMagnifier>
                         </div>
                     </div>
                 </div>
@@ -386,11 +427,13 @@ export default function XRProximityProjectPage() {
                 <div className="flex flex-col gap-6 p-8 rounded-xl border border-border bg-background">
                     <div className="flex flex-col gap-1">
                         <span className="text-xs font-mono text-muted uppercase tracking-wider">Phase 02 — Environment Design &amp; Render Optimisation</span>
-                        <h3 className="text-2xl font-semibold tracking-tight">The Prison Room — Native Unity URP</h3>
+                        <h3 className="text-[20px] md:text-[25px] font-semibold leading-tight">The Prison Room — Native Unity URP</h3>
                     </div>
-                    <p className="text-muted leading-relaxed text-sm">
+                    <ScrollMagnifier>
+<p className="text-muted leading-relaxed text-sm">
                         A purpose-built test environment — the &ldquo;Prison Room&rdquo; — designed in native Unity URP. Three interconnected zones: entry cell with warm torch lighting, central corridor with arched openings, and interior study room with grabbable props.
                     </p>
+</ScrollMagnifier>
                     <div className="relative w-full aspect-[16/9] rounded-xl overflow-hidden border border-border bg-background">
                         <Image
                             src="/projects/xr-proximity-based-presence/webp-m/Three-zoneLayout.webp"
@@ -399,7 +442,9 @@ export default function XRProximityProjectPage() {
                             className="object-contain p-4"
                         />
                     </div>
-                    <p className="text-xs text-muted">Fig. 4.2 — Prison Room: Three-Zone Floor Plan · Zone 1: Entry Cell · Zone 2: Central Corridor · Zone 3: Study Room</p>
+                    <ScrollMagnifier>
+<p className="text-xs text-muted">Fig. 4.2 — Prison Room: Three-Zone Floor Plan · Zone 1: Entry Cell · Zone 2: Central Corridor · Zone 3: Study Room</p>
+</ScrollMagnifier>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div className="flex flex-col gap-2">
                             <div className="relative aspect-video rounded-xl overflow-hidden border border-border">
@@ -410,7 +455,9 @@ export default function XRProximityProjectPage() {
                                     className="object-cover"
                                 />
                             </div>
-                            <p className="text-xs text-muted">Fig. 4.3 — Entry Zone · Zone 1: Torch intensity responds to player approach</p>
+                            <ScrollMagnifier>
+<p className="text-xs text-muted">Fig. 4.3 — Entry Zone · Zone 1: Torch intensity responds to player approach</p>
+</ScrollMagnifier>
                         </div>
                         <div className="flex flex-col gap-2">
                             <div className="relative aspect-video rounded-xl overflow-hidden border border-border">
@@ -421,7 +468,9 @@ export default function XRProximityProjectPage() {
                                     className="object-cover"
                                 />
                             </div>
-                            <p className="text-xs text-muted">Fig. 4.5 — Study Room · Zone 3: Grabbable props trigger proximity effects</p>
+                            <ScrollMagnifier>
+<p className="text-xs text-muted">Fig. 4.5 — Study Room · Zone 3: Grabbable props trigger proximity effects</p>
+</ScrollMagnifier>
                         </div>
                     </div>
                     <div className="relative w-full aspect-video rounded-xl overflow-hidden border border-border bg-background">
@@ -432,10 +481,14 @@ export default function XRProximityProjectPage() {
                             className="object-contain"
                         />
                     </div>
-                    <p className="text-xs text-muted">Fig. 4.6 — Render Optimisation: Three Nested Layers · Baked GI (~0%) + Light Probe Network (~2%) + Real-Time Shadows in 0.8m player zone (~5%) = ~7% total overhead</p>
+                    <ScrollMagnifier>
+<p className="text-xs text-muted">Fig. 4.6 — Render Optimisation: Three Nested Layers · Baked GI (~0%) + Light Probe Network (~2%) + Real-Time Shadows in 0.8m player zone (~5%) = ~7% total overhead</p>
+</ScrollMagnifier>
                     <div className="flex items-start gap-3 p-4 rounded-lg bg-emerald-950/20 border border-emerald-900/30">
                         <span className="text-emerald-400 font-mono text-sm shrink-0">✓</span>
-                        <p className="text-sm text-muted">Stable 72+ FPS baseline established. Full rendering budget headroom available for procedural animation systems.</p>
+                        <ScrollMagnifier>
+<p className="text-sm text-muted">Stable 72+ FPS baseline established. Full rendering budget headroom available for procedural animation systems.</p>
+</ScrollMagnifier>
                     </div>
                 </div>
 
@@ -443,11 +496,13 @@ export default function XRProximityProjectPage() {
                 <div className="flex flex-col gap-6 p-8 rounded-xl border border-border bg-background">
                     <div className="flex flex-col gap-1">
                         <span className="text-xs font-mono text-muted uppercase tracking-wider">Phase 03 — Procedural Animation Systems</span>
-                        <h3 className="text-2xl font-semibold tracking-tight">Four Primitives. Two Trigger Types.</h3>
+                        <h3 className="text-[20px] md:text-[25px] font-semibold leading-tight">Four Primitives. Two Trigger Types.</h3>
                     </div>
-                    <p className="text-muted leading-relaxed text-sm">
+                    <ScrollMagnifier>
+<p className="text-muted leading-relaxed text-sm">
                         Four procedural animation primitives implemented in C# within Unity, each triggered by user <strong className="text-foreground">proximity</strong> (Euclidean distance from head transform drops below threshold) or <strong className="text-foreground">physical interaction</strong> (XR controller collider intersects object trigger).
                     </p>
+</ScrollMagnifier>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         {primitives.map((p) => (
                             <div key={p.name} className="flex flex-col gap-3 p-6 rounded-xl border border-border bg-background">
@@ -459,13 +514,17 @@ export default function XRProximityProjectPage() {
                                     <span className="text-xs font-mono text-muted">Trigger: {p.trigger}</span>
                                     <span className="text-xs text-muted">Applied to: {p.appliedTo}</span>
                                 </div>
-                                <p className="text-xs text-muted leading-relaxed border-t border-border pt-3">{p.method}</p>
+                                <ScrollMagnifier>
+<p className="text-xs text-muted leading-relaxed border-t border-border pt-3">{p.method}</p>
+</ScrollMagnifier>
                             </div>
                         ))}
                     </div>
                     <div className="flex items-start gap-3 p-4 rounded-lg bg-emerald-950/20 border border-emerald-900/30">
                         <span className="text-emerald-400 font-mono text-sm shrink-0">✓</span>
-                        <p className="text-sm text-muted">All four primitives deployed. Frame rate maintained at 72+ FPS under all interaction conditions on Meta Quest 2.</p>
+                        <ScrollMagnifier>
+<p className="text-sm text-muted">All four primitives deployed. Frame rate maintained at 72+ FPS under all interaction conditions on Meta Quest 2.</p>
+</ScrollMagnifier>
                     </div>
                 </div>
 
@@ -473,19 +532,25 @@ export default function XRProximityProjectPage() {
                 <div className="flex flex-col gap-6 p-8 rounded-xl border border-border bg-background">
                     <div className="flex flex-col gap-1">
                         <span className="text-xs font-mono text-muted uppercase tracking-wider">Phase 04 — A/B Testing Framework</span>
-                        <h3 className="text-2xl font-semibold tracking-tight">8 Participants · Two Conditions · Two Onboarding Types</h3>
+                        <h3 className="text-[20px] md:text-[25px] font-semibold leading-tight">8 Participants · Two Conditions · Two Onboarding Types</h3>
                     </div>
-                    <p className="text-muted leading-relaxed text-sm">
+                    <ScrollMagnifier>
+<p className="text-muted leading-relaxed text-sm">
                         An A/B testing build deployed on Meta Quest 2 hardware. Eight participants recruited from a student population — first-time headset users through frequent VR gamers. Each completed sessions in both conditions, with order counterbalanced.
                     </p>
+</ScrollMagnifier>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div className="flex flex-col gap-3 p-6 rounded-xl border border-border bg-background">
                             <span className="text-xs font-mono uppercase tracking-wider" style={{ color: "var(--accent-blue)" }}>Static Condition (SC)</span>
-                            <p className="text-sm text-muted leading-relaxed">All animations as pre-rendered keyframe loops. No proximity triggers active.</p>
+                            <ScrollMagnifier>
+<p className="text-sm text-muted leading-relaxed">All animations as pre-rendered keyframe loops. No proximity triggers active.</p>
+</ScrollMagnifier>
                         </div>
                         <div className="flex flex-col gap-3 p-6 rounded-xl border border-border bg-background">
                             <span className="text-xs font-mono uppercase tracking-wider" style={{ color: "var(--accent-neon)" }}>Reactive Condition (RC)</span>
-                            <p className="text-sm text-muted leading-relaxed">All four procedural systems fully active, responding to real-time user proximity and controller input.</p>
+                            <ScrollMagnifier>
+<p className="text-sm text-muted leading-relaxed">All four procedural systems fully active, responding to real-time user proximity and controller input.</p>
+</ScrollMagnifier>
                         </div>
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -511,10 +576,12 @@ export default function XRProximityProjectPage() {
             >
                 <div className="flex flex-col gap-2">
                     <SectionLabel>User Study Recording</SectionLabel>
-                    <h2 className="text-5xl font-semibold tracking-tight">Task-Driven Session — Did the Environment Feel Alive?</h2>
-                    <p className="max-w-2xl text-muted leading-relaxed">
+                    <h2 className="text-[28px] md:text-[50px] font-extrabold leading-tight">Task-Driven Session — Did the Environment Feel Alive?</h2>
+                    <ScrollMagnifier>
+<p className="max-w-2xl text-muted leading-relaxed">
                         Participants were given a single objective: <strong className="text-foreground">find the key and escape the cell.</strong> The session captures navigation pattern, zone dwell time, and whether users voluntarily return to areas already visited.
                     </p>
+</ScrollMagnifier>
                 </div>
                 <div className="relative w-full aspect-video rounded-2xl overflow-hidden border border-border bg-foreground">
                     <video
@@ -540,7 +607,7 @@ export default function XRProximityProjectPage() {
             >
                 <div className="flex flex-col gap-2">
                     <SectionLabel>Findings</SectionLabel>
-                    <h2 className="text-5xl font-semibold tracking-tight">What the Data Shows</h2>
+                    <h2 className="text-[28px] md:text-[50px] font-extrabold leading-tight">What the Data Shows</h2>
                 </div>
 
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-px border border-border rounded-xl overflow-hidden">
@@ -551,7 +618,7 @@ export default function XRProximityProjectPage() {
                         { num: "≈ 0", label: "Difference in comfort scores — no nausea or performance degradation" },
                     ].map((s) => (
                         <div key={s.num} className="flex flex-col gap-2 p-6 bg-background">
-                            <span className="text-3xl font-semibold tracking-tight">{s.num}</span>
+                            <span className="text-[28px] md:text-[50px] font-extrabold leading-tight">{s.num}</span>
                             <span className="text-xs text-muted leading-relaxed">{s.label}</span>
                         </div>
                     ))}
@@ -565,7 +632,9 @@ export default function XRProximityProjectPage() {
                         className="object-contain"
                     />
                 </div>
-                <p className="text-sm text-muted">Fig. 5.1 — Session Duration by Participant: Static vs. Reactive Condition · RC mean 8.4 min vs. SC mean 6.2 min (+35%)</p>
+                <ScrollMagnifier>
+<p className="text-sm text-muted">Fig. 5.1 — Session Duration by Participant: Static vs. Reactive Condition · RC mean 8.4 min vs. SC mean 6.2 min (+35%)</p>
+</ScrollMagnifier>
 
                 <div className="flex flex-col gap-4">
                     {[
@@ -589,7 +658,9 @@ export default function XRProximityProjectPage() {
                             <span className="font-mono text-sm text-muted shrink-0 pt-0.5">{finding.num}</span>
                             <div className="flex flex-col gap-2">
                                 <span className="font-semibold">{finding.title}</span>
-                                <p className="text-sm text-muted leading-relaxed">{finding.body}</p>
+                                <ScrollMagnifier>
+<p className="text-sm text-muted leading-relaxed">{finding.body}</p>
+</ScrollMagnifier>
                             </div>
                         </div>
                     ))}
@@ -606,7 +677,7 @@ export default function XRProximityProjectPage() {
             >
                 <div className="flex flex-col gap-2">
                     <SectionLabel>Environment Gallery</SectionLabel>
-                    <h2 className="text-5xl font-semibold tracking-tight">The Prison Room in Unity.</h2>
+                    <h2 className="text-[28px] md:text-[50px] font-extrabold leading-tight">The Prison Room in Unity.</h2>
                 </div>
 
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
@@ -636,10 +707,12 @@ export default function XRProximityProjectPage() {
                 <div className="grid grid-cols-1 md:grid-cols-2">
                     <div className="flex flex-col gap-6 p-10 md:p-12 bg-background">
                         <SectionLabel>Conclusion</SectionLabel>
-                        <h2 className="text-3xl font-semibold tracking-tight">Environmental responsiveness over graphical power.</h2>
-                        <p className="text-muted leading-relaxed">
+                        <h2 className="text-[28px] md:text-[50px] font-extrabold leading-tight">Environmental responsiveness over graphical power.</h2>
+                        <ScrollMagnifier>
+<p className="text-muted leading-relaxed">
                             On constrained standalone hardware, environmental responsiveness is a more effective strategy for sustaining immersion than graphical power. The same procedural system operates at two cognitive levels simultaneously — conscious re-exploration in experienced users, and subconscious extended engagement in novices.
                         </p>
+</ScrollMagnifier>
                         <div className="flex flex-col gap-2 pt-2 border-t border-border">
                             <span className="text-xs font-mono text-muted">Anirudh Singh · M24LDX002</span>
                             <span className="text-xs font-mono text-muted">M.Des. in XR Design · IIT Jodhpur, School of Design</span>

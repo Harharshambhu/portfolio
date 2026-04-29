@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import ScrollReveal from "@/components/ScrollReveal";
 import SectionLabel from "@/components/SectionLabel";
+import SpotlightHeading from "@/components/SpotlightHeading";
 import { prefix } from "@/utils/prefix";
 import { experiences, education } from "@/data/experience";
 
@@ -11,7 +12,7 @@ export default function About() {
     return (
         <div className="flex flex-col gap-16">
             <section className="flex flex-col gap-12">
-                <h1 className="text-6xl md:text-[150px] font-medium tracking-tighter leading-none">About</h1>
+                <SpotlightHeading className="text-6xl md:text-[150px] font-medium tracking-tighter leading-none">About</SpotlightHeading>
 
                 <div className="flex flex-col md:flex-row gap-12 items-start justify-between w-full">
                     <p className="text-lg leading-relaxed text-muted md:w-1/2">

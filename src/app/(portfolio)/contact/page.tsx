@@ -1,13 +1,14 @@
 import ContactForm from "@/components/ContactForm";
 import BackgroundGrid from "@/components/BackgroundGrid";
 import SectionLabel from "@/components/SectionLabel";
+import SpotlightHeading from "@/components/SpotlightHeading";
 
 export default function Contact() {
     return (
         <div className="flex flex-col w-full">
             <div className="flex flex-col gap-10 items-center w-full px-6 min-h-[50vh] justify-center mb-12 mt-4 md:mt-8">
                 <section className="flex flex-col gap-4 items-center text-center w-full">
-                    <h1 className="text-6xl md:text-[120px] font-medium tracking-tighter leading-none">Contact</h1>
+                    <SpotlightHeading className="text-6xl md:text-[120px] font-medium tracking-tighter leading-none">Contact</SpotlightHeading>
                     <p className="max-w-xl text-lg leading-relaxed text-muted">
                         Feel free to reach out for collaborations or just say hi.
                     </p>

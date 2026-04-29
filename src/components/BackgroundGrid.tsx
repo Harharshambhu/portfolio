@@ -29,7 +29,7 @@ export default function BackgroundGrid({
         let delayedMouseY = -1000;
 
         const gridSize = 10; // Denser grid (10px)
-        const hoverRadius = 120; // Increased radius for smoother falloff
+        const hoverRadius = 150; // Increased radius for smoother falloff
         const easing = 0.15; // Smooth factor for delay
 
         const render = () => {
@@ -103,10 +103,10 @@ export default function BackgroundGrid({
                         }
 
                         // Color (Neon Blue hover effect: target 30, 80, 255)
-                        const rCol = 100 - (70 * colorFactor);
-                        const gCol = 100 - (20 * colorFactor);
-                        const bCol = 100 + (155 * colorFactor);
-                        const alpha = (0.2 + (0.8 * colorFactor)) * 0.8;
+                        const rCol = 200;
+                        const gCol = 200;
+                        const bCol = 255;
+                        const alpha = 0.7;
 
                         ctx.fillStyle = `rgba(${Math.round(rCol)}, ${Math.round(gCol)}, ${Math.round(bCol)}, ${alpha})`;
                     } else {
