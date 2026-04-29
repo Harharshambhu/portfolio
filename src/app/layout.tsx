@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
+import BackgroundGrid from "@/components/BackgroundGrid";
+import TargetCursor from "@/components/TargetCursor";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -17,11 +19,6 @@ export const metadata: Metadata = {
   description: "Product & XR Designer | M.Des at IIT Jodhpur",
 };
 
-import Navigation from "@/components/Navigation";
-import BackgroundGrid from "@/components/BackgroundGrid";
-import TargetCursor from "@/components/TargetCursor";
-import MainLayout from "@/components/MainLayout";
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -35,14 +32,12 @@ export default function RootLayout({
         <TargetCursor />
         <BackgroundGrid />
 
-        {/* Left Mask which is white */}
+        {/* Left mask */}
         <div className="fixed top-0 left-0 h-full bg-background z-0 hidden min-[1330px]:block" style={{ width: 'calc((100vw - 1280px) / 2)' }} />
-        {/* Right Mask which is white */}
+        {/* Right mask */}
         <div className="fixed top-0 right-0 h-full bg-background z-0 hidden min-[1330px]:block" style={{ width: 'calc((100vw - 1280px) / 2)' }} />
 
-        <MainLayout>
-          {children}
-        </MainLayout>
+        {children}
       </body>
     </html>
   );

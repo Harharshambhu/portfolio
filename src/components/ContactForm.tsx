@@ -68,14 +68,14 @@ export default function ContactForm() {
                             initial: {
                                 flexGrow: 0,
                                 borderRadius: "4px",
-                                backgroundColor: "#ffffff",
-                                color: "#000000",
+                                backgroundColor: "var(--background)",
+                                color: "var(--foreground)",
                             },
                             hover: {
                                 flexGrow: 1,
                                 borderRadius: "1px",
-                                backgroundColor: "#39FF14",
-                                color: "#000000",
+                                backgroundColor: "var(--accent-neon)",
+                                color: "var(--foreground)",
                             },
                         }}
                         initial="initial"
