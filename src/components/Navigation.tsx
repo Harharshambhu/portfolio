@@ -84,7 +84,7 @@ export default function Navigation() {
                 paddingBottom: { type: "spring", stiffness: 100, damping: 20 },
                 default: { duration: 0.2, ease: "easeOut" }
             }}
-            className={`flex flex-col w-full max-w-screen-xl items-center pt-8 mb-12 bg-background z-50 fixed top-0 left-1/2 -translate-x-1/2 px-6 border-b-2 border-[#525252]`}
+            className={`flex flex-col w-full max-w-screen-xl items-center pt-8 mb-12 bg-background z-50 fixed top-0 left-1/2 -translate-x-1/2 px-6 border-b-2 border-muted`}
         >
             <div className="flex w-full items-start justify-between">
                 <motion.div
@@ -133,7 +133,7 @@ export default function Navigation() {
                             fontSize: isScrolled ? "0.875rem" : (isHovered ? "8vw" : "12vw"),
                             fontWeight: isScrolled ? 600 : (isHovered ? 700 : 700),
                             letterSpacing: isScrolled ? "0em" : (isHovered ? "0.35em" : "-0.05em"),
-                            color: isHovered ? "#1F51FF" : "var(--foreground)"
+                            color: isHovered ? "var(--accent-blue)" : "var(--foreground)"
                         }}
                         className={`leading-none block text-right transition-all duration-300`}
                     >

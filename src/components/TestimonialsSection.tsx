@@ -2,22 +2,23 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import SectionLabel from "@/components/SectionLabel";
 
 const testimonials = [
     {
         text: "Anirudh was instrumental in building the visual universe for Takes Are Real over two years. From designing character cards for multiple races to developing weapon and support props, his ability to deliver high-quality assets across complex project cycles made him an invaluable asset to our team.",
         author: "Richard Heinrich",
-        image: "https://framerusercontent.com/images/uFknaDfYVUUAoUhvxiaFg4rFhus.png?width=208&height=231",
+        image: "/images/testimonials/richard.png",
     },
     {
         text: "Anirudh is exceptionally hardworking and consistently delivered great results across diverse projects—from corporate ads to unique creative themes. He is a versatile collaborator who handles complex deliveries with ease and successfully adapts to any team or challenge.",
         author: "Shikhant Sablania",
-        image: "https://framerusercontent.com/images/VQ19ZZTydGI4M3L8QpsQRjWGJ9c.jpeg?width=800&height=800",
+        image: "/images/testimonials/shikhant.jpg",
     },
     {
         text: "This portfolio website turned out even better than I imagined! Its sleek, modern design highlights my work beautifully, and the seamless animations give it a unique edge. I've gotten tons of positive feedback from clients and recruiters.",
         author: "William",
-        image: "https://framerusercontent.com/images/ykax52rsbkgYur5jZqaKxWGRLM.jpg?width=3246&height=4058",
+        image: "/images/testimonials/william.jpg",
     },
 ];
 
@@ -27,9 +28,7 @@ const duplicatedTestimonials = [...testimonials, ...testimonials, ...testimonial
 export default function TestimonialsSection() {
     return (
         <section className="flex flex-col gap-8 overflow-hidden">
-            <h3 className="text-sm font-mono text-muted uppercase tracking-wider">
-                Testimonials
-            </h3>
+            <SectionLabel as="h3">Testimonials</SectionLabel>
 
             <div className="relative w-full overflow-hidden mask-fade">
                 <div className="absolute top-0 left-0 w-20 h-full bg-gradient-to-r from-background to-transparent z-10" />
