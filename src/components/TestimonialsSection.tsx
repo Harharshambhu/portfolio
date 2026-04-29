@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { useRef, useState } from "react";
 import SectionLabel from "@/components/SectionLabel";
 
 const testimonials = [
@@ -22,8 +23,33 @@ const testimonials = [
     },
 ];
 
-// Duplicate testimonials to create a seamless loop
 const duplicatedTestimonials = [...testimonials, ...testimonials, ...testimonials, ...testimonials];
+
+function SpotlightCard({ children, className }: { children: React.ReactNode; className?: string }) {
+    const cardRef = useRef<HTMLDivElement>(null);
+    const [spotlight, setSpotlight] = useState({ x: 0, y: 0, visible: false });
+
+    return (
+        <div
+            ref={cardRef}
+            className={`relative overflow-hidden ${className ?? ""}`}
+            onMouseMove={(e) => {
+                const rect = cardRef.current!.getBoundingClientRect();
+                setSpotlight({ x: e.clientX - rect.left, y: e.clientY - rect.top, visible: true });
+            }}
+            onMouseLeave={() => setSpotlight((s) => ({ ...s, visible: false }))}
+        >
+            <div
+                className="pointer-events-none absolute inset-0 z-10 rounded-sm transition-opacity duration-300"
+                style={{
+                    opacity: spotlight.visible ? 1 : 0,
+                    background: `radial-gradient(circle 320px at ${spotlight.x}px ${spotlight.y}px, rgba(31,81,255,0.07), transparent 70%)`,
+                }}
+            />
+            {children}
+        </div>
+    );
+}
 
 export default function TestimonialsSection() {
     return (
@@ -45,7 +71,7 @@ export default function TestimonialsSection() {
                     }}
                 >
                     {duplicatedTestimonials.map((item, index) => (
-                        <div
+                        <SpotlightCard
                             key={index}
                             className="flex flex-col gap-6 w-[400px] md:w-[500px] flex-shrink-0 p-6 border border-border rounded-sm bg-background/50 backdrop-blur-sm"
                         >
@@ -66,7 +92,7 @@ export default function TestimonialsSection() {
                                     — {item.author}
                                 </footer>
                             </div>
-                        </div>
+                        </SpotlightCard>
                     ))}
                 </motion.div>
             </div>

@@ -3,6 +3,7 @@ import ProjectsTable from "@/components/ProjectsTable";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import ScrollReveal from "@/components/ScrollReveal";
 import HeroImage from "@/components/HeroImage";
+import HeroName from "@/components/HeroName";
 import SectionLabel from "@/components/SectionLabel";
 import { projects } from "@/data/projects";
 
@@ -17,9 +18,7 @@ export default function Home() {
         </ScrollReveal>
 
         <div className="flex flex-col gap-6 w-full md:w-[60%] mb-8 md:mb-10">
-          <ScrollReveal>
-            <h1 className="text-4xl font-medium tracking-tight">Anirudh</h1>
-          </ScrollReveal>
+          <HeroName />
           <ScrollReveal delay={0.1}>
             <h2 className="text-xl text-muted">
               Product & XR Designer | M.Des at IIT Jodhpur
