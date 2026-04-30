@@ -28,22 +28,42 @@ const duplicatedTestimonials = [...testimonials, ...testimonials, ...testimonial
 function SpotlightCard({ children, className }: { children: React.ReactNode; className?: string }) {
     const cardRef = useRef<HTMLDivElement>(null);
     const [spotlight, setSpotlight] = useState({ x: 0, y: 0, visible: false });
+    const [tilt, setTilt] = useState({ x: 0, y: 0 });
+
+    const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+        const rect = cardRef.current!.getBoundingClientRect();
+        const px = e.clientX - rect.left;
+        const py = e.clientY - rect.top;
+        setSpotlight({ x: px, y: py, visible: true });
+        const cx = rect.width / 2;
+        const cy = rect.height / 2;
+        setTilt({
+            x: ((py - cy) / cy) * -6,
+            y: ((px - cx) / cx) * 6,
+        });
+    };
+
+    const handleMouseLeave = () => {
+        setSpotlight((s) => ({ ...s, visible: false }));
+        setTilt({ x: 0, y: 0 });
+    };
 
     return (
         <div
             ref={cardRef}
             className={`relative overflow-hidden ${className ?? ""}`}
-            onMouseMove={(e) => {
-                const rect = cardRef.current!.getBoundingClientRect();
-                setSpotlight({ x: e.clientX - rect.left, y: e.clientY - rect.top, visible: true });
+            onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseLeave}
+            style={{
+                transform: `perspective(800px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)`,
+                transition: tilt.x === 0 ? "transform 0.5s ease" : "transform 0.1s ease",
             }}
-            onMouseLeave={() => setSpotlight((s) => ({ ...s, visible: false }))}
         >
             <div
                 className="pointer-events-none absolute inset-0 z-10 rounded-sm transition-opacity duration-300"
                 style={{
                     opacity: spotlight.visible ? 1 : 0,
-                    background: `radial-gradient(circle 320px at ${spotlight.x}px ${spotlight.y}px, rgba(31,81,255,0.07), transparent 70%)`,
+                    background: `radial-gradient(circle 320px at ${spotlight.x}px ${spotlight.y}px, rgba(31,81,255,0.14), transparent 70%)`,
                 }}
             />
             {children}
