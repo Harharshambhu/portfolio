@@ -2,17 +2,84 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { useRef, useState } from "react";
 import ScrollReveal from "@/components/ScrollReveal";
 import SectionLabel from "@/components/SectionLabel";
 import SpotlightHeading from "@/components/SpotlightHeading";
 import { prefix } from "@/utils/prefix";
 import { experiences, education } from "@/data/experience";
 
+function RippleRow({ year, role, company, delay }: { year: string; role: string; company: string; delay: number }) {
+    const rowRef = useRef<HTMLDivElement>(null);
+    const [origin, setOrigin] = useState({ x: 0, y: 0 });
+    const [hovered, setHovered] = useState(false);
+
+    const handleMouseEnter = (e: React.MouseEvent) => {
+        const rect = rowRef.current!.getBoundingClientRect();
+        setOrigin({ x: e.clientX - rect.left, y: e.clientY - rect.top });
+        setHovered(true);
+    };
+
+    return (
+        <motion.div
+            ref={rowRef}
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay }}
+            className="relative flex flex-col md:flex-row py-4 border-b border-border px-3 -mx-3 rounded-sm overflow-hidden cursor-default"
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={() => setHovered(false)}
+            style={{
+                borderBottomColor: hovered ? "transparent" : undefined,
+                transition: "border-color 0.2s ease",
+            }}
+        >
+            {/* Ripple fill */}
+            <div
+                className="absolute inset-0 pointer-events-none"
+                style={{
+                    backgroundColor: "rgba(31,81,255,1)",
+                    clipPath: hovered
+                        ? `circle(150% at ${origin.x}px ${origin.y}px)`
+                        : `circle(0% at ${origin.x}px ${origin.y}px)`,
+                    transition: hovered
+                        ? "clip-path 0.55s cubic-bezier(0.4,0,0.2,1)"
+                        : "clip-path 0.4s cubic-bezier(0.4,0,0.2,1)",
+                }}
+            />
+            <div className="relative md:w-1/4">
+                <span
+                    className="font-mono text-sm"
+                    style={{ color: hovered ? "rgba(255,255,255,0.7)" : "var(--muted)", transition: "color 0.25s ease" }}
+                >
+                    {year}
+                </span>
+            </div>
+            <div className="relative md:w-1/4">
+                <span
+                    className="font-medium"
+                    style={{ color: hovered ? "#ffffff" : "var(--foreground)", transition: "color 0.25s ease" }}
+                >
+                    {role}
+                </span>
+            </div>
+            <div className="relative md:w-1/2">
+                <span
+                    style={{ color: hovered ? "rgba(255,255,255,0.7)" : "var(--muted)", transition: "color 0.25s ease" }}
+                >
+                    {company}
+                </span>
+            </div>
+        </motion.div>
+    );
+}
+
 export default function About() {
     return (
         <div className="flex flex-col gap-16">
             <section className="flex flex-col gap-12">
-                <SpotlightHeading className="text-6xl md:text-[150px] font-medium tracking-tighter leading-none">About</SpotlightHeading>
+                <SpotlightHeading className="text-6xl md:text-[150px] font-medium tracking-tighter leading-none" color="var(--accent-blue)">About</SpotlightHeading>
 
                 <div className="flex flex-col md:flex-row gap-12 items-start justify-between w-full">
                     <p className="text-lg leading-relaxed text-muted md:w-1/2">
@@ -34,57 +101,31 @@ export default function About() {
             </section>
 
             <section className="flex flex-col gap-8">
-                <SectionLabel>
-                    Experience
-                </SectionLabel>
+                <SectionLabel>Experience</SectionLabel>
                 <div className="flex flex-col border-t border-border">
                     {experiences.map((exp, index) => (
-                        <motion.div
+                        <RippleRow
                             key={index}
-                            initial={{ opacity: 0, y: 10 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.3, delay: index * 0.1 }}
-                            className="flex flex-col md:flex-row py-4 border-b border-border hover:bg-hover transition-colors px-2 -mx-2 rounded-sm"
-                        >
-                            <div className="md:w-1/4">
-                                <span className="font-mono text-sm text-muted">{exp.year}</span>
-                            </div>
-                            <div className="md:w-1/4">
-                                <span className="font-medium">{exp.role}</span>
-                            </div>
-                            <div className="md:w-1/2">
-                                <span className="text-muted">{exp.company}</span>
-                            </div>
-                        </motion.div>
+                            year={exp.year}
+                            role={exp.role}
+                            company={exp.company}
+                            delay={index * 0.1}
+                        />
                     ))}
                 </div>
             </section>
 
             <section className="flex flex-col gap-8">
-                <SectionLabel>
-                    Education
-                </SectionLabel>
+                <SectionLabel>Education</SectionLabel>
                 <div className="flex flex-col border-t border-border">
                     {education.map((edu, index) => (
-                        <motion.div
+                        <RippleRow
                             key={index}
-                            initial={{ opacity: 0, y: 10 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.3, delay: index * 0.1 }}
-                            className="flex flex-col md:flex-row py-4 border-b border-border hover:bg-hover transition-colors px-2 -mx-2 rounded-sm"
-                        >
-                            <div className="md:w-1/4">
-                                <span className="font-mono text-sm text-muted">{edu.year}</span>
-                            </div>
-                            <div className="md:w-1/4">
-                                <span className="font-medium">{edu.role}</span>
-                            </div>
-                            <div className="md:w-1/2">
-                                <span className="text-muted">{edu.company}</span>
-                            </div>
-                        </motion.div>
+                            year={edu.year}
+                            role={edu.role}
+                            company={edu.company}
+                            delay={index * 0.1}
+                        />
                     ))}
                 </div>
             </section>
