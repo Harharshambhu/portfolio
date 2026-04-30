@@ -5,9 +5,10 @@ import { useRef, useState } from "react";
 interface Props {
     children: string;
     className?: string;
+    color?: string;
 }
 
-export default function SpotlightHeading({ children, className }: Props) {
+export default function SpotlightHeading({ children, className, color = "#FFD600" }: Props) {
     const ref = useRef<HTMLHeadingElement>(null);
     const [spotlight, setSpotlight] = useState({ x: 0, y: 0 });
     const [hovering, setHovering] = useState(false);
@@ -23,7 +24,7 @@ export default function SpotlightHeading({ children, className }: Props) {
             onMouseEnter={() => setHovering(true)}
             onMouseLeave={() => setHovering(false)}
             style={hovering ? {
-                backgroundImage: `radial-gradient(circle 120px at ${spotlight.x}px ${spotlight.y}px, var(--accent-blue) 100%, var(--foreground) 100%)`,
+                backgroundImage: `radial-gradient(circle 120px at ${spotlight.x}px ${spotlight.y}px, ${color} 100%, var(--foreground) 100%)`,
                 backgroundSize: "100% 100%",
                 backgroundRepeat: "no-repeat",
                 WebkitBackgroundClip: "text",

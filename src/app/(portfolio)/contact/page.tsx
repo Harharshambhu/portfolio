@@ -8,7 +8,7 @@ export default function Contact() {
         <div className="flex flex-col w-full">
             <div className="flex flex-col gap-10 items-center w-full px-6 min-h-[50vh] justify-center mb-12 mt-4 md:mt-8">
                 <section className="flex flex-col gap-4 items-center text-center w-full">
-                    <SpotlightHeading className="text-6xl md:text-[120px] font-medium tracking-tighter leading-none">Contact</SpotlightHeading>
+                    <SpotlightHeading className="text-6xl md:text-[120px] font-medium tracking-tighter leading-none" color="#A855F7">Contact</SpotlightHeading>
                     <p className="max-w-xl text-lg leading-relaxed text-muted">
                         Feel free to reach out for collaborations or just say hi.
                     </p>
