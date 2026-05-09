@@ -130,12 +130,12 @@ export default function Navigation() {
                 <Link href="/" className={`block ${!isScrolled ? "no-cursor-interaction" : ""}`}>
                     <motion.span
                         animate={{
-                            fontSize: isScrolled ? "0.875rem" : (isHovered ? "8vw" : "12vw"),
-                            fontWeight: isScrolled ? 600 : (isHovered ? 700 : 700),
+                            fontSize: isScrolled ? "0.99rem" : (isHovered ? "8vw" : "11vw"),
+                            fontWeight: isScrolled ? 600 : 700,
                             letterSpacing: isScrolled ? "0em" : (isHovered ? "0.35em" : "-0.05em"),
                             color: isHovered ? "var(--accent-blue)" : "var(--foreground)"
                         }}
-                        className={`leading-none block text-right transition-all duration-300`}
+                        className={`leading-none block text-right font-sans transition-all duration-300 pb-2`}
                     >
                         {displayText}
                     </motion.span>

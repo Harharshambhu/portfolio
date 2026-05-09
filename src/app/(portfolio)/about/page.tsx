@@ -50,7 +50,7 @@ function RippleRow({ year, role, company, delay }: { year: string; role: string;
             />
             <div className="relative md:w-1/4">
                 <span
-                    className="font-mono text-sm"
+                    className="font-sans font-medium text-sm"
                     style={{ color: hovered ? "var(--text-hover-muted)" : "var(--muted)", transition: "color 0.25s ease" }}
                 >
                     {year}
@@ -58,7 +58,7 @@ function RippleRow({ year, role, company, delay }: { year: string; role: string;
             </div>
             <div className="relative md:w-1/4">
                 <span
-                    className="font-medium"
+                    className="font-medium text-lg leading-tight"
                     style={{ color: hovered ? "var(--text-hover)" : "var(--foreground)", transition: "color 0.25s ease" }}
                 >
                     {role}
@@ -66,6 +66,7 @@ function RippleRow({ year, role, company, delay }: { year: string; role: string;
             </div>
             <div className="relative md:w-1/2">
                 <span
+                    className="font-sans font-medium text-sm"
                     style={{ color: hovered ? "var(--text-hover-muted)" : "var(--muted)", transition: "color 0.25s ease" }}
                 >
                     {company}
@@ -79,7 +80,7 @@ export default function About() {
     return (
         <div className="flex flex-col gap-16">
             <section className="flex flex-col gap-12">
-                <SpotlightHeading className="text-6xl md:text-[150px] font-medium tracking-tighter leading-none" color="var(--accent-blue)">About</SpotlightHeading>
+                <SpotlightHeading className="font-medium tracking-tighter leading-none" color="var(--accent-blue)" style={{ fontSize: "var(--fs-page-title)" }}>About</SpotlightHeading>
 
                 <div className="flex flex-col md:flex-row gap-12 items-start justify-between w-full">
                     <p className="text-lg leading-relaxed text-muted md:w-1/2">

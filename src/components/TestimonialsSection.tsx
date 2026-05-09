@@ -82,8 +82,8 @@ export default function TestimonialsSection() {
 
                 <motion.div
                     className="flex w-max"
-                    initial={{ x: "-50%" }}
-                    animate={{ x: "20%" }}
+                    initial={{ x: "0%" }}
+                    animate={{ x: "-50%" }}
                     transition={{
                         duration: 40,
                         ease: "linear",
@@ -111,7 +111,7 @@ export default function TestimonialsSection() {
                                         <p className="text-base leading-relaxed text-foreground">
                                             &ldquo;{item.text}&rdquo;
                                         </p>
-                                        <footer className="text-sm font-mono text-muted">
+                                        <footer className="text-sm font-sans font-medium text-muted">
                                             — {item.author}
                                         </footer>
                                     </div>

@@ -13,7 +13,8 @@ export default function SectionLabel<T extends ElementType = "h2">({
     const Tag = (as ?? "h2") as ElementType;
     return (
         <Tag
-            className={["text-sm font-semibold text-muted uppercase tracking-wider", className].filter(Boolean).join(" ")}
+            className={["font-semibold text-muted uppercase tracking-wider font-sans", className].filter(Boolean).join(" ")}
+            style={{ fontSize: "var(--fs-label)", ...((props as any).style ?? {}) }}
             {...props}
         />
     );

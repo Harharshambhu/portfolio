@@ -24,7 +24,8 @@ const tools = [
 
 export default function ToolsCarousel() {
     const marqueeAnimation = {
-        animate: { x: "-50%" },
+        initial: { x: "-50%" },
+        animate: { x: "0%" },
         transition: {
             duration: 40,
             ease: "linear" as const,

@@ -70,7 +70,7 @@ function ProjectRow({ project, delay }: { project: Project; delay: number }) {
 
                 <div className="relative flex flex-col md:flex-row md:items-center justify-between flex-1 gap-4 md:gap-0 mt-2 md:mt-0">
                     <span
-                        className="font-mono text-sm md:w-1/2"
+                        className="font-sans font-medium text-sm md:w-1/2"
                         style={{
                             color: hovered ? "var(--text-hover-muted)" : "var(--muted)",
                             transition: "color 0.25s ease",
@@ -81,7 +81,7 @@ function ProjectRow({ project, delay }: { project: Project; delay: number }) {
 
                     <div className="flex items-center gap-12 md:w-1/2 justify-between md:justify-end">
                         <span
-                            className="font-mono text-sm"
+                            className="font-sans font-medium text-sm"
                             style={{
                                 color: hovered ? "var(--text-hover-muted)" : "var(--muted)",
                                 transition: "color 0.25s ease",

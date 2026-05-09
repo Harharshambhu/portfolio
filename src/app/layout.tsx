@@ -1,18 +1,21 @@
 import type { Metadata } from "next";
-import { Inter, JetBrains_Mono } from "next/font/google";
+import { Plus_Jakarta_Sans, Merriweather } from "next/font/google";
 import "./globals.css";
 import BackgroundGrid from "@/components/BackgroundGrid";
 import TargetCursor from "@/components/TargetCursor";
 import SmoothScroll from "@/components/SmoothScroll";
 
-const inter = Inter({
-  variable: "--font-inter",
+const plusJakartaSans = Plus_Jakarta_Sans({
+  variable: "--font-sans",
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
 });
 
-const jetbrainsMono = JetBrains_Mono({
-  variable: "--font-jetbrains-mono",
+const merriweather = Merriweather({
+  variable: "--font-serif",
   subsets: ["latin"],
+  weight: ["400", "700"],
+  style: ["normal", "italic"],
 });
 
 export const metadata: Metadata = {
@@ -28,7 +31,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.variable} ${jetbrainsMono.variable} antialiased min-h-screen flex flex-col items-center bg-background text-foreground relative`}
+        className={`${plusJakartaSans.variable} ${merriweather.variable} antialiased min-h-screen flex flex-col items-center bg-background text-foreground relative`}
       >
         <SmoothScroll>
           <TargetCursor />
