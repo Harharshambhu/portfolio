@@ -46,7 +46,7 @@ function ProjectRow({ project, delay }: { project: Project; delay: number }) {
                 <div
                     className="absolute inset-0 pointer-events-none"
                     style={{
-                        backgroundColor: "rgba(31,81,255,1)",
+                        backgroundColor: "var(--accent-blue)",
                         clipPath: hovered
                             ? `circle(150% at ${origin.x}px ${origin.y}px)`
                             : `circle(0% at ${origin.x}px ${origin.y}px)`,
@@ -60,7 +60,7 @@ function ProjectRow({ project, delay }: { project: Project; delay: number }) {
                     <h3
                         className="font-medium text-lg leading-tight"
                         style={{
-                            color: hovered ? "#ffffff" : "var(--foreground)",
+                            color: hovered ? "var(--text-hover)" : "var(--foreground)",
                             transition: "color 0.25s ease",
                         }}
                     >
@@ -72,7 +72,7 @@ function ProjectRow({ project, delay }: { project: Project; delay: number }) {
                     <span
                         className="font-mono text-sm md:w-1/2"
                         style={{
-                            color: hovered ? "rgba(255,255,255,0.75)" : "var(--muted)",
+                            color: hovered ? "var(--text-hover-muted)" : "var(--muted)",
                             transition: "color 0.25s ease",
                         }}
                     >
@@ -83,7 +83,7 @@ function ProjectRow({ project, delay }: { project: Project; delay: number }) {
                         <span
                             className="font-mono text-sm"
                             style={{
-                                color: hovered ? "rgba(255,255,255,0.75)" : "var(--muted)",
+                                color: hovered ? "var(--text-hover-muted)" : "var(--muted)",
                                 transition: "color 0.25s ease",
                             }}
                         >
@@ -99,7 +99,7 @@ function ProjectRow({ project, delay }: { project: Project; delay: number }) {
                             >
                                 <ArrowUpRight
                                     className="w-5 h-5"
-                                    style={{ color: hovered ? "rgba(255,255,255,0.75)" : "var(--muted)" }}
+                                    style={{ color: hovered ? "var(--text-hover-muted)" : "var(--muted)" }}
                                 />
                             </div>
                             <div

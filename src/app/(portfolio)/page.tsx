@@ -5,6 +5,7 @@ import ScrollReveal from "@/components/ScrollReveal";
 import HeroImage from "@/components/HeroImage";
 import HeroName from "@/components/HeroName";
 import SectionLabel from "@/components/SectionLabel";
+import ToolsCarousel from "@/components/ToolsCarousel";
 import { projects } from "@/data/projects";
 
 export default function Home() {
@@ -32,6 +33,8 @@ export default function Home() {
         </div>
       </section>
 
+
+
       <section className="flex flex-col gap-8">
         <ScrollReveal>
           <div className="flex items-center justify-between">
@@ -43,6 +46,15 @@ export default function Home() {
         </ScrollReveal>
         <ScrollReveal delay={0.1}>
           <ProjectsTable projects={selectedProjects} />
+        </ScrollReveal>
+      </section>
+
+      <section className="flex flex-col gap-8">
+        <ScrollReveal delay={0.4}>
+          <SectionLabel as="h3">Tools</SectionLabel>
+        </ScrollReveal>
+        <ScrollReveal delay={0.5}>
+          <ToolsCarousel />
         </ScrollReveal>
       </section>
 

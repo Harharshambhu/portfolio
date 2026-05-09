@@ -1,13 +1,25 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-  --muted: #525252;
-  --border: #e5e5e5;
-  --hover: #f3f4f6;
-  --accent-neon: #39FF14;
-  --accent-blue: #1F51FF;
+  --background: rgba(255, 255, 255, 1);
+  --foreground: rgba(23, 23, 23, 1);
+  --muted: rgba(82, 82, 82, 1);
+  --border: rgba(229, 229, 229, 1);
+  --hover: rgba(243, 244, 246, 1);
+  --accent-neon: rgba(57, 255, 20, 1);
+  --accent-blue: rgba(31, 81, 255, 1);
+
+  /* Background Grid Controls */
+  /* --grid-base: The default subtle color of the static grid dots/lines */
+  --grid-base: rgba(100, 100, 100, 0.2);
+  /* --grid-hover */
+  --grid-hover: rgba(200, 200, 255, 0.7);
+
+  /* Spotlight & Interaction Controls */
+  --spotlight-primary: #FFD600;
+  --spotlight-secondary: #A855F7;
+  --text-hover: #ffffff;
+  --text-hover-muted: rgba(255, 255, 255, 0.75);
 }
 
 @theme inline {
