@@ -22,6 +22,11 @@ export default function BackgroundGrid({
         const ctx = canvas.getContext("2d");
         if (!ctx) return;
 
+        // Fetch colors from global CSS variables
+        const computedStyle = getComputedStyle(document.documentElement);
+        const gridHoverColor = computedStyle.getPropertyValue('--grid-hover').trim() || 'rgba(200, 200, 255, 0.7)';
+        const gridBaseColor = computedStyle.getPropertyValue('--grid-base').trim() || color;
+
         let animationFrameId: number;
         let mouseX = -1000;
         let mouseY = -1000;
@@ -44,7 +49,7 @@ export default function BackgroundGrid({
             // Spotlight Effect
             if (spotlight && delayedMouseX > -100 && delayedMouseY > -100) {
                 const gradient = ctx.createRadialGradient(delayedMouseX, delayedMouseY, 0, delayedMouseX, delayedMouseY, 300);
-                gradient.addColorStop(0, "rgba(255, 255, 255, 0.15)");
+                gradient.addColorStop(0, "color-mix(in srgb, var(--text-hover) 15%, transparent)");
                 gradient.addColorStop(1, "transparent");
                 ctx.fillStyle = gradient;
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -102,16 +107,11 @@ export default function BackgroundGrid({
                             h = 2 + stretch;
                         }
 
-                        // Color (Neon Blue hover effect: target 30, 80, 255)
-                        const rCol = 200;
-                        const gCol = 200;
-                        const bCol = 255;
-                        const alpha = 0.7;
-
-                        ctx.fillStyle = `rgba(${Math.round(rCol)}, ${Math.round(gCol)}, ${Math.round(bCol)}, ${alpha})`;
+                        // Use global hover color
+                        ctx.fillStyle = gridHoverColor;
                     } else {
-                        // Use the passed color prop for default state
-                        ctx.fillStyle = color;
+                        // Use global base color (or passed prop as fallback)
+                        ctx.fillStyle = gridBaseColor;
                     }
 
                     ctx.fillRect(renderX - w / 2, renderY - h / 2, w, h);

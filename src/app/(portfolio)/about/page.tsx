@@ -39,7 +39,7 @@ function RippleRow({ year, role, company, delay }: { year: string; role: string;
             <div
                 className="absolute inset-0 pointer-events-none"
                 style={{
-                    backgroundColor: "rgba(31,81,255,1)",
+                    backgroundColor: "var(--accent-blue)",
                     clipPath: hovered
                         ? `circle(150% at ${origin.x}px ${origin.y}px)`
                         : `circle(0% at ${origin.x}px ${origin.y}px)`,
@@ -51,7 +51,7 @@ function RippleRow({ year, role, company, delay }: { year: string; role: string;
             <div className="relative md:w-1/4">
                 <span
                     className="font-mono text-sm"
-                    style={{ color: hovered ? "rgba(255,255,255,0.7)" : "var(--muted)", transition: "color 0.25s ease" }}
+                    style={{ color: hovered ? "var(--text-hover-muted)" : "var(--muted)", transition: "color 0.25s ease" }}
                 >
                     {year}
                 </span>
@@ -59,14 +59,14 @@ function RippleRow({ year, role, company, delay }: { year: string; role: string;
             <div className="relative md:w-1/4">
                 <span
                     className="font-medium"
-                    style={{ color: hovered ? "#ffffff" : "var(--foreground)", transition: "color 0.25s ease" }}
+                    style={{ color: hovered ? "var(--text-hover)" : "var(--foreground)", transition: "color 0.25s ease" }}
                 >
                     {role}
                 </span>
             </div>
             <div className="relative md:w-1/2">
                 <span
-                    style={{ color: hovered ? "rgba(255,255,255,0.7)" : "var(--muted)", transition: "color 0.25s ease" }}
+                    style={{ color: hovered ? "var(--text-hover-muted)" : "var(--muted)", transition: "color 0.25s ease" }}
                 >
                     {company}
                 </span>

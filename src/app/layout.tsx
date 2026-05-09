@@ -3,6 +3,7 @@ import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import BackgroundGrid from "@/components/BackgroundGrid";
 import TargetCursor from "@/components/TargetCursor";
+import SmoothScroll from "@/components/SmoothScroll";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -29,15 +30,17 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${jetbrainsMono.variable} antialiased min-h-screen flex flex-col items-center bg-background text-foreground relative`}
       >
-        <TargetCursor />
-        <BackgroundGrid />
+        <SmoothScroll>
+          <TargetCursor />
+          <BackgroundGrid />
 
-        {/* Left mask */}
-        <div className="fixed top-0 left-0 h-full bg-background z-0 hidden min-[1330px]:block" style={{ width: 'calc((100vw - 1280px) / 2)' }} />
-        {/* Right mask */}
-        <div className="fixed top-0 right-0 h-full bg-background z-0 hidden min-[1330px]:block" style={{ width: 'calc((100vw - 1280px) / 2)' }} />
+          {/* Left mask */}
+          <div className="fixed top-0 left-0 h-full bg-background z-0 hidden min-[1330px]:block" style={{ width: 'calc((100vw - 1280px) / 2)' }} />
+          {/* Right mask */}
+          <div className="fixed top-0 right-0 h-full bg-background z-0 hidden min-[1330px]:block" style={{ width: 'calc((100vw - 1280px) / 2)' }} />
 
-        {children}
+          {children}
+        </SmoothScroll>
       </body>
     </html>
   );

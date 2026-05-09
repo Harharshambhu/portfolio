@@ -8,7 +8,7 @@ interface Props {
     color?: string;
 }
 
-export default function SpotlightHeading({ children, className, color = "#FFD600" }: Props) {
+export default function SpotlightHeading({ children, className, color = "var(--spotlight-primary)" }: Props) {
     const ref = useRef<HTMLHeadingElement>(null);
     const [spotlight, setSpotlight] = useState({ x: 0, y: 0 });
     const [hovering, setHovering] = useState(false);

@@ -23,7 +23,7 @@ const testimonials = [
     },
 ];
 
-const duplicatedTestimonials = [...testimonials, ...testimonials, ...testimonials, ...testimonials];
+
 
 function SpotlightCard({ children, className }: { children: React.ReactNode; className?: string }) {
     const cardRef = useRef<HTMLDivElement>(null);
@@ -63,7 +63,7 @@ function SpotlightCard({ children, className }: { children: React.ReactNode; cla
                 className="pointer-events-none absolute inset-0 z-10 rounded-sm transition-opacity duration-300"
                 style={{
                     opacity: spotlight.visible ? 1 : 0,
-                    background: `radial-gradient(circle 320px at ${spotlight.x}px ${spotlight.y}px, rgba(31,81,255,0.14), transparent 70%)`,
+                    background: `radial-gradient(circle 320px at ${spotlight.x}px ${spotlight.y}px, color-mix(in srgb, var(--accent-blue) 14%, transparent), transparent 70%)`,
                 }}
             />
             {children}
@@ -81,7 +81,7 @@ export default function TestimonialsSection() {
                 <div className="absolute top-0 right-0 w-20 h-full bg-gradient-to-l from-background to-transparent z-10" />
 
                 <motion.div
-                    className="flex gap-8 w-max"
+                    className="flex w-max"
                     animate={{ x: "-50%" }}
                     transition={{
                         duration: 40,
@@ -90,29 +90,33 @@ export default function TestimonialsSection() {
                         repeatType: "loop",
                     }}
                 >
-                    {duplicatedTestimonials.map((item, index) => (
-                        <SpotlightCard
-                            key={index}
-                            className="flex flex-col gap-6 w-[400px] md:w-[500px] flex-shrink-0 p-6 border border-border rounded-sm bg-background/50 backdrop-blur-sm"
-                        >
-                            <div className="relative w-12 h-12 flex-shrink-0 overflow-hidden rounded-full border border-border">
-                                <Image
-                                    src={item.image}
-                                    alt={item.author}
-                                    fill
-                                    className="object-cover"
-                                />
-                            </div>
+                    {[...Array(2)].map((_, groupIndex) => (
+                        <div key={groupIndex} className="flex gap-8 pr-8 w-max">
+                            {[...testimonials, ...testimonials].map((item, index) => (
+                                <SpotlightCard
+                                    key={index}
+                                    className="flex flex-col gap-6 w-[400px] md:w-[500px] flex-shrink-0 p-6 border border-border rounded-sm bg-background/50 backdrop-blur-sm"
+                                >
+                                    <div className="relative w-12 h-12 flex-shrink-0 overflow-hidden rounded-full border border-border">
+                                        <Image
+                                            src={item.image}
+                                            alt={item.author}
+                                            fill
+                                            className="object-cover"
+                                        />
+                                    </div>
 
-                            <div className="flex flex-col gap-4">
-                                <p className="text-base leading-relaxed text-foreground">
-                                    &ldquo;{item.text}&rdquo;
-                                </p>
-                                <footer className="text-sm font-mono text-muted">
-                                    — {item.author}
-                                </footer>
-                            </div>
-                        </SpotlightCard>
+                                    <div className="flex flex-col gap-4">
+                                        <p className="text-base leading-relaxed text-foreground">
+                                            &ldquo;{item.text}&rdquo;
+                                        </p>
+                                        <footer className="text-sm font-mono text-muted">
+                                            — {item.author}
+                                        </footer>
+                                    </div>
+                                </SpotlightCard>
+                            ))}
+                        </div>
                     ))}
                 </motion.div>
             </div>

@@ -32,7 +32,7 @@ export default function HeroName() {
                 onMouseEnter={isScrolled ? () => setHovering(true) : undefined}
                 onMouseLeave={isScrolled ? () => setHovering(false) : undefined}
                 style={isScrolled && hovering ? {
-                    backgroundImage: `radial-gradient(circle 120px at ${spotlight.x}px ${spotlight.y}px, #FFD600 100%, var(--foreground) 100%)`,
+                    backgroundImage: `radial-gradient(circle 120px at ${spotlight.x}px ${spotlight.y}px, var(--spotlight-primary) 100%, var(--foreground) 100%)`,
                     backgroundSize: "100% 100%",
                     backgroundRepeat: "no-repeat",
                     WebkitBackgroundClip: "text",
