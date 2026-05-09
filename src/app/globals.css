@@ -1,14 +1,6 @@
 @import "tailwindcss";
 
 :root {
-  /*--background: rgba(255, 255, 255, 1);
-  --foreground: rgba(23, 23, 23, 1);
-  --muted: rgba(82, 82, 82, 1);
-  --border: rgba(229, 229, 229, 1);
-  --hover: rgba(243, 244, 246, 1);
-  --accent-neon: rgba(57, 255, 20, 1);
-  --accent-blue: rgba(31, 81, 255, 1); */
-
   --background: rgba(255, 255, 255, 1);
   --foreground: rgba(23, 23, 23, 1);
   --muted: rgba(82, 82, 82, 1);
@@ -18,9 +10,7 @@
   --accent-blue: rgba(31, 81, 255, 1);
 
   /* Background Grid Controls */
-  /* --grid-base: The default subtle color of the static grid dots/lines */
   --grid-base: rgba(100, 100, 100, 0.2);
-  /* --grid-hover */
   --grid-hover: rgba(200, 200, 255, 0.7);
 
   /* Spotlight & Interaction Controls */
@@ -28,6 +18,47 @@
   --spotlight-secondary: #A855F7;
   --text-hover: #ffffff;
   --text-hover-muted: rgba(255, 255, 255, 0.75);
+
+  /* ============================================================
+     TYPOGRAPHY SCALE  (Plus Jakarta Sans + Merriweather)
+     Format: --fs-[name]: desktop / mobile (via clamp or direct)
+     ============================================================ */
+
+  /* Logo / Hero — 52px desktop, 34px mobile */
+  --fs-hero: clamp(2.125rem, 5vw, 3.25rem);
+
+  /* Page Titles (About, Projects) */
+  --fs-page-title: clamp(6rem, 15vw, 203px);
+
+  /* Contact Title (Slightly smaller to prevent overflow) */
+  --fs-page-title-contact: clamp(4.5rem, 12vw, 160px);
+
+  /* H1 — 34px desktop, 26px mobile */
+  --fs-h1: clamp(1.625rem, 3vw, 2.125rem);
+
+  /* H2 — 23px desktop, 20px mobile */
+  --fs-h2: clamp(1.25rem, 2vw, 1.4375rem);
+
+  /* H3 — 17px desktop, 14px mobile */
+  --fs-h3: clamp(0.875rem, 1.4vw, 1.0625rem);
+
+  /* H4 — 13px desktop, 11px mobile */
+  --fs-h4: clamp(0.6875rem, 1vw, 0.8125rem);
+
+  /* H5 / Label — 15px desktop & mobile */
+  --fs-label: 0.92rem;
+
+  /* Body Large — 14px desktop, 13px mobile */
+  --fs-body-lg: clamp(0.8125rem, 1.1vw, 0.875rem);
+
+  /* Body Regular — 11px desktop & mobile */
+  --fs-body: 0.6875rem;
+
+  /* Body Small — 10px desktop & mobile */
+  --fs-body-sm: 0.65rem;
+
+  /* UI Label — 11px desktop, 10px mobile */
+  --fs-ui: clamp(0.8rem, 0.95vw, 0.95rem);
 }
 
 @theme inline {
@@ -38,14 +69,49 @@
   --color-hover: var(--hover);
   --color-accent-neon: var(--accent-neon);
   --color-accent-blue: var(--accent-blue);
-  --font-sans: var(--font-inter);
-  --font-mono: var(--font-jetbrains-mono);
+  --font-sans: var(--font-sans);
+  --font-serif: var(--font-serif);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans), sans-serif;
+  font-size: var(--fs-body);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Heading defaults ── */
+h1 {
+  font-family: var(--font-sans), sans-serif;
+  font-size: var(--fs-h1);
+  font-weight: 700;
+}
+
+h2 {
+  font-family: var(--font-sans), sans-serif;
+  font-size: var(--fs-h2);
+  font-weight: 600;
+}
+
+h3 {
+  font-family: var(--font-sans), sans-serif;
+  font-size: var(--fs-h3);
+  font-weight: 600;
+}
+
+h4 {
+  font-family: var(--font-sans), sans-serif;
+  font-size: var(--fs-h4);
+  font-weight: 600;
+}
+
+/* ── Body / reading content — Merriweather ── */
+p,
+li,
+blockquote {
+  font-family: var(--font-serif), serif;
+  font-size: var(--fs-body-lg);
+  line-height: 1.7;
 }

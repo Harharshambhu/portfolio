@@ -62,7 +62,7 @@ export default function ContactForm() {
                         onBlur={() => setIsHovered(false)}
                         whileTap={{ scale: 0.95 }}
                         transition={{ duration: 0.15, ease: "linear" }}
-                        className="relative inline-flex items-center justify-center px-9 py-4 text-xl font-mono overflow-hidden disabled:opacity-50 disabled:pointer-events-none"
+                        className="relative inline-flex items-center justify-center px-9 py-4 text-xl font-sans overflow-hidden disabled:opacity-50 disabled:pointer-events-none"
                         style={{ minWidth: "260px" }}
                         variants={{
                             initial: {

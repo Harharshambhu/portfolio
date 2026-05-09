@@ -108,7 +108,7 @@ export default function LetsTalkSection() {
                         onFocus={handleFocus}
                         onBlur={handleBlur}
                         transition={{ duration: ANIMATION_DURATION, ease: "linear" }}
-                        className="relative inline-flex items-center justify-center px-9 py-4 text-2xl font-mono overflow-hidden"
+                        className="relative inline-flex items-center justify-center px-9 py-4 text-2xl font-sans overflow-hidden"
                         style={{ minWidth: "260px" }}
                         variants={{
                             initial: {
