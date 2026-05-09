@@ -1,6 +1,14 @@
 @import "tailwindcss";
 
 :root {
+  /*--background: rgba(255, 255, 255, 1);
+  --foreground: rgba(23, 23, 23, 1);
+  --muted: rgba(82, 82, 82, 1);
+  --border: rgba(229, 229, 229, 1);
+  --hover: rgba(243, 244, 246, 1);
+  --accent-neon: rgba(57, 255, 20, 1);
+  --accent-blue: rgba(31, 81, 255, 1); */
+
   --background: rgba(255, 255, 255, 1);
   --foreground: rgba(23, 23, 23, 1);
   --muted: rgba(82, 82, 82, 1);

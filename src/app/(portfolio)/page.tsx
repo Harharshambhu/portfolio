@@ -14,15 +14,15 @@ export default function Home() {
   return (
     <div className="flex flex-col gap-16 pt-0">
       <section className="flex flex-col md:flex-row items-end gap-6 md:gap-12">
-        <ScrollReveal delay={0.3} className="relative w-full md:w-[40%] flex justify-center md:justify-center translate-y-8">
+        <ScrollReveal delay={0.3} className="relative w-full md:w-[40%] flex justify-center">
           <HeroImage />
         </ScrollReveal>
 
-        <div className="flex flex-col gap-6 w-full md:w-[60%] mb-8 md:mb-10">
+        <div className="flex flex-col gap-4 w-full md:w-[60%]">
           <HeroName />
           <ScrollReveal delay={0.1}>
             <h2 className="text-xl text-muted">
-              Product & XR Designer | M.Des at IIT Jodhpur
+              I am a Product & XR Designer
             </h2>
           </ScrollReveal>
           <ScrollReveal delay={0.2}>

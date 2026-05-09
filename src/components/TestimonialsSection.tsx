@@ -82,7 +82,8 @@ export default function TestimonialsSection() {
 
                 <motion.div
                     className="flex w-max"
-                    animate={{ x: "-40%" }}
+                    initial={{ x: "-50%" }}
+                    animate={{ x: "20%" }}
                     transition={{
                         duration: 40,
                         ease: "linear",
