@@ -1,21 +1,48 @@
 import type { Metadata } from "next";
-import { Plus_Jakarta_Sans, Merriweather } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import BackgroundGrid from "@/components/BackgroundGrid";
 import TargetCursor from "@/components/TargetCursor";
 import SmoothScroll from "@/components/SmoothScroll";
 
-const plusJakartaSans = Plus_Jakarta_Sans({
+const plusJakartaSans = localFont({
+  src: [
+    {
+      path: "../../public/fonts/Plus_Jakarta_Sans/PlusJakartaSans-VariableFont_wght.ttf",
+      style: "normal",
+    },
+    {
+      path: "../../public/fonts/Plus_Jakarta_Sans/PlusJakartaSans-Italic-VariableFont_wght.ttf",
+      style: "italic",
+    },
+  ],
   variable: "--font-sans",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
 });
 
-const merriweather = Merriweather({
+const merriweather = localFont({
+  src: [
+    {
+      path: "../../public/fonts/Merriweather/static/Merriweather_48pt-Regular.ttf",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../../public/fonts/Merriweather/static/Merriweather_48pt-Italic.ttf",
+      weight: "400",
+      style: "italic",
+    },
+    {
+      path: "../../public/fonts/Merriweather/static/Merriweather_48pt-Bold.ttf",
+      weight: "700",
+      style: "normal",
+    },
+    {
+      path: "../../public/fonts/Merriweather/static/Merriweather_48pt-BoldItalic.ttf",
+      weight: "700",
+      style: "italic",
+    },
+  ],
   variable: "--font-serif",
-  subsets: ["latin"],
-  weight: ["400", "700"],
-  style: ["normal", "italic"],
 });
 
 export const metadata: Metadata = {
