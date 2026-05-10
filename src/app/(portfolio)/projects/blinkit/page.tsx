@@ -19,7 +19,7 @@ export default function BlinkitProjectPage() {
                         { label: "Year", value: "2022" },
                     ].map((item) => (
                         <div key={item.label} className="flex flex-col gap-1 p-5 bg-background text-left">
-                            <span className="text-xs font-mono text-muted uppercase tracking-wider">{item.label}</span>
+                            <span className="text-xs font-sans text-muted uppercase tracking-wider">{item.label}</span>
                             <span className="text-sm font-medium">{item.value}</span>
                         </div>
                     ))}

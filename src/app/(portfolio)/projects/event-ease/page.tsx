@@ -96,13 +96,13 @@ const channelZones = [
 ];
 
 const lifecycleStages = [
-    { label: "Lead",      color: "#737373", desc: "Event is a potential brief — no commitment" },
+    { label: "Lead", color: "#737373", desc: "Event is a potential brief — no commitment" },
     { label: "Confirmed", color: "var(--accent-blue)", desc: "Client signed off — planning can begin" },
-    { label: "Planning",  color: "#ca8a04", desc: "Active production — vendors onboarding" },
-    { label: "Build-Up",  color: "#ea580c", desc: "On-site setup underway" },
-    { label: "Live",      color: "#dc2626", desc: "Event is live — all-hands on deck" },
-    { label: "Wrap-Up",   color: "#7c3aed", desc: "Post-event breakdown and reporting" },
-    { label: "Closed",    color: "#16a34a", desc: "Event archived — channels preserved T+14" },
+    { label: "Planning", color: "#ca8a04", desc: "Active production — vendors onboarding" },
+    { label: "Build-Up", color: "#ea580c", desc: "On-site setup underway" },
+    { label: "Live", color: "#dc2626", desc: "Event is live — all-hands on deck" },
+    { label: "Wrap-Up", color: "#7c3aed", desc: "Post-event breakdown and reporting" },
+    { label: "Closed", color: "#16a34a", desc: "Event archived — channels preserved T+14" },
 ];
 
 const platformEngines = [
@@ -277,7 +277,7 @@ export default function EventEaseProjectPage() {
                         { label: "Year", value: "2026" },
                     ].map((item) => (
                         <div key={item.label} className="flex flex-col gap-1 p-5 bg-background">
-                            <span className="text-xs font-mono text-muted uppercase tracking-wider">{item.label}</span>
+                            <span className="text-xs font-sans text-muted uppercase tracking-wider">{item.label}</span>
                             <span className="text-sm font-medium">{item.value}</span>
                         </div>
                     ))}
@@ -399,10 +399,10 @@ export default function EventEaseProjectPage() {
                     </p>
                 </div>
                 <div className="flex flex-col gap-3">
-                    <span className="text-xs font-mono text-muted uppercase tracking-wider mb-1">Five Architectural Principles</span>
+                    <span className="text-xs font-sans text-muted uppercase tracking-wider mb-1">Five Architectural Principles</span>
                     {architecturalPrinciples.map((p) => (
                         <div key={p.num} className="flex gap-6 p-6 rounded-xl border border-border bg-background">
-                            <span className="font-mono text-sm text-muted shrink-0 pt-0.5">{p.num}</span>
+                            <span className="font-sans text-sm text-muted shrink-0 pt-0.5">{p.num}</span>
                             <div className="flex flex-col gap-1.5">
                                 <span className="font-semibold text-sm">{p.title}</span>
                                 <p className="text-sm text-muted leading-relaxed">{p.body}</p>
@@ -427,7 +427,7 @@ export default function EventEaseProjectPage() {
 
                 {/* Channel Zones */}
                 <div className="flex flex-col gap-4">
-                    <span className="text-xs font-mono text-muted uppercase tracking-wider">The Three Channel Zones</span>
+                    <span className="text-xs font-sans text-muted uppercase tracking-wider">The Three Channel Zones</span>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                         {channelZones.map((z) => (
                             <div key={z.zone} className="flex flex-col gap-4 p-6 rounded-xl border border-border bg-background">
@@ -438,7 +438,7 @@ export default function EventEaseProjectPage() {
                                 <p className="text-xs text-muted leading-relaxed">{z.desc}</p>
                                 <ul className="flex flex-col gap-1">
                                     {z.channels.map((ch) => (
-                                        <li key={ch} className="flex items-center gap-2 text-xs font-mono text-muted">
+                                        <li key={ch} className="flex items-center gap-2 text-xs font-sans text-muted">
                                             <span className="w-1 h-1 rounded-full shrink-0" style={{ backgroundColor: z.color }} />
                                             {ch}
                                         </li>
@@ -451,7 +451,7 @@ export default function EventEaseProjectPage() {
 
                 {/* Lifecycle Stages */}
                 <div className="flex flex-col gap-4">
-                    <span className="text-xs font-mono text-muted uppercase tracking-wider">Seven-Stage Lifecycle Colour System</span>
+                    <span className="text-xs font-sans text-muted uppercase tracking-wider">Seven-Stage Lifecycle Colour System</span>
                     <p className="text-sm text-muted leading-relaxed max-w-2xl">
                         Each event lifecycle stage has a distinct colour that appears consistently across the sidebar, Events tab, Overview diagram, and channel headers. Stage is communicated through colour throughout — anyone can read the status of every event from the colour indicator alone.
                     </p>
@@ -527,7 +527,7 @@ export default function EventEaseProjectPage() {
                         { src: "/projects/EventEase/Module-Brainstorm-Mapping3.webp", label: "Module Brainstorm — Session 3" },
                     ].map((img) => (
                         <div key={img.src} className="flex flex-col gap-2">
-                            <span className="text-xs font-mono text-muted uppercase tracking-wider">{img.label}</span>
+                            <span className="text-xs font-sans text-muted uppercase tracking-wider">{img.label}</span>
                             <div className="relative w-full rounded-xl overflow-hidden border border-border">
                                 <Image src={img.src} alt={img.label} width={0} height={0} sizes="100vw" className="w-full h-auto" />
                             </div>
@@ -536,13 +536,13 @@ export default function EventEaseProjectPage() {
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="flex flex-col gap-2">
-                        <span className="text-xs font-mono text-muted uppercase tracking-wider">Module Mapping</span>
+                        <span className="text-xs font-sans text-muted uppercase tracking-wider">Module Mapping</span>
                         <div className="relative aspect-video rounded-xl overflow-hidden border border-border bg-background">
                             <Image src="/projects/EventEase/ModuleMapping.png" alt="Module mapping — dependencies, outputs, features, and permissions per module" fill className="object-contain p-3" />
                         </div>
                     </div>
                     <div className="flex flex-col gap-2">
-                        <span className="text-xs font-mono text-muted uppercase tracking-wider">Dashboard Module Map</span>
+                        <span className="text-xs font-sans text-muted uppercase tracking-wider">Dashboard Module Map</span>
                         <div className="relative aspect-video rounded-xl overflow-hidden border border-border bg-background">
                             <Image src="/projects/EventEase/Dashboard-Module-Map.png" alt="Dashboard module map — widget layout and module connections" fill className="object-contain p-3" />
                         </div>
@@ -561,7 +561,7 @@ export default function EventEaseProjectPage() {
                     <div className="flex flex-col gap-3">
                         {mod.tabs.map((tab, i) => (
                             <div key={tab.name} className="flex gap-5 p-5 rounded-xl border border-border bg-background">
-                                <span className="font-mono text-xs text-muted shrink-0 pt-0.5 w-5">{String(i + 1).padStart(2, "0")}</span>
+                                <span className="font-sans text-xs text-muted shrink-0 pt-0.5 w-5">{String(i + 1).padStart(2, "0")}</span>
                                 <div className="flex flex-col gap-1">
                                     <span className="font-semibold text-sm">{tab.name}</span>
                                     <p className="text-sm text-muted leading-relaxed">{tab.detail}</p>
@@ -580,7 +580,7 @@ export default function EventEaseProjectPage() {
                 </div>
 
                 <div className="p-8 rounded-2xl border border-border bg-background">
-                    <span className="text-xs font-mono text-muted uppercase tracking-wider">The Problem, Precisely Stated</span>
+                    <span className="text-xs font-sans text-muted uppercase tracking-wider">The Problem, Precisely Stated</span>
                     <p className="mt-4 text-lg leading-relaxed max-w-2xl">
                         A vendor completes internal work, reaches a decision, and then has to separately inform the agency of that decision. Two updates. Two places. Two opportunities for versions to diverge. This is a <span className="font-semibold">structural design problem, not a behaviour problem.</span>
                     </p>
@@ -611,7 +611,7 @@ export default function EventEaseProjectPage() {
                 </div>
 
                 <div className="flex flex-col gap-3 p-6 rounded-xl border border-border bg-background">
-                    <span className="text-xs font-mono text-muted uppercase tracking-wider">Stage Mapping Rules</span>
+                    <span className="text-xs font-sans text-muted uppercase tracking-wider">Stage Mapping Rules</span>
                     <div className="flex flex-col gap-2 mt-2">
                         {[
                             "One-to-one mapping only: a child form stage can only map to one parent stage. Prevents ambiguity about what triggered what.",
@@ -620,7 +620,7 @@ export default function EventEaseProjectPage() {
                             "The same mechanism works for Dashboard Forms — published simultaneously to multiple vendor channels, creating one parent record with multiple vendor child forms feeding into it.",
                         ].map((rule, i) => (
                             <div key={i} className="flex gap-3 text-sm text-muted">
-                                <span className="font-mono text-xs shrink-0 pt-0.5 text-muted">{String(i + 1).padStart(2, "0")}</span>
+                                <span className="font-sans text-xs shrink-0 pt-0.5 text-muted">{String(i + 1).padStart(2, "0")}</span>
                                 <p className="leading-relaxed">{rule}</p>
                             </div>
                         ))}
@@ -696,7 +696,7 @@ export default function EventEaseProjectPage() {
                 <div className="flex flex-col gap-3">
                     {originalContributions.map((c) => (
                         <div key={c.num} className="flex gap-6 p-6 rounded-xl border border-border bg-background">
-                            <span className="font-mono text-sm text-muted shrink-0 pt-0.5">{c.num}</span>
+                            <span className="font-sans text-sm text-muted shrink-0 pt-0.5">{c.num}</span>
                             <div className="flex flex-col gap-1.5">
                                 <span className="font-semibold text-sm">{c.title}</span>
                                 <p className="text-sm text-muted leading-relaxed">{c.body}</p>

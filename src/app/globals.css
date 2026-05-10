@@ -117,3 +117,9 @@ blockquote {
   font-size: var(--fs-body-lg);
   line-height: 1.7;
 }
+
+/* ── Keep monospace inside table elements in project case studies ── */
+table,
+table * {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !important;
+}

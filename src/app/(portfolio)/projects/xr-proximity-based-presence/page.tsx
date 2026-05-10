@@ -98,7 +98,7 @@ export default function XRProximityProjectPage() {
                         { label: "Year", value: "2026" },
                     ].map((item) => (
                         <div key={item.label} className="flex flex-col gap-1 p-5 bg-background text-left">
-                            <span className="text-xs font-mono text-muted uppercase tracking-wider">{item.label}</span>
+                            <span className="text-xs font-sans text-muted uppercase tracking-wider">{item.label}</span>
                             <span className="text-sm font-medium">{item.value}</span>
                         </div>
                     ))}
@@ -119,7 +119,7 @@ export default function XRProximityProjectPage() {
                     { label: "Re-visits", value: "3.75×", sub: "Voluntary return visits per session in reactive condition" },
                 ].map((item) => (
                     <div key={item.label} className="flex flex-col gap-2 p-8 bg-background">
-                        <span className="text-xs font-mono text-muted uppercase tracking-wider">{item.label}</span>
+                        <span className="text-xs font-sans text-muted uppercase tracking-wider">{item.label}</span>
                         <span className="text-[20px] md:text-[25px] font-semibold leading-tight">{item.value}</span>
                         <span className="text-sm text-muted leading-relaxed">{item.sub}</span>
                     </div>
@@ -164,12 +164,12 @@ export default function XRProximityProjectPage() {
                             &ldquo;Low-fidelity PC games like Minecraft and Roblox consistently outperform high-fidelity standalone VR in session duration. If graphical power determined immersion, this would be impossible.&rdquo;
                         </p>
                     </ScrollMagnifier>
-                    <span className="text-xs font-mono text-muted mt-3 block">Research premise — informed by Jin (2024) and Slater &amp; Wilbur (1997)</span>
+                    <span className="text-xs font-sans text-muted mt-3 block">Research premise — informed by Jin (2024) and Slater &amp; Wilbur (1997)</span>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="flex flex-col gap-3">
-                        <span className="text-xs font-mono text-muted uppercase tracking-wider">Reference — Silent Hill</span>
+                        <span className="text-xs font-sans text-muted uppercase tracking-wider">Reference — Silent Hill</span>
                         <div className="relative aspect-video rounded-xl overflow-hidden border border-border">
                             <Image
                                 src="/projects/xr-proximity-based-presence/webp-m/Silenthill.webp"
@@ -183,7 +183,7 @@ export default function XRProximityProjectPage() {
                         </ScrollMagnifier>
                     </div>
                     <div className="flex flex-col gap-3">
-                        <span className="text-xs font-mono text-muted uppercase tracking-wider">Reference — Minecraft</span>
+                        <span className="text-xs font-sans text-muted uppercase tracking-wider">Reference — Minecraft</span>
                         <div className="relative aspect-video rounded-xl overflow-hidden border border-border">
                             <Image
                                 src="/projects/xr-proximity-based-presence/webp-m/Minecraft.webp"
@@ -276,7 +276,7 @@ export default function XRProximityProjectPage() {
                         },
                     ].map((finding) => (
                         <div key={finding.num} className="flex gap-6 p-6 rounded-xl border border-border bg-background">
-                            <span className="font-mono text-sm text-muted shrink-0 pt-0.5">{finding.num}</span>
+                            <span className="font-sans text-sm text-muted shrink-0 pt-0.5">{finding.num}</span>
                             <div className="flex flex-col gap-2">
                                 <span className="font-semibold">{finding.title}</span>
                                 <ScrollMagnifier>
@@ -357,7 +357,7 @@ export default function XRProximityProjectPage() {
                         },
                     ].map((obj) => (
                         <div key={obj.num} className="flex flex-col gap-4 p-6 rounded-xl border border-border">
-                            <span className="text-sm font-medium font-mono" style={{ color: obj.color }}>{obj.num}</span>
+                            <span className="text-sm font-medium font-sans" style={{ color: obj.color }}>{obj.num}</span>
                             <span className="font-semibold">{obj.title}</span>
                             <ScrollMagnifier>
                                 <p className="text-sm text-muted leading-relaxed">{obj.body}</p>
@@ -388,7 +388,7 @@ export default function XRProximityProjectPage() {
                 {/* Phase 01 */}
                 <div className="flex flex-col gap-6 p-8 rounded-xl border border-border bg-background">
                     <div className="flex flex-col gap-1">
-                        <span className="text-xs font-mono text-muted uppercase tracking-wider">Phase 01 — Exploration &amp; Architectural Pivot</span>
+                        <span className="text-xs font-sans text-muted uppercase tracking-wider">Phase 01 — Exploration &amp; Architectural Pivot</span>
                         <h3 className="text-[20px] md:text-[25px] font-semibold leading-tight">Audio-Reactive Pipeline: TouchDesigner → Unity</h3>
                     </div>
                     <ScrollMagnifier>
@@ -409,13 +409,13 @@ export default function XRProximityProjectPage() {
                     </ScrollMagnifier>
                     <div className="flex flex-col gap-2">
                         <div className="flex items-start gap-3 p-4 rounded-lg bg-red-950/20 border border-red-900/30">
-                            <span className="text-red-400 font-mono text-sm shrink-0">✕</span>
+                            <span className="text-red-400 font-sans text-sm shrink-0">✕</span>
                             <ScrollMagnifier>
                                 <p className="text-sm text-muted">Abandoned — Meta Quest 2 output: 15–35 FPS. Inter-application GPU texture sharing and audio-driven physics consumed the entire processing budget.</p>
                             </ScrollMagnifier>
                         </div>
                         <div className="flex items-start gap-3 p-4 rounded-lg bg-emerald-950/20 border border-emerald-900/30">
-                            <span className="text-emerald-400 font-mono text-sm shrink-0">✓</span>
+                            <span className="text-emerald-400 font-sans text-sm shrink-0">✓</span>
                             <ScrollMagnifier>
                                 <p className="text-sm text-muted">Principle retained — Dynamic environmental responsiveness is the correct direction. Scale of computation must be reduced dramatically for standalone deployment.</p>
                             </ScrollMagnifier>
@@ -426,7 +426,7 @@ export default function XRProximityProjectPage() {
                 {/* Phase 02 */}
                 <div className="flex flex-col gap-6 p-8 rounded-xl border border-border bg-background">
                     <div className="flex flex-col gap-1">
-                        <span className="text-xs font-mono text-muted uppercase tracking-wider">Phase 02 — Environment Design &amp; Render Optimisation</span>
+                        <span className="text-xs font-sans text-muted uppercase tracking-wider">Phase 02 — Environment Design &amp; Render Optimisation</span>
                         <h3 className="text-[20px] md:text-[25px] font-semibold leading-tight">The Prison Room — Native Unity URP</h3>
                     </div>
                     <ScrollMagnifier>
@@ -485,7 +485,7 @@ export default function XRProximityProjectPage() {
                         <p className="text-xs text-muted">Fig. 4.6 — Render Optimisation: Three Nested Layers · Baked GI (~0%) + Light Probe Network (~2%) + Real-Time Shadows in 0.8m player zone (~5%) = ~7% total overhead</p>
                     </ScrollMagnifier>
                     <div className="flex items-start gap-3 p-4 rounded-lg bg-emerald-950/20 border border-emerald-900/30">
-                        <span className="text-emerald-400 font-mono text-sm shrink-0">✓</span>
+                        <span className="text-emerald-400 font-sans text-sm shrink-0">✓</span>
                         <ScrollMagnifier>
                             <p className="text-sm text-muted">Stable 72+ FPS baseline established. Full rendering budget headroom available for procedural animation systems.</p>
                         </ScrollMagnifier>
@@ -495,7 +495,7 @@ export default function XRProximityProjectPage() {
                 {/* Phase 03 */}
                 <div className="flex flex-col gap-6 p-8 rounded-xl border border-border bg-background">
                     <div className="flex flex-col gap-1">
-                        <span className="text-xs font-mono text-muted uppercase tracking-wider">Phase 03 — Procedural Animation Systems</span>
+                        <span className="text-xs font-sans text-muted uppercase tracking-wider">Phase 03 — Procedural Animation Systems</span>
                         <h3 className="text-[20px] md:text-[25px] font-semibold leading-tight">Four Primitives. Two Trigger Types.</h3>
                     </div>
                     <ScrollMagnifier>
@@ -511,7 +511,7 @@ export default function XRProximityProjectPage() {
                                     <span className="text-xs font-mono px-2 py-0.5 rounded-full border" style={{ color: p.costColor, borderColor: p.costColor + "40" }}>{p.cost}</span>
                                 </div>
                                 <div className="flex flex-col gap-1">
-                                    <span className="text-xs font-mono text-muted">Trigger: {p.trigger}</span>
+                                    <span className="text-xs font-sans text-muted">Trigger: {p.trigger}</span>
                                     <span className="text-xs text-muted">Applied to: {p.appliedTo}</span>
                                 </div>
                                 <ScrollMagnifier>
@@ -521,7 +521,7 @@ export default function XRProximityProjectPage() {
                         ))}
                     </div>
                     <div className="flex items-start gap-3 p-4 rounded-lg bg-emerald-950/20 border border-emerald-900/30">
-                        <span className="text-emerald-400 font-mono text-sm shrink-0">✓</span>
+                        <span className="text-emerald-400 font-sans text-sm shrink-0">✓</span>
                         <ScrollMagnifier>
                             <p className="text-sm text-muted">All four primitives deployed. Frame rate maintained at 72+ FPS under all interaction conditions on Meta Quest 2.</p>
                         </ScrollMagnifier>
@@ -531,7 +531,7 @@ export default function XRProximityProjectPage() {
                 {/* Phase 04 */}
                 <div className="flex flex-col gap-6 p-8 rounded-xl border border-border bg-background">
                     <div className="flex flex-col gap-1">
-                        <span className="text-xs font-mono text-muted uppercase tracking-wider">Phase 04 — A/B Testing Framework</span>
+                        <span className="text-xs font-sans text-muted uppercase tracking-wider">Phase 04 — A/B Testing Framework</span>
                         <h3 className="text-[20px] md:text-[25px] font-semibold leading-tight">8 Participants · Two Conditions · Two Onboarding Types</h3>
                     </div>
                     <ScrollMagnifier>
@@ -541,13 +541,13 @@ export default function XRProximityProjectPage() {
                     </ScrollMagnifier>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div className="flex flex-col gap-3 p-6 rounded-xl border border-border bg-background">
-                            <span className="text-xs font-mono uppercase tracking-wider" style={{ color: "var(--accent-blue)" }}>Static Condition (SC)</span>
+                            <span className="text-xs font-sans uppercase tracking-wider" style={{ color: "var(--accent-blue)" }}>Static Condition (SC)</span>
                             <ScrollMagnifier>
                                 <p className="text-sm text-muted leading-relaxed">All animations as pre-rendered keyframe loops. No proximity triggers active.</p>
                             </ScrollMagnifier>
                         </div>
                         <div className="flex flex-col gap-3 p-6 rounded-xl border border-border bg-background">
-                            <span className="text-xs font-mono uppercase tracking-wider" style={{ color: "var(--accent-neon)" }}>Reactive Condition (RC)</span>
+                            <span className="text-xs font-sans uppercase tracking-wider" style={{ color: "var(--accent-neon)" }}>Reactive Condition (RC)</span>
                             <ScrollMagnifier>
                                 <p className="text-sm text-muted leading-relaxed">All four procedural systems fully active, responding to real-time user proximity and controller input.</p>
                             </ScrollMagnifier>
@@ -556,7 +556,7 @@ export default function XRProximityProjectPage() {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                         {participants.map((p) => (
                             <div key={p.id} className="flex items-center gap-4 p-4 rounded-xl border border-border bg-background">
-                                <span className="font-mono text-sm text-muted w-6 shrink-0">{p.id}</span>
+                                <span className="font-sans text-sm text-muted w-6 shrink-0">{p.id}</span>
                                 <span className="text-xs text-muted shrink-0">{p.exp}</span>
                                 <span className="text-xs font-mono px-2 py-0.5 rounded-full border border-border text-muted shrink-0">{p.onboarding}</span>
                                 <span className="text-xs text-muted ml-auto">{p.order}</span>
@@ -655,7 +655,7 @@ export default function XRProximityProjectPage() {
                         },
                     ].map((finding) => (
                         <div key={finding.num} className="flex gap-6 p-6 rounded-xl border border-border bg-background">
-                            <span className="font-mono text-sm text-muted shrink-0 pt-0.5">{finding.num}</span>
+                            <span className="font-sans text-sm text-muted shrink-0 pt-0.5">{finding.num}</span>
                             <div className="flex flex-col gap-2">
                                 <span className="font-semibold">{finding.title}</span>
                                 <ScrollMagnifier>
@@ -714,9 +714,9 @@ export default function XRProximityProjectPage() {
                             </p>
                         </ScrollMagnifier>
                         <div className="flex flex-col gap-2 pt-2 border-t border-border">
-                            <span className="text-xs font-mono text-muted">Anirudh Singh · M24LDX002</span>
-                            <span className="text-xs font-mono text-muted">M.Des. in XR Design · IIT Jodhpur, School of Design</span>
-                            <span className="text-xs font-mono text-muted">Under the supervision of Dr. Sajan Pillai</span>
+                            <span className="text-xs font-sans text-muted">Anirudh Singh · M24LDX002</span>
+                            <span className="text-xs font-sans text-muted">M.Des. in XR Design · IIT Jodhpur, School of Design</span>
+                            <span className="text-xs font-sans text-muted">Under the supervision of Dr. Sajan Pillai</span>
                         </div>
                     </div>
                     <div className="relative min-h-64 md:min-h-0">
