@@ -44,7 +44,7 @@ export default function EchoTilesProjectPage() {
                         { label: "Year", value: "2025" },
                     ].map((item) => (
                         <div key={item.label} className="flex flex-col gap-1 p-5 bg-background text-left">
-                            <span className="text-xs font-mono text-muted uppercase tracking-wider">{item.label}</span>
+                            <span className="text-xs font-sans text-muted uppercase tracking-wider">{item.label}</span>
                             <span className="text-sm font-medium">{item.value}</span>
                         </div>
                     ))}
@@ -81,7 +81,7 @@ export default function EchoTilesProjectPage() {
                     { label: "Interaction", value: "VR Hand Gesture", sub: "Custom sensor gun + proximity reveal logic" },
                 ].map((item) => (
                     <div key={item.label} className="flex flex-col gap-2 p-8 bg-background">
-                        <span className="text-xs font-mono text-muted uppercase tracking-wider">{item.label}</span>
+                        <span className="text-xs font-sans text-muted uppercase tracking-wider">{item.label}</span>
                         <span className="text-2xl font-semibold tracking-tight">{item.value}</span>
                         <span className="text-sm text-muted leading-relaxed">{item.sub}</span>
                     </div>
@@ -106,7 +106,7 @@ export default function EchoTilesProjectPage() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
                     <div className="flex flex-col gap-3">
-                        <span className="text-xs font-mono text-muted uppercase tracking-wider">Original — Minesweeper (1989)</span>
+                        <span className="text-xs font-sans text-muted uppercase tracking-wider">Original — Minesweeper (1989)</span>
                         <div className="relative aspect-video rounded-xl overflow-hidden border border-border bg-foreground">
                             <Image
                                 src="/projects/Echo-tiles/minesweeperss.webp"
@@ -118,7 +118,7 @@ export default function EchoTilesProjectPage() {
                         <p className="text-sm text-muted">A flat 2D grid. Numbers tell you how many mines are adjacent. Safe cells are clicked one by one.</p>
                     </div>
                     <div className="flex flex-col gap-3">
-                        <span className="text-xs font-mono text-muted uppercase tracking-wider">Reimagined — Echo Tiles (2025)</span>
+                        <span className="text-xs font-sans text-muted uppercase tracking-wider">Reimagined — Echo Tiles (2025)</span>
                         <div className="relative aspect-video rounded-xl overflow-hidden border border-border">
                             <Image
                                 src="/projects/Echo-tiles/Gameenvironment/image 4.webp"
@@ -141,12 +141,12 @@ export default function EchoTilesProjectPage() {
                 className="grid grid-cols-1 md:grid-cols-2 gap-6"
             >
                 <div className="flex flex-col gap-4 p-8 rounded-xl border border-border bg-background">
-                    <span className="text-xs font-mono uppercase tracking-wider" style={{ color: "var(--accent-neon)" }}>Win Condition</span>
+                    <span className="text-xs font-sans uppercase tracking-wider" style={{ color: "var(--accent-neon)" }}>Win Condition</span>
                     <p className="text-2xl font-semibold tracking-tight">Reveal all non-mine tiles.</p>
                     <p className="text-muted leading-relaxed text-sm">Use audio clues to map the mine locations. Systematically reveal every safe tile without triggering a single mine.</p>
                 </div>
                 <div className="flex flex-col gap-4 p-8 rounded-xl border border-border bg-background">
-                    <span className="text-xs font-mono uppercase tracking-wider text-red-400">Lose Condition</span>
+                    <span className="text-xs font-sans uppercase tracking-wider text-red-400">Lose Condition</span>
                     <p className="text-2xl font-semibold tracking-tight">Reveal a mine tile.</p>
                     <p className="text-muted leading-relaxed text-sm">One wrong press ends the game. In a space where tiles surround you on all sides, every decision carries weight.</p>
                 </div>
@@ -199,7 +199,7 @@ export default function EchoTilesProjectPage() {
                         },
                     ].map((col) => (
                         <div key={col.label} className="flex flex-col gap-4 p-6 rounded-xl border border-border bg-background">
-                            <span className="text-sm font-medium font-mono" style={{ color: col.color }}>{col.label}</span>
+                            <span className="text-sm font-medium font-sans" style={{ color: col.color }}>{col.label}</span>
                             <ul className="flex flex-col gap-2">
                                 {col.items.map((item) => (
                                     <li key={item} className="flex gap-2 text-sm text-muted leading-relaxed">
@@ -263,7 +263,7 @@ export default function EchoTilesProjectPage() {
                         { step: "03", action: "Reveal", desc: "Press the trigger. Safe tile cascades open. Mine tile ends the game." },
                     ].map((s) => (
                         <div key={s.step} className="flex flex-col gap-2 p-6 rounded-xl border border-border bg-background">
-                            <span className="text-xs font-mono text-muted">{s.step}</span>
+                            <span className="text-xs font-sans text-muted">{s.step}</span>
                             <span className="font-semibold">{s.action}</span>
                             <p className="text-sm text-muted leading-relaxed">{s.desc}</p>
                         </div>
@@ -365,7 +365,7 @@ export default function EchoTilesProjectPage() {
                                 { beats: "3+ beats", meaning: "High-risk zone — proceed carefully" },
                             ].map((row) => (
                                 <div key={row.beats} className="flex items-center gap-4 py-3 border-b border-border last:border-0">
-                                    <span className="font-mono text-sm text-accent-blue w-20 shrink-0">{row.beats}</span>
+                                    <span className="font-sans text-sm text-accent-blue w-20 shrink-0">{row.beats}</span>
                                     <span className="text-sm text-muted">{row.meaning}</span>
                                 </div>
                             ))}
@@ -468,9 +468,9 @@ export default function EchoTilesProjectPage() {
                         },
                     ].map((s) => (
                         <div key={s.num} className="flex gap-5 p-6 rounded-xl border border-border bg-background hover:bg-hover transition-colors">
-                            <span className="font-mono text-sm text-muted shrink-0 pt-0.5">{s.num}</span>
+                            <span className="font-sans text-sm text-muted shrink-0 pt-0.5">{s.num}</span>
                             <div className="flex flex-col gap-1">
-                                <span className="font-medium font-mono text-sm" style={{ color: "var(--accent-blue)" }}>{s.name}</span>
+                                <span className="font-medium font-sans text-sm" style={{ color: "var(--accent-blue)" }}>{s.name}</span>
                                 <p className="text-sm text-muted leading-relaxed">{s.desc}</p>
                             </div>
                         </div>

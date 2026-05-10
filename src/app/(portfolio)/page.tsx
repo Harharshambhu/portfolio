@@ -39,7 +39,7 @@ export default function Home() {
         <ScrollReveal>
           <div className="flex items-center justify-between">
             <SectionLabel as="h3">Selected Work</SectionLabel>
-            <Link href="/projects" className="text-sm font-mono text-muted hover:text-foreground transition-colors">
+            <Link href="/projects" className="text-sm font-sans text-muted hover:text-foreground transition-colors">
               View All →
             </Link>
           </div>
