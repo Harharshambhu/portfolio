@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
 
 export default function BackgroundGrid({
     color = "rgba(100, 100, 100, 0.2)",
@@ -13,9 +14,13 @@ export default function BackgroundGrid({
     spotlight?: boolean;
     interaction?: boolean;
 }) {
+    const pathname = usePathname();
     const canvasRef = useRef<HTMLCanvasElement>(null);
 
+    const isProjectCaseStudy = pathname?.startsWith("/projects/") && pathname !== "/projects";
+
     useEffect(() => {
+        if (isProjectCaseStudy) return;
         const canvas = canvasRef.current;
         if (!canvas) return;
 
@@ -192,7 +197,11 @@ export default function BackgroundGrid({
             if (resizeObserver) resizeObserver.disconnect();
             cancelAnimationFrame(animationFrameId);
         };
-    }, [color, fixed]);
+    }, [color, fixed, isProjectCaseStudy]);
+
+    if (isProjectCaseStudy) {
+        return null;
+    }
 
     return (
         <canvas
