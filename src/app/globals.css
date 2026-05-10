@@ -34,7 +34,7 @@
   --fs-page-title-contact: clamp(4.5rem, 12vw, 160px);
 
   /* H1 — 34px desktop, 26px mobile */
-  --fs-h1: clamp(1.625rem, 3vw, 2.125rem);
+  --fs-h1: clamp(1.625rem, 10vw, 5rem);
 
   /* H2 — 23px desktop, 20px mobile */
   --fs-h2: clamp(1.25rem, 2vw, 1.4375rem);
@@ -80,6 +80,8 @@ body {
   font-size: var(--fs-body);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  width: 100%;
 }
 
 /* ── Heading defaults ── */

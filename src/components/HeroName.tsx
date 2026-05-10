@@ -2,6 +2,7 @@
 
 import { motion, useScroll, useMotionValueEvent } from "framer-motion";
 import { useState, useRef } from "react";
+import { useWindowSize } from "@/hooks/useWindowSize";
 
 export default function HeroName() {
     const { scrollY } = useScroll();
@@ -14,16 +15,30 @@ export default function HeroName() {
         setIsScrolled(latest > 1);
     });
 
+    const { width } = useWindowSize();
+    const isMobile = width < 768;
+    
+    // Calculate exact pixel sizes to prevent Framer Motion unit-mixing snaps
+    const compactSize = 34; // 2.125rem
+    
+    const mobileEnlargedSize = Math.min(width * 0.24, 120); // 24vw max 120px
+    const desktopEnlargedSize = Math.min(width * 0.08, 160); // 8vw max 160px
+    const enlargedSize = isMobile ? mobileEnlargedSize : desktopEnlargedSize;
+    
+    const targetFontSize = isScrolled ? enlargedSize : compactSize;
+
     return (
         <div className="relative inline-block">
             <motion.h1
                 ref={ref}
                 animate={{
-                    fontSize: isScrolled ? "8vw" : "2.125rem", // 34px (H1 size)
+                    fontSize: targetFontSize,
                     fontWeight: isScrolled ? 700 : 500,
                     letterSpacing: isScrolled ? "-0.01em" : "-0.025em",
                 }}
-                transition={{ type: "spring", stiffness: 80, damping: 18 }}
+                transition={{ 
+                    type: "spring", stiffness: 60, damping: 14, mass: 1
+                }}
                 className="leading-none relative"
                 onMouseMove={isScrolled ? (e) => {
                     const rect = ref.current!.getBoundingClientRect();

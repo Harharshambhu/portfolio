@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 
 interface Props {
     children: string;
@@ -13,7 +13,12 @@ export default function SpotlightHeading({ children, className, color = "var(--s
     const ref = useRef<HTMLHeadingElement>(null);
     const [spotlight, setSpotlight] = useState({ x: 0, y: 0 });
     const [hovering, setHovering] = useState(false);
-
+    const [isMobile, setIsMobile] = useState(false);
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            setIsMobile(window.innerWidth <= 768);
+        }
+    }, []);
     return (
         <h1
             ref={ref}
@@ -28,7 +33,7 @@ export default function SpotlightHeading({ children, className, color = "var(--s
                 paddingBottom: "0.2em",
                 marginBottom: "-0.2em",
                 ...style,
-                ...(hovering ? {
+                ...(hovering && !isMobile ? {
                     backgroundImage: `
                         url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='2.5' numOctaves='10' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.95'/%3E%3C/svg%3E"),
                         radial-gradient(circle 120px at ${spotlight.x}px ${spotlight.y}px, ${color} 70%, var(--foreground) 100%)

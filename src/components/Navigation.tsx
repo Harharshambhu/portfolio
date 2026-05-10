@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 
 import { motion, useScroll, useMotionValueEvent } from "framer-motion";
 import { useState, useEffect, useRef } from "react";
+import { useWindowSize } from "@/hooks/useWindowSize";
 
 const links = [
     { href: "/", label: "Home" },
@@ -71,6 +72,24 @@ export default function Navigation() {
         intervalRef.current = id;
     };
 
+    const { width } = useWindowSize();
+    const isMobile = width < 768;
+
+    // Calculate exact pixel sizes to prevent Framer Motion unit-mixing snaps
+    const compactSize = 16; // 1rem
+
+    // Unhovered (Giant) state: Cap at sizes that fit on the screen
+    const mobileUnhoveredSize = Math.min(width * 0.28, 150); // 22vw max 70px (to fit "Singh." on 375px screens)
+    const desktopUnhoveredSize = Math.min(width * 0.11, 200); // 11vw max 200px
+    const enlargedUnhoveredSize = isMobile ? mobileUnhoveredSize : desktopUnhoveredSize;
+
+    // Hovered (Shrunk) state: 
+    const mobileHoveredSize = Math.min(width * 0.15, 60); // 15vw max 60px
+    const desktopHoveredSize = Math.min(width * 0.08, 120); // 8vw max 120px
+    const enlargedHoveredSize = isMobile ? mobileHoveredSize : desktopHoveredSize;
+
+    const targetFontSize = isScrolled ? compactSize : (isHovered ? enlargedHoveredSize : enlargedUnhoveredSize);
+
     return (
         <motion.nav
             initial={{ opacity: 0, y: -20, filter: "blur(10px)" }}
@@ -130,12 +149,15 @@ export default function Navigation() {
                 <Link href="/" className={`block ${!isScrolled ? "no-cursor-interaction" : ""}`}>
                     <motion.span
                         animate={{
-                            fontSize: isScrolled ? "0.99rem" : (isHovered ? "8vw" : "11vw"),
+                            fontSize: targetFontSize,
                             fontWeight: isScrolled ? 600 : 700,
-                            letterSpacing: isScrolled ? "0em" : (isHovered ? "0.35em" : "-0.05em"),
+                            letterSpacing: isScrolled ? "0em" : (isHovered ? (isMobile ? "0.15em" : "0.35em") : "-0.05em"),
                             color: isHovered ? "var(--accent-blue)" : "var(--foreground)"
                         }}
-                        className={`leading-none block text-right font-sans transition-all duration-300 pb-2`}
+                        transition={{
+                            type: "spring", stiffness: 60, damping: 14, mass: 1
+                        }}
+                        className={`leading-none block text-right font-sans pb-2`}
                     >
                         {displayText}
                     </motion.span>
