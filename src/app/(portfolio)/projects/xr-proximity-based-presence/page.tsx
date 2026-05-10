@@ -85,11 +85,6 @@ export default function XRProximityProjectPage() {
                         Procedural environments that respond to user proximity, gaze, and movement — sustaining engagement more effectively than static, high-fidelity alternatives without exceeding standalone VR hardware limits.
                     </p>
                 </ScrollMagnifier>
-                <ScrollMagnifier>
-                    <p className="max-w-2xl text-base leading-relaxed text-muted">
-                        An A/B study across eight participants showed a <strong className="text-foreground">35% increase in session duration</strong> and a <strong className="text-foreground">77% increase in interaction events</strong> in the reactive condition, with no perceptible performance degradation.
-                    </p>
-                </ScrollMagnifier>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-px border border-border rounded-xl overflow-hidden w-full max-w-2xl mt-2">
                     {[
                         { label: "Role", value: "Solo Researcher" },

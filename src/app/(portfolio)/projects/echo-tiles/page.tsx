@@ -320,7 +320,31 @@ export default function EchoTilesProjectPage() {
 
                 <div className="relative w-full aspect-[16/9] md:aspect-[21/9] rounded-xl overflow-hidden border border-border bg-background">
                     <Image
-                        src="/projects/Echo-tiles/wireframes/game_Wireframes (1) 1.webp"
+                        src="/projects/Echo-tiles/wireframes/game_Wireframes1.webp"
+                        alt="Detailed wireframe diagram of tile states and reveal mechanics"
+                        fill
+                        className="object-contain"
+                    />
+                </div>
+                <div className="relative w-full aspect-[16/9] md:aspect-[21/9] rounded-xl overflow-hidden border border-border bg-background">
+                    <Image
+                        src="/projects/Echo-tiles/wireframes/game_Wireframes2.webp"
+                        alt="Detailed wireframe diagram of tile states and reveal mechanics"
+                        fill
+                        className="object-contain"
+                    />
+                </div>
+                <div className="relative w-full aspect-[16/9] md:aspect-[21/9] rounded-xl overflow-hidden border border-border bg-background">
+                    <Image
+                        src="/projects/Echo-tiles/wireframes/game_Wireframes3.webp"
+                        alt="Detailed wireframe diagram of tile states and reveal mechanics"
+                        fill
+                        className="object-contain"
+                    />
+                </div>
+                <div className="relative w-full aspect-[16/9] md:aspect-[21/9] rounded-xl overflow-hidden border border-border bg-background">
+                    <Image
+                        src="/projects/Echo-tiles/wireframes/game_Wireframes4.webp"
                         alt="Detailed wireframe diagram of tile states and reveal mechanics"
                         fill
                         className="object-contain"
@@ -339,6 +363,35 @@ export default function EchoTilesProjectPage() {
                             <p className="text-sm text-muted leading-relaxed">{t.desc}</p>
                         </div>
                     ))}
+                </div>
+            </motion.section>
+
+            {/* ── USER STUDY VIDEO ── */}
+            <motion.section
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                variants={fade}
+                className="flex flex-col gap-6"
+            >
+                <div className="flex flex-col gap-2">
+                    <SectionLabel>User Study Recording</SectionLabel>
+                    <h2 className="text-[28px] md:text-[50px] font-extrabold leading-tight">Task-Driven Session — Did the Environment Feel Alive?</h2>
+                    <p className="max-w-2xl text-muted leading-relaxed">
+                        Participants were given a single objective: <strong className="text-foreground">find the key and escape the cell.</strong> The session captures navigation pattern, zone dwell time, and whether users voluntarily return to areas already visited.
+                    </p>
+                </div>
+                <div className="relative w-full aspect-video rounded-2xl overflow-hidden border border-border bg-foreground">
+                    <video
+                        controls
+                        loop
+                        autoPlay
+                        muted
+                        preload="auto"
+                        className="w-full h-full object-cover"
+                    >
+                        <source src="/projects/Echo-tiles/output.webm" type="video/webm" />
+                    </video>
                 </div>
             </motion.section>
 
