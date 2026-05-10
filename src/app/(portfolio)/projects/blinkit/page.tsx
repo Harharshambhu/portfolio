@@ -6,7 +6,7 @@ export default function BlinkitProjectPage() {
                     <span className="text-sm font-semibold uppercase tracking-widest" style={{ color: "var(--accent-blue)" }}>
                         Ad Campaign · 2022
                     </span>
-                    <h1 className="text-5xl md:text-7xl font-medium tracking-tighter leading-none text-center">Blinkit</h1>
+                    <h1 className="text-6xl md:text-[100px] font-bold tracking-tighter leading-none">Blinkit</h1>
                 </div>
                 <p className="max-w-2xl text-lg leading-relaxed text-muted">
                     A comprehensive ad campaign focusing on rapid delivery services.
