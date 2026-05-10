@@ -1,4 +1,4 @@
-import Link from "next/link";
+
 import ProjectsTable from "@/components/ProjectsTable";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import ScrollReveal from "@/components/ScrollReveal";
@@ -37,12 +37,7 @@ export default function Home() {
 
       <section className="flex flex-col gap-8">
         <ScrollReveal>
-          <div className="flex items-center justify-between">
-            <SectionLabel as="h3">Selected Work</SectionLabel>
-            <Link href="/projects" className="text-sm font-sans text-muted hover:text-foreground transition-colors">
-              View All →
-            </Link>
-          </div>
+          <SectionLabel as="h3">Selected Work</SectionLabel>
         </ScrollReveal>
         <ScrollReveal delay={0.1}>
           <ProjectsTable projects={selectedProjects} />
