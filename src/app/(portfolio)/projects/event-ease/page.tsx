@@ -284,6 +284,28 @@ export default function EventEaseProjectPage() {
                 </div>
             </motion.section>
 
+            {/* ── HERO VIDEO ── */}
+            <motion.div
+                initial={{ opacity: 0, scale: 0.98 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="w-full rounded-2xl border-4 bg-background p-1.1 -mt-12 -mb-12"
+                style={{ borderColor: "#1d1d1d" }}
+            >
+                <div className="relative w-full aspect-video rounded-xl overflow-hidden bg-foreground">
+                    <video
+                        autoPlay
+                        muted
+                        loop
+                        playsInline
+                        preload="auto"
+                        className="w-full h-full object-cover"
+                    >
+                        <source src="/projects/EventEase/EE.webm" type="video/webm" />
+                    </video>
+                </div>
+            </motion.div>
+
             {/* ── THE PROBLEM ── */}
             <motion.section initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fade} className="flex flex-col gap-8">
                 <div className="flex flex-col gap-4">
