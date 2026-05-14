@@ -11,6 +11,7 @@ import { projects } from "@/data/projects";
 
 export default function Home() {
   const selectedProjects = projects.slice(0, 3);
+  const gridProjects = projects.filter(p => p.title !== "From Discovery to Transaction");
 
   return (
     <div className="flex flex-col gap-16 pt-0">
@@ -36,7 +37,7 @@ export default function Home() {
 
 
       <section className="flex flex-col gap-8">
-        <CircularGrid projects={projects} />
+        <CircularGrid projects={gridProjects} />
       </section>
 
       <section className="flex flex-col gap-8">
