@@ -376,7 +376,7 @@ export default function EchoTilesProjectPage() {
             >
                 <div className="flex flex-col gap-2">
                     <SectionLabel>User Study Recording</SectionLabel>
-                    <h2 className="text-[28px] md:text-[50px] font-extrabold leading-tight">Task-Driven Session — Did the Environment Feel Alive?</h2>
+                    <h2 className="text-5xl font-semibold tracking-tight">Task-Driven Session — Did the Environment Feel Alive?</h2>
                     <p className="max-w-2xl text-muted leading-relaxed">
                         Participants were given a single objective: <strong className="text-foreground">find the key and escape the cell.</strong> The session captures navigation pattern, zone dwell time, and whether users voluntarily return to areas already visited.
                     </p>
@@ -406,7 +406,7 @@ export default function EchoTilesProjectPage() {
                 <div className="grid grid-cols-1 md:grid-cols-2">
                     <div className="flex flex-col gap-6 p-10 md:p-12 bg-background">
                         <SectionLabel>Audio Feedback System</SectionLabel>
-                        <h2 className="text-3xl font-semibold tracking-tight">Numbers become rhythm.</h2>
+                        <h2 className="text-5xl font-semibold tracking-tight">Numbers become rhythm.</h2>
                         <p className="text-muted leading-relaxed">
                             Visual number clues are replaced entirely by spatial audio. When a player hovers over a revealed tile, it emits a rhythmic beat pattern — one beat per adjacent mine.
                         </p>

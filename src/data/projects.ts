@@ -1,37 +1,57 @@
-export const projects = [
+export interface Project {
+    title: string;
+    category: string;
+    year: string;
+    href?: string;
+    description?: string;
+    thumbnail?: string;
+    circularThumbnail?: string;
+}
+
+export const projects: Project[] = [
     {
         title: "Event Ease",
         category: "UX Design",
         year: "2026",
-        description: "End-to-end event management platform designed for large-scale productions.",
+        description: "B2B SaaS platform that replaces WhatsApp-and-spreadsheet event coordination with a communication-first architecture, where channels, forms, tasks, and vendor access are all event-scoped by design.",
         href: "/projects/event-ease",
+        thumbnail: "/projects/EventEase/thumbnail.png",
+        circularThumbnail: "/projects/EventEase/circularthumbnail.png",
     },
     {
         title: "XR Proximity-Based Presence",
         category: "XR Design",
         year: "2026",
-        description: "Procedural effects for standalone VR immersion.",
+        description: "M.Des. research project proving that procedural animations triggered by user proximity sustain VR engagement more effectively than static high-fidelity environments, without exceeding standalone headset hardware limits.",
         href: "/projects/xr-proximity-based-presence",
+        thumbnail: "/projects/xr-proximity-based-presence/thumbnail.jpg",
+        circularThumbnail: "/projects/xr-proximity-based-presence/circular thumnail.png",
     },
     {
         title: "Comfort Aid",
         category: "Product Design",
         year: "2024",
-        description: "Innovative immersive media solutions for event experiences.",
+        description: "A slide-mattress system for Indian public hospitals that eliminates the bedsheet lifting method for patient transfers, enabling a single caregiver to complete a safe transfer in five steps.",
         href: "/projects/comfort-aid",
+        thumbnail: "/projects/Comfort Aid/thumbnail.jpeg",
+        circularThumbnail: "/projects/Comfort Aid/circular thumnail.png",
     },
     {
         title: "Echo Tiles",
         category: "Game Design",
         year: "2025",
-        description: "A logic-based puzzle game challenging spatial reasoning.",
+        description: "Minesweeper reimagined as a VR spatial puzzle where the player stands inside a hollow 3D cube and navigates mine locations through audio beats instead of visual numbers.",
         href: "/projects/echo-tiles",
+        thumbnail: "/projects/Echo-tiles/thumbnail.webp",
+        circularThumbnail: "/projects/Echo-tiles/circularthumbnail.png",
     },
     {
         title: "From Discovery to Transaction",
         category: "UX Research",
         year: "2025",
-        description: "Mapping the cognitive gap between Instagram discovery and D2C purchase conversion.",
+        description: "UX research into Instagram's Top-of-Funnel leakage in the Indian D2C market, proposing a statutory Shop Tag verification system to bridge the trust gap between passive browsing and purchase.",
         href: "/projects/from-discovery-to-transaction",
+        thumbnail: "/projects/discovery-to-transaction/thumbnail.png",
+        circularThumbnail: "/projects/discovery-to-transaction/CircularThumbnail.png",
     },
 ];
