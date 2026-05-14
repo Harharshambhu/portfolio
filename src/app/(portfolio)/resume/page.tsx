@@ -7,7 +7,7 @@ export default function Resume() {
                 <h1 className="text-6xl md:text-[150px] font-medium tracking-tighter leading-none">Resume</h1>
             </section>
 
-            <section className="flex flex-col items-center w-full max-w-3xl gap-6">
+            <section className="flex flex-col items-center w-full max-w-3xl gap-6" style={{ isolation: "isolate", zIndex: 1, position: "relative" }}>
                 {/* PDF iframe — native text layer allows copy-paste */}
                 <iframe
                     src="/Anirudh_Singh_Resume.pdf#toolbar=0&navpanes=0&scrollbar=0"
