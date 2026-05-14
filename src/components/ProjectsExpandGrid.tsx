@@ -103,9 +103,54 @@ export default function ProjectsExpandGrid({ projects }: { projects: Project[] }
     const row2: (Project | null)[] = [projects[3] ?? null, projects[4] ?? null, null];
 
     return (
-        <div className="flex flex-col gap-[2px]">
-            <ExpandRow items={row1} />
-            <ExpandRow items={row2} />
-        </div>
+        <>
+            {/* ── Mobile: single column stack ── */}
+            <div className="md:hidden flex flex-col gap-4">
+                {projects.filter(Boolean).map((project) => (
+                    <Link
+                        key={project.href}
+                        href={project.href || "#"}
+                        className="block rounded-[3px] overflow-hidden relative"
+                        style={{ boxShadow: "0 2px 12px rgba(0,0,0,0.06)" }}
+                    >
+                        <div className="relative aspect-video w-full overflow-hidden" style={{ background: "var(--hover)" }}>
+                            {project.thumbnail && (
+                                <Image
+                                    src={project.thumbnail}
+                                    alt={project.title}
+                                    fill
+                                    className="object-cover"
+                                    sizes="100vw"
+                                />
+                            )}
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
+                            <div className="absolute bottom-0 left-0 right-0 p-4">
+                                <span
+                                    className="uppercase tracking-[0.14em] block mb-1"
+                                    style={{ fontSize: "var(--fs-body-sm)", color: "rgba(255,255,255,0.45)" }}
+                                >
+                                    {project.category}&nbsp;·&nbsp;{project.year}
+                                </span>
+                                <div className="flex items-end justify-between">
+                                    <h3 className="font-semibold text-white leading-snug" style={{ fontSize: "var(--fs-h3)" }}>
+                                        {project.title}
+                                    </h3>
+                                    <ArrowUpRight size={15} className="shrink-0 text-white mb-0.5 opacity-70" />
+                                </div>
+                            </div>
+                        </div>
+                        <div className="px-4 py-3">
+                            <p className="text-xs text-muted leading-relaxed">{project.description}</p>
+                        </div>
+                    </Link>
+                ))}
+            </div>
+
+            {/* ── Desktop: expand-on-hover grid ── */}
+            <div className="hidden md:flex flex-col gap-[2px]">
+                <ExpandRow items={row1} />
+                <ExpandRow items={row2} />
+            </div>
+        </>
     );
 }
