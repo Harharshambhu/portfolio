@@ -26,10 +26,6 @@ export default function CircularGrid({ projects }: { projects: Project[] }) {
 
     const rotationValue = useMotionValue(0);
     const smoothRotation = useSpring(rotationValue, { stiffness: 60, damping: 30, mass: 1 });
-    const rotateSVG = useTransform(
-        smoothRotation,
-        (r) => `rotate(${r}, ${500}, ${500})`
-    );
 
     const points = projects.length || 5;
     const outerRadius = 320;
@@ -240,7 +236,7 @@ export default function CircularGrid({ projects }: { projects: Project[] }) {
                     className="overflow-visible relative z-10 -translate-x-50"
                 >
                     {/* Rotating group — all wheel content spins inside this g */}
-                    <motion.g transform={rotateSVG}>
+                    <motion.g style={{ rotate: smoothRotation, transformOrigin: "500px 420px" }}>
 
                     {/* Central hit area (desktop hover only) */}
                     <circle
