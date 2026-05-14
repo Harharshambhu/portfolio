@@ -17,14 +17,14 @@ export default function HeroName() {
 
     const { width } = useWindowSize();
     const isMobile = width < 768;
-    
+
     // Calculate exact pixel sizes to prevent Framer Motion unit-mixing snaps
     const compactSize = 34; // 2.125rem
-    
+
     const mobileEnlargedSize = Math.min(width * 0.24, 120); // 24vw max 120px
     const desktopEnlargedSize = Math.min(width * 0.08, 160); // 8vw max 160px
     const enlargedSize = isMobile ? mobileEnlargedSize : desktopEnlargedSize;
-    
+
     const targetFontSize = isScrolled ? enlargedSize : compactSize;
 
     return (
@@ -36,7 +36,7 @@ export default function HeroName() {
                     fontWeight: isScrolled ? 700 : 500,
                     letterSpacing: isScrolled ? "-0.01em" : "-0.025em",
                 }}
-                transition={{ 
+                transition={{
                     type: "spring", stiffness: 60, damping: 14, mass: 1
                 }}
                 className="leading-none relative"

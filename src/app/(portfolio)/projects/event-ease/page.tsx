@@ -12,16 +12,31 @@ const fade = {
     visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" as const } },
 };
 
-const ecosystemStakeholders = [
-    { role: "Host", desc: "Corporate clients, government bodies, and institutions that commission the event and set the strategic brief." },
-    { role: "Organiser", desc: "The event management agency — the central information router for the entire temporary multi-org network." },
-    { role: "Manager", desc: "Specialised agency leads across production, creative, client servicing, logistics, budget, and security." },
-    { role: "Sponsor", desc: "Brands funding or co-presenting the event in exchange for visibility, data, or activation rights." },
-    { role: "Team", desc: "On-ground crew and internal staff executing the run-of-show across all departments simultaneously." },
-    { role: "Vendors", desc: "AV, décor, catering, transport, and technical service providers — each engaged per event, not permanently." },
-    { role: "Session", desc: "Speakers, performers, and facilitators delivering the content of the event. Often externally coordinated." },
-    { role: "Attendees", desc: "Delegates, guests, and public participants — the primary audience for whom the event is produced." },
-    { role: "Exhibitor", desc: "Brands with a physical or digital presence at the event; managed separately from sponsors." },
+const operatorTypes = [
+    {
+        role: "Platform Manager",
+        desc: "Sets up every event, builds channel clusters, invites vendors, creates parent forms, reviews dashboards, and sends broadcasts. Sees everything across all events simultaneously.",
+        tag: "Global Access",
+        tagColor: "var(--accent-blue)"
+    },
+    {
+        role: "Event Manager",
+        desc: "Owns a specific event end-to-end. Creates channels, assigns tasks, manages vendors, and tracks every stage of the run-of-show for their events.",
+        tag: "Event Owner",
+        tagColor: "#10b981"
+    },
+    {
+        role: "Event Worker",
+        desc: "Executes in their designated area. Sees the channels and tasks relevant to their role — without the noise of the wider organisation or other events.",
+        tag: "Operational",
+        tagColor: "#f59e0b"
+    },
+    {
+        role: "Executive",
+        desc: "Sees event portfolio status and key flags — without access to operational detail. A read-only view calibrated for oversight, not execution.",
+        tag: "ReadOnly",
+        tagColor: "#6366f1"
+    },
 ];
 
 const structuralFailures = [
@@ -41,6 +56,59 @@ const structuralFailures = [
         title: "The Global Platform Gap",
         body: "Cvent is built for North American corporate buyers — too expensive, too generic. Indian platforms focus on ticketing. Nothing exists for internal Indian agency operations.",
     },
+];
+
+const stakeholderVoices = [
+    {
+        quote: "We run three events a month. Everything lives in my WhatsApp. When I leave the agency, the entire operational history of the last five years leaves with me.",
+        role: "Head of Operations",
+    },
+    {
+        quote: "I send the same update to the AV vendor on WhatsApp, then paste it into the ops sheet, then email the client. Three times. Every time something changes.",
+        role: "Event Manager",
+    },
+    {
+        quote: "On event day I am in 40 WhatsApp groups. I have no way to know which ones need a response right now and which ones are just noise.",
+        role: "Senior Operations Coordinator",
+    },
+    {
+        quote: "The vendor confirmed the load-in time with me on call. I updated my sheet. Nobody told the site manager. The truck arrived and there was nobody to receive it.",
+        role: "Logistics Manager",
+    },
+];
+
+const ecosystemStakeholders = [
+    { role: "Host", desc: "Corporate clients, government bodies, and institutions that commission the event and set the strategic brief." },
+    { role: "Organiser", desc: "The event management agency — the central information router for the entire temporary multi-org network." },
+    { role: "Manager", desc: "Specialised agency leads across production, creative, client servicing, logistics, budget, and security." },
+    { role: "Sponsor", desc: "Brands funding or co-presenting the event in exchange for visibility, data, or activation rights." },
+    { role: "Team", desc: "On-ground crew and internal staff executing the run-of-show across all departments simultaneously." },
+    { role: "Vendors", desc: "AV, décor, catering, transport, and technical service providers — each engaged per event, not permanently." },
+    { role: "Session", desc: "Speakers, performers, and facilitators delivering the content of the event. Often externally coordinated." },
+    { role: "Attendees", desc: "Delegates, guests, and public participants — the primary audience for whom the event is produced." },
+    { role: "Exhibitor", desc: "Brands with a physical or digital presence at the event; managed separately from sponsors." },
+];
+
+const structuralGaps = [
+    "No single source of truth for event briefs — conflicting versions live across email, WhatsApp, and spreadsheets simultaneously.",
+    "Institutional memory is tied to individuals, not the organisation — when a team member leaves, operational history leaves with them.",
+    "Structural double-entry between vendor-side and agency-side records — the same information entered twice, in two places, by two people.",
+    "No event-scoped channel separation — conversations from different events collide in a single shared workspace.",
+    "No purpose-built vendor coordination layer — external parties managed entirely outside any structured system.",
+    "Communication is architecturally separated from operations — teams use one tool for records, WhatsApp for actual coordination.",
+    "Notification collapse on event day — all messages arrive with equal urgency, making critical ones impossible to distinguish.",
+    "No tunnelled view design — vendor portals communicate restriction, not purposeful and complete access.",
+    "No purpose-built platform for the Indian B2B agency market — global tools are built for Western buyers, Indian tools cover only ticketing.",
+];
+
+const competitors = [
+    { name: "Cvent", verdict: "Database product. Communication is a notification layer on top of a project management core. Built for North American corporate buyers." },
+    { name: "Lennd", verdict: "Closest competitor — describes itself as 'a communications tool at its core.' But portal-based (each vendor gets a website), not channel-based real-time coordination." },
+    { name: "Bizzabo", verdict: "Attendee experience platform. No internal agency coordination layer exists." },
+    { name: "Samaaro", verdict: "WhatsApp integration as outbound broadcast only — attendee notifications, not structured vendor coordination." },
+    { name: "Zoho Backstage", verdict: "Indian-market ticketing and attendee registration. No operational or vendor layer." },
+    { name: "Eventdex", verdict: "Badge and registration focus. Communication entirely absent from the product." },
+    { name: "Dreamcast", verdict: "Streaming and ticketing. Built for the public-facing event experience, not internal production operations." },
 ];
 
 const architecturalPrinciples = [
@@ -95,34 +163,20 @@ const channelZones = [
     },
 ];
 
-const lifecycleStages = [
-    { label: "Lead", color: "#737373", desc: "Event is a potential brief — no commitment" },
-    { label: "Confirmed", color: "var(--accent-blue)", desc: "Client signed off — planning can begin" },
-    { label: "Planning", color: "#ca8a04", desc: "Active production — vendors onboarding" },
-    { label: "Build-Up", color: "#ea580c", desc: "On-site setup underway" },
-    { label: "Live", color: "#dc2626", desc: "Event is live — all-hands on deck" },
-    { label: "Wrap-Up", color: "#7c3aed", desc: "Post-event breakdown and reporting" },
-    { label: "Closed", color: "#16a34a", desc: "Event archived — channels preserved T+14" },
-];
-
-const platformEngines = [
-    { name: "Communication", desc: "Real-time channels, DMs, broadcast — the primary layer all other modules surface through." },
-    { name: "Forms", desc: "Multi-stage form pipelines with parent-child hierarchy and automatic stage mapping." },
-    { name: "Task", desc: "List, Kanban, Gantt, and Analytics views — all derived from the same task record." },
-    { name: "Permission", desc: "Role-access matrix governing who can see, post in, and manage each channel type." },
-    { name: "Data Sync", desc: "The mechanism that connects vendor child form completion to agency parent form stage updates." },
-    { name: "Notification", desc: "Three-tier delivery system: immediate push, batched in-app, and passive on-visit." },
-    { name: "Analytics", desc: "Status distribution, workload per assignee, form linkage, velocity, and burndown — computed from live task state." },
-];
-
-const roleMatrix = [
-    { channel: "#company-general", admin: "Full", eventMgr: "Full", opsCoord: "Full", vendor: "None", client: "None" },
-    { channel: "#dept-[name]", admin: "Full", eventMgr: "Own dept", opsCoord: "Own dept", vendor: "None", client: "None" },
-    { channel: "#[event]-general", admin: "Full", eventMgr: "Full", opsCoord: "Full", vendor: "None", client: "None" },
-    { channel: "#[event]-ops", admin: "Full", eventMgr: "Full", opsCoord: "Full", vendor: "None", client: "None" },
-    { channel: "#[event]-vendor-[x]", admin: "Full", eventMgr: "Full", opsCoord: "Full", vendor: "Own only", client: "None" },
-    { channel: "#[event]-client-[x]", admin: "Full", eventMgr: "Full", opsCoord: "View", vendor: "None", client: "Own only" },
-    { channel: "DMs", admin: "Open", eventMgr: "Open", opsCoord: "Open", vendor: "Agency only", client: "Agency only" },
+const accessRules = [
+    { label: "CHANNELS", isHeader: true },
+    { area: "#company-general", access: "Platform Mgr · Event Mgr · Event Worker — Full  ·  Executive — View  ·  Vendor, Client — None" },
+    { area: "#dept-[name]", access: "Platform Mgr — All depts  ·  Event Mgr, Event Worker — Own dept  ·  Executive, Vendor, Client — None" },
+    { area: "#[event]-general / ops", access: "Platform Mgr · Event Mgr — Full  ·  Event Worker — Assigned  ·  Executive, Vendor, Client — None" },
+    { area: "#[event]-vendor-[x]", access: "Platform Mgr · Event Mgr · Event Worker — Full  ·  Vendor — Own channel only  ·  Executive, Client — None" },
+    { area: "#[event]-client-[x]", access: "Platform Mgr · Event Mgr · Event Worker — Full  ·  Client — Own channel only  ·  Executive, Vendor — None" },
+    { label: "MODULES", isHeader: true },
+    { area: "Guest lists", access: "Platform Mgr · Event Mgr — Full  ·  Event Worker — View  ·  Executive — Summary  ·  Vendor, Client — None" },
+    { area: "Credentials", access: "Platform Mgr · Event Mgr · Event Worker — Full  ·  Executive, Vendor, Client — None" },
+    { area: "Assets", access: "Platform Mgr · Event Mgr · Event Worker — Full  ·  Vendor — Assigned assets  ·  Executive, Client — None" },
+    { area: "Forms + Tasks", access: "Platform Mgr · Event Mgr — Create + manage  ·  Event Worker · Vendor — Fill assigned  ·  Executive — Review only  ·  Client — None" },
+    { area: "Financials", access: "Platform Mgr — Full  ·  Event Mgr — View  ·  Executive — Summary  ·  Event Worker, Vendor, Client — None" },
+    { area: "Dashboard / portfolio", access: "Platform Mgr — All events  ·  Event Mgr · Event Worker — Own events  ·  Executive — Summary  ·  Vendor, Client — None" },
 ];
 
 const modules = [
@@ -147,17 +201,7 @@ const modules = [
             { name: "RSVP & Confirmation", detail: "Full guest table with tier badges, dietary flags, and RSVP status. Sortable and filterable. A guest's record is created once and updated as the event approaches." },
             { name: "Waitlist", detail: "Waitlisted guests with position number and a one-action promotion flow. When a confirmed guest cancels, the next waitlisted guest is promoted and notified." },
             { name: "Check-in", detail: "On-day scanner interface. QR-based or manual search. Marks guests as arrived in real time — visible to all team members with module access." },
-            { name: "Export", detail: "Download final guest list as CSV or PDF for venue ops, security, and catering final-count reconciliation." },
-        ],
-    },
-    {
-        id: "catering",
-        title: "Catering",
-        tagline: "Menu to final count.",
-        desc: "The catering module exists to solve the final-count problem — the recurring failure where a catering vendor receives a headcount that does not match actual attendance. Configuration and final count are deliberately separate steps with a locking mechanism.",
-        tabs: [
-            { name: "Catering Setup", detail: "Menu builder with dietary configuration (veg, non-veg, vegan, Jain, allergen flags) and session-to-meal mapping. One session can have multiple meal configurations for different guest tiers." },
-            { name: "Final Count", detail: "Lock screen that converts the live guest count into a confirmed catering order. The lock action creates a permanent record and sends an automatic update to the catering channel. Cannot be edited after lock without a manual override with timestamp." },
+            { name: "Export", detail: "Download final guest list as CSV or PDF for venue ops, security, and administrative reconciliation." },
         ],
     },
     {
@@ -174,7 +218,7 @@ const modules = [
         id: "forms",
         title: "Forms & Tasks",
         tagline: "Eliminating double-entry.",
-        desc: "The most complex module — the one that makes MmE fundamentally different from all existing platforms. Forms are not data collection tools bolted onto a project management core. They are the connective tissue between vendor internal work and agency milestone tracking.",
+        desc: "The most complex module — and the one that makes EventEase fundamentally different from all existing platforms. Forms are not data collection tools bolted onto a project management core. They are the connective tissue between vendor internal work and agency milestone tracking. A vendor completes their child form stage; the system automatically fires the corresponding parent form stage on the agency side. One action. One place. Both parties updated.",
         tabs: [
             { name: "Forms & Pipelines", detail: "Pipeline list showing all active forms per event (Vendor Onboarding, Stage Tech Brief, etc.). Each pipeline shows stage count, last activity, and status. Clicking a pipeline opens the stage rail: Draft → Sent → Submitted → Reviewed → Approved. Submitting a stage auto-creates a linked Task." },
             { name: "Tasks — List", detail: "Task rows with title, assignee, priority, due date, status, and tags. Full create/edit drawer with linked form field, description, and activity log." },
@@ -187,56 +231,12 @@ const modules = [
         id: "comms",
         title: "Communications",
         tagline: "The channel is the product.",
-        desc: "Not a module added to the platform — the layer everything else surfaces through. Every operational object (task, form, document) is accessed from within a channel. Communication is not a feature of MmE. MmE is a communication platform with operational depth.",
+        desc: "Not a module added to the platform — the layer everything else surfaces through. Every operational object (task, form, document) is accessed from within a channel. Communication is not a feature of EventEase. EventEase is a communication platform with operational depth.",
         tabs: [
             { name: "Channel Chat", detail: "Three-column layout: sidebar, chat, right panel. Right panel tabs: Overview, Members, Pinned Docs, Forms, Tasks. Messages support rich text, file attachments, poll cards, and system notices. Channels are event-scoped — there is no global feed." },
             { name: "Broadcast", detail: "One-to-many announcements with optional acknowledgement requirement. Sent tab shows real-time ack status per recipient. Unacknowledged after 30 min: Tier 1 reminder to recipient. After 60 min: sender notified of non-acknowledgers by name. On event day: thresholds compress to 10/20 min." },
             { name: "Direct Messages", detail: "Filterable by Internal / External / Clients / Vendors. Every contact row shows role, company, and event — solving the Slack identity problem where DMs from unfamiliar names have no context." },
         ],
-    },
-];
-
-const notificationTiers = [
-    { tier: "Tier 1 — Immediate", trigger: "@mention, broadcast requiring ack, task stage update, URGENT-flagged message", delivery: "Push notification + in-app badge + sound", override: "Do Not Disturb mode only" },
-    { tier: "Tier 2 — Batched", trigger: "New message in accessible channel, new DM, broadcast not requiring ack", delivery: "In-app only — digest every 30 minutes", override: "Yes, per-channel setting" },
-    { tier: "Tier 3 — Passive", trigger: "Resolved thread reopened, file shared, system messages", delivery: "Seen on next visit — no active delivery", override: "N/A" },
-];
-
-const competitors = [
-    { name: "Cvent", verdict: "Database product. Communication is a notification layer on top of a project management core. Built for North American corporate buyers." },
-    { name: "Lennd", verdict: "Closest competitor — describes itself as 'a communications tool at its core.' But portal-based (each vendor gets a website), not channel-based real-time coordination." },
-    { name: "Bizzabo", verdict: "Attendee experience platform. No internal agency coordination layer exists." },
-    { name: "Samaaro", verdict: "WhatsApp integration as outbound broadcast only — attendee notifications, not structured vendor coordination." },
-    { name: "Zoho Backstage", verdict: "Indian-market ticketing and attendee registration. No operational or vendor layer." },
-    { name: "Eventdex", verdict: "Badge and registration focus. Communication entirely absent from the product." },
-    { name: "Dreamcast", verdict: "Streaming and ticketing. Built for the public-facing event experience, not internal production operations." },
-];
-
-const originalContributions = [
-    {
-        num: "01",
-        title: "The Communication-First Architecture Inversion",
-        body: "Existing platforms treat communication as a notification layer on top of a project management core. MmE inverts this — making the channel the primary unit from which all operational objects derive their context.",
-    },
-    {
-        num: "02",
-        title: "Event-Scoped Ephemeral Channels as Operational Memory",
-        body: "Structured temporary communication environments that automatically archive at the end of their lifecycle, preserving institutional memory while preventing channel pollution across events. Not implemented in any existing event management product.",
-    },
-    {
-        num: "03",
-        title: "Double-Entry Elimination via Parent-Child Form Hierarchy",
-        body: "The parent-child form system with automatic stage mapping eliminates a structural coordination failure. The vendor does one thing in one place. Both parties are updated. This mechanism is absent from all existing platforms.",
-    },
-    {
-        num: "04",
-        title: "The Tunnelled View as a Design Principle",
-        body: "A secondary user's experience designed as purposefully complete rather than permission-restricted. The vendor portal feels like its own product — not a restricted version of the agency portal.",
-    },
-    {
-        num: "05",
-        title: "The Indian B2B Agency Market as an Underserved Design Context",
-        body: "Indian event management software grows at 17.9% CAGR. No purpose-built platform exists for agency-side operations. Every existing tool is either a global enterprise product designed for Western buyers or an Indian attendee-facing ticketing platform.",
     },
 ];
 
@@ -257,24 +257,21 @@ export default function EventEaseProjectPage() {
     return (
         <div className="flex flex-col gap-24 pb-24">
 
-            {/* ── COVER ── */}
+            {/* 01 — HERO */}
             <motion.section initial="hidden" animate="visible" variants={fade} className="flex flex-col gap-6 items-center text-center">
                 <div className="flex flex-col gap-3 items-center">
                     <span className="text-sm font-semibold uppercase tracking-widest" style={{ color: "var(--accent-blue)" }}>
                         UX &amp; Product Design · B2B SaaS · 2024–2026
                     </span>
                     <h1 className="text-6xl md:text-[100px] font-bold tracking-tighter leading-none">EventEase</h1>
-                    <p className="text-2xl md:text-3xl font-medium tracking-tight text-muted">Event Management Platform</p>
+                    <p className="text-lg text-muted max-w-xl">A communication-first operations platform for Indian event agencies.</p>
                 </div>
-                <p className="max-w-2xl text-xl leading-relaxed text-muted">
-                    Communication as the Operating System of Event Management.
-                </p>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-px border border-border rounded-xl overflow-hidden mt-4 w-full max-w-2xl">
                     {[
                         { label: "Role", value: "UX & Product Designer" },
                         { label: "Scope", value: "Solo" },
-                        { label: "Platform", value: "B2B SaaS — Web & Mobile" },
-                        { label: "Year", value: "2026" },
+                        { label: "Platform", value: "B2B SaaS — Web-based" },
+                        { label: "Year", value: "2024–2026" },
                     ].map((item) => (
                         <div key={item.label} className="flex flex-col gap-1 p-5 bg-background">
                             <span className="text-xs font-sans text-muted uppercase tracking-wider">{item.label}</span>
@@ -284,7 +281,7 @@ export default function EventEaseProjectPage() {
                 </div>
             </motion.section>
 
-            {/* ── HERO VIDEO ── */}
+            {/* HERO VIDEO */}
             <motion.div
                 initial={{ opacity: 0, scale: 0.98 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -293,29 +290,46 @@ export default function EventEaseProjectPage() {
                 style={{ borderColor: "#1d1d1d" }}
             >
                 <div className="relative w-full aspect-video rounded-xl overflow-hidden bg-foreground">
-                    <video
-                        autoPlay
-                        muted
-                        loop
-                        playsInline
-                        preload="auto"
-                        className="w-full h-full object-cover"
-                    >
+                    <video autoPlay muted loop playsInline preload="auto" className="w-full h-full object-cover">
                         <source src="/projects/EventEase/EE.webm" type="video/webm" />
                     </video>
                 </div>
             </motion.div>
 
-            {/* ── THE PROBLEM ── */}
+            {/* 02 — WHAT IS EVENTEASE? */}
+            <motion.section initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fade} className="flex flex-col gap-4">
+                <h2 className="text-5xl font-semibold tracking-tight">What is EventEase?</h2>
+                <p className="max-w-2xl text-muted leading-relaxed">
+                    EventEase is an operational platform built for Indian event management agencies. It replaces the WhatsApp groups, email chains, and spreadsheets that currently hold a live event&apos;s information — with one communication-first workspace where everything is event-scoped, role-gated, and permanently findable. It is not a database you report into after coordination happens. It is the place coordination happens.
+                </p>
+            </motion.section>
+
+            {/* 03 — WHO USES IT? */}
+            <motion.section initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fade} className="flex flex-col gap-6">
+                <div className="flex flex-col gap-2">
+                    <SectionLabel>Who uses it?</SectionLabel>
+                    <h2 className="text-5xl font-semibold tracking-tight">Four operator types. One platform.</h2>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {operatorTypes.map((op) => (
+                        <div key={op.role} className="flex flex-col gap-3 p-6 rounded-xl border border-border bg-background">
+                            <div className="flex items-center justify-between">
+                                <span className="font-semibold text-sm">{op.role}</span>
+                                <span className="text-xs px-2 py-0.5 rounded-full font-medium border border-border" style={{ color: op.tagColor }}>{op.tag}</span>
+                            </div>
+                            <p className="text-sm text-muted leading-relaxed">{op.desc}</p>
+                        </div>
+                    ))}
+                </div>
+            </motion.section>
+
+            {/* 04 — THE PROBLEM */}
             <motion.section initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fade} className="flex flex-col gap-8">
                 <div className="flex flex-col gap-4">
                     <SectionLabel>The Problem</SectionLabel>
-                    <h2 className="text-5xl font-semibold tracking-tight">The operational backbone of India's event industry is WhatsApp.</h2>
+                    <h2 className="text-5xl font-semibold tracking-tight">The operational backbone of India&apos;s event industry is WhatsApp.</h2>
                     <p className="max-w-2xl text-muted leading-relaxed">
-                        India's MICE sector generated <span className="text-foreground font-medium">₹4,16,217 crore in 2024</span> and is projected to reach ₹8,73,559 crore by 2030. Yet most Indian event agencies coordinate through WhatsApp groups, email chains, and spreadsheets — with no purpose-built operational software.
-                    </p>
-                    <p className="max-w-2xl text-muted leading-relaxed">
-                        The specific gap is not a missing feature in existing tools. It is a missing category: no platform treats communication as the operational core. Every existing tool is a database product with a messaging layer added on top. Teams use the software for record-keeping and return to WhatsApp for actual coordination.
+                        India&apos;s MICE sector generated <span className="text-foreground font-medium">₹4,16,217 crore in 2024</span> and is projected to reach ₹8,73,559 crore by 2030. Yet most Indian event agencies coordinate through WhatsApp groups, email chains, and spreadsheets — with no purpose-built operational software. The failures are not edge cases. They happen at the moments that matter most.
                     </p>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -328,93 +342,164 @@ export default function EventEaseProjectPage() {
                 </div>
             </motion.section>
 
-            {/* ── RESEARCH: STAKEHOLDER MAP ── */}
-            <motion.section initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fade} className="flex flex-col gap-8">
-                <div className="flex flex-col gap-4">
-                    <SectionLabel>Research — Stakeholder Map</SectionLabel>
-                    <h2 className="text-5xl font-semibold tracking-tight">Nine primary categories. Twelve agency roles.</h2>
-                    <p className="max-w-2xl text-muted leading-relaxed">
-                        Nine primary stakeholder categories were identified across the Indian event ecosystem. Within the agency team alone, twelve distinct management roles were mapped — Event Manager, Performance Coordinator, Security Manager, Budget Manager, Client Servicing Lead, Logistics Manager, and more. The insight: the agency is not a service provider. It is the <span className="text-foreground font-medium">information router</span> for an entire temporary multi-organisational network.
-                    </p>
+            {/* 05 — STAKEHOLDER VOICES */}
+            <motion.section initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fade} className="flex flex-col gap-6">
+                <div className="flex flex-col gap-2">
+                    <SectionLabel>Stakeholder Interviews</SectionLabel>
+                    <h2 className="text-5xl font-semibold tracking-tight">Four people. Four different insights.</h2>
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-                    {ecosystemStakeholders.map((s) => (
-                        <div key={s.role} className="flex flex-col gap-2 p-5 rounded-xl border border-border bg-background">
-                            <span className="font-semibold text-sm" style={{ color: "var(--accent-blue)" }}>{s.role}</span>
-                            <p className="text-xs text-muted leading-relaxed">{s.desc}</p>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {stakeholderVoices.map((v, i) => (
+                        <div key={i} className="flex flex-col gap-4 p-6 rounded-xl border border-border bg-background">
+                            <p className="text-sm leading-relaxed font-medium">&ldquo;{v.quote}&rdquo;</p>
+                            <div className="border-t border-border pt-4">
+                                <span className="text-xs font-semibold text-foreground">{v.role}</span>
+                            </div>
                         </div>
                     ))}
                 </div>
             </motion.section>
 
-            {/* ── RESEARCH: ECOSYSTEM MAPPING ── */}
-            <motion.section initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fade} className="flex flex-col gap-6">
+            {/* 06 — RESEARCH */}
+            <motion.section initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fade} className="flex flex-col gap-16">
                 <div className="flex flex-col gap-4">
-                    <SectionLabel>Research — Ecosystem Mapping</SectionLabel>
-                    <h2 className="text-5xl font-semibold tracking-tight">Twelve simultaneous information flows.</h2>
+                    <SectionLabel>Research</SectionLabel>
+                    <h2 className="text-5xl font-semibold tracking-tight">Four methods. One conclusion.</h2>
                     <p className="max-w-2xl text-muted leading-relaxed">
-                        A full ecosystem map traced four types of flows — goods, services, information, and monetary — between the event management agency and its surrounding network. Twelve distinct simultaneous information flows were identified. When information flow breaks, the failure is always a communication breakdown — not a process failure, not a people failure.
+                        Research followed four methods in deliberate sequence. Stakeholder mapping established who was in the network and what each party needed. Ecosystem mapping traced how information actually moved between them. A process map revealed where coordination failures occurred in practice. Competitive analysis confirmed no existing platform had addressed these failures. The gap closure strategy translated every structural failure into a direct design response.
                     </p>
                 </div>
-                <div className="relative w-full aspect-[16/9] rounded-xl overflow-hidden border border-border bg-background">
-                    <Image src="/projects/EventEase/EcosystemMapping.png" alt="Ecosystem map — four flow types across all stakeholder relationships" fill className="object-contain p-4" />
+
+                {/* Stakeholder Map */}
+                <div className="flex flex-col gap-6">
+                    <div className="flex flex-col gap-3">
+                        <SectionLabel>Stakeholder Map</SectionLabel>
+                        <h2 className="text-5xl font-semibold tracking-tight">Nine primary categories. Twelve agency roles.</h2>
+                        <p className="max-w-2xl text-muted leading-relaxed">
+                            Nine primary stakeholder categories were identified across the Indian event ecosystem. Within the agency team alone, twelve distinct management roles were mapped. The insight: the agency is not a service provider. It is the <span className="text-foreground font-medium">information router</span> for an entire temporary multi-organisational network.
+                        </p>
+                    </div>
+                    <div className="relative w-full aspect-[16/9] rounded-xl overflow-hidden border border-border bg-background">
+                        <Image src="/projects/EventEase/STakeholderMap.png" alt="Stakeholder map — all primary actors and management roles in the Indian event agency ecosystem" fill className="object-contain p-4" />
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                        {ecosystemStakeholders.map((s) => (
+                            <div key={s.role} className="flex flex-col gap-2 p-5 rounded-xl border border-border bg-background">
+                                <span className="font-semibold text-sm" style={{ color: "var(--accent-blue)" }}>{s.role}</span>
+                                <p className="text-xs text-muted leading-relaxed">{s.desc}</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
+                {/* Ecosystem Mapping */}
+                <div className="flex flex-col gap-6">
+                    <div className="flex flex-col gap-3">
+                        <SectionLabel>Ecosystem Mapping</SectionLabel>
+                        <h2 className="text-5xl font-semibold tracking-tight">Twelve simultaneous information flows.</h2>
+                        <p className="max-w-2xl text-muted leading-relaxed">
+                            A full ecosystem map traced four types of flows — goods, services, information, and monetary — between the event management agency and its surrounding network. Twelve distinct simultaneous information flows were identified. When information flow breaks, the failure is always a communication breakdown — not a process failure, not a people failure.
+                        </p>
+                    </div>
+                    <div className="relative w-full aspect-[16/9] rounded-xl overflow-hidden border border-border bg-background">
+                        <Image src="/projects/EventEase/EcosystemMapping.png" alt="Ecosystem map — four flow types across all stakeholder relationships" fill className="object-contain p-4" />
+                    </div>
+                </div>
+
+                {/* Event Process Map */}
+                <div className="flex flex-col gap-6">
+                    <div className="flex flex-col gap-3">
+                        <SectionLabel>Event Process Map</SectionLabel>
+                        <h2 className="text-5xl font-semibold tracking-tight">Five parallel workstreams. One WhatsApp group.</h2>
+                        <p className="max-w-2xl text-muted leading-relaxed">
+                            A detailed process map traced the full event lifecycle across parallel swim lanes: corporate client, agency teams (Client Servicing, Concept, Creative, Production, Operations), sponsors, vendors, technology platforms, government bodies, and the venue. An event agency manages at minimum five distinct parallel workstreams simultaneously — with no structural way to know which messages require action, which are informational, and which are resolved.
+                        </p>
+                    </div>
+                    <div className="relative w-full aspect-[16/9] rounded-xl overflow-hidden border border-border bg-background">
+                        <Image src="/projects/EventEase/Event-Process-Map.png" alt="Event process map — full lifecycle across all parallel stakeholder swim lanes" fill className="object-contain p-3" />
+                    </div>
+                </div>
+
+                {/* Competitive Analysis */}
+                <div className="flex flex-col gap-6">
+                    <div className="flex flex-col gap-3">
+                        <SectionLabel>Competitive Analysis</SectionLabel>
+                        <h2 className="text-5xl font-semibold tracking-tight">No platform inverts the model.</h2>
+                        <p className="max-w-2xl text-muted leading-relaxed">
+                            Seven existing platforms were analysed. Lennd is the closest competitor, describing itself as &ldquo;a communications tool at its core,&rdquo; but its model is portal-based — each vendor gets a website, not a channel. No existing platform makes communication the primary unit of organisation.
+                        </p>
+                    </div>
+                    <div className="flex flex-col gap-px border border-border rounded-xl overflow-hidden">
+                        {competitors.map((c, i) => (
+                            <div key={c.name} className={`grid grid-cols-[130px_1fr] gap-6 p-5 bg-background ${i !== competitors.length - 1 ? "border-b border-border" : ""}`}>
+                                <span className="font-semibold text-sm pt-0.5">{c.name}</span>
+                                <p className="text-sm text-muted leading-relaxed">{c.verdict}</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
+                {/* Gap Closure Strategy */}
+                <div className="flex flex-col gap-6">
+                    <div className="flex flex-col gap-3">
+                        <SectionLabel>Gap Closure Strategy</SectionLabel>
+                        <h2 className="text-5xl font-semibold tracking-tight">Nine market failures. Nine design responses.</h2>
+                        <p className="max-w-2xl text-muted leading-relaxed">
+                            Nine structural failures in the current market were each matched with a corresponding platform design response. Every EventEase design decision traces back to one of these nine gaps.
+                        </p>
+                    </div>
+
+                    <div className="relative w-full aspect-[16/9] rounded-xl overflow-hidden border border-border bg-background">
+                        <Image src="/projects/EventEase/GapClosure-Strategy-Map.png" alt="Gap closure strategy — nine market failures and platform responses" fill className="object-contain p-3" />
+                    </div>
+                </div>
+            </motion.section>
+            {/* 11 — PROTOTYPE */}
+            <motion.section initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fade} className="flex flex-col gap-6">
+                <div className="flex flex-col gap-4">
+                    <SectionLabel>Working Prototype</SectionLabel>
+                    <h2 className="text-5xl font-semibold tracking-tight">The full agency-side IA, implemented.</h2>
+                    <p className="text-muted leading-relaxed max-w-2xl">
+                        Built in React with a dark-mode design system. The prototype implements the complete agency-side information architecture — six operational modules with live mock data, the full channel workspace (Overview, Events, Channel Chat, DMs, Broadcast), and all role-specific views. Navigate the full system: create an event, open its dashboard, enter a channel, assign a task, submit a form stage.
+                    </p>
+
+                </div>
+
+                <div
+                    ref={protoContainerRef}
+                    className="relative w-full rounded-2xl overflow-hidden border-2 border-border"
+                    style={{ aspectRatio: "16/9" }}
+                >
+                    {protoScale !== null && (
+                        <iframe
+                            src={PROTOTYPE_URL}
+                            title="EventEase Prototype"
+                            sandbox="allow-scripts allow-same-origin allow-forms"
+                            style={{
+                                position: "absolute",
+                                top: 0,
+                                left: 0,
+                                width: 1920,
+                                height: 1080,
+                                border: 0,
+                                transformOrigin: "top left",
+                                transform: `scale(${protoScale})`,
+                            }}
+                        />
+                    )}
                 </div>
             </motion.section>
 
-            {/* ── RESEARCH: EVENT PROCESS MAP ── */}
-            <motion.section initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fade} className="flex flex-col gap-6">
-                <div className="flex flex-col gap-4">
-                    <SectionLabel>Research — Event Process Map</SectionLabel>
-                    <h2 className="text-5xl font-semibold tracking-tight">Five parallel workstreams. One WhatsApp group.</h2>
-                    <p className="max-w-2xl text-muted leading-relaxed">
-                        A detailed process map traced the full event lifecycle across parallel swim lanes: corporate client, agency teams (Client Servicing, Concept, Creative, Production, Operations), sponsors, vendors, technology platforms, government bodies, and the venue. An event agency manages at minimum five distinct parallel workstreams simultaneously — with no structural way to know which messages require action, which are informational, and which are resolved.
-                    </p>
-                </div>
-                <div className="relative w-full aspect-[16/9] rounded-xl overflow-hidden border border-border bg-background">
-                    <Image src="/projects/EventEase/Event-Process-Map.png" alt="Event process map — full lifecycle across all parallel stakeholder swim lanes" fill className="object-contain p-3" />
-                </div>
-            </motion.section>
-
-            {/* ── RESEARCH: COMPETITIVE ANALYSIS ── */}
-            <motion.section initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fade} className="flex flex-col gap-6">
-                <div className="flex flex-col gap-4">
-                    <SectionLabel>Research — Competitive Analysis</SectionLabel>
-                    <h2 className="text-5xl font-semibold tracking-tight">No platform inverts the model.</h2>
-                    <p className="max-w-2xl text-muted leading-relaxed">
-                        Seven existing platforms were analysed. Lennd is the closest competitor, describing itself as "a communications tool at its core," but its model is portal-based — each vendor gets a website, not a channel. No existing platform makes communication the primary unit of organisation.
-                    </p>
-                </div>
-                <div className="flex flex-col gap-px border border-border rounded-xl overflow-hidden">
-                    {competitors.map((c, i) => (
-                        <div key={c.name} className={`grid grid-cols-[130px_1fr] gap-6 p-5 bg-background ${i !== competitors.length - 1 ? "border-b border-border" : ""}`}>
-                            <span className="font-semibold text-sm pt-0.5">{c.name}</span>
-                            <p className="text-sm text-muted leading-relaxed">{c.verdict}</p>
-                        </div>
-                    ))}
-                </div>
-            </motion.section>
-
-            {/* ── RESEARCH: GAP CLOSURE STRATEGY ── */}
-            <motion.section initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fade} className="flex flex-col gap-6">
-                <div className="flex flex-col gap-4">
-                    <SectionLabel>Research — Gap Closure Strategy</SectionLabel>
-                    <h2 className="text-5xl font-semibold tracking-tight">Nine market failures. Nine design responses.</h2>
-                    <p className="max-w-2xl text-muted leading-relaxed">
-                        Nine structural failures in the current market were each matched with a corresponding platform design response. The gap closure map was the direct input into the design thesis — every platform decision traces back to one of these nine gaps.
-                    </p>
-                </div>
-                <div className="relative w-full aspect-[16/9] rounded-xl overflow-hidden border border-border bg-background">
-                    <Image src="/projects/EventEase/GapClosure-Strategy-Map.png" alt="Gap closure strategy — nine market failures and platform responses" fill className="object-contain p-3" />
-                </div>
-            </motion.section>
-
-            {/* ── DESIGN THESIS ── */}
+            {/* 07 — DESIGN THESIS */}
             <motion.section initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fade} className="flex flex-col gap-8">
                 <div className="flex flex-col gap-4">
                     <SectionLabel>Design Thesis</SectionLabel>
                     <h2 className="text-5xl font-semibold tracking-tight">Communication is the operating system.</h2>
+                    <p className="max-w-2xl text-muted leading-relaxed">
+                        The solution is a communication-first event management platform — one where every operational object (task, form, document, approval) is accessed from within a channel, not the other way around. The research produced a single clear principle that governed every subsequent design decision: if a team member has to leave the platform to coordinate, the platform has failed.
+                    </p>
                 </div>
-                <div className="p-8 md:p-12 rounded-2xl border border-border bg-background">
+                <div className="p-8 md:p-6 rounded-2xl border border-border bg-background">
                     <p className="text-xl md:text-2xl font-semibold tracking-tight leading-snug">
                         &ldquo;Communication is the operating system of event management. Every other tool — forms, tasks, approvals, documents, budgets — is a{" "}
                         <em className="font-normal not-italic" style={{ color: "var(--accent-blue)" }}>layer on top of communication, not the other way around.</em>&rdquo;
@@ -434,20 +519,19 @@ export default function EventEaseProjectPage() {
                 </div>
             </motion.section>
 
-            {/* ── INFORMATION ARCHITECTURE ── */}
+            {/* 08 — INFORMATION ARCHITECTURE */}
             <motion.section initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fade} className="flex flex-col gap-8">
                 <div className="flex flex-col gap-4">
                     <SectionLabel>Information Architecture</SectionLabel>
                     <h2 className="text-5xl font-semibold tracking-tight">Three layers. One coherent system.</h2>
                     <p className="max-w-2xl text-muted leading-relaxed">
-                        The platform's IA is designed in three layers: global navigation (Overview · Events · DMs), workspace organisation (channels in three structural zones), and the module layer (operational modules accessed through the Event Dashboard). Each layer maps exactly to one zone of the channel hierarchy — learnable, exhaustive, non-overlapping.
+                        The platform&apos;s IA is organised in three layers. Global navigation gives access to three destinations: <span className="text-foreground font-medium">Overview</span> (all active events and activity feed), <span className="text-foreground font-medium">Events</span> (the full event directory and individual event dashboards), and <span className="text-foreground font-medium">DMs</span> (direct messages and group conversations). Within each event, workspace channels are organised in three structural zones. Operational modules are accessed from the Event Dashboard. Each layer maps to exactly one zone of the channel hierarchy — learnable, exhaustive, non-overlapping.
                     </p>
                 </div>
                 <div className="relative w-full aspect-[16/9] rounded-xl overflow-hidden border border-border bg-background">
-                    <Image src="/projects/EventEase/Information-architecture.png" alt="MmE — full platform information architecture" fill className="object-contain p-4" />
+                    <Image src="/projects/EventEase/Information-architecture.png" alt="EventEase — full platform information architecture" fill className="object-contain p-4" />
                 </div>
 
-                {/* Channel Zones */}
                 <div className="flex flex-col gap-4">
                     <span className="text-xs font-sans text-muted uppercase tracking-wider">The Three Channel Zones</span>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -470,109 +554,57 @@ export default function EventEaseProjectPage() {
                         ))}
                     </div>
                 </div>
+            </motion.section>
 
-                {/* Lifecycle Stages */}
+            {/* 09 — SYSTEM ARCHITECTURE */}
+            <motion.section initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fade} className="flex flex-col gap-8">
                 <div className="flex flex-col gap-4">
-                    <span className="text-xs font-sans text-muted uppercase tracking-wider">Seven-Stage Lifecycle Colour System</span>
-                    <p className="text-sm text-muted leading-relaxed max-w-2xl">
-                        Each event lifecycle stage has a distinct colour that appears consistently across the sidebar, Events tab, Overview diagram, and channel headers. Stage is communicated through colour throughout — anyone can read the status of every event from the colour indicator alone.
+                    <SectionLabel>System Architecture</SectionLabel>
+                    <h2 className="text-5xl font-semibold tracking-tight">Who can see what. Precisely.</h2>
+                    <p className="max-w-2xl text-muted leading-relaxed">
+                        A vendor scanned top-to-bottom sees exactly what they experience — their own channel, their assigned assets, and the forms they need to fill. Everything else is not visible. This is the tunnelled view made concrete.
                     </p>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                        {lifecycleStages.map((s) => (
-                            <div key={s.label} className="flex items-center gap-3 px-4 py-3 rounded-lg border border-border bg-background">
-                                <span className="w-2.5 h-2.5 rounded-full shrink-0" style={{ backgroundColor: s.color }} />
-                                <span className="text-sm font-medium w-20 shrink-0">{s.label}</span>
-                                <span className="text-xs text-muted">{s.desc}</span>
+                </div>
+
+
+
+                <div className="flex flex-col gap-4 mt-2">
+                    <span className="text-xs font-sans text-muted uppercase tracking-wider">Module Brainstorm Session</span>
+                    <p className="text-sm text-muted leading-relaxed max-w-2xl">
+                        An initial brainstorm produced 200 tools across 17 modules and 6 clusters. These were reduced to 47 buildable components by identifying seven platform engines powering the majority: Communication, Forms, Task, Permission, Data Sync, Notification, and Analytics. Everything else is a configuration of an engine applied to a specific operational domain.
+                    </p>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        {[
+                            { src: "/projects/EventEase/Module-Brainstorm-Mapping1.webp", label: "Module Brainstorm — Session 1" },
+                            { src: "/projects/EventEase/Module-Brainstorm-Mapping2.webp", label: "Module Brainstorm — Session 2" },
+                            { src: "/projects/EventEase/Module-Brainstorm-Mapping3.webp", label: "Module Brainstorm — Session 3" },
+                        ].map((img) => (
+                            <div key={img.src} className="flex flex-col gap-2">
+                                <span className="text-xs font-sans text-muted uppercase tracking-wider">{img.label}</span>
+                                <div className="relative w-full rounded-xl overflow-hidden border border-border">
+                                    <Image src={img.src} alt={img.label} width={0} height={0} sizes="100vw" className="w-full h-auto" />
+                                </div>
                             </div>
                         ))}
                     </div>
-                </div>
-            </motion.section>
-
-            {/* ── ROLE-ACCESS MATRIX ── */}
-            <motion.section initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fade} className="flex flex-col gap-6">
-                <div className="flex flex-col gap-4">
-                    <SectionLabel>Role-Access Matrix</SectionLabel>
-                    <h2 className="text-5xl font-semibold tracking-tight">The tunnelled view in numbers.</h2>
-                    <p className="max-w-2xl text-muted leading-relaxed">
-                        The access matrix is the governance layer that makes the tunnelled vendor view possible. A vendor can see their own channel fully, post freely, and access all their forms and tasks — while having no visibility into the agency's internal coordination. The experience feels complete, not restricted.
-                    </p>
-                </div>
-                <div className="overflow-x-auto">
-                    <table className="w-full text-sm border border-border rounded-xl overflow-hidden">
-                        <thead>
-                            <tr className="border-b border-border">
-                                <th className="text-left p-4 font-mono text-xs text-muted uppercase tracking-wider bg-background">Channel Type</th>
-                                {["Org Admin", "Event Mgr", "Ops Coord", "Vendor", "Client"].map(h => (
-                                    <th key={h} className="text-left p-4 font-mono text-xs text-muted uppercase tracking-wider bg-background">{h}</th>
-                                ))}
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {roleMatrix.map((row, i) => (
-                                <tr key={row.channel} className={`border-b border-border last:border-0 ${i % 2 === 0 ? "bg-background" : "bg-hover/30"}`}>
-                                    <td className="p-4 font-mono text-xs text-muted">{row.channel}</td>
-                                    {[row.admin, row.eventMgr, row.opsCoord, row.vendor, row.client].map((v, j) => (
-                                        <td key={j} className={`p-4 text-xs font-medium ${v === "None" ? "text-muted" : v === "Full" || v === "Open" ? "text-foreground" : "text-amber-600"}`}>{v}</td>
-                                    ))}
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </div>
-            </motion.section>
-
-            {/* ── MODULE ARCHITECTURE ── */}
-            <motion.section initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fade} className="flex flex-col gap-8">
-                <div className="flex flex-col gap-4">
-                    <SectionLabel>Module Architecture</SectionLabel>
-                    <h2 className="text-5xl font-semibold tracking-tight">284 tools. Seven engines. 47 components.</h2>
-                    <p className="max-w-2xl text-muted leading-relaxed">
-                        An initial brainstorm produced 284 tools across 17 modules and 6 clusters: Planner, Registration &amp; Badges, Marketing, Logistics, Agenda &amp; Speaker, Exhibitor, Sponsor, Security, Comms, and System Modules. These were reduced to 47 buildable components by identifying the seven platform engines that power most of them — everything else is a configuration of an engine applied to a specific operational domain.
-                    </p>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                    {platformEngines.map((e) => (
-                        <div key={e.name} className="flex gap-4 p-5 rounded-xl border border-border bg-background">
-                            <span className="w-2 h-2 mt-1.5 rounded-full shrink-0" style={{ backgroundColor: "var(--accent-blue)" }} />
-                            <div className="flex flex-col gap-1">
-                                <span className="font-semibold text-sm">{e.name}</span>
-                                <p className="text-xs text-muted leading-relaxed">{e.desc}</p>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div className="flex flex-col gap-2">
+                            <span className="text-xs font-sans text-muted uppercase tracking-wider">Module Mapping</span>
+                            <div className="relative aspect-video rounded-xl overflow-hidden border border-border bg-background">
+                                <Image src="/projects/EventEase/ModuleMapping.png" alt="Module mapping" fill className="object-contain p-3" />
                             </div>
                         </div>
-                    ))}
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-2">
-                    {[
-                        { src: "/projects/EventEase/Module-Brainstorm-Mapping1.webp", label: "Module Brainstorm — Session 1" },
-                        { src: "/projects/EventEase/Module-Brainstorm-Mapping2.webp", label: "Module Brainstorm — Session 2" },
-                        { src: "/projects/EventEase/Module-Brainstorm-Mapping3.webp", label: "Module Brainstorm — Session 3" },
-                    ].map((img) => (
-                        <div key={img.src} className="flex flex-col gap-2">
-                            <span className="text-xs font-sans text-muted uppercase tracking-wider">{img.label}</span>
-                            <div className="relative w-full rounded-xl overflow-hidden border border-border">
-                                <Image src={img.src} alt={img.label} width={0} height={0} sizes="100vw" className="w-full h-auto" />
+                        <div className="flex flex-col gap-2">
+                            <span className="text-xs font-sans text-muted uppercase tracking-wider">Dashboard Module Map</span>
+                            <div className="relative aspect-video rounded-xl overflow-hidden border border-border bg-background">
+                                <Image src="/projects/EventEase/Dashboard-Module-Map.png" alt="Dashboard module map" fill className="object-contain p-3" />
                             </div>
-                        </div>
-                    ))}
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="flex flex-col gap-2">
-                        <span className="text-xs font-sans text-muted uppercase tracking-wider">Module Mapping</span>
-                        <div className="relative aspect-video rounded-xl overflow-hidden border border-border bg-background">
-                            <Image src="/projects/EventEase/ModuleMapping.png" alt="Module mapping — dependencies, outputs, features, and permissions per module" fill className="object-contain p-3" />
-                        </div>
-                    </div>
-                    <div className="flex flex-col gap-2">
-                        <span className="text-xs font-sans text-muted uppercase tracking-wider">Dashboard Module Map</span>
-                        <div className="relative aspect-video rounded-xl overflow-hidden border border-border bg-background">
-                            <Image src="/projects/EventEase/Dashboard-Module-Map.png" alt="Dashboard module map — widget layout and module connections" fill className="object-contain p-3" />
                         </div>
                     </div>
                 </div>
             </motion.section>
 
-            {/* ── MODULE DEEP DIVES ── */}
+            {/* 10 — MODULE DEEP DIVES */}
             {modules.map((mod) => (
                 <motion.section key={mod.id} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fade} className="flex flex-col gap-6">
                     <div className="flex flex-col gap-3">
@@ -580,171 +612,158 @@ export default function EventEaseProjectPage() {
                         <h2 className="text-4xl font-semibold tracking-tight">{mod.tagline}</h2>
                         <p className="max-w-2xl text-muted leading-relaxed">{mod.desc}</p>
                     </div>
-                    <div className="flex flex-col gap-3">
-                        {mod.tabs.map((tab, i) => (
-                            <div key={tab.name} className="flex gap-5 p-5 rounded-xl border border-border bg-background">
-                                <span className="font-sans text-xs text-muted shrink-0 pt-0.5 w-5">{String(i + 1).padStart(2, "0")}</span>
-                                <div className="flex flex-col gap-1">
-                                    <span className="font-semibold text-sm">{tab.name}</span>
-                                    <p className="text-sm text-muted leading-relaxed">{tab.detail}</p>
-                                </div>
+
+                    {mod.id === "credentials" ? (
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+                            <div className="flex flex-col gap-3">
+                                {mod.tabs.map((tab, i) => (
+                                    <div key={tab.name} className="flex gap-5 p-5 rounded-xl border border-border bg-background">
+                                        <span className="font-sans text-xs text-muted shrink-0 pt-0.5 w-5">{String(i + 1).padStart(2, "0")}</span>
+                                        <div className="flex flex-col gap-1">
+                                            <span className="font-semibold text-sm">{tab.name}</span>
+                                            <p className="text-sm text-muted leading-relaxed">{tab.detail}</p>
+                                        </div>
+                                    </div>
+                                ))}
                             </div>
-                        ))}
-                    </div>
+                            <div className="flex items-center">
+                                <Image
+                                    src="/projects/EventEase/screenshots/CredentialModuleWidget.png"
+                                    alt="Credential Module Widget"
+                                    width={0}
+                                    height={0}
+                                    sizes="100vw"
+                                    className="w-full h-auto"
+                                />
+                            </div>
+                        </div>
+                    ) : mod.id === "guestlists" ? (
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+                            <div className="flex items-center order-2 md:order-1">
+                                <Image
+                                    src="/projects/EventEase/screenshots/Guestslist.png"
+                                    alt="Guest List Module"
+                                    width={0}
+                                    height={0}
+                                    sizes="100vw"
+                                    className="w-full h-auto"
+                                />
+                            </div>
+                            <div className="flex flex-col gap-3 order-1 md:order-2">
+                                {mod.tabs.map((tab, i) => (
+                                    <div key={tab.name} className="flex gap-5 p-5 rounded-xl border border-border bg-background">
+                                        <span className="font-sans text-xs text-muted shrink-0 pt-0.5 w-5">{String(i + 1).padStart(2, "0")}</span>
+                                        <div className="flex flex-col gap-1">
+                                            <span className="font-semibold text-sm">{tab.name}</span>
+                                            <p className="text-sm text-muted leading-relaxed">{tab.detail}</p>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    ) : mod.id === "assets" ? (
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+                            <div className="flex flex-col gap-3">
+                                {mod.tabs.map((tab, i) => (
+                                    <div key={tab.name} className="flex gap-5 p-5 rounded-xl border border-border bg-background">
+                                        <span className="font-sans text-xs text-muted shrink-0 pt-0.5 w-5">{String(i + 1).padStart(2, "0")}</span>
+                                        <div className="flex flex-col gap-1">
+                                            <span className="font-semibold text-sm">{tab.name}</span>
+                                            <p className="text-sm text-muted leading-relaxed">{tab.detail}</p>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                            <div className="flex items-center">
+                                <Image
+                                    src="/projects/EventEase/screenshots/Assets.png"
+                                    alt="Assets Module"
+                                    width={0}
+                                    height={0}
+                                    sizes="100vw"
+                                    className="w-full h-auto"
+                                />
+                            </div>
+                        </div>
+                    ) : mod.id === "forms" ? (
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+                            <div className="flex flex-col gap-4 order-2 md:order-1">
+                                <Image
+                                    src="/projects/EventEase/screenshots/TAsksProgress.png"
+                                    alt="Tasks Progress"
+                                    width={0}
+                                    height={0}
+                                    sizes="100vw"
+                                    className="w-full h-auto"
+                                />
+                                <Image
+                                    src="/projects/EventEase/screenshots/Form&taskModulewidget.png"
+                                    alt="Forms & Tasks Module Widget"
+                                    width={0}
+                                    height={0}
+                                    sizes="100vw"
+                                    className="w-full h-auto"
+                                />
+                            </div>
+                            <div className="flex flex-col gap-3 order-1 md:order-2">
+                                {mod.tabs.map((tab, i) => (
+                                    <div key={tab.name} className="flex gap-5 p-5 rounded-xl border border-border bg-background">
+                                        <span className="font-sans text-xs text-muted shrink-0 pt-0.5 w-5">{String(i + 1).padStart(2, "0")}</span>
+                                        <div className="flex flex-col gap-1">
+                                            <span className="font-semibold text-sm">{tab.name}</span>
+                                            <p className="text-sm text-muted leading-relaxed">{tab.detail}</p>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    ) : mod.id === "comms" ? (
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+                            <div className="flex flex-col gap-3">
+                                {mod.tabs.map((tab, i) => (
+                                    <div key={tab.name} className="flex gap-5 p-5 rounded-xl border border-border bg-background">
+                                        <span className="font-sans text-xs text-muted shrink-0 pt-0.5 w-5">{String(i + 1).padStart(2, "0")}</span>
+                                        <div className="flex flex-col gap-1">
+                                            <span className="font-semibold text-sm">{tab.name}</span>
+                                            <p className="text-sm text-muted leading-relaxed">{tab.detail}</p>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                            <div className="flex flex-col gap-4">
+                                <Image
+                                    src="/projects/EventEase/screenshots/Communication.png"
+                                    alt="Communication Module"
+                                    width={0}
+                                    height={0}
+                                    sizes="100vw"
+                                    className="w-full h-auto"
+                                />
+                            </div>
+                        </div>
+                    ) : (
+                        <div className="flex flex-col gap-3">
+                            {mod.tabs.map((tab, i) => (
+                                <div key={tab.name} className="flex gap-5 p-5 rounded-xl border border-border bg-background">
+                                    <span className="font-sans text-xs text-muted shrink-0 pt-0.5 w-5">{String(i + 1).padStart(2, "0")}</span>
+                                    <div className="flex flex-col gap-1">
+                                        <span className="font-semibold text-sm">{tab.name}</span>
+                                        <p className="text-sm text-muted leading-relaxed">{tab.detail}</p>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    )}
                 </motion.section>
             ))}
 
-            {/* ── FORMS: PARENT-CHILD HIERARCHY ── */}
-            <motion.section initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fade} className="flex flex-col gap-8">
-                <div className="flex flex-col gap-4">
-                    <SectionLabel>Forms System — The Core Mechanism</SectionLabel>
-                    <h2 className="text-5xl font-semibold tracking-tight">One action. One place. Both parties updated.</h2>
-                </div>
 
-                <div className="p-8 rounded-2xl border border-border bg-background">
-                    <span className="text-xs font-sans text-muted uppercase tracking-wider">The Problem, Precisely Stated</span>
-                    <p className="mt-4 text-lg leading-relaxed max-w-2xl">
-                        A vendor completes internal work, reaches a decision, and then has to separately inform the agency of that decision. Two updates. Two places. Two opportunities for versions to diverge. This is a <span className="font-semibold">structural design problem, not a behaviour problem.</span>
-                    </p>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div className="flex flex-col gap-3 p-6 rounded-xl border border-border bg-background">
-                        <div className="flex items-center gap-2">
-                            <span className="w-2 h-2 rounded-full shrink-0" style={{ backgroundColor: "var(--accent-blue)" }} />
-                            <span className="font-semibold text-sm">Agency — Parent Form</span>
-                        </div>
-                        <p className="text-xs text-muted leading-relaxed">Stages: A → B → C → D. Published to the vendor's event channel. The agency sees which stages are complete, when, and by whom. This form is never manually updated by the agency.</p>
-                    </div>
-                    <div className="flex flex-col gap-3 p-6 rounded-xl border border-border bg-background">
-                        <div className="flex items-center gap-2">
-                            <span className="w-2 h-2 rounded-full shrink-0" style={{ backgroundColor: "#16a34a" }} />
-                            <span className="font-semibold text-sm">Vendor — Child Form</span>
-                        </div>
-                        <p className="text-xs text-muted leading-relaxed">Stages: 1 → 2 → 3 → 4. Lives in the vendor's internal channel. Stage 4 is mapped to Stage B on the parent form. The agency cannot see the child form's content — only that the trigger fired and when.</p>
-                    </div>
-                    <div className="flex flex-col gap-3 p-6 rounded-xl border border-border bg-background">
-                        <div className="flex items-center gap-2">
-                            <span className="w-2 h-2 rounded-full shrink-0" style={{ backgroundColor: "var(--accent-neon)" }} />
-                            <span className="font-semibold text-sm">The Trigger Chain</span>
-                        </div>
-                        <p className="text-xs text-muted leading-relaxed">Vendor completes Stage 4 → system fires Stage B on parent form → agency notification → Gantt chart updates → system message in shared channel. The vendor did nothing extra.</p>
-                    </div>
-                </div>
-
-                <div className="flex flex-col gap-3 p-6 rounded-xl border border-border bg-background">
-                    <span className="text-xs font-sans text-muted uppercase tracking-wider">Stage Mapping Rules</span>
-                    <div className="flex flex-col gap-2 mt-2">
-                        {[
-                            "One-to-one mapping only: a child form stage can only map to one parent stage. Prevents ambiguity about what triggered what.",
-                            "Mapping is optional: vendors can keep their internal form completely unmapped and manually mark parent stages. Both modes produce the same output on the parent form.",
-                            "Agency can see the mapping exists but cannot see the child form's internal content — only that the trigger fired and when.",
-                            "The same mechanism works for Dashboard Forms — published simultaneously to multiple vendor channels, creating one parent record with multiple vendor child forms feeding into it.",
-                        ].map((rule, i) => (
-                            <div key={i} className="flex gap-3 text-sm text-muted">
-                                <span className="font-sans text-xs shrink-0 pt-0.5 text-muted">{String(i + 1).padStart(2, "0")}</span>
-                                <p className="leading-relaxed">{rule}</p>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </motion.section>
-
-            {/* ── NOTIFICATION SYSTEM ── */}
-            <motion.section initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fade} className="flex flex-col gap-6">
-                <div className="flex flex-col gap-4">
-                    <SectionLabel>Notification System</SectionLabel>
-                    <h2 className="text-5xl font-semibold tracking-tight">Three tiers. Designed against overload.</h2>
-                    <p className="max-w-2xl text-muted leading-relaxed">
-                        Notification overload is the failure mode of all communication platforms. The notification system is designed around three tiers with different delivery mechanisms and different urgency signals. On event day (Live stage), Tier 1 acknowledgement thresholds compress from 30/60 minutes to 10/20 minutes.
-                    </p>
-                </div>
-                <div className="flex flex-col gap-px border border-border rounded-xl overflow-hidden">
-                    {notificationTiers.map((t, i) => (
-                        <div key={t.tier} className={`grid grid-cols-1 md:grid-cols-[200px_1fr_1fr_120px] gap-4 p-5 bg-background ${i !== notificationTiers.length - 1 ? "border-b border-border" : ""}`}>
-                            <span className="font-semibold text-sm">{t.tier}</span>
-                            <p className="text-xs text-muted leading-relaxed"><span className="font-medium text-foreground block mb-1">Trigger</span>{t.trigger}</p>
-                            <p className="text-xs text-muted leading-relaxed"><span className="font-medium text-foreground block mb-1">Delivery</span>{t.delivery}</p>
-                            <p className="text-xs text-muted leading-relaxed"><span className="font-medium text-foreground block mb-1">Override</span>{t.override}</p>
-                        </div>
-                    ))}
-                </div>
-            </motion.section>
-
-            {/* ── PROTOTYPE EMBED ── */}
-            <motion.section initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fade} className="flex flex-col gap-4">
-                <div className="flex flex-col gap-1">
-                    <SectionLabel>Working Prototype</SectionLabel>
-                    <h2 className="text-5xl font-semibold tracking-tight">The full agency-side IA, implemented.</h2>
-                    <p className="text-muted leading-relaxed max-w-2xl">
-                        Built in React with a dark-mode design system. Navigate the full workspace — Overview, Events, Channel Chat, DMs, Broadcast, and all six operational modules with live data.
-                    </p>
-                </div>
-
-                {/* Outer frame — 16:9, measures width to compute scale */}
-                <div
-                    ref={protoContainerRef}
-                    className="relative w-full rounded-2xl overflow-hidden border-2 border-border"
-                    style={{ aspectRatio: "16/9" }}
-                >
-                    {/* Iframe only renders once scale is known — no unscaled flash */}
-                    {protoScale !== null && (
-                        <iframe
-                            src={PROTOTYPE_URL}
-                            title="EventEase Prototype"
-                            sandbox="allow-scripts allow-same-origin allow-forms"
-                            style={{
-                                position: "absolute",
-                                top: 0,
-                                left: 0,
-                                width: 1920,
-                                height: 1080,
-                                border: 0,
-                                transformOrigin: "top left",
-                                transform: `scale(${protoScale})`,
-                            }}
-                        />
-                    )}
-                </div>
-            </motion.section>
-
-            {/* ── ORIGINAL CONTRIBUTIONS ── */}
-            <motion.section initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fade} className="flex flex-col gap-8">
-                <div className="flex flex-col gap-4">
-                    <SectionLabel>Original Contributions</SectionLabel>
-                    <h2 className="text-5xl font-semibold tracking-tight">Five defensible claims.</h2>
-                    <p className="max-w-2xl text-muted leading-relaxed">Each claim is defensible against the current market and the academic literature on event technology.</p>
-                </div>
-                <div className="flex flex-col gap-3">
-                    {originalContributions.map((c) => (
-                        <div key={c.num} className="flex gap-6 p-6 rounded-xl border border-border bg-background">
-                            <span className="font-sans text-sm text-muted shrink-0 pt-0.5">{c.num}</span>
-                            <div className="flex flex-col gap-1.5">
-                                <span className="font-semibold text-sm">{c.title}</span>
-                                <p className="text-sm text-muted leading-relaxed">{c.body}</p>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-            </motion.section>
-
-            {/* ── REFLECTION ── */}
-            <motion.section initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fade} className="rounded-2xl border border-border overflow-hidden">
-                <div className="flex flex-col gap-8 p-10 md:p-14 bg-background">
-                    <SectionLabel>Reflection</SectionLabel>
-                    <p className="text-xl md:text-2xl font-semibold tracking-tight leading-snug max-w-3xl">
-                        &ldquo;The right response to a communication problem is not to build better communication tools. It is to build the operational structure that makes communication purposeful.&rdquo;
-                    </p>
-                    <div className="flex flex-col gap-4 border-t border-border pt-6 max-w-2xl">
-                        <p className="text-sm text-muted leading-relaxed">
-                            A channel without context is just another WhatsApp group. A channel that is event-scoped, role-gated, connected to a task list and a form record and a pinned document set, and archived automatically at the end of its lifecycle — that is an operational instrument. The difference between those two things is the difference between a platform that teams use and a platform they abandon for WhatsApp.
-                        </p>
-                        <p className="text-sm text-muted leading-relaxed">
-                            The most significant design insight from this project is also the simplest: the platform works when it works because it makes the structured version of communication the path of least resistance. That is harder to design than it sounds.
-                        </p>
-                    </div>
-                </div>
-            </motion.section>
+            {/* 12 — CLOSING QUOTE */}
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fade} className="px-2">
+                <p className="text-2xl md:text-3xl font-semibold tracking-tight leading-snug max-w-2xl text-muted">
+                    &ldquo;A channel without context is just another WhatsApp group.&rdquo;
+                </p>
+            </motion.div>
 
         </div>
     );

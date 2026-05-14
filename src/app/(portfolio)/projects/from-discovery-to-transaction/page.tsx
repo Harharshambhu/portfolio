@@ -2,8 +2,8 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import SectionLabel from "@/components/SectionLabel";
 import ScrollMagnifier from "@/components/ScrollMagnifier";
+import SectionLabel from "@/components/SectionLabel";
 
 const fade = {
     hidden: { opacity: 0, y: 24 },
@@ -125,7 +125,7 @@ export default function DiscoveryToTransactionPage() {
                     </p>
                 </ScrollMagnifier>
                 <div className="flex flex-col gap-3 border-l-2 pl-5" style={{ borderColor: "var(--accent-blue)" }}>
-                    <h3 className="text-[20px] md:text-[25px] font-semibold leading-tight italic">Hypothesis</h3>
+                    <h2 className="text-4xl font-semibold tracking-tight">Hypothesis</h2>
                     <ScrollMagnifier>
                         <p className="text-base leading-relaxed font-semibold">
                             &quot;If we institutionalize{" "}
@@ -147,13 +147,13 @@ export default function DiscoveryToTransactionPage() {
             {/* ── Market Research ── */}
             <motion.section className="flex flex-col gap-8" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fade}>
                 <SectionLabel>Market Research</SectionLabel>
-                <h2 className="text-[28px] md:text-[50px] font-extrabold leading-tight">User Psychology</h2>
+                <h2 className="text-5xl font-semibold tracking-tight">User Psychology</h2>
 
                 {/* Dopamine vs Intent */}
                 <div className="flex flex-col gap-3">
-                    <h3 className="text-[20px] md:text-[25px] font-semibold leading-tight">
+                    <h2 className="text-4xl font-semibold tracking-tight">
                         <span style={{ color: "var(--accent-blue)" }}>Dopamine</span> vs. Intent
-                    </h3>
+                    </h2>
                     <div className="flex flex-col md:flex-row gap-6 items-start">
                         <ul className="flex flex-col gap-3 text-base leading-relaxed flex-1">
                             <ScrollMagnifier>
@@ -198,9 +198,9 @@ export default function DiscoveryToTransactionPage() {
                             />
                         </div>
                         <div className="flex flex-col gap-3 flex-1">
-                            <h3 className="text-[20px] md:text-[25px] font-semibold leading-tight text-right">
+                            <h2 className="text-4xl font-semibold tracking-tight text-right">
                                 The <span style={{ color: "var(--accent-blue)" }}>Trust</span> Deficit
-                            </h3>
+                            </h2>
                             <ul className="flex flex-col gap-3 text-base leading-relaxed">
                                 <ScrollMagnifier>
                                     <li>
@@ -222,7 +222,7 @@ export default function DiscoveryToTransactionPage() {
 
             {/* ── Data & Funnel Analysis ── */}
             <motion.section className="flex flex-col gap-8" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fade}>
-                <SectionLabel>Data &amp; Funnel Analysis</SectionLabel>
+                <h2 className="text-5xl font-semibold tracking-tight">Data &amp; Funnel Analysis</h2>
                 <ScrollMagnifier>
                     <p className="text-base leading-relaxed">
                         To justify a strategic pivot, we must look at the hard numbers. The data confirms that Instagram in India, is a high-friction environment for commerce, especially for small businesses.{" "}
@@ -230,7 +230,7 @@ export default function DiscoveryToTransactionPage() {
                     </p>
                 </ScrollMagnifier>
 
-                <h3 className="text-[20px] md:text-[25px] font-semibold leading-tight">The Top-of-Funnel</h3>
+                <h2 className="text-4xl font-semibold tracking-tight">The Top-of-Funnel</h2>
                 <ScrollMagnifier>
                     <p className="text-base leading-relaxed">
                         Analysis of industry-standard funnels for{" "}
@@ -259,9 +259,9 @@ export default function DiscoveryToTransactionPage() {
                     />
                 </div>
 
-                <h3 className="text-[20px] md:text-[25px] font-semibold leading-tight text-center mt-4">
+                <h2 className="text-4xl font-semibold tracking-tight text-center mt-4">
                     Trust Dividend: <em style={{ color: "var(--accent-blue)" }}>India v/s USA</em>
-                </h3>
+                </h2>
                 <div className="grid md:grid-cols-12 gap-6 items-center">
                     <div className="md:col-span-4 flex flex-col gap-8">
                         <ScrollMagnifier>
@@ -295,7 +295,7 @@ export default function DiscoveryToTransactionPage() {
 
             {/* ── User Personas ── */}
             <motion.section className="flex flex-col gap-8" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fade}>
-                <SectionLabel>User Personas</SectionLabel>
+                <h2 className="text-5xl font-semibold tracking-tight">User Personas</h2>
                 <ScrollMagnifier>
                     <p className="text-base leading-relaxed">
                         To bridge the <strong>Trust Gap</strong>, we must understand the specific psychological blockers of our three core users.
@@ -304,7 +304,7 @@ export default function DiscoveryToTransactionPage() {
 
                 {/* Impulsive Buyer */}
                 <div className="flex flex-col gap-4">
-                    <h3 className="text-[20px] md:text-[25px] font-semibold leading-tight">The Impulsive Buyer</h3>
+                    <h2 className="text-4xl font-semibold tracking-tight">The Impulsive Buyer</h2>
                     <ScrollMagnifier>
                         <p className="text-base italic text-muted">&quot;I wasn&apos;t looking for this, but I need it to make my day better.&quot;</p>
                     </ScrollMagnifier>
@@ -330,7 +330,7 @@ export default function DiscoveryToTransactionPage() {
 
                 {/* Exploratory Buyer */}
                 <div className="flex flex-col gap-4 mt-4">
-                    <h3 className="text-[20px] md:text-[25px] font-semibold leading-tight">The Exploratory Buyer</h3>
+                    <h2 className="text-4xl font-semibold tracking-tight">The Exploratory Buyer</h2>
                     <ScrollMagnifier>
                         <p className="text-base italic text-muted">&quot;I love hidden gems, but I refuse to be a victim of a scam.&quot;</p>
                     </ScrollMagnifier>
@@ -356,7 +356,7 @@ export default function DiscoveryToTransactionPage() {
 
                 {/* Planned Buyer */}
                 <div className="flex flex-col gap-4 mt-4">
-                    <h3 className="text-[20px] md:text-[25px] font-semibold leading-tight">The Planned Buyer</h3>
+                    <h2 className="text-4xl font-semibold tracking-tight">The Planned Buyer</h2>
                     <ScrollMagnifier>
                         <p className="text-base italic text-muted">&quot;I use Instagram as visual search engine for new products, but I buy where I&apos;m protected.&quot;</p>
                     </ScrollMagnifier>
@@ -383,7 +383,7 @@ export default function DiscoveryToTransactionPage() {
 
             {/* ── Journey Map ── */}
             <motion.section className="flex flex-col gap-8" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fade}>
-                <SectionLabel>Personas&apos; Journey Map</SectionLabel>
+                <h2 className="text-5xl font-semibold tracking-tight">Personas&apos; Journey Map</h2>
                 <div className="overflow-x-auto rounded-xl border border-border">
                     <Image
                         src="/projects/discovery-to-transaction/journey-mapping.png"
@@ -413,10 +413,10 @@ export default function DiscoveryToTransactionPage() {
 
             {/* ── Key Insights ── */}
             <motion.section className="flex flex-col gap-8" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fade}>
-                <SectionLabel>
+                <h2 className="text-5xl font-semibold tracking-tight">
                     Key <span style={{ color: "var(--accent-blue)" }}>Insights</span> from{" "}
                     <span style={{ color: "var(--accent-blue)" }}>Personas</span>&apos;
-                </SectionLabel>
+                </h2>
                 <div className="grid md:grid-cols-3 gap-4">
                     {insights.map((ins) => (
                         <div
@@ -436,7 +436,7 @@ export default function DiscoveryToTransactionPage() {
 
             {/* ── Analyzing the Problem ── */}
             <motion.section className="flex flex-col gap-8" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fade}>
-                <SectionLabel>Analyzing the Problem</SectionLabel>
+                <h2 className="text-5xl font-semibold tracking-tight">Analyzing the Problem</h2>
                 <div className="flex justify-center">
                     <Image
                         src="/projects/discovery-to-transaction/problem-tree.png"
@@ -470,9 +470,9 @@ export default function DiscoveryToTransactionPage() {
 
             {/* ── The North Star ── */}
             <motion.section className="flex flex-col gap-8" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fade}>
-                <SectionLabel>
+                <h2 className="text-5xl font-semibold tracking-tight">
                     The <span style={{ color: "var(--accent-blue)" }}>North</span> Star
-                </SectionLabel>
+                </h2>
                 <ScrollMagnifier>
                     <blockquote className="text-base leading-relaxed italic border-l-2 pl-5" style={{ borderColor: "var(--accent-blue)" }}>
                         &quot;How might we <strong>institutionalize <em>statutory accountability</em></strong> for Instagram businesses in India to{" "}
@@ -495,7 +495,7 @@ export default function DiscoveryToTransactionPage() {
 
             {/* ── Proposed Solution ── */}
             <motion.section className="flex flex-col gap-8" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fade}>
-                <SectionLabel>Proposed Solution</SectionLabel>
+                <h2 className="text-5xl font-semibold tracking-tight">Proposed Solution</h2>
                 <div className="flex flex-col md:flex-row gap-6 items-start">
                     <div className="flex flex-col gap-4 flex-1 text-base leading-relaxed">
                         <ScrollMagnifier>
@@ -566,9 +566,9 @@ export default function DiscoveryToTransactionPage() {
 
             {/* ── Success Metrics ── */}
             <motion.section className="flex flex-col gap-8" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fade}>
-                <SectionLabel>Success Metrics</SectionLabel>
+                <h2 className="text-5xl font-semibold tracking-tight">Success Metrics</h2>
 
-                <h3 className="text-[20px] md:text-[25px] font-semibold leading-tight">North Star Metric</h3>
+                <h2 className="text-4xl font-semibold tracking-tight">North Star Metric</h2>
                 <div className="flex flex-col md:flex-row gap-6 items-start">
                     <div className="flex-shrink-0 md:w-48">
                         <Image
@@ -587,7 +587,7 @@ export default function DiscoveryToTransactionPage() {
                     </div>
                 </div>
 
-                <h3 className="text-[20px] md:text-[25px] font-semibold leading-tight italic">Secondary Performance Metrics</h3>
+                <h2 className="text-4xl font-semibold tracking-tight">Secondary Performance Metrics</h2>
                 <div className="grid md:grid-cols-2 gap-4 text-base leading-relaxed">
                     <div className="p-5 border border-border rounded-xl">
                         <ScrollMagnifier>
@@ -604,7 +604,7 @@ export default function DiscoveryToTransactionPage() {
 
             {/* ── Trade-Offs ── */}
             <motion.section className="flex flex-col gap-6" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fade}>
-                <SectionLabel>Trade-Offs</SectionLabel>
+                <h2 className="text-5xl font-semibold tracking-tight">Trade-Offs</h2>
                 <ScrollMagnifier>
                     <p className="text-base leading-relaxed italic">
                         This case study provided an invaluable opportunity to explore the complex intersection of consumer psychology, conversion optimization, and the critical role of trust in the Indian social commerce landscape.

@@ -1,11 +1,12 @@
 
-import ProjectsTable from "@/components/ProjectsTable";
+import ProjectsGrid from "@/components/ProjectsGrid";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import ScrollReveal from "@/components/ScrollReveal";
 import HeroImage from "@/components/HeroImage";
 import HeroName from "@/components/HeroName";
 import SectionLabel from "@/components/SectionLabel";
 import ToolsCarousel from "@/components/ToolsCarousel";
+import CircularGrid from "@/components/CircularGrid";
 import { projects } from "@/data/projects";
 
 export default function Home() {
@@ -34,14 +35,8 @@ export default function Home() {
       </section>
 
 
-
       <section className="flex flex-col gap-8">
-        <ScrollReveal>
-          <SectionLabel as="h3">Selected Work</SectionLabel>
-        </ScrollReveal>
-        <ScrollReveal delay={0.1}>
-          <ProjectsTable projects={selectedProjects} />
-        </ScrollReveal>
+        <CircularGrid projects={projects} />
       </section>
 
       <section className="flex flex-col gap-8">

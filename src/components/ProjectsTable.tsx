@@ -4,14 +4,9 @@ import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import { useRef, useState } from "react";
+import type { Project } from "@/data/projects";
 
-export interface Project {
-    title: string;
-    category: string;
-    year: string;
-    href?: string;
-    description?: string;
-}
+export type { Project };
 
 function ProjectRow({ project, delay }: { project: Project; delay: number }) {
     const rowRef = useRef<HTMLAnchorElement>(null);

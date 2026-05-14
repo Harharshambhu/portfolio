@@ -357,7 +357,7 @@ export default function ComfortAidProjectPage() {
                 </div>
 
                 <div className="flex flex-col gap-4">
-                    <SectionLabel as="h3">Five Problem Clusters</SectionLabel>
+                    <h2 className="text-4xl font-semibold tracking-tight">Five Problem Clusters</h2>
                     {problemClusters.map((p) => (
                         <div key={p.num} className="flex gap-6 p-6 rounded-xl border border-border bg-background">
                             <span className="font-mono text-sm text-muted shrink-0 pt-0.5">{p.num}</span>
@@ -400,7 +400,7 @@ export default function ComfortAidProjectPage() {
                     <div className="flex flex-col gap-6 p-10 md:p-12 bg-background">
                         <SectionLabel>User Persona</SectionLabel>
                         <div className="flex flex-col gap-1">
-                            <h2 className="text-3xl font-semibold tracking-tight">Rajni, 26</h2>
+                            <h2 className="text-5xl font-semibold tracking-tight">Rajni, 26</h2>
                             <p className="text-sm text-muted font-mono">Construction labourer · Tier-2 city, Northern India · 4 months pregnant</p>
                         </div>
                         <p className="text-muted leading-relaxed text-sm">
@@ -424,7 +424,7 @@ export default function ComfortAidProjectPage() {
                 variants={fade}
                 className="flex flex-col gap-6"
             >
-                <SectionLabel>How Might We</SectionLabel>
+                <h2 className="text-5xl font-semibold tracking-tight">How Might We</h2>
                 <div className="p-8 md:p-12 rounded-2xl border border-border bg-background">
                     <p className="text-xl md:text-2xl font-semibold tracking-tight leading-snug">
                         &ldquo;How might we create a human-centred system with improved weight management and balanced ergonomics, ensuring minimal effort and time for staff — incorporating customisable immobilisation — enhancing patient stability, and making it the <em className="font-normal not-italic" style={{ color: "var(--accent-blue)" }}>preferred choice for hospital staff in Indian public healthcare settings?</em>&rdquo;
@@ -597,7 +597,7 @@ export default function ComfortAidProjectPage() {
                 <div className="grid grid-cols-1 md:grid-cols-2">
                     <div className="flex flex-col gap-6 p-10 md:p-12 bg-background">
                         <SectionLabel>Reflections</SectionLabel>
-                        <h2 className="text-3xl font-semibold tracking-tight">What the project taught us.</h2>
+                        <h2 className="text-5xl font-semibold tracking-tight">What the project taught us.</h2>
                         <div className="flex flex-col gap-4">
                             {reflections.map((r) => (
                                 <div key={r.title} className="flex flex-col gap-2 border-t border-border pt-4 first:border-0 first:pt-0">
@@ -626,7 +626,7 @@ export default function ComfortAidProjectPage() {
                 variants={fade}
                 className="flex flex-col gap-4 p-8 rounded-xl border border-border bg-background"
             >
-                <SectionLabel>Team</SectionLabel>
+                <h2 className="text-5xl font-semibold tracking-tight">Team</h2>
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
                     {[
                         { id: "M24LDX002", name: "Anirudh Singh" },

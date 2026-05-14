@@ -48,8 +48,8 @@
   /* H5 / Label — 15px desktop & mobile */
   --fs-label: 0.92rem;
 
-  /* Body Large — 14px desktop, 13px mobile */
-  --fs-body-lg: clamp(0.8125rem, 1.1vw, 0.875rem);
+  /* Body Large — 16px desktop, 15px mobile */
+  --fs-body-lg: clamp(0.9375rem, 1.3vw, 1rem);
 
   /* Body Regular — 11px desktop & mobile */
   --fs-body: 0.6875rem;
@@ -113,13 +113,72 @@ h4 {
 p,
 li,
 blockquote {
-  font-family: var(--font-serif), serif;
+  font-family: var(--font-sans), sans-serif;
   font-size: var(--fs-body-lg);
   line-height: 1.7;
+}
+
+/* ── Nav links — lock weight, prevent browser font-synthesis on hover ── */
+nav a {
+  font-weight: 400 !important;
+  font-synthesis: none;
+}
+
+/* ── Design quote — Merriweather italic, unrestricted size ── */
+.quote-text {
+  font-family: var(--font-serif) !important;
+  font-style: italic !important;
+  font-size: inherit !important;
+  line-height: 1.3 !important;
+}
+
+/* ── Project summary — Jakarta Sans, 2px under quote size (22px) ── */
+.project-summary-text {
+  font-family: var(--font-sans) !important;
+  font-size: 1.375rem !important;
+  line-height: 1.5 !important;
+  font-style: normal !important;
 }
 
 /* ── Keep monospace inside table elements in project case studies ── */
 table,
 table * {
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !important;
+}
+
+/* ============================================================
+   PROJECT CASE STUDY TYPOGRAPHY
+   Single control point for all project pages.
+   Hierarchy rule: each level is 2× the size below it.
+   Weight rule: skip a step going up (600 → 800, no 700).
+   ============================================================ */
+
+/* L1 — Section heading: Merriweather ExtraBold 800, 80px desktop */
+.cs-heading {
+  font-family: var(--font-serif);
+  font-weight: 800;
+  font-size: clamp(2.5rem, 5.5vw, 5rem);
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  color: var(--foreground);
+}
+
+/* L2 — Descriptive subtitle / module title / research sub-label:
+   Plus Jakarta Sans Semibold 600, 40px desktop — exactly half of cs-heading */
+.cs-sub {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: clamp(1.25rem, 2.75vw, 2.5rem);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--foreground);
+}
+
+/* L3 — Body text in project pages: Plus Jakarta Sans Regular
+   Overrides the global Merriweather applied to p/li/blockquote */
+.project-page p,
+.project-page li,
+.project-page blockquote {
+  font-family: var(--font-sans), sans-serif;
+  line-height: 1.65;
 }

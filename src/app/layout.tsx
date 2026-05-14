@@ -41,6 +41,16 @@ const merriweather = localFont({
       weight: "700",
       style: "italic",
     },
+    {
+      path: "../../public/fonts/Merriweather/static/Merriweather_48pt-ExtraBold.ttf",
+      weight: "800",
+      style: "normal",
+    },
+    {
+      path: "../../public/fonts/Merriweather/static/Merriweather_48pt-ExtraBoldItalic.ttf",
+      weight: "800",
+      style: "italic",
+    },
   ],
   variable: "--font-serif",
 });

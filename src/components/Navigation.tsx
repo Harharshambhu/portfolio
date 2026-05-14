@@ -35,7 +35,7 @@ export default function Navigation() {
         }
     }, [pathname, isHome, scrollY]);
 
-    const [displayText, setDisplayText] = useState("Singh.");
+    const [displayText, setDisplayText] = useState("Hello.");
     const [isHovered, setIsHovered] = useState(false);
     const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -114,7 +114,7 @@ export default function Navigation() {
                         <Link
                             key={link.href}
                             href={link.href}
-                            className={`hover:text-foreground transition-colors text-sm font-medium ${pathname === link.href ? "text-foreground" : "text-muted"
+                            className={`hover:text-foreground transition-colors text-sm font-normal ${pathname === link.href ? "text-foreground" : "text-muted"
                                 }`}
                         >
                             {link.label}
@@ -142,7 +142,7 @@ export default function Navigation() {
                 onMouseLeave={() => {
                     if (isHovered) {
                         setIsHovered(false);
-                        scramble("Singh.");
+                        scramble("Hello.");
                     }
                 }}
             >
