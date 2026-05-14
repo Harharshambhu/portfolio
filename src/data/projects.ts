@@ -54,4 +54,13 @@ export const projects: Project[] = [
         thumbnail: "/projects/discovery-to-transaction/thumbnail.png",
         circularThumbnail: "/projects/discovery-to-transaction/CircularThumbnail.png",
     },
+    {
+        title: "Chabad House",
+        category: "Architectural Design",
+        year: "2023",
+        description: "A community center design focusing on creating inclusive spaces that facilitate spiritual growth and communal activities through light, geometry, and traditional motifs.",
+        href: "/projects/chabad-house",
+        thumbnail: "/projects/chabad-house/01.png",
+        circularThumbnail: "/projects/chabad-house/01.png",
+    },
 ];

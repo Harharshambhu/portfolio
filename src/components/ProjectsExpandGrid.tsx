@@ -21,7 +21,7 @@ function ExpandRow({ items }: { items: (Project | null)[] }) {
                 if (!project) {
                     return (
                         <div
-                            key="empty"
+                            key={`empty-${i}`}
                             style={{ flex: flex(i), transition: FLEX_EASE, minWidth: 0 }}
                             className="border border-border/30 rounded-[3px]"
                         />
@@ -100,7 +100,8 @@ function ExpandRow({ items }: { items: (Project | null)[] }) {
 
 export default function ProjectsExpandGrid({ projects }: { projects: Project[] }) {
     const row1: (Project | null)[] = [projects[0] ?? null, projects[1] ?? null, projects[2] ?? null];
-    const row2: (Project | null)[] = [projects[3] ?? null, projects[4] ?? null, null];
+    const row2: (Project | null)[] = [projects[3] ?? null, projects[4] ?? null, projects[5] ?? null];
+    const row3: (Project | null)[] = [null, null, null];
 
     return (
         <>
@@ -150,6 +151,7 @@ export default function ProjectsExpandGrid({ projects }: { projects: Project[] }
             <div className="hidden md:flex flex-col gap-[2px]">
                 <ExpandRow items={row1} />
                 <ExpandRow items={row2} />
+                <ExpandRow items={row3} />
             </div>
         </>
     );
