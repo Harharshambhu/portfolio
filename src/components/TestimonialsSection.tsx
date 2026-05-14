@@ -17,7 +17,7 @@ const testimonials = [
         image: "/images/testimonials/shikhant.jpg",
     },
     {
-        text: "This portfolio website turned out even better than I imagined! Its sleek, modern design highlights my work beautifully, and the seamless animations give it a unique edge. I've gotten tons of positive feedback from clients and recruiters.",
+        text: "It was great working with Anirudh — he picks up context fast, asks the right questions, and delivers without needing his hand held. Would work with him again without hesitation.",
         author: "William",
         image: "/images/testimonials/william.jpg",
     },
