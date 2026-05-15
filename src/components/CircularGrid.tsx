@@ -210,7 +210,7 @@ export default function CircularGrid({ projects }: { projects: Project[] }) {
         <div className="flex flex-col md:block">
 
             {/* ── Mobile quote — visible only on mobile, sits above the dial ── */}
-            <div className="md:hidden text-right pb-6">
+            <div className="md:hidden text-right pb-20 min-h-[110px] flex flex-col justify-end">
                 <div className="w-8 h-px bg-foreground/40 ml-auto mb-3" />
                 <AnimatePresence mode="wait">
                     <motion.p
