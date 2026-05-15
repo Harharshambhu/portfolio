@@ -9,8 +9,8 @@ import { useWindowSize } from "@/hooks/useWindowSize";
 
 const links = [
     { href: "/", label: "Home" },
-    { href: "/projects", label: "Projects" },
     { href: "/about", label: "About" },
+    { href: "/projects", label: "Projects" },
     { href: "/resume", label: "Resume" },
     { href: "/contact", label: "Contact" },
 ];
