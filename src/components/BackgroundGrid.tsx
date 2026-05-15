@@ -31,6 +31,7 @@ export default function BackgroundGrid({
         const computedStyle = getComputedStyle(document.documentElement);
         const gridHoverColor = computedStyle.getPropertyValue('--grid-hover').trim() || 'rgba(200, 200, 255, 0.7)';
         const gridBaseColor = computedStyle.getPropertyValue('--grid-base').trim() || color;
+        const spotlightColor = 'rgba(255, 255, 255, 0.25)';
 
         let animationFrameId: number;
         let mouseX = -1000;
@@ -54,7 +55,7 @@ export default function BackgroundGrid({
             // Spotlight Effect
             if (spotlight && delayedMouseX > -100 && delayedMouseY > -100) {
                 const gradient = ctx.createRadialGradient(delayedMouseX, delayedMouseY, 0, delayedMouseX, delayedMouseY, 300);
-                gradient.addColorStop(0, "color-mix(in srgb, var(--text-hover) 15%, transparent)");
+                gradient.addColorStop(0, spotlightColor);
                 gradient.addColorStop(1, "transparent");
                 ctx.fillStyle = gradient;
                 ctx.fillRect(0, 0, canvas.width, canvas.height);

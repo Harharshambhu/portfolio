@@ -140,9 +140,6 @@ export default function ProjectsExpandGrid({ projects }: { projects: Project[] }
                                 </div>
                             </div>
                         </div>
-                        <div className="px-4 py-3">
-                            <p className="text-xs text-muted leading-relaxed">{project.description}</p>
-                        </div>
                     </Link>
                 ))}
             </div>

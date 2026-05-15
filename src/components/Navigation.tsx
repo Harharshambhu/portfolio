@@ -11,6 +11,7 @@ const links = [
     { href: "/", label: "Home" },
     { href: "/projects", label: "Projects" },
     { href: "/about", label: "About" },
+    { href: "/resume", label: "Resume" },
     { href: "/contact", label: "Contact" },
 ];
 
@@ -114,7 +115,7 @@ export default function Navigation() {
                         <Link
                             key={link.href}
                             href={link.href}
-                            className={`hover:text-foreground transition-colors text-sm font-normal ${pathname === link.href ? "text-foreground" : "text-muted"
+                            className={`hover:text-foreground transition-colors text-sm font-semibold ${pathname === link.href ? "text-foreground" : "text-muted"
                                 }`}
                         >
                             {link.label}
