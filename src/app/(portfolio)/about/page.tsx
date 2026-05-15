@@ -9,7 +9,7 @@ import SpotlightHeading from "@/components/SpotlightHeading";
 import { prefix } from "@/utils/prefix";
 import { experiences, education } from "@/data/experience";
 
-function RippleRow({ year, role, company, desc, delay, globalMouse }: { year: string; role: string; company: string; desc: string; delay: number; globalMouse: { x: number; y: number } }) {
+function RippleRow({ year, role, company, desc, delay, globalMouse, showBubble = true }: { year: string; role: string; company: string; desc: string; delay: number; globalMouse: { x: number; y: number }; showBubble?: boolean }) {
     const rowRef = useRef<HTMLDivElement>(null);
     const [origin, setOrigin] = useState({ x: 0, y: 0 });
     const [hovered, setHovered] = useState(false);
@@ -42,12 +42,8 @@ function RippleRow({ year, role, company, desc, delay, globalMouse }: { year: st
 
     return (
         <>
-            <motion.div
+            <div
                 ref={rowRef}
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.1, delay }}
                 className="relative flex flex-col md:flex-row py-4 border-b border-border px-3 -mx-3 rounded-sm overflow-hidden cursor-none"
                 onMouseEnter={() => updateHoverState(globalMouse.x, globalMouse.y)}
                 onMouseMove={(e) => updateHoverState(e.clientX, e.clientY)}
@@ -94,11 +90,11 @@ function RippleRow({ year, role, company, desc, delay, globalMouse }: { year: st
                         {company}
                     </span>
                 </div>
-            </motion.div>
+            </div>
 
             {/* Floating Green Bubble */}
             <AnimatePresence>
-                {hovered && (
+                {hovered && showBubble && (
                     <motion.div
                         key="bubble"
                         initial={{ scale: 0, opacity: 0 }}
@@ -119,7 +115,7 @@ function RippleRow({ year, role, company, desc, delay, globalMouse }: { year: st
                             className="w-90 h-90 rounded-full backdrop-blur-md border border-white/20 shadow-2xl flex flex-col items-center justify-center p-10 text-center"
                             style={{ background: "rgba(45, 236, 11, 1)" }}
                         >
-                            <p className="text-white font-semibold text-lg leading-relaxed max-w-[280px]">
+                            <p className="text-white font-semibold text-lg leading-relaxed max-w-[280px] whitespace-pre-line">
                                 {desc}
                             </p>
                         </div>
@@ -230,6 +226,7 @@ export default function About() {
                             desc={edu.desc}
                             delay={index * 0.001}
                             globalMouse={globalMouse}
+                            showBubble={false}
                         />
                     ))}
                 </div>
