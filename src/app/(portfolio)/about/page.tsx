@@ -9,7 +9,7 @@ import SpotlightHeading from "@/components/SpotlightHeading";
 import { prefix } from "@/utils/prefix";
 import { experiences, education } from "@/data/experience";
 
-function RippleRow({ year, role, company, desc, delay, globalMouse, showBubble = true }: { year: string; role: string; company: string; desc: string; delay: number; globalMouse: { x: number; y: number }; showBubble?: boolean }) {
+function RippleRow({ year, role, company, desc, delay, globalMouse, showBubble = true, isMobile = false }: { year: string; role: string; company: string; desc: string; delay: number; globalMouse: { x: number; y: number }; showBubble?: boolean; isMobile?: boolean }) {
     const rowRef = useRef<HTMLDivElement>(null);
     const [origin, setOrigin] = useState({ x: 0, y: 0 });
     const [hovered, setHovered] = useState(false);
@@ -103,11 +103,11 @@ function RippleRow({ year, role, company, desc, delay, globalMouse, showBubble =
                         transition={{ duration: 0.2, ease: "easeOut" }}
                         className="fixed pointer-events-none z-[10000] flex items-center justify-center"
                         style={{
-                            left: globalMouse.x + 20,
+                            left: isMobile ? "50%" : globalMouse.x + 20,
                             top: globalMouse.y < window.innerHeight / 2
                                 ? globalMouse.y + 180
                                 : globalMouse.y - 180,
-                            x: "0%",
+                            x: isMobile ? "-50%" : "0%",
                             y: "-50%",
                         }}
                     >
@@ -128,6 +128,7 @@ function RippleRow({ year, role, company, desc, delay, globalMouse, showBubble =
 
 export default function About() {
     const [globalMouse, setGlobalMouse] = useState({ x: 0, y: 0 });
+    const [isMobile, setIsMobile] = useState(false);
 
     useEffect(() => {
         const handleMouseMove = (e: MouseEvent) => {
@@ -135,6 +136,13 @@ export default function About() {
         };
         window.addEventListener("mousemove", handleMouseMove);
         return () => window.removeEventListener("mousemove", handleMouseMove);
+    }, []);
+
+    useEffect(() => {
+        const check = () => setIsMobile(window.innerWidth < 768);
+        check();
+        window.addEventListener("resize", check);
+        return () => window.removeEventListener("resize", check);
     }, []);
 
     const [isExpanded, setIsExpanded] = useState(false);
@@ -180,7 +188,7 @@ export default function About() {
                             </motion.span>
                         </button>
                     </div>
-                    <ScrollReveal className="w-full md:w-1/2 flex justify-end -mt-24 md:-mt-60">
+                    <ScrollReveal className="w-full md:w-1/2 flex justify-end order-first md:order-none -mt-0 md:-mt-60">
                         <Image
                             src={prefix("/images/profile.webp")}
                             alt="Anirudh Singh"
@@ -209,6 +217,7 @@ export default function About() {
                             desc={exp.desc}
                             delay={index * 0.001}
                             globalMouse={globalMouse}
+                            isMobile={isMobile}
                         />
                     ))}
                 </div>
