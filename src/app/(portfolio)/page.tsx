@@ -24,12 +24,12 @@ export default function Home() {
           <HeroName />
           <ScrollReveal delay={0.1}>
             <h2 className="text-xl text-muted">
-              I am a Product & XR Designer
+              I am a Product & UX Designer
             </h2>
           </ScrollReveal>
           <ScrollReveal delay={0.2}>
             <p className="max-w-xl text-lg leading-relaxed text-muted">
-              Designing immersive interventions and digital trust architectures.
+              Product Designer with a specialism in XR and complex system design
             </p>
           </ScrollReveal>
         </div>
