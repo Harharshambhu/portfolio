@@ -103,10 +103,10 @@ function RippleRow({ year, role, company, desc, delay, globalMouse, showBubble =
                         transition={{ duration: 0.2, ease: "easeOut" }}
                         className="fixed pointer-events-none z-[10000] flex items-center justify-center"
                         style={{
-                            left: isMobile ? "50%" : globalMouse.x + 20,
+                            left: isMobile ? "50%" : globalMouse.x + 10,
                             top: globalMouse.y < window.innerHeight / 2
-                                ? globalMouse.y + 180
-                                : globalMouse.y - 180,
+                                ? globalMouse.y + 120
+                                : globalMouse.y - 210,
                             x: isMobile ? "-50%" : "0%",
                             y: "-50%",
                         }}
@@ -194,11 +194,13 @@ export default function About() {
                             alt="Anirudh Singh"
                             width={600}
                             height={400}
-                            className="w-full max-w-lg h-auto rounded-xl grayscale-0 hover:grayscale transition-all duration-500 object-cover max-h-[600px] object-top"
+                            className="w-full max-w-lg h-auto rounded-xl object-cover max-h-[600px] object-top"
                         />
                     </ScrollReveal>
                 </div>
             </section>
+
+            <p className="quote-text !text-2xl text-muted/60 text-center py-8">"By the way, Sokimevi is an acronym of me and my sisters."</p>
 
             <section className="flex flex-col gap-8">
                 <div className="flex items-center justify-between w-full">

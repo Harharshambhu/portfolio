@@ -233,7 +233,7 @@ export default function CircularGrid({ projects }: { projects: Project[] }) {
             >
                 <motion.svg
                     width="1000" height="840" viewBox="0 80 1000 840"
-                    className="overflow-visible relative z-10 -translate-x-50"
+                    className="overflow-visible relative z-10 -translate-x-[260px]"
                 >
                     {/* Rotating group — all wheel content spins inside this g */}
                     <motion.g style={{ rotate: smoothRotation, transformOrigin: "500px 420px" }}>
@@ -372,7 +372,7 @@ export default function CircularGrid({ projects }: { projects: Project[] }) {
                 </motion.svg>
 
                 {/* ── Desktop: central title overlay ── */}
-                <div className="hidden md:flex absolute inset-0 items-center justify-center pointer-events-none z-20 -translate-x-50">
+                <div className="hidden md:flex absolute inset-0 items-center justify-center pointer-events-none z-20 -translate-x-[260px]">
                     <div
                         className="flex flex-col items-center justify-center text-center p-4 relative"
                         style={{ width: innerRadius * 1.8, height: innerRadius * 1.8 }}
@@ -398,7 +398,7 @@ export default function CircularGrid({ projects }: { projects: Project[] }) {
                 </div>
 
                 {/* ── Desktop: rotating quotes column ── */}
-                <div className="hidden md:flex absolute right-0 top-[8%] flex-col items-end text-right w-[400px] pointer-events-none z-20 gap-4">
+                <div className="hidden md:flex absolute right-8 top-[8%] flex-col items-end text-right w-[400px] pointer-events-none z-20 gap-4">
                     <div className="w-10 h-px bg-foreground/70" />
                     <AnimatePresence mode="wait">
                         <motion.p
@@ -415,12 +415,12 @@ export default function CircularGrid({ projects }: { projects: Project[] }) {
                 </div>
 
                 {/* ── Desktop: hover hint ── */}
-                <p className="quote-text hidden md:flex absolute right-0 top-[45%] !text-[1.5rem] tracking-widest text-muted/40 items-center gap-2 pointer-events-none z-20">
+                <p className="quote-text hidden md:flex absolute right-8 top-[45%] !text-[1.5rem] tracking-widest text-muted/40 items-center gap-2 pointer-events-none z-20">
                     <span>&#8592;</span> Hover to see Project Details
                 </p>
 
                 {/* ── Desktop: project summary ── */}
-                <div className="hidden md:block absolute right-0 top-[57%] w-[400px] text-right pointer-events-none z-20">
+                <div className="hidden md:block absolute right-8 top-[57%] w-[400px] text-right pointer-events-none z-20">
                     <AnimatePresence mode="wait">
                         {hoveredIdx !== null && (
                             <motion.p

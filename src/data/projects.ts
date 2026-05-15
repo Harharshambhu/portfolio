@@ -60,6 +60,6 @@ export const projects: Project[] = [
         year: "2023",
         description: " We wanted to find a way to tell Tragic story of Chabad House, preserving the weight of what happened while keeping it accessible as a narrative. Every panel was illustrated and sequenced digitally, designed to be read as an interactive flipbook.",
         thumbnail: "/projects/chabad-house/01.png",
-        circularThumbnail: "/projects/chabad-house/01.png",
+        circularThumbnail: "/projects/chabad-house/circularthumbnail.png",
     },
 ];
