@@ -73,13 +73,21 @@
   --font-serif: var(--font-serif);
 }
 
+/* Force grayscale antialiasing globally — WebKitGTK on Linux defaults to
+   subpixel (rgba) rendering with full hinting, which makes all fonts appear
+   heavier than intended. Setting this on * (not just body) prevents it being
+   reset by any framework or component stylesheet. */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-synthesis: none;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans), sans-serif;
   font-size: var(--fs-body);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
   width: 100%;
 }

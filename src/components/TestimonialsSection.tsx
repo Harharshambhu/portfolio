@@ -28,24 +28,14 @@ const testimonials = [
 function SpotlightCard({ children, className }: { children: React.ReactNode; className?: string }) {
     const cardRef = useRef<HTMLDivElement>(null);
     const [spotlight, setSpotlight] = useState({ x: 0, y: 0, visible: false });
-    const [tilt, setTilt] = useState({ x: 0, y: 0 });
 
     const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
         const rect = cardRef.current!.getBoundingClientRect();
-        const px = e.clientX - rect.left;
-        const py = e.clientY - rect.top;
-        setSpotlight({ x: px, y: py, visible: true });
-        const cx = rect.width / 2;
-        const cy = rect.height / 2;
-        setTilt({
-            x: ((py - cy) / cy) * -6,
-            y: ((px - cx) / cx) * 6,
-        });
+        setSpotlight({ x: e.clientX - rect.left, y: e.clientY - rect.top, visible: true });
     };
 
     const handleMouseLeave = () => {
         setSpotlight((s) => ({ ...s, visible: false }));
-        setTilt({ x: 0, y: 0 });
     };
 
     return (
@@ -54,10 +44,6 @@ function SpotlightCard({ children, className }: { children: React.ReactNode; cla
             className={`relative overflow-hidden ${className ?? ""}`}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
-            style={{
-                transform: `perspective(800px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)`,
-                transition: tilt.x === 0 ? "transform 0.5s ease" : "transform 0.1s ease",
-            }}
         >
             <div
                 className="pointer-events-none absolute inset-0 z-10 rounded-sm transition-opacity duration-300"
@@ -96,7 +82,7 @@ export default function TestimonialsSection() {
                             {[...testimonials, ...testimonials].map((item, index) => (
                                 <SpotlightCard
                                     key={index}
-                                    className="flex flex-col gap-6 w-[400px] md:w-[500px] flex-shrink-0 p-6 border border-border rounded-sm bg-background/50 backdrop-blur-sm"
+                                    className="flex flex-col gap-6 w-[400px] md:w-[500px] flex-shrink-0 p-6 border border-border rounded-sm bg-background"
                                 >
                                     <div className="relative w-12 h-12 flex-shrink-0 overflow-hidden rounded-full border border-border">
                                         <Image

@@ -8,10 +8,9 @@ import BackgroundGrid from "./BackgroundGrid";
 
 const MotionLink = motion.create(Link);
 
-// Constants
 const SCRAMBLE_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+";
-const INTERVAL_DELAY = 30; // ms
-const ANIMATION_DURATION = 0.15; // seconds (layout + scramble)
+const INTERVAL_DELAY = 30;
+const ANIMATION_DURATION = 0.15;
 
 const PHRASE_DEFAULT = "Let's Talk";
 const PHRASE_HOVER = "START A PROJECT — GET IN TOUCH — ANIRUDH@SINGH";
@@ -21,57 +20,47 @@ export default function LetsTalkSection() {
     const [displayText, setDisplayText] = useState(PHRASE_DEFAULT);
     const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
-    // Cleanup interval on unmount
     useEffect(() => {
         return () => {
             if (intervalRef.current) clearInterval(intervalRef.current);
         };
     }, []);
 
-    // Scramble effect
-    const scramble = useCallback(
-        (targetText: string) => {
-            if (intervalRef.current) clearInterval(intervalRef.current);
+    const scramble = useCallback((targetText: string) => {
+        if (intervalRef.current) clearInterval(intervalRef.current);
 
-            const totalSteps = Math.ceil((ANIMATION_DURATION * 6500) / INTERVAL_DELAY);
-            let step = 0;
+        const totalSteps = Math.ceil((ANIMATION_DURATION * 6500) / INTERVAL_DELAY);
+        let step = 0;
 
-            intervalRef.current = setInterval(() => {
-                step++;
-                const charsToReveal = Math.min(
-                    targetText.length,
-                    Math.floor((step / totalSteps) * targetText.length)
-                );
+        intervalRef.current = setInterval(() => {
+            step++;
+            const charsToReveal = Math.min(
+                targetText.length,
+                Math.floor((step / totalSteps) * targetText.length)
+            );
 
-                const newText = targetText
-                    .split("")
-                    .map((char, index) => {
-                        if (index < charsToReveal) return targetText[index];
-                        // Preserve spaces and em-dash
-                        if (char === " " || char === "—") return char;
-                        return SCRAMBLE_CHARS[
-                            Math.floor(Math.random() * SCRAMBLE_CHARS.length)
-                        ];
-                    })
-                    .join("");
+            const newText = targetText
+                .split("")
+                .map((char, index) => {
+                    if (index < charsToReveal) return targetText[index];
+                    if (char === " " || char === "—") return char;
+                    return SCRAMBLE_CHARS[Math.floor(Math.random() * SCRAMBLE_CHARS.length)];
+                })
+                .join("");
 
-                setDisplayText(newText);
+            setDisplayText(newText);
 
-                if (step >= totalSteps) {
-                    clearInterval(intervalRef.current!);
-                    intervalRef.current = null;
-                }
-            }, INTERVAL_DELAY);
-        },
-        [] // No dependencies – uses constants only
-    );
+            if (step >= totalSteps) {
+                clearInterval(intervalRef.current!);
+                intervalRef.current = null;
+            }
+        }, INTERVAL_DELAY);
+    }, []);
 
-    // Trigger scramble when hover state changes
     useEffect(() => {
         scramble(isHovered ? PHRASE_HOVER : PHRASE_DEFAULT);
     }, [isHovered, scramble]);
 
-    // Handle keyboard focus for accessibility
     const handleFocus = () => setIsHovered(true);
     const handleBlur = () => setIsHovered(false);
 
@@ -82,7 +71,7 @@ export default function LetsTalkSection() {
             <div className="max-w-screen-xl mx-auto w-full px-6 flex flex-col gap-28 z-10 relative">
                 <div className="flex flex-col gap-4">
                     <h2 className="text-4xl md:text-5xl font-medium tracking-tight">
-                        Let’s build something immersive.
+                        Let&apos;s build something immersive.
                     </h2>
                     <a
                         href="mailto:anirudhsingh1441@gmail.com"
@@ -98,7 +87,6 @@ export default function LetsTalkSection() {
                     </a>
                 </div>
 
-                {/* Parent container is flex so the button can grow */}
                 <div className="flex justify-center w-full z-10">
                     <MotionLink
                         href="/contact"
@@ -128,33 +116,25 @@ export default function LetsTalkSection() {
                         animate={isHovered ? "hover" : "initial"}
                         aria-label="Contact page"
                     >
-                        <motion.div
-                            layout
-                            className={`flex items-center w-full z-10 whitespace-nowrap px-4 ${isHovered ? "justify-between" : "justify-center gap-4"
-                                }`}
-                        >
-                            {/* Text container – also uses layout to animate width */}
-                            <div
-                                className={`flex w-full ${isHovered ? "justify-between" : "justify-center"
-                                    }`}
-                            >
+                        {/* Plain div — no layout re-measurement on every scramble tick */}
+                        <div className={`flex items-center w-full z-10 whitespace-nowrap px-4 ${isHovered ? "justify-between" : "justify-center gap-4"}`}>
+                            <div className={`flex w-full ${isHovered ? "justify-between" : "justify-center"}`}>
                                 {displayText.split("").map((char, i) => (
+                                    // Stable key by position — reuses DOM nodes so scramble updates
+                                    // don't cause constant mount/unmount churn triggering layout re-measurements
                                     <span
-                                        key={`${char}-${i}`} // stable key (char + index) – fine for static text
+                                        key={i}
                                         className="uppercase tracking-tighter font-bold"
-                                        // Hide scrambled characters from screen readers while animating
                                         aria-hidden={char !== PHRASE_DEFAULT[i] && char !== PHRASE_HOVER[i]}
                                     >
-                                        {char === " " ? "\u00A0" : char}
+                                        {char === " " ? " " : char}
                                     </span>
                                 ))}
                             </div>
 
-                            {/* Arrow – hidden on hover to give more space */}
                             <AnimatePresence>
                                 {!isHovered && (
                                     <motion.span
-                                        layout
                                         initial={{ opacity: 1, width: "auto" }}
                                         exit={{ opacity: 0, width: 0, transition: { duration: 0.1 } }}
                                         className="ml-4"
@@ -164,7 +144,7 @@ export default function LetsTalkSection() {
                                     </motion.span>
                                 )}
                             </AnimatePresence>
-                        </motion.div>
+                        </div>
                     </MotionLink>
                 </div>
             </div>

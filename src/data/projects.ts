@@ -19,8 +19,8 @@ export const projects: Project[] = [
         circularThumbnail: "/projects/EventEase/circularthumbnail.png",
     },
     {
-        title: "XR Proximity-Based Presence",
-        category: "XR Design",
+        title: "VR Proximity-Based Presence",
+        category: "UX Research",
         year: "2026",
         description: "M.Des. research project proving that procedural animations triggered by user proximity sustain VR engagement more effectively than static high-fidelity environments, without exceeding standalone headset hardware limits.",
         href: "/projects/xr-proximity-based-presence",

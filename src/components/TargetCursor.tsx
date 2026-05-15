@@ -51,7 +51,7 @@ const TargetCursor: React.FC<TargetCursorProps> = ({
 
     const constants = useMemo(
         () => ({
-            borderWidth: 3,
+            borderWidth: 4,
             cornerSize: 12
         }),
         []
