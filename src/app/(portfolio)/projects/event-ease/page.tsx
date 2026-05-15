@@ -254,6 +254,46 @@ export default function EventEaseProjectPage() {
         return () => ro.disconnect();
     }, []);
 
+    // --- SCROLL VETO LOGIC START ---
+    const lastUserScrollY = useRef(0);
+    const isUserInteracting = useRef(false);
+    const isMouseOverPrototype = useRef(false); // Track if we are hovering the prototype
+
+    useEffect(() => {
+        if (typeof window === "undefined") return;
+
+        const handleInput = () => {
+            isUserInteracting.current = true;
+            lastUserScrollY.current = window.scrollY;
+            // Short timeout to catch the momentum/end of interaction
+            setTimeout(() => { isUserInteracting.current = false; }, 100);
+        };
+
+        const handleScroll = () => {
+            // ONLY veto if we are hovering the prototype and the scroll was NOT human-initiated
+            if (isMouseOverPrototype.current && !isUserInteracting.current) {
+                window.scrollTo(0, lastUserScrollY.current);
+            } else {
+                lastUserScrollY.current = window.scrollY;
+            }
+        };
+
+        window.addEventListener("wheel", handleInput, { passive: true });
+        window.addEventListener("touchstart", handleInput, { passive: true });
+        window.addEventListener("touchmove", handleInput, { passive: true });
+        window.addEventListener("keydown", handleInput, { passive: true });
+        window.addEventListener("scroll", handleScroll, { passive: true });
+
+        return () => {
+            window.removeEventListener("wheel", handleInput);
+            window.removeEventListener("touchstart", handleInput);
+            window.removeEventListener("touchmove", handleInput);
+            window.removeEventListener("keydown", handleInput);
+            window.removeEventListener("scroll", handleScroll);
+        };
+    }, []);
+    // --- SCROLL VETO LOGIC END ---
+
     return (
         <div className="flex flex-col gap-24 pb-24">
 
@@ -264,7 +304,7 @@ export default function EventEaseProjectPage() {
                         UX &amp; Product Design · B2B SaaS · 2024–2026
                     </span>
                     <h1 className="text-6xl md:text-[100px] font-bold tracking-tighter leading-none">EventEase</h1>
-                    <p className="text-lg text-muted max-w-xl">A communication-first operations platform for Indian event agencies.</p>
+                    <h2 className="text-xl text-muted max-w-xl">A communication-first operations platform for Indian event agencies.</h2>
                 </div>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-px border border-border rounded-xl overflow-hidden mt-4 w-full max-w-2xl">
                     {[
@@ -308,7 +348,7 @@ export default function EventEaseProjectPage() {
             <motion.section initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fade} className="flex flex-col gap-6">
                 <div className="flex flex-col gap-2">
                     <SectionLabel>Who uses it?</SectionLabel>
-                    <h2 className="text-5xl font-semibold tracking-tight">Four operator types. One platform.</h2>
+                    <h3 className="text-5xl font-semibold tracking-tight">Four operator types. One platform.</h3>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {operatorTypes.map((op) => (
@@ -327,7 +367,7 @@ export default function EventEaseProjectPage() {
             <motion.section initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fade} className="flex flex-col gap-8">
                 <div className="flex flex-col gap-4">
                     <SectionLabel>The Problem</SectionLabel>
-                    <h2 className="text-5xl font-semibold tracking-tight">The operational backbone of India&apos;s event industry is WhatsApp.</h2>
+                    <h3 className="text-5xl font-semibold tracking-tight">The operational backbone of India&apos;s event industry is WhatsApp.</h3>
                     <p className="max-w-2xl text-muted leading-relaxed">
                         India&apos;s MICE sector generated <span className="text-foreground font-medium">₹4,16,217 crore in 2024</span> and is projected to reach ₹8,73,559 crore by 2030. Yet most Indian event agencies coordinate through WhatsApp groups, email chains, and spreadsheets — with no purpose-built operational software. The failures are not edge cases. They happen at the moments that matter most.
                     </p>
@@ -346,7 +386,7 @@ export default function EventEaseProjectPage() {
             <motion.section initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fade} className="flex flex-col gap-6">
                 <div className="flex flex-col gap-2">
                     <SectionLabel>Stakeholder Interviews</SectionLabel>
-                    <h2 className="text-5xl font-semibold tracking-tight">Four people. Four different insights.</h2>
+                    <h3 className="text-5xl font-semibold tracking-tight">Four people. Four different insights.</h3>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {stakeholderVoices.map((v, i) => (
@@ -364,7 +404,7 @@ export default function EventEaseProjectPage() {
             <motion.section initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fade} className="flex flex-col gap-16">
                 <div className="flex flex-col gap-4">
                     <SectionLabel>Research</SectionLabel>
-                    <h2 className="text-5xl font-semibold tracking-tight">Four methods. One conclusion.</h2>
+                    <h3 className="text-5xl font-semibold tracking-tight">Four methods. One conclusion.</h3>
                     <p className="max-w-2xl text-muted leading-relaxed">
                         Research followed four methods in deliberate sequence. Stakeholder mapping established who was in the network and what each party needed. Ecosystem mapping traced how information actually moved between them. A process map revealed where coordination failures occurred in practice. Competitive analysis confirmed no existing platform had addressed these failures. The gap closure strategy translated every structural failure into a direct design response.
                     </p>
@@ -374,7 +414,7 @@ export default function EventEaseProjectPage() {
                 <div className="flex flex-col gap-6">
                     <div className="flex flex-col gap-3">
                         <SectionLabel>Stakeholder Map</SectionLabel>
-                        <h2 className="text-5xl font-semibold tracking-tight">Nine primary categories. Twelve agency roles.</h2>
+                        <h3 className="text-5xl font-semibold tracking-tight">Nine primary categories. Twelve agency roles.</h3>
                         <p className="max-w-2xl text-muted leading-relaxed">
                             Nine primary stakeholder categories were identified across the Indian event ecosystem. Within the agency team alone, twelve distinct management roles were mapped. The insight: the agency is not a service provider. It is the <span className="text-foreground font-medium">information router</span> for an entire temporary multi-organisational network.
                         </p>
@@ -396,7 +436,7 @@ export default function EventEaseProjectPage() {
                 <div className="flex flex-col gap-6">
                     <div className="flex flex-col gap-3">
                         <SectionLabel>Ecosystem Mapping</SectionLabel>
-                        <h2 className="text-5xl font-semibold tracking-tight">Twelve simultaneous information flows.</h2>
+                        <h3 className="text-5xl font-semibold tracking-tight">Twelve simultaneous information flows.</h3>
                         <p className="max-w-2xl text-muted leading-relaxed">
                             A full ecosystem map traced four types of flows — goods, services, information, and monetary — between the event management agency and its surrounding network. Twelve distinct simultaneous information flows were identified. When information flow breaks, the failure is always a communication breakdown — not a process failure, not a people failure.
                         </p>
@@ -410,7 +450,7 @@ export default function EventEaseProjectPage() {
                 <div className="flex flex-col gap-6">
                     <div className="flex flex-col gap-3">
                         <SectionLabel>Event Process Map</SectionLabel>
-                        <h2 className="text-5xl font-semibold tracking-tight">Five parallel workstreams. One WhatsApp group.</h2>
+                        <h3 className="text-5xl font-semibold tracking-tight">Five parallel workstreams. One WhatsApp group.</h3>
                         <p className="max-w-2xl text-muted leading-relaxed">
                             A detailed process map traced the full event lifecycle across parallel swim lanes: corporate client, agency teams (Client Servicing, Concept, Creative, Production, Operations), sponsors, vendors, technology platforms, government bodies, and the venue. An event agency manages at minimum five distinct parallel workstreams simultaneously — with no structural way to know which messages require action, which are informational, and which are resolved.
                         </p>
@@ -424,7 +464,7 @@ export default function EventEaseProjectPage() {
                 <div className="flex flex-col gap-6">
                     <div className="flex flex-col gap-3">
                         <SectionLabel>Competitive Analysis</SectionLabel>
-                        <h2 className="text-5xl font-semibold tracking-tight">No platform inverts the model.</h2>
+                        <h3 className="text-5xl font-semibold tracking-tight">No platform inverts the model.</h3>
                         <p className="max-w-2xl text-muted leading-relaxed">
                             Seven existing platforms were analysed. Lennd is the closest competitor, describing itself as &ldquo;a communications tool at its core,&rdquo; but its model is portal-based — each vendor gets a website, not a channel. No existing platform makes communication the primary unit of organisation.
                         </p>
@@ -443,7 +483,7 @@ export default function EventEaseProjectPage() {
                 <div className="flex flex-col gap-6">
                     <div className="flex flex-col gap-3">
                         <SectionLabel>Gap Closure Strategy</SectionLabel>
-                        <h2 className="text-5xl font-semibold tracking-tight">Nine market failures. Nine design responses.</h2>
+                        <h3 className="text-5xl font-semibold tracking-tight">Nine market failures. Nine design responses.</h3>
                         <p className="max-w-2xl text-muted leading-relaxed">
                             Nine structural failures in the current market were each matched with a corresponding platform design response. Every EventEase design decision traces back to one of these nine gaps.
                         </p>
@@ -458,7 +498,7 @@ export default function EventEaseProjectPage() {
             <motion.section initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fade} className="flex flex-col gap-6">
                 <div className="flex flex-col gap-4">
                     <SectionLabel>Working Prototype</SectionLabel>
-                    <h2 className="text-5xl font-semibold tracking-tight">The full agency-side IA, implemented.</h2>
+                    <h3 className="text-5xl font-semibold tracking-tight">The full agency-side IA, implemented.</h3>
                     <p className="text-muted leading-relaxed max-w-2xl">
                         Built in React with a dark-mode design system. The prototype implements the complete agency-side information architecture — six operational modules with live mock data, the full channel workspace (Overview, Events, Channel Chat, DMs, Broadcast), and all role-specific views. Navigate the full system: create an event, open its dashboard, enter a channel, assign a task, submit a form stage.
                     </p>
@@ -467,8 +507,12 @@ export default function EventEaseProjectPage() {
 
                 <div
                     ref={protoContainerRef}
+                    onMouseEnter={() => { isMouseOverPrototype.current = true; }}
+                    onMouseLeave={() => { isMouseOverPrototype.current = false; }}
                     className="relative w-full rounded-2xl overflow-hidden border-2 border-border"
-                    style={{ aspectRatio: "16/9" }}
+                    style={{ 
+                        aspectRatio: "16/9",
+                    }}
                 >
                     {protoScale !== null && (
                         <iframe
