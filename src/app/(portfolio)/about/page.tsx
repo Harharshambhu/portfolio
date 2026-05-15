@@ -148,7 +148,7 @@ export default function About() {
     const [isExpanded, setIsExpanded] = useState(false);
 
     const introText = `I learned design in fashion studios, but I learned product thinking backstage — where every event runs on chaos that nobody has built proper tools for.`;
-    const expandedText1 = ` In my Four years of bachelours fashion shows and corporate events across FDDI and NIFT showed me that the most interesting design problems aren’t visual — they’re operational and alongside working  as a Freelancer on 3D and AR experiences for event stalls pulled me toward spatial design.`;
+    const expandedText1 = ` In my 4 years of bachelours, fashion shows and corporate events across FDDI and NIFT showed me that the most interesting design problems aren’t visual — they’re operational and alongside working  as a Freelancer on 3D and AR experiences for event stalls pulled me toward spatial design.`;
     const expandedText2 = ` That’s why I went to IIT Jodhpur to do my M.Des in XR Design, to go deeper on both fronts. My thesis research was on why users drop out of standalone VR experiences, and rather than looking it as a hardware limitation, and built a solution around it. The event industry taught me to see broken systems. The M.Des gave me the research rigour and design methodology to fix them.`;
     const closingText = `I’m looking for Product and UX roles where  deep research into how things actually work matter, and design that fixes the structure, not just the surface.`;
 
