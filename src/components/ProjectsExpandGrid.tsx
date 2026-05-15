@@ -68,8 +68,8 @@ function ExpandRow({ items }: { items: (Project | null)[] }) {
                             {/* Text */}
                             <div className="absolute bottom-0 left-0 right-0 p-5 flex flex-col gap-1.5">
                                 <span
-                                    className="uppercase tracking-[0.14em]"
-                                    style={{ fontSize: "var(--fs-body-sm)", color: "rgba(255,255,255,0.45)" }}
+                                    className="uppercase tracking-[0.14em] font-medium"
+                                    style={{ fontSize: "var(--fs-body-sm)", color: "rgba(255,255,255,0.75)" }}
                                 >
                                     {project.category}&nbsp;·&nbsp;{project.year}
                                 </span>
@@ -127,8 +127,8 @@ export default function ProjectsExpandGrid({ projects }: { projects: Project[] }
                             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
                             <div className="absolute bottom-0 left-0 right-0 p-4">
                                 <span
-                                    className="uppercase tracking-[0.14em] block mb-1"
-                                    style={{ fontSize: "var(--fs-body-sm)", color: "rgba(255,255,255,0.45)" }}
+                                    className="uppercase tracking-[0.14em] block mb-1 font-medium"
+                                    style={{ fontSize: "var(--fs-body-sm)", color: "rgba(255,255,255,0.75)" }}
                                 >
                                     {project.category}&nbsp;·&nbsp;{project.year}
                                 </span>

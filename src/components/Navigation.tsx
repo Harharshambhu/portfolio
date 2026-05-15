@@ -93,79 +93,78 @@ export default function Navigation() {
 
     return (
         <div className="fixed top-0 left-0 right-0 z-50">
-        <motion.nav
-            initial={{ opacity: 0, y: -20, filter: "blur(10px)" }}
-            animate={{
-                opacity: 1,
-                y: 0,
-                filter: "blur(0px)",
-                paddingBottom: isScrolled ? 16 : 0
-            }}
-            transition={{
-                paddingBottom: { type: "spring", stiffness: 100, damping: 20 },
-                default: { duration: 0.2, ease: "easeOut" }
-            }}
-            className={`flex flex-col w-full max-w-screen-xl mx-auto items-center pt-10 md:pt-8 bg-background px-8 md:px-6 border-b-2 border-muted`}
-        >
-            <div className="flex w-full items-start justify-between">
-                <motion.div
-                    className="flex gap-3 md:gap-6 -translate-y-2"
-                    transition={{ duration: 0 }}
-                >
-                    {links.map((link) => (
-                        <Link
-                            key={link.href}
-                            href={link.href}
-                            className={`hover:text-foreground transition-colors text-sm font-semibold ${pathname === link.href ? "text-foreground" : "text-muted"
-                                }`}
-                        >
-                            {link.label}
-                        </Link>
-                    ))}
-                </motion.div>
-
-                {/* Placeholder to keep layout stable when Singh moves */}
-                {isScrolled && <div className="w-[45px]" />}
-            </div>
-
-            <motion.div
+            <motion.nav
+                initial={{ opacity: 0, y: -20 }}
                 animate={{
-                    marginTop: isScrolled ? -24 : 24,
-                    marginBottom: isScrolled ? 0 : 32
+                    opacity: 1,
+                    y: 0,
+                    paddingBottom: isScrolled ? 16 : 0
                 }}
-                className={`flex w-full justify-end cursor-pointer`}
-                transition={{ type: "spring", stiffness: 100, damping: 20 }}
-                onMouseEnter={() => {
-                    if (!isHovered) {
-                        setIsHovered(true);
-                        scramble("Sokimevi");
-                    }
+                transition={{
+                    paddingBottom: { type: "spring", stiffness: 100, damping: 20 },
+                    default: { duration: 0.2, ease: "easeOut" }
                 }}
-                onMouseLeave={() => {
-                    if (isHovered) {
-                        setIsHovered(false);
-                        scramble("Hello.");
-                    }
-                }}
+                className={`flex flex-col w-full max-w-screen-xl mx-auto items-center pt-10 md:pt-8 bg-background px-6 md:px-6 border-b-2 border-muted`}
             >
-                <Link href="/" className={`block ${!isScrolled ? "no-cursor-interaction" : ""}`}>
-                    <motion.span
-                        animate={{
-                            fontSize: targetFontSize,
-                            fontWeight: isScrolled ? 600 : 700,
-                            letterSpacing: isScrolled ? "0em" : (isHovered ? (isMobile ? "0.15em" : "0.35em") : "-0.05em"),
-                            color: isHovered ? "var(--accent-blue)" : "var(--foreground)"
-                        }}
-                        transition={{
-                            type: "spring", stiffness: 60, damping: 14, mass: 1
-                        }}
-                        className={`leading-none block text-right font-sans pb-2`}
+                <div className="flex w-full items-start justify-between">
+                    <motion.div
+                        className="flex gap-5 md:gap-10 -translate-y-2"
+                        transition={{ duration: 0 }}
                     >
-                        {displayText}
-                    </motion.span>
-                </Link>
-            </motion.div>
-        </motion.nav>
+                        {links.map((link) => (
+                            <Link
+                                key={link.href}
+                                href={link.href}
+                                className={`hover:text-foreground transition-colors text-sm font-semibold ${pathname === link.href ? "text-foreground" : "text-muted"
+                                    }`}
+                            >
+                                {link.label}
+                            </Link>
+                        ))}
+                    </motion.div>
+
+                    {/* Placeholder to keep layout stable when Singh moves */}
+                    {isScrolled && <div className="w-[45px]" />}
+                </div>
+
+                <motion.div
+                    animate={{
+                        marginTop: isScrolled ? -24 : 24,
+                        marginBottom: isScrolled ? 0 : 32
+                    }}
+                    className={`flex w-full justify-end cursor-pointer`}
+                    transition={{ type: "spring", stiffness: 100, damping: 20 }}
+                    onMouseEnter={() => {
+                        if (!isHovered) {
+                            setIsHovered(true);
+                            scramble("Sokimevi");
+                        }
+                    }}
+                    onMouseLeave={() => {
+                        if (isHovered) {
+                            setIsHovered(false);
+                            scramble("Hello.");
+                        }
+                    }}
+                >
+                    <Link href="/" className={`block ${!isScrolled ? "no-cursor-interaction" : ""}`}>
+                        <motion.span
+                            animate={{
+                                fontSize: targetFontSize,
+                                fontWeight: isScrolled ? 600 : 700,
+                                letterSpacing: isScrolled ? "0em" : (isHovered ? (isMobile ? "0.15em" : "0.35em") : "-0.05em"),
+                                color: isHovered ? "var(--accent-blue)" : "var(--foreground)"
+                            }}
+                            transition={{
+                                type: "spring", stiffness: 60, damping: 14, mass: 1
+                            }}
+                            className={`leading-none block text-right font-sans pb-2`}
+                        >
+                            {displayText}
+                        </motion.span>
+                    </Link>
+                </motion.div>
+            </motion.nav>
         </div>
     );
 }

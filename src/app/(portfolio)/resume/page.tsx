@@ -11,12 +11,8 @@ export default function Resume() {
                 {/* PDF iframe — native text layer allows copy-paste */}
                 <iframe
                     src="/Anirudh_Singh_Resume.pdf#toolbar=0&navpanes=0&scrollbar=0"
-                    className="w-full border-0"
-                    style={{
-                        height: "calc(100svh - 160px)",
-                        minHeight: 1050,
-                        boxShadow: "0 4px 40px rgba(0,0,0,0.12), 0 1px 6px rgba(0,0,0,0.06)",
-                    }}
+                    className="w-full border-0 h-[75svh] md:h-[calc(100svh-160px)] md:min-h-[1050px]"
+                    style={{ boxShadow: "0 4px 40px rgba(0,0,0,0.12), 0 1px 6px rgba(0,0,0,0.06)" }}
                     title="Anirudh Singh Resume"
                 />
 

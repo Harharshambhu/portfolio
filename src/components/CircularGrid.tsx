@@ -1,9 +1,8 @@
 "use client";
 
-import { motion, AnimatePresence, useSpring, useMotionValue, useTransform } from "framer-motion";
+import { motion, AnimatePresence, useSpring, useMotionValue } from "framer-motion";
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import type { Project } from "@/data/projects";
 
 const QUOTES = [
@@ -26,6 +25,7 @@ export default function CircularGrid({ projects }: { projects: Project[] }) {
 
     const rotationValue = useMotionValue(0);
     const smoothRotation = useSpring(rotationValue, { stiffness: 60, damping: 30, mass: 1 });
+    const rotatingGroupRef = useRef<SVGGElement>(null);
 
     const points = projects.length || 5;
     const outerRadius = 320;
@@ -156,6 +156,15 @@ export default function CircularGrid({ projects }: { projects: Project[] }) {
         };
     }, [rotationValue]);
 
+    // Drive SVG rotation via native transform attribute — CSS transform-origin is broken on SVG in Safari
+    useEffect(() => {
+        const setTransform = (v: number) => {
+            rotatingGroupRef.current?.setAttribute("transform", `rotate(${v}, 500, 500)`);
+        };
+        setTransform(smoothRotation.get());
+        return smoothRotation.on("change", setTransform);
+    }, [smoothRotation]);
+
     // Quote rotation interval
     useEffect(() => {
         const id = setInterval(() => {
@@ -210,7 +219,7 @@ export default function CircularGrid({ projects }: { projects: Project[] }) {
         <div className="flex flex-col md:block">
 
             {/* ── Mobile quote — visible only on mobile, sits above the dial ── */}
-            <div className="md:hidden text-right pb-20 min-h-[110px] flex flex-col justify-end">
+            <div className="md:hidden text-right pb-20 h-[200px] overflow-hidden flex flex-col justify-end">
                 <div className="w-8 h-px bg-foreground/40 ml-auto mb-3" />
                 <AnimatePresence mode="wait">
                     <motion.p
@@ -235,8 +244,8 @@ export default function CircularGrid({ projects }: { projects: Project[] }) {
                     width="1000" height="840" viewBox="0 80 1000 840"
                     className="overflow-visible relative z-10 md:-translate-x-[260px] -translate-x-[220px]"
                 >
-                    {/* Rotating group — all wheel content spins inside this g */}
-                    <motion.g style={{ rotate: smoothRotation, transformOrigin: "500px 40px" }}>
+                    {/* Rotating group — driven via SVG transform attribute for Safari compatibility */}
+                    <g ref={rotatingGroupRef}>
 
                         {/* Central hit area (desktop hover only) */}
                         <circle
@@ -266,7 +275,7 @@ export default function CircularGrid({ projects }: { projects: Project[] }) {
                                     <clipPath id={`clip-${i}`} key={i}>
                                         <motion.path
                                             animate={{ d: sectorPath }}
-                                            transition={{ type: "spring", stiffness: 200, damping: 25 }}
+                                            transition={{ type: "spring", stiffness: 80, damping: 20, mass: 1.2 }}
                                         />
                                     </clipPath>
                                 );
@@ -307,39 +316,37 @@ export default function CircularGrid({ projects }: { projects: Project[] }) {
                                         <path d={hitAreaPath} fill="transparent" />
 
                                         <g clipPath={`url(#clip-${i})`}>
-                                            <foreignObject x={0} y={0} width="1000" height="1000" className="pointer-events-none">
-                                                <div className="w-full h-full relative">
-                                                    {project?.circularThumbnail && (
-                                                        <motion.div
-                                                            className="absolute w-[800px] h-[800px]"
-                                                            initial={false}
-                                                            animate={{
-                                                                left: pContent.x - 400,
-                                                                top: pContent.y - 400,
-                                                                rotate: metric.mid,
-                                                                scale: isHovered ? 1.2 : 1,
-                                                                opacity: isHovered ? 1 : 0.95
-                                                            }}
-                                                            transition={{ type: "spring", stiffness: 200, damping: 25 }}
-                                                        >
-                                                            <Image
-                                                                src={project.circularThumbnail}
-                                                                alt={project.title}
-                                                                fill
-                                                                className="object-cover"
-                                                                priority
-                                                            />
-                                                        </motion.div>
-                                                    )}
-                                                </div>
-                                            </foreignObject>
+                                            {project?.circularThumbnail && (
+                                                // motion.g on SVG elements uses the SVG transform attribute (not CSS),
+                                                // so x/y/rotate/scale animate safely in Safari/WebKit
+                                                <motion.g
+                                                    initial={false}
+                                                    animate={{
+                                                        x: pContent.x,
+                                                        y: pContent.y,
+                                                        rotate: metric.mid,
+                                                        scale: isHovered ? 1.08 : 1,
+                                                        opacity: isHovered ? 1 : 0.92,
+                                                    }}
+                                                    transition={{ type: "spring", stiffness: 80, damping: 20, mass: 1.2 }}
+                                                >
+                                                    <image
+                                                        href={project.circularThumbnail}
+                                                        x={-400}
+                                                        y={-400}
+                                                        width={800}
+                                                        height={800}
+                                                        preserveAspectRatio="xMidYMid slice"
+                                                    />
+                                                </motion.g>
+                                            )}
                                         </g>
 
-                                        <motion.path animate={{ d: outerArc }} fill="none" stroke="var(--foreground)" strokeWidth="2" opacity={0.4} transition={{ type: "spring", stiffness: 200, damping: 25 }} />
-                                        <motion.path animate={{ d: innerArc }} fill="none" stroke="var(--foreground)" strokeWidth="1.5" opacity={0.3} transition={{ type: "spring", stiffness: 200, damping: 25 }} />
-                                        <motion.line animate={{ x1: p1Inner.x, y1: p1Inner.y, x2: p1Outer.x, y2: p1Outer.y }} stroke="var(--foreground)" strokeWidth="1.5" opacity={0.2} transition={{ type: "spring", stiffness: 200, damping: 25 }} />
-                                        <motion.line animate={{ x1: p2Inner.x, y1: p2Inner.y, x2: p2Outer.x, y2: p2Outer.y }} stroke="var(--foreground)" strokeWidth="1.5" opacity={0.2} transition={{ type: "spring", stiffness: 200, damping: 25 }} />
-                                        <motion.circle animate={{ cx: pNode.x, cy: pNode.y }} r={3} fill="var(--accent-blue)" transition={{ type: "spring", stiffness: 200, damping: 25 }} />
+                                        <motion.path animate={{ d: outerArc }} fill="none" stroke="var(--foreground)" strokeWidth="2" opacity={0.4} transition={{ type: "spring", stiffness: 80, damping: 20, mass: 1.2 }} />
+                                        <motion.path animate={{ d: innerArc }} fill="none" stroke="var(--foreground)" strokeWidth="1.5" opacity={0.3} transition={{ type: "spring", stiffness: 80, damping: 20, mass: 1.2 }} />
+                                        <motion.line animate={{ x1: p1Inner.x, y1: p1Inner.y, x2: p1Outer.x, y2: p1Outer.y }} stroke="var(--foreground)" strokeWidth="1.5" opacity={0.2} transition={{ type: "spring", stiffness: 80, damping: 20, mass: 1.2 }} />
+                                        <motion.line animate={{ x1: p2Inner.x, y1: p2Inner.y, x2: p2Outer.x, y2: p2Outer.y }} stroke="var(--foreground)" strokeWidth="1.5" opacity={0.2} transition={{ type: "spring", stiffness: 80, damping: 20, mass: 1.2 }} />
+                                        <motion.circle animate={{ cx: pNode.x, cy: pNode.y }} r={3} fill="var(--accent-blue)" transition={{ type: "spring", stiffness: 80, damping: 20, mass: 1.2 }} />
                                     </motion.g>
                                 </Link>
                             );
@@ -347,13 +354,13 @@ export default function CircularGrid({ projects }: { projects: Project[] }) {
 
                         <motion.circle cx={centerX} cy={centerY} r={3} fill="var(--foreground)" initial={{ opacity: 0 }} whileInView={{ opacity: 0.1 }} viewport={{ once: true }} />
 
-                    </motion.g>{/* end rotating group */}
+                    </g>{/* end rotating group */}
 
                     {/* Mobile: "WORKS" — outside rotating group, stays perfectly static */}
                     <g className="md:hidden">
                         <text
                             x={centerX}
-                            y={centerY - 20}
+                            y={centerY - 12}
                             textAnchor="middle"
                             dominantBaseline="middle"
                             transform={`rotate(90, ${centerX}, ${centerY})`}

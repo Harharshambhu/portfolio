@@ -5,17 +5,14 @@ import Image from "next/image";
 import { prefix } from "@/utils/prefix";
 
 const tools = [
-    "/Tools/Monado_logo.svg",
+    "/Tools/figma-icon.svg",
     "/Tools/adobe-illustrator-icon.svg",
     "/Tools/adobe-photoshop-icon.svg",
     "/Tools/adobe-substance-3d-designer-icon.svg",
     "/Tools/adobe-substance-3d-painter-icon.svg",
     "/Tools/antigravity-color.svg",
     "/Tools/blender-icon.svg",
-    "/Tools/claude-ai-icon.svg",
-    "/Tools/figma-icon.svg",
-    "/Tools/milanote.svg",
-    "/Tools/notion-icon.svg",
+    "/Tools/Monado_logo.svg",
     "/Tools/unity-game-engine-icon.svg",
     "/Tools/zbrush-icon.svg"
 ];
