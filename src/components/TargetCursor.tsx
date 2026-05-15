@@ -125,6 +125,12 @@ const TargetCursor: React.FC<TargetCursorProps> = ({
                 return;
             }
 
+            // Safety check: if target is removed from DOM, trigger leave
+            if (!document.body.contains(activeTarget)) {
+                if (currentLeaveHandler) currentLeaveHandler();
+                return;
+            }
+
             const strength = activeStrengthRef.current.current;
             if (strength === 0) return;
 
