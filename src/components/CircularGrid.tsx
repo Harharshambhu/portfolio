@@ -1,9 +1,8 @@
 "use client";
 
-import { motion, AnimatePresence, useSpring, useMotionValue, useTransform } from "framer-motion";
+import { motion, AnimatePresence, useSpring, useMotionValue } from "framer-motion";
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import type { Project } from "@/data/projects";
 
 const QUOTES = [
@@ -233,10 +232,10 @@ export default function CircularGrid({ projects }: { projects: Project[] }) {
             >
                 <motion.svg
                     width="1000" height="840" viewBox="0 80 1000 840"
-                    className="overflow-visible relative z-10 -translate-x-[260px]"
+                    className="overflow-visible relative z-10 -translate-x-[220px] md:-translate-x-[260px]"
                 >
                     {/* Rotating group — all wheel content spins inside this g */}
-                    <motion.g style={{ rotate: smoothRotation, transformOrigin: "500px 420px" }}>
+                    <motion.g style={{ rotate: smoothRotation, transformOrigin: "500px 40px" }}>
 
                         {/* Central hit area (desktop hover only) */}
                         <circle
@@ -307,32 +306,24 @@ export default function CircularGrid({ projects }: { projects: Project[] }) {
                                         <path d={hitAreaPath} fill="transparent" />
 
                                         <g clipPath={`url(#clip-${i})`}>
-                                            <foreignObject x={0} y={0} width="1000" height="1000" className="pointer-events-none">
-                                                <div className="w-full h-full relative">
-                                                    {project?.circularThumbnail && (
-                                                        <motion.div
-                                                            className="absolute w-[800px] h-[800px]"
-                                                            initial={false}
-                                                            animate={{
-                                                                left: pContent.x - 400,
-                                                                top: pContent.y - 400,
-                                                                rotate: metric.mid,
-                                                                scale: isHovered ? 1.2 : 1,
-                                                                opacity: isHovered ? 1 : 0.95
-                                                            }}
-                                                            transition={{ type: "spring", stiffness: 200, damping: 25 }}
-                                                        >
-                                                            <Image
-                                                                src={project.circularThumbnail}
-                                                                alt={project.title}
-                                                                fill
-                                                                className="object-cover"
-                                                                priority
-                                                            />
-                                                        </motion.div>
-                                                    )}
-                                                </div>
-                                            </foreignObject>
+                                            {project?.circularThumbnail && (
+                                                <image
+                                                    href={project.circularThumbnail}
+                                                    x={pContent.x - 400}
+                                                    y={pContent.y - 400}
+                                                    width="800"
+                                                    height="800"
+                                                    preserveAspectRatio="xMidYMid slice"
+                                                    style={{
+                                                        pointerEvents: "none",
+                                                        opacity: isHovered ? 1 : 0.95,
+                                                        transformBox: "fill-box",
+                                                        transformOrigin: "center",
+                                                        transform: `rotate(${metric.mid}deg) scale(${isHovered ? 1.2 : 1})`,
+                                                        transition: "opacity 0.3s ease, transform 0.3s ease",
+                                                    }}
+                                                />
+                                            )}
                                         </g>
 
                                         <motion.path animate={{ d: outerArc }} fill="none" stroke="var(--foreground)" strokeWidth="2" opacity={0.4} transition={{ type: "spring", stiffness: 200, damping: 25 }} />
@@ -353,7 +344,7 @@ export default function CircularGrid({ projects }: { projects: Project[] }) {
                     <g className="md:hidden">
                         <text
                             x={centerX}
-                            y={centerY - 40}
+                            y={centerY - 20}
                             textAnchor="middle"
                             dominantBaseline="middle"
                             transform={`rotate(90, ${centerX}, ${centerY})`}
