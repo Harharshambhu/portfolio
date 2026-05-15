@@ -104,11 +104,11 @@ export default function Navigation() {
                 paddingBottom: { type: "spring", stiffness: 100, damping: 20 },
                 default: { duration: 0.2, ease: "easeOut" }
             }}
-            className={`flex flex-col w-full max-w-screen-xl items-center pt-8 mb-12 bg-background z-50 fixed top-0 left-1/2 -translate-x-1/2 px-6 border-b-2 border-muted`}
+            className={`flex flex-col w-full max-w-screen-xl items-center pt-10 md:pt-8 mb-12 bg-background z-50 fixed top-0 left-1/2 -translate-x-1/2 px-8 md:px-6 border-b-2 border-muted`}
         >
             <div className="flex w-full items-start justify-between">
                 <motion.div
-                    className="flex gap-6 -translate-y-2"
+                    className="flex gap-3 md:gap-6 -translate-y-2"
                     transition={{ duration: 0 }}
                 >
                     {links.map((link) => (
