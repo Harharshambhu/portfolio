@@ -238,114 +238,114 @@ export default function CircularGrid({ projects }: { projects: Project[] }) {
                     {/* Rotating group — all wheel content spins inside this g */}
                     <motion.g style={{ rotate: smoothRotation, transformOrigin: "500px 420px" }}>
 
-                    {/* Central hit area (desktop hover only) */}
-                    <circle
-                        cx={centerX} cy={centerY} r={innerRadius}
-                        fill="transparent"
-                        className="cursor-pointer pointer-events-auto hidden md:block"
-                        onMouseEnter={() => setIsCenterHovered(true)}
-                        onMouseLeave={() => setIsCenterHovered(false)}
-                    />
+                        {/* Central hit area (desktop hover only) */}
+                        <circle
+                            cx={centerX} cy={centerY} r={innerRadius}
+                            fill="transparent"
+                            className="cursor-pointer pointer-events-auto hidden md:block"
+                            onMouseEnter={() => setIsCenterHovered(true)}
+                            onMouseLeave={() => setIsCenterHovered(false)}
+                        />
 
-                    <defs>
+                        <defs>
+                            {segments.map((metric, i) => {
+                                const isHovered = hoveredIdx === i;
+                                const effectiveOuterRadius = isHovered ? outerRadius + 50 : outerRadius;
+                                const p1Inner = polarToCartesian(innerRadius, metric.start);
+                                const p2Inner = polarToCartesian(innerRadius, metric.end);
+                                const p1Outer = polarToCartesian(effectiveOuterRadius, metric.start);
+                                const p2Outer = polarToCartesian(effectiveOuterRadius, metric.end);
+                                const sectorPath = [
+                                    "M", p1Inner.x, p1Inner.y,
+                                    "A", innerRadius, innerRadius, 0, 0, 1, p2Inner.x, p2Inner.y,
+                                    "L", p2Outer.x, p2Outer.y,
+                                    "A", effectiveOuterRadius, effectiveOuterRadius, 0, 0, 0, p1Outer.x, p1Outer.y,
+                                    "Z"
+                                ].join(" ");
+                                return (
+                                    <clipPath id={`clip-${i}`} key={i}>
+                                        <motion.path
+                                            animate={{ d: sectorPath }}
+                                            transition={{ type: "spring", stiffness: 200, damping: 25 }}
+                                        />
+                                    </clipPath>
+                                );
+                            })}
+                        </defs>
+
                         {segments.map((metric, i) => {
+                            const project = projects[i];
                             const isHovered = hoveredIdx === i;
                             const effectiveOuterRadius = isHovered ? outerRadius + 50 : outerRadius;
+
+                            const outerArc = describeArc(effectiveOuterRadius, metric.start, metric.end);
+                            const innerArc = describeArc(innerRadius, metric.start, metric.end);
                             const p1Inner = polarToCartesian(innerRadius, metric.start);
-                            const p2Inner = polarToCartesian(innerRadius, metric.end);
                             const p1Outer = polarToCartesian(effectiveOuterRadius, metric.start);
+                            const p2Inner = polarToCartesian(innerRadius, metric.end);
                             const p2Outer = polarToCartesian(effectiveOuterRadius, metric.end);
-                            const sectorPath = [
-                                "M", p1Inner.x, p1Inner.y,
-                                "A", innerRadius, innerRadius, 0, 0, 1, p2Inner.x, p2Inner.y,
-                                "L", p2Outer.x, p2Outer.y,
-                                "A", effectiveOuterRadius, effectiveOuterRadius, 0, 0, 0, p1Outer.x, p1Outer.y,
+                            const pNode = polarToCartesian(effectiveOuterRadius, metric.mid);
+                            const contentRadius = (innerRadius + effectiveOuterRadius) / 2;
+                            const pContent = polarToCartesian(contentRadius, metric.mid);
+
+                            const hitAreaRadius = outerRadius + 20;
+                            const hitAreaPath = [
+                                "M", polarToCartesian(innerRadius - 40, metric.start).x, polarToCartesian(innerRadius - 40, metric.start).y,
+                                "A", innerRadius - 40, innerRadius - 40, 0, 0, 1, polarToCartesian(innerRadius - 40, metric.end).x, polarToCartesian(innerRadius - 40, metric.end).y,
+                                "L", polarToCartesian(hitAreaRadius, metric.end).x, polarToCartesian(hitAreaRadius, metric.end).y,
+                                "A", hitAreaRadius, hitAreaRadius, 0, 0, 0, polarToCartesian(hitAreaRadius, metric.start).x, polarToCartesian(hitAreaRadius, metric.start).y,
                                 "Z"
                             ].join(" ");
+
                             return (
-                                <clipPath id={`clip-${i}`} key={i}>
-                                    <motion.path
-                                        animate={{ d: sectorPath }}
-                                        transition={{ type: "spring", stiffness: 200, damping: 25 }}
-                                    />
-                                </clipPath>
+                                <Link key={i} href={project?.href || "#"} className="no-cursor-interaction">
+                                    <motion.g
+                                        onMouseEnter={() => setHoveredIdx(i)}
+                                        onMouseLeave={() => setHoveredIdx(null)}
+                                        className="cursor-pointer"
+                                    >
+                                        <path d={hitAreaPath} fill="transparent" />
+
+                                        <g clipPath={`url(#clip-${i})`}>
+                                            <foreignObject x={0} y={0} width="1000" height="1000" className="pointer-events-none">
+                                                <div className="w-full h-full relative">
+                                                    {project?.circularThumbnail && (
+                                                        <motion.div
+                                                            className="absolute w-[800px] h-[800px]"
+                                                            initial={false}
+                                                            animate={{
+                                                                left: pContent.x - 400,
+                                                                top: pContent.y - 400,
+                                                                rotate: metric.mid,
+                                                                scale: isHovered ? 1.2 : 1,
+                                                                opacity: isHovered ? 1 : 0.95
+                                                            }}
+                                                            transition={{ type: "spring", stiffness: 200, damping: 25 }}
+                                                        >
+                                                            <Image
+                                                                src={project.circularThumbnail}
+                                                                alt={project.title}
+                                                                fill
+                                                                className="object-cover"
+                                                                priority
+                                                            />
+                                                        </motion.div>
+                                                    )}
+                                                </div>
+                                            </foreignObject>
+                                        </g>
+
+                                        <motion.path animate={{ d: outerArc }} fill="none" stroke="var(--foreground)" strokeWidth="2" opacity={0.4} transition={{ type: "spring", stiffness: 200, damping: 25 }} />
+                                        <motion.path animate={{ d: innerArc }} fill="none" stroke="var(--foreground)" strokeWidth="1.5" opacity={0.3} transition={{ type: "spring", stiffness: 200, damping: 25 }} />
+                                        <motion.line animate={{ x1: p1Inner.x, y1: p1Inner.y, x2: p1Outer.x, y2: p1Outer.y }} stroke="var(--foreground)" strokeWidth="1.5" opacity={0.2} transition={{ type: "spring", stiffness: 200, damping: 25 }} />
+                                        <motion.line animate={{ x1: p2Inner.x, y1: p2Inner.y, x2: p2Outer.x, y2: p2Outer.y }} stroke="var(--foreground)" strokeWidth="1.5" opacity={0.2} transition={{ type: "spring", stiffness: 200, damping: 25 }} />
+                                        <motion.circle animate={{ cx: pNode.x, cy: pNode.y }} r={3} fill="var(--accent-blue)" transition={{ type: "spring", stiffness: 200, damping: 25 }} />
+                                    </motion.g>
+                                </Link>
                             );
                         })}
-                    </defs>
 
-                    {segments.map((metric, i) => {
-                        const project = projects[i];
-                        const isHovered = hoveredIdx === i;
-                        const effectiveOuterRadius = isHovered ? outerRadius + 50 : outerRadius;
-
-                        const outerArc = describeArc(effectiveOuterRadius, metric.start, metric.end);
-                        const innerArc = describeArc(innerRadius, metric.start, metric.end);
-                        const p1Inner = polarToCartesian(innerRadius, metric.start);
-                        const p1Outer = polarToCartesian(effectiveOuterRadius, metric.start);
-                        const p2Inner = polarToCartesian(innerRadius, metric.end);
-                        const p2Outer = polarToCartesian(effectiveOuterRadius, metric.end);
-                        const pNode = polarToCartesian(effectiveOuterRadius, metric.mid);
-                        const contentRadius = (innerRadius + effectiveOuterRadius) / 2;
-                        const pContent = polarToCartesian(contentRadius, metric.mid);
-
-                        const hitAreaRadius = outerRadius + 20;
-                        const hitAreaPath = [
-                            "M", polarToCartesian(innerRadius - 40, metric.start).x, polarToCartesian(innerRadius - 40, metric.start).y,
-                            "A", innerRadius - 40, innerRadius - 40, 0, 0, 1, polarToCartesian(innerRadius - 40, metric.end).x, polarToCartesian(innerRadius - 40, metric.end).y,
-                            "L", polarToCartesian(hitAreaRadius, metric.end).x, polarToCartesian(hitAreaRadius, metric.end).y,
-                            "A", hitAreaRadius, hitAreaRadius, 0, 0, 0, polarToCartesian(hitAreaRadius, metric.start).x, polarToCartesian(hitAreaRadius, metric.start).y,
-                            "Z"
-                        ].join(" ");
-
-                        return (
-                            <Link key={i} href={project?.href || "#"} className="no-cursor-interaction">
-                                <motion.g
-                                    onMouseEnter={() => setHoveredIdx(i)}
-                                    onMouseLeave={() => setHoveredIdx(null)}
-                                    className="cursor-pointer"
-                                >
-                                    <path d={hitAreaPath} fill="transparent" />
-
-                                    <g clipPath={`url(#clip-${i})`}>
-                                        <foreignObject x={0} y={0} width="1000" height="1000" className="pointer-events-none">
-                                            <div className="w-full h-full relative">
-                                                {project?.circularThumbnail && (
-                                                    <motion.div
-                                                        className="absolute w-[800px] h-[800px]"
-                                                        initial={false}
-                                                        animate={{
-                                                            left: pContent.x - 400,
-                                                            top: pContent.y - 400,
-                                                            rotate: metric.mid,
-                                                            scale: isHovered ? 1.2 : 1,
-                                                            opacity: isHovered ? 1 : 0.95
-                                                        }}
-                                                        transition={{ type: "spring", stiffness: 200, damping: 25 }}
-                                                    >
-                                                        <Image
-                                                            src={project.circularThumbnail}
-                                                            alt={project.title}
-                                                            fill
-                                                            className="object-cover"
-                                                            priority
-                                                        />
-                                                    </motion.div>
-                                                )}
-                                            </div>
-                                        </foreignObject>
-                                    </g>
-
-                                    <motion.path animate={{ d: outerArc }} fill="none" stroke="var(--foreground)" strokeWidth="2" opacity={0.4} transition={{ type: "spring", stiffness: 200, damping: 25 }} />
-                                    <motion.path animate={{ d: innerArc }} fill="none" stroke="var(--foreground)" strokeWidth="1.5" opacity={0.3} transition={{ type: "spring", stiffness: 200, damping: 25 }} />
-                                    <motion.line animate={{ x1: p1Inner.x, y1: p1Inner.y, x2: p1Outer.x, y2: p1Outer.y }} stroke="var(--foreground)" strokeWidth="1.5" opacity={0.2} transition={{ type: "spring", stiffness: 200, damping: 25 }} />
-                                    <motion.line animate={{ x1: p2Inner.x, y1: p2Inner.y, x2: p2Outer.x, y2: p2Outer.y }} stroke="var(--foreground)" strokeWidth="1.5" opacity={0.2} transition={{ type: "spring", stiffness: 200, damping: 25 }} />
-                                    <motion.circle animate={{ cx: pNode.x, cy: pNode.y }} r={3} fill="var(--accent-blue)" transition={{ type: "spring", stiffness: 200, damping: 25 }} />
-                                </motion.g>
-                            </Link>
-                        );
-                    })}
-
-                    <motion.circle cx={centerX} cy={centerY} r={3} fill="var(--foreground)" initial={{ opacity: 0 }} whileInView={{ opacity: 0.1 }} viewport={{ once: true }} />
+                        <motion.circle cx={centerX} cy={centerY} r={3} fill="var(--foreground)" initial={{ opacity: 0 }} whileInView={{ opacity: 0.1 }} viewport={{ once: true }} />
 
                     </motion.g>{/* end rotating group */}
 
@@ -353,7 +353,7 @@ export default function CircularGrid({ projects }: { projects: Project[] }) {
                     <g className="md:hidden">
                         <text
                             x={centerX}
-                            y={centerY - 25}
+                            y={centerY - 40}
                             textAnchor="middle"
                             dominantBaseline="middle"
                             transform={`rotate(90, ${centerX}, ${centerY})`}
