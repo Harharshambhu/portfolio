@@ -120,7 +120,7 @@ blockquote {
 
 /* ── Nav links — lock weight, prevent browser font-synthesis on hover ── */
 nav a {
-  font-weight: 400 !important;
+  font-weight: 600 !important;
   font-synthesis: none;
 }
 

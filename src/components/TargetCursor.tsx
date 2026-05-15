@@ -13,7 +13,7 @@ interface TargetCursorProps {
 }
 
 const TargetCursor: React.FC<TargetCursorProps> = ({
-    targetSelector = '.cursor-target, a:not(.no-cursor-interaction), button:not(.no-cursor-interaction)', // Added default selectors for convenience
+    targetSelector = '.cursor-target, a:not(.no-cursor-interaction), button:not(.no-cursor-interaction)',
     spinDuration = 2,
     hideDefaultCursor = true,
     hoverDuration = 0.2,
@@ -22,12 +22,17 @@ const TargetCursor: React.FC<TargetCursorProps> = ({
     const cursorRef = useRef<HTMLDivElement>(null);
     const cornersRef = useRef<NodeListOf<Element> | null>(null);
     const spinTl = useRef<gsap.core.Timeline | null>(null);
-    const dotRef = useRef<HTMLDivElement>(null);
+
+    // 4 trailing circles: c1 = biggest/fastest, c4 = smallest/slowest
+    const c1Ref = useRef<HTMLDivElement>(null);
+    const c2Ref = useRef<HTMLDivElement>(null);
+    const c3Ref = useRef<HTMLDivElement>(null);
+    const c4Ref = useRef<HTMLDivElement>(null);
 
     const isActiveRef = useRef(false);
     const targetCornerPositionsRef = useRef<{ x: number; y: number }[] | null>(null);
     const tickerFnRef = useRef<(() => void) | null>(null);
-    const activeStrengthRef = useRef({ current: 0 }); // Changed to object for GSAP to tween
+    const activeStrengthRef = useRef({ current: 0 });
 
     const [isMobile, setIsMobile] = useState(false);
 
@@ -39,7 +44,6 @@ const TargetCursor: React.FC<TargetCursorProps> = ({
             const userAgent = navigator.userAgent || navigator.vendor || (window as any).opera;
             const mobileRegex = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i;
             const isMobileUserAgent = mobileRegex.test(userAgent.toLowerCase());
-            // Return boolean result
             return !!((hasTouchScreen && isSmallScreen) || isMobileUserAgent);
         };
         setIsMobile(checkMobile());
@@ -53,25 +57,45 @@ const TargetCursor: React.FC<TargetCursorProps> = ({
         []
     );
 
+    const xToRef = useRef<((value: number) => void) | null>(null);
+    const yToRef = useRef<((value: number) => void) | null>(null);
+
     const moveCursor = useCallback((x: number, y: number) => {
-        if (!cursorRef.current) return;
-        gsap.to(cursorRef.current, {
-            x,
-            y,
-            duration: 0.1,
-            ease: 'power3.out'
-        });
+        xToRef.current?.(x);
+        yToRef.current?.(y);
     }, []);
 
     useEffect(() => {
-        if (isMobile || !cursorRef.current) return;
-
-        const originalCursor = document.body.style.cursor;
-        if (hideDefaultCursor) {
-            document.body.classList.add('hide-native-cursor');
-        }
+        if (
+            isMobile ||
+            !cursorRef.current ||
+            !c1Ref.current || !c2Ref.current || !c3Ref.current || !c4Ref.current
+        ) return;
 
         const cursor = cursorRef.current;
+        const initX = window.innerWidth / 2;
+        const initY = window.innerHeight / 2;
+
+        xToRef.current = gsap.quickTo(cursor, "x", { duration: 0.5, ease: "power2.out" });
+        yToRef.current = gsap.quickTo(cursor, "y", { duration: 0.5, ease: "power2.out" });
+
+        gsap.set(cursor, { xPercent: -50, yPercent: -50, x: initX, y: initY });
+
+        // Place each circle at center on mount
+        [c1Ref, c2Ref, c3Ref, c4Ref].forEach(ref => {
+            gsap.set(ref.current, { xPercent: -50, yPercent: -50, x: initX, y: initY });
+        });
+
+        // quickTo setters — biggest circle = fastest follow, smallest = most lag
+        const c1X = gsap.quickTo(c1Ref.current, "x", { duration: 0.15, ease: "power2.out" });
+        const c1Y = gsap.quickTo(c1Ref.current, "y", { duration: 0.15, ease: "power2.out" });
+        const c2X = gsap.quickTo(c2Ref.current, "x", { duration: 0.2, ease: "power2.out" });
+        const c2Y = gsap.quickTo(c2Ref.current, "y", { duration: 0.2, ease: "power2.out" });
+        const c3X = gsap.quickTo(c3Ref.current, "x", { duration: 0.25, ease: "power2.out" });
+        const c3Y = gsap.quickTo(c3Ref.current, "y", { duration: 0.25, ease: "power2.out" });
+        const c4X = gsap.quickTo(c4Ref.current, "x", { duration: 0.48, ease: "power2.out" });
+        const c4Y = gsap.quickTo(c4Ref.current, "y", { duration: 0.48, ease: "power2.out" });
+
         cornersRef.current = cursor.querySelectorAll('.target-cursor-corner');
 
         let activeTarget: Element | null = null;
@@ -84,13 +108,6 @@ const TargetCursor: React.FC<TargetCursorProps> = ({
             }
             currentLeaveHandler = null;
         };
-
-        gsap.set(cursor, {
-            xPercent: -50,
-            yPercent: -50,
-            x: window.innerWidth / 2,
-            y: window.innerHeight / 2
-        });
 
         const createSpinTimeline = () => {
             if (spinTl.current) {
@@ -115,7 +132,6 @@ const TargetCursor: React.FC<TargetCursorProps> = ({
             const cursorY = gsap.getProperty(cursorRef.current, 'y') as number;
             const { borderWidth, cornerSize } = constants;
 
-            // Dynamic calculation of target position
             const rect = activeTarget.getBoundingClientRect();
             const dynamicTargetCorners = [
                 { x: rect.left - borderWidth, y: rect.top - borderWidth },
@@ -149,13 +165,38 @@ const TargetCursor: React.FC<TargetCursorProps> = ({
 
         tickerFnRef.current = tickerFn;
 
-        const moveHandler = (e: MouseEvent) => moveCursor(e.clientX, e.clientY);
+        // Switch circles to white inside the dark footer, regardless of whether
+        // the change was triggered by mouse movement or page scroll.
+        const circles = [c1Ref.current, c2Ref.current, c3Ref.current, c4Ref.current];
+        const footer = document.getElementById('main-footer');
+        let isInFooter = false;
+
+        const updateCircleColor = (x: number, y: number) => {
+            if (!footer) return;
+            const rect = footer.getBoundingClientRect();
+            const nowInFooter = x >= rect.left && x <= rect.right && y >= rect.top && y <= rect.bottom;
+            if (nowInFooter !== isInFooter) {
+                isInFooter = nowInFooter;
+                gsap.to(circles, { backgroundColor: nowInFooter ? '#ffffff' : '#000000', duration: 0.35, ease: 'power2.out' });
+            }
+        };
+
+        const moveHandler = (e: MouseEvent) => {
+            moveCursor(e.clientX, e.clientY);
+            c1X(e.clientX); c1Y(e.clientY);
+            c2X(e.clientX); c2Y(e.clientY);
+            c3X(e.clientX); c3Y(e.clientY);
+            c4X(e.clientX); c4Y(e.clientY);
+            updateCircleColor(e.clientX, e.clientY);
+        };
         window.addEventListener('mousemove', moveHandler);
 
         const scrollHandler = () => {
-            if (!activeTarget || !cursorRef.current) return;
+            if (!cursorRef.current) return;
             const mouseX = gsap.getProperty(cursorRef.current, 'x') as number;
             const mouseY = gsap.getProperty(cursorRef.current, 'y') as number;
+            updateCircleColor(mouseX, mouseY);
+            if (!activeTarget) return;
             const elementUnderMouse = document.elementFromPoint(mouseX, mouseY);
             const isStillOverTarget =
                 elementUnderMouse &&
@@ -169,14 +210,14 @@ const TargetCursor: React.FC<TargetCursorProps> = ({
         window.addEventListener('scroll', scrollHandler, { passive: true });
 
         const mouseDownHandler = () => {
-            if (!dotRef.current || !cursorRef.current) return;
-            gsap.to(dotRef.current, { scale: 0.7, duration: 0.3 });
+            if (!cursorRef.current) return;
+            gsap.to([c1Ref.current, c2Ref.current, c3Ref.current, c4Ref.current], { scale: 0.7, duration: 0.2 });
             gsap.to(cursorRef.current, { scale: 0.9, duration: 0.2 });
         };
 
         const mouseUpHandler = () => {
-            if (!dotRef.current || !cursorRef.current) return;
-            gsap.to(dotRef.current, { scale: 1, duration: 0.3 });
+            if (!cursorRef.current) return;
+            gsap.to([c1Ref.current, c2Ref.current, c3Ref.current, c4Ref.current], { scale: 1, duration: 0.3 });
             gsap.to(cursorRef.current, { scale: 1, duration: 0.2 });
         };
 
@@ -212,8 +253,6 @@ const TargetCursor: React.FC<TargetCursorProps> = ({
             spinTl.current?.pause();
             gsap.set(cursorRef.current, { rotation: 0 });
 
-            // Removed static calculation here, moved to tickerFn
-
             isActiveRef.current = true;
             gsap.ticker.add(tickerFnRef.current!);
 
@@ -223,15 +262,11 @@ const TargetCursor: React.FC<TargetCursorProps> = ({
                 ease: 'power2.out'
             });
 
-            // Animate corners opacity to 1
             gsap.to(cornersRef.current, {
                 opacity: 1,
                 duration: 0.2,
                 ease: 'power2.out'
             });
-
-            // Initial positioning (optional, but helps avoid jump)
-            // We can do a one-off set here if needed, but the ticker will catch it immediately.
 
             const leaveHandler = () => {
                 if (tickerFnRef.current) {
@@ -260,7 +295,7 @@ const TargetCursor: React.FC<TargetCursorProps> = ({
                             {
                                 x: positions[index].x,
                                 y: positions[index].y,
-                                opacity: 0, // Hide corners on leave
+                                opacity: 0,
                                 duration: 0.3,
                                 ease: 'power3.out'
                             },
@@ -314,7 +349,6 @@ const TargetCursor: React.FC<TargetCursorProps> = ({
             }
 
             spinTl.current?.kill();
-            document.body.classList.remove('hide-native-cursor');
 
             isActiveRef.current = false;
             targetCornerPositionsRef.current = null;
@@ -337,13 +371,18 @@ const TargetCursor: React.FC<TargetCursorProps> = ({
     }
 
     return (
-        <div ref={cursorRef} className="target-cursor-wrapper">
-            <div ref={dotRef} className="target-cursor-dot" />
-            <div className="target-cursor-corner corner-tl" />
-            <div className="target-cursor-corner corner-tr" />
-            <div className="target-cursor-corner corner-br" />
-            <div className="target-cursor-corner corner-bl" />
-        </div>
+        <>
+            <div ref={c1Ref} className="cursor-trail cursor-trail-1" />
+            <div ref={c2Ref} className="cursor-trail cursor-trail-2" />
+            <div ref={c3Ref} className="cursor-trail cursor-trail-3" />
+            <div ref={c4Ref} className="cursor-trail cursor-trail-4" />
+            <div ref={cursorRef} className="target-cursor-wrapper">
+                <div className="target-cursor-corner corner-tl" />
+                <div className="target-cursor-corner corner-tr" />
+                <div className="target-cursor-corner corner-br" />
+                <div className="target-cursor-corner corner-bl" />
+            </div>
+        </>
     );
 };
 
