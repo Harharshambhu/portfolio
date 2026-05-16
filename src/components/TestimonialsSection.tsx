@@ -7,7 +7,7 @@ import SectionLabel from "@/components/SectionLabel";
 
 const testimonials = [
     {
-        text: "Anirudh was instrumental in building the visual universe for Takes Are Real over two years. From designing character cards for multiple races to developing weapon and support props, his ability to deliver high-quality assets across complex project cycles made him an invaluable asset to our team.",
+        text: "Anirudh was instrumental in building the visual universe for Tales Are Real over two years. From designing character cards for multiple races to developing weapon and support props, his ability to deliver high-quality assets across complex project cycles made him an invaluable asset to our team.",
         author: "Richard Heinrich",
         image: "/images/testimonials/richard.png",
     },

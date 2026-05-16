@@ -248,7 +248,7 @@ export default function CircularGrid({ projects }: { projects: Project[] }) {
             >
                 <motion.svg
                     width="1000" height="840" viewBox="0 80 1000 840"
-                    className="overflow-visible relative z-10 md:-translate-x-[260px] -translate-x-[220px]"
+                    className="overflow-visible relative z-10 md:-translate-x-[260px] -translate-x-[180px]"
                 >
                     {/* Rotating group — driven via SVG transform attribute for Safari compatibility */}
                     <g ref={rotatingGroupRef}>
@@ -365,8 +365,8 @@ export default function CircularGrid({ projects }: { projects: Project[] }) {
                     {/* Mobile: "WORKS" — outside rotating group, stays perfectly static */}
                     <g className="md:hidden">
                         <text
-                            x={centerX}
-                            y={centerY - 12}
+                            x={centerX - 5}
+                            y={centerY - 2}
                             textAnchor="middle"
                             dominantBaseline="middle"
                             transform={`rotate(90, ${centerX}, ${centerY})`}
