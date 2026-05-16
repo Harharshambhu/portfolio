@@ -67,6 +67,8 @@ export default function EchoTilesProjectPage() {
                 />
             </motion.div>
 
+            <div className="flex flex-col gap-24 max-w-4xl mx-auto w-full">
+
             {/* ── AT A GLANCE ── */}
             <motion.section
                 initial="hidden"
@@ -530,6 +532,8 @@ export default function EchoTilesProjectPage() {
                     ))}
                 </div>
             </motion.section>
+
+            </div>
 
         </div>
     );

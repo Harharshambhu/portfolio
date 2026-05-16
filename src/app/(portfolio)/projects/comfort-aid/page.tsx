@@ -161,6 +161,8 @@ export default function ComfortAidProjectPage() {
                 />
             </motion.div>
 
+            <div className="flex flex-col gap-24 max-w-4xl mx-auto w-full">
+
             {/* ── AT A GLANCE ── */}
             <motion.section
                 initial="hidden"
@@ -644,6 +646,8 @@ export default function ComfortAidProjectPage() {
                 </div>
                 <p className="text-xs text-muted font-mono mt-2">Group 4 · Design Thinking Studio · IIT Jodhpur · 2025</p>
             </motion.section>
+
+            </div>
 
         </div>
     );

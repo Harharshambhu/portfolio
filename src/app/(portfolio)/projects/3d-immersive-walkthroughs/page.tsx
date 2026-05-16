@@ -137,23 +137,6 @@ export default function ImmersiveWalkthroughsPage() {
                 </div>
             </motion.section>
 
-            {/* ── ENVIRONMENT INDEX ── */}
-            <motion.section
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                variants={fade}
-                className="grid grid-cols-1 md:grid-cols-5 gap-px border border-border rounded-xl overflow-hidden"
-            >
-                {environments.map((env) => (
-                    <div key={env.id} className="flex flex-col gap-2 p-6 bg-background">
-                        <span className="text-xs font-sans text-muted">{env.id}</span>
-                        <span className="font-semibold text-sm leading-snug">{env.title}</span>
-                        <span className="text-xs text-muted leading-relaxed">{env.label.split(" · ")[0]}</span>
-                    </div>
-                ))}
-            </motion.section>
-
             {/* ── ENVIRONMENT SECTIONS ── */}
             {environments.map((env, envIdx) => (
                 <motion.section

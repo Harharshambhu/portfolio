@@ -336,6 +336,8 @@ export default function EventEaseProjectPage() {
                 </div>
             </motion.div>
 
+            <div className="flex flex-col gap-24 max-w-4xl mx-auto w-full">
+
             {/* 02 — WHAT IS EVENTEASE? */}
             <motion.section initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fade} className="flex flex-col gap-4">
                 <h2 className="text-5xl font-semibold tracking-tight">What is EventEase?</h2>
@@ -494,6 +496,9 @@ export default function EventEaseProjectPage() {
                     </div>
                 </div>
             </motion.section>
+
+            </div>
+
             {/* 11 — PROTOTYPE */}
             <motion.section initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fade} className="flex flex-col gap-6">
                 <div className="flex flex-col gap-4">
@@ -533,6 +538,8 @@ export default function EventEaseProjectPage() {
                     )}
                 </div>
             </motion.section>
+
+            <div className="flex flex-col gap-24 max-w-4xl mx-auto w-full">
 
             {/* 07 — DESIGN THESIS */}
             <motion.section initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fade} className="flex flex-col gap-8">
@@ -808,6 +815,8 @@ export default function EventEaseProjectPage() {
                     &ldquo;A channel without context is just another WhatsApp group.&rdquo;
                 </p>
             </motion.div>
+
+            </div>
 
         </div>
     );
