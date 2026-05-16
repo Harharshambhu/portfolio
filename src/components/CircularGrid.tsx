@@ -6,14 +6,20 @@ import Link from "next/link";
 import type { Project } from "@/data/projects";
 
 const QUOTES = [
-    "Designing for privacy means designing against your own product's incentives. Most teams never get that far.",
-    "The most important design question isn't 'can we collect this?' It's 'should we?' Most rooms never ask it.",
-    "Dark patterns aren't a design failure. They're what happens when nobody in the room is actually representing the user.",
+    "Most entrepreneurs and product development people dramatically overestimate how many features are needed in an MVP. When in doubt, simplify.",
+    "There was a product which seemed attractive, expensive, portable, beautiful and simple. Everybody talked about its beauty but they bought it for it's simplicity.",
+    "One of the main functions of the material is to determine whether or not the product is disposable.",
     "Data doesn't lie. But the design built around it often does.",
-    "A system that doesn't account for people doesn't stay neutral. It starts breaking them.",
+    "If you think good design is expensive, you should look at the cost of bad design.",
     "I'm a researcher who builds. The making only starts once I understand what's actually being asked.",
     "Trends are a brief. I design for what remains after the trend that created the project has moved on.",
-    "Design is infrastructure. The best of it is invisible — you only notice it when it's gone.",
+    "Once achieved, maintaining relevance requires constant listening, questioning, prototyping and testing.",
+    "Perfection is achieved, not when there is nothing more to add, but when there is nothing left to take away.",
+    "You’ve got to start with the customer experience and work backwards for the technology. You can’t start with the technology and try to figure out where you’re going to try to sell it.",
+    "Good design, when it’s done well, becomes invisible. It’s only when it’s done poorly that we notice it.",
+    "Testing with one user early in the project is better than testing with 50 near the end.",
+    "Pay attention to what users do, not what they say.",
+    "Content precedes design. Design in the absence of content is not design, it's decoration.",
 ];
 
 export default function CircularGrid({ projects }: { projects: Project[] }) {

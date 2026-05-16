@@ -32,7 +32,7 @@ function ExpandRow({ items }: { items: (Project | null)[] }) {
 
                 return (
                     <div
-                        key={project.href}
+                        key={project.href || project.title}
                         style={{ flex: flex(i), transition: FLEX_EASE, minWidth: 0 }}
                         className="relative overflow-hidden rounded-[3px] cursor-pointer"
                         onMouseEnter={() => setHoveredIdx(i)}
@@ -98,18 +98,18 @@ function ExpandRow({ items }: { items: (Project | null)[] }) {
     );
 }
 
-export default function ProjectsExpandGrid({ projects }: { projects: Project[] }) {
+export default function ProjectsExpandGrid({ projects }: { projects: (Project | null)[] }) {
     const row1: (Project | null)[] = [projects[0] ?? null, projects[1] ?? null, projects[2] ?? null];
     const row2: (Project | null)[] = [projects[3] ?? null, projects[4] ?? null, projects[5] ?? null];
-    const row3: (Project | null)[] = [null, null, null];
+    const row3: (Project | null)[] = [projects[6] ?? null, projects[7] ?? null, projects[8] ?? null];
 
     return (
         <>
             {/* ── Mobile: single column stack ── */}
             <div className="md:hidden flex flex-col gap-4">
-                {projects.filter(Boolean).map((project) => (
+                {projects.filter((p): p is Project => p !== null).map((project) => (
                     <Link
-                        key={project.href}
+                        key={project.href || project.title}
                         href={project.href || "#"}
                         className="block rounded-[3px] overflow-hidden relative"
                         style={{ boxShadow: "0 2px 12px rgba(0,0,0,0.06)" }}
