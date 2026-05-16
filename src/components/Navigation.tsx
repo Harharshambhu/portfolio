@@ -27,6 +27,11 @@ export default function Navigation() {
         }
     });
 
+    // Force scroll to top when navigating to a new page
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [pathname]);
+
     // Reset or force state on path change
     useEffect(() => {
         if (!isHome) {

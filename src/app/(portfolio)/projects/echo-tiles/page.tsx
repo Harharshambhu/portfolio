@@ -56,13 +56,14 @@ export default function EchoTilesProjectPage() {
                 initial={{ opacity: 0, scale: 0.98 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
-                className="relative w-full aspect-video rounded-2xl overflow-hidden border border-border"
+                className="w-full rounded-2xl overflow-hidden border border-border"
             >
                 <Image
                     src="/projects/Echo-tiles/image.webp"
                     alt="Player silhouette standing inside Echo Tiles' 3D hollow cube environment"
-                    fill
-                    className="object-cover"
+                    width={1296}
+                    height={704}
+                    className="w-full h-auto"
                     priority
                 />
             </motion.div>
