@@ -9,16 +9,16 @@ const fade = {
 };
 
 const images = [
-    "/projects/storyboarding-comic/1.jpg",
-    "/projects/storyboarding-comic/2.jpg",
-    "/projects/storyboarding-comic/3.jpg",
-    "/projects/storyboarding-comic/4.jpg",
-    "/projects/storyboarding-comic/5.jpg",
-    "/projects/storyboarding-comic/6.jpg",
-    "/projects/storyboarding-comic/8.jpg",
-    "/projects/storyboarding-comic/9.jpg",
-    "/projects/storyboarding-comic/10.jpg",
-    "/projects/storyboarding-comic/11.jpg",
+    "/projects/storyboarding-comic/1.webp",
+    "/projects/storyboarding-comic/2.webp",
+    "/projects/storyboarding-comic/3.webp",
+    "/projects/storyboarding-comic/4.webp",
+    "/projects/storyboarding-comic/5.webp",
+    "/projects/storyboarding-comic/6.webp",
+    "/projects/storyboarding-comic/8.webp",
+    "/projects/storyboarding-comic/9.webp",
+    "/projects/storyboarding-comic/10.webp",
+    "/projects/storyboarding-comic/11.webp",
 ];
 
 export default function StoryboardPage() {

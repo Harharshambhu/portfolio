@@ -9,17 +9,17 @@ const testimonials = [
     {
         text: "Anirudh was instrumental in building the visual universe for Tales Are Real over two years. From designing character cards for multiple races to developing weapon and support props, his ability to deliver high-quality assets across complex project cycles made him an invaluable asset to our team.",
         author: "Richard Heinrich",
-        image: "/images/testimonials/richard.png",
+        image: "/images/testimonials/richard.webp",
     },
     {
         text: "Anirudh is exceptionally hardworking and consistently delivered great results across diverse projects—from corporate ads to unique creative themes. He is a versatile collaborator who handles complex deliveries with ease and successfully adapts to any team or challenge.",
         author: "Shikhant Sablania",
-        image: "/images/testimonials/shikhant.jpg",
+        image: "/images/testimonials/shikhant.webp",
     },
     {
         text: "It was great working with Anirudh — he picks up context fast, asks the right questions, and delivers without needing his hand held. Would work with him again without hesitation.",
         author: "William",
-        image: "/images/testimonials/william.jpg",
+        image: "/images/testimonials/william.webp",
     },
 ];
 
