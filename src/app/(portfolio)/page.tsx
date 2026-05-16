@@ -7,11 +7,18 @@ import HeroName from "@/components/HeroName";
 import SectionLabel from "@/components/SectionLabel";
 import ToolsCarousel from "@/components/ToolsCarousel";
 import CircularGrid from "@/components/CircularGrid";
-import { projects } from "@/data/projects";
+import { projects, type Project } from "@/data/projects";
 
 export default function Home() {
-  const selectedProjects = projects.slice(0, 3);
-  const gridProjects = projects.filter(p => p.title !== "From Discovery to Transaction");
+  const selectedProjects = projects.filter((p): p is Project => p !== null).slice(0, 3);
+  const gridProjects = projects.filter((p): p is Project =>
+    p !== null &&
+    p.title !== "From Discovery to Transaction" &&
+    p.title !== "3D Immersive Walkthroughs" &&
+    p.title !== "Ad Campaigns" &&
+    p.title !== "Artworks" &&
+    p.title !== "Storyboard"
+  );
 
   return (
     <div className="flex flex-col gap-16 pt-0">
@@ -29,7 +36,7 @@ export default function Home() {
           </ScrollReveal>
           <ScrollReveal delay={0.2}>
             <p className="max-w-xl text-lg leading-relaxed text-muted">
-              Product Designer with a specialism in XR and complex system design
+              Let's Research — Iterate —. And Deliver.
             </p>
           </ScrollReveal>
         </div>

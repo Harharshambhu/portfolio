@@ -8,7 +8,7 @@ export interface Project {
     circularThumbnail?: string;
 }
 
-export const projects: Project[] = [
+export const projects: (Project | null)[] = [
     {
         title: "Event Ease",
         category: "UX Design",
@@ -61,5 +61,29 @@ export const projects: Project[] = [
         description: " We wanted to find a way to tell Tragic story of Chabad House, preserving the weight of what happened while keeping it accessible as a narrative. Every panel was illustrated and sequenced digitally, designed to be read as an interactive flipbook.",
         thumbnail: "/projects/chabad-house/01.png",
         circularThumbnail: "/projects/chabad-house/circularthumbnail.png",
+    },
+    {
+        title: "Artworks",
+        category: "Illustration",
+        year: "",
+        description: "Personal illustration work — character concept, creature design, digital painting, and line art. No client, no brief. Each piece started from an idea that needed to exist somewhere.",
+        href: "/projects/artworks",
+        thumbnail: "/projects/ArtWorks/beside-a-river0002.jpg",
+    },
+    {
+        title: "3D Immersive Walkthroughs",
+        category: "3D Design",
+        year: "2022",
+        description: "Five distinct 3D environments — from an eldritch creature gate to a retrofuturistic roadside station — each built as a walkthrough scene exploring different visual languages, atmospheres, and prop design.",
+        href: "/projects/3d-immersive-walkthroughs",
+        thumbnail: "/projects/3D-Immersive-Walkthroughs/DemonGate.png",
+    },
+    {
+        title: "Ad Campaigns",
+        category: "Ad Design",
+        year: "2022",
+        description: "Commercial work across three clients — a webtoon comic ad for Blinkit, satirical social and print campaigns for Hubble, and aggressive character-driven logo design for cricket teams.",
+        href: "/projects/ad-campaigns",
+        thumbnail: "/projects/AdCapaigns/BlinkitAdComic3.png",
     },
 ];
