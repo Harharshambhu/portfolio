@@ -11,49 +11,49 @@ const fade = {
 };
 
 const blinkitPanels = [
-    { src: "/projects/AdCapaigns/BlinkitAdComic1.png", alt: "Panel 1 — ketchup bottle spill, dramatic action cuts" },
-    { src: "/projects/AdCapaigns/BlinkitAdComic2.png", alt: "Panel 2 — character opens Blinkit app to reorder" },
-    { src: "/projects/AdCapaigns/BlinkitAdComic3.png", alt: "Panel 3 — doorbell rings, DING DONG!!!" },
-    { src: "/projects/AdCapaigns/BlinkitAdComic4.png", alt: "Panel 4 — Blinkit delivery arrives, YAY!!!" },
+    { src: "/projects/AdCapaigns/BlinkitAdComic1.webp", alt: "Panel 1 — ketchup bottle spill, dramatic action cuts" },
+    { src: "/projects/AdCapaigns/BlinkitAdComic2.webp", alt: "Panel 2 — character opens Blinkit app to reorder" },
+    { src: "/projects/AdCapaigns/BlinkitAdComic3.webp", alt: "Panel 3 — doorbell rings, DING DONG!!!" },
+    { src: "/projects/AdCapaigns/BlinkitAdComic4.webp", alt: "Panel 4 — Blinkit delivery arrives, YAY!!!" },
 ];
 
 const blinkitDraftsV1 = [
-    "/projects/AdCapaigns/Blinit-draft1.png",
-    "/projects/AdCapaigns/Blinit-draft2.png",
-    "/projects/AdCapaigns/Blinit-draft3.png",
-    "/projects/AdCapaigns/Blinit-draft4.png",
-    "/projects/AdCapaigns/Blinit-draft5.png",
-    "/projects/AdCapaigns/Blinit-draft6.png",
-    "/projects/AdCapaigns/Blinit-draft7.png",
-    "/projects/AdCapaigns/Blinit-draft8.png",
+    "/projects/AdCapaigns/Blinit-draft1.webp",
+    "/projects/AdCapaigns/Blinit-draft2.webp",
+    "/projects/AdCapaigns/Blinit-draft3.webp",
+    "/projects/AdCapaigns/Blinit-draft4.webp",
+    "/projects/AdCapaigns/Blinit-draft5.webp",
+    "/projects/AdCapaigns/Blinit-draft6.webp",
+    "/projects/AdCapaigns/Blinit-draft7.webp",
+    "/projects/AdCapaigns/Blinit-draft8.webp",
 ];
 
 const blinkitDraftsV2 = [
-    "/projects/AdCapaigns/Blinit-draftv2-1.png",
-    "/projects/AdCapaigns/Blinit-draftv2-2.png",
-    "/projects/AdCapaigns/Blinit-draftv2-3.png",
-    "/projects/AdCapaigns/Blinit-draftv2-4.png",
-    "/projects/AdCapaigns/Blinit-draftv2-5.png",
-    "/projects/AdCapaigns/Blinit-draftv2-6.png",
+    "/projects/AdCapaigns/Blinit-draftv2-1.webp",
+    "/projects/AdCapaigns/Blinit-draftv2-2.webp",
+    "/projects/AdCapaigns/Blinit-draftv2-3.webp",
+    "/projects/AdCapaigns/Blinit-draftv2-4.webp",
+    "/projects/AdCapaigns/Blinit-draftv2-5.webp",
+    "/projects/AdCapaigns/Blinit-draftv2-6.webp",
 ];
 
 const hubblePosts = [
-    { src: "/projects/AdCapaigns/hubble-post2.jpg", alt: "Mat-laay — Tere upar nahi jachega (Myntra parody, landscape)" },
-    { src: "/projects/AdCapaigns/hubble-post3.jpg", alt: "Bus Kar King — 100% you will save, Save karle phone ke liye (Burger King parody)" },
-    { src: "/projects/AdCapaigns/hubble-post4.png", alt: "Hubble social post — view 4" },
+    { src: "/projects/AdCapaigns/hubble-post2.webp", alt: "Mat-laay — Tere upar nahi jachega (Myntra parody, landscape)" },
+    { src: "/projects/AdCapaigns/hubble-post3.webp", alt: "Bus Kar King — 100% you will save, Save karle phone ke liye (Burger King parody)" },
+    { src: "/projects/AdCapaigns/hubble-post4.webp", alt: "Hubble social post — view 4" },
 ];
 
 const cricketLogos = [
-    "/projects/AdCapaigns/logo-for-cricetteams-1.png",
-    "/projects/AdCapaigns/logo-for-cricetteams-1-1.png",
-    "/projects/AdCapaigns/logo-for-cricetteams-1-2.png",
-    "/projects/AdCapaigns/logo-for-cricetteams-2.png",
-    "/projects/AdCapaigns/logo-for-cricetteams-3.png",
-    "/projects/AdCapaigns/logo-for-cricetteams-4.png",
-    "/projects/AdCapaigns/logo-for-cricetteams-5.png",
-    "/projects/AdCapaigns/logo-for-cricetteams-6.png",
-    "/projects/AdCapaigns/logo-for-cricetteams-7.png",
-    "/projects/AdCapaigns/logo-for-cricetteams-9.png",
+    "/projects/AdCapaigns/logo-for-cricetteams-1.webp",
+    "/projects/AdCapaigns/logo-for-cricetteams-1-1.webp",
+    "/projects/AdCapaigns/logo-for-cricetteams-1-2.webp",
+    "/projects/AdCapaigns/logo-for-cricetteams-2.webp",
+    "/projects/AdCapaigns/logo-for-cricetteams-3.webp",
+    "/projects/AdCapaigns/logo-for-cricetteams-4.webp",
+    "/projects/AdCapaigns/logo-for-cricetteams-5.webp",
+    "/projects/AdCapaigns/logo-for-cricetteams-6.webp",
+    "/projects/AdCapaigns/logo-for-cricetteams-7.webp",
+    "/projects/AdCapaigns/logo-for-cricetteams-9.webp",
 ];
 
 const tshirtRenders = [
@@ -196,7 +196,7 @@ export default function AdCampaignsPage() {
                 {/* Newspaper print — full width */}
                 <div className="relative w-full aspect-[3/4] md:aspect-[2/3] rounded-xl overflow-hidden border border-border">
                     <Image
-                        src="/projects/AdCapaigns/hubble-newsppr-print.png"
+                        src="/projects/AdCapaigns/hubble-newsppr-print.webp"
                         alt="Hubble x Croma newspaper print ad — illustrated map of Indore with 10% rewards"
                         fill
                         className="object-cover object-top"

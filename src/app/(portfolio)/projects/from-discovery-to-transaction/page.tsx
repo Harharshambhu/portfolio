@@ -114,7 +114,7 @@ export default function DiscoveryToTransactionPage() {
                 className="w-full rounded-2xl overflow-hidden border border-border bg-background"
             >
                 <Image
-                    src="/projects/discovery-to-transaction/thumbnail.png"
+                    src="/projects/discovery-to-transaction/thumbnail.webp"
                     alt="From Discovery to Transaction — Case Study Landing Image"
                     width={1512}
                     height={1134}
@@ -127,7 +127,7 @@ export default function DiscoveryToTransactionPage() {
             <motion.section className="flex flex-col gap-18" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fade}>
                 <div className="flex justify-center">
                     <Image
-                        src="/projects/discovery-to-transaction/instagram-logo.png"
+                        src="/projects/discovery-to-transaction/instagram-logo.webp"
                         alt="Instagram"
                         width={140} height={140}
                         className="w-40 h-40 object-contain"
@@ -194,7 +194,7 @@ export default function DiscoveryToTransactionPage() {
                         </ul>
                         <div className="flex-shrink-0 md:w-64">
                             <Image
-                                src="/projects/discovery-to-transaction/system1-vs-system2.png"
+                                src="/projects/discovery-to-transaction/system1-vs-system2.webp"
                                 alt="System 1 (Dopamine, Emotional Passive Discovery) vs System 2 (Intent, Logical Skeptical Shopping)"
                                 width={0} height={0} sizes="(max-width: 768px) 100vw, 256px"
                                 className="w-full h-auto rounded-lg border border-border"
@@ -208,7 +208,7 @@ export default function DiscoveryToTransactionPage() {
                     <div className="flex flex-col md:flex-row gap-6 items-start">
                         <div className="flex-shrink-0 md:w-48">
                             <Image
-                                src="/projects/discovery-to-transaction/post-purchase-anxiety.png"
+                                src="/projects/discovery-to-transaction/post-purchase-anxiety.webp"
                                 alt="Post-purchase anxiety"
                                 width={0} height={0} sizes="(max-width: 768px) 100vw, 192px"
                                 className="w-full h-auto rounded-lg border border-border"
@@ -269,7 +269,7 @@ export default function DiscoveryToTransactionPage() {
                 </div>
                 <div className="flex justify-center">
                     <Image
-                        src="/projects/discovery-to-transaction/drop-off-funnel.png"
+                        src="/projects/discovery-to-transaction/drop-off-funnel.webp"
                         alt="Drop-off funnel showing ~95% Discovery-to-Profile Gap down to 0.5–0.3% Successful Sales, with 25-40% post-purchase RTO"
                         width={0} height={0} sizes="(max-width: 768px) 100vw, 520px"
                         className="w-full max-w-lg h-auto rounded-xl border border-border"
@@ -294,7 +294,7 @@ export default function DiscoveryToTransactionPage() {
                     </div>
                     <div className="md:col-span-6">
                         <Image
-                            src="/projects/discovery-to-transaction/us-india-comparison.png"
+                            src="/projects/discovery-to-transaction/us-india-comparison.webp"
                             alt="US vs India verified drop-off comparison: Bio Click 75-82% vs 82-88%, Browse 35-45% vs 45-55%, Add-to-Cart 40-50% vs 45-55%, Purchase 65-75% vs 75-85%, Remaining 2.0-3.4% vs 0.4-1.5%"
                             width={1200} height={800} sizes="(max-width: 768px) 100vw, 800px"
                             className="w-full h-auto rounded-xl border border-border"
@@ -338,7 +338,7 @@ export default function DiscoveryToTransactionPage() {
                         </div>
                     </div>
                     <Image
-                        src="/projects/discovery-to-transaction/persona-reyansh.png"
+                        src="/projects/discovery-to-transaction/persona-reyansh.webp"
                         alt="Reyansh persona card — Impulsive Buyer, Age 22, with goals and frustrations"
                         width={0} height={0} sizes="100vw"
                         className="w-full max-w-2xl mx-auto h-auto rounded-xl border border-border"
@@ -364,7 +364,7 @@ export default function DiscoveryToTransactionPage() {
                         </div>
                     </div>
                     <Image
-                        src="/projects/discovery-to-transaction/persona-aarav.png"
+                        src="/projects/discovery-to-transaction/persona-aarav.webp"
                         alt="Aarav persona card — Passionate Explorer, Age 28, with goals and frustrations"
                         width={0} height={0} sizes="100vw"
                         className="w-full max-w-2xl mx-auto h-auto rounded-xl border border-border"
@@ -390,7 +390,7 @@ export default function DiscoveryToTransactionPage() {
                         </div>
                     </div>
                     <Image
-                        src="/projects/discovery-to-transaction/persona-arjun.png"
+                        src="/projects/discovery-to-transaction/persona-arjun.webp"
                         alt="Arjun Mehta persona card — Planned Shopper, Age 31, with goals and frustrations"
                         width={0} height={0} sizes="100vw"
                         className="w-full max-w-2xl mx-auto h-auto rounded-xl border border-border"
@@ -403,7 +403,7 @@ export default function DiscoveryToTransactionPage() {
                 <h2 className="text-5xl font-semibold tracking-tight">Personas&apos; Journey Map</h2>
                 <div className="overflow-x-auto rounded-xl border border-border">
                     <Image
-                        src="/projects/discovery-to-transaction/journey-mapping.png"
+                        src="/projects/discovery-to-transaction/journey-mapping.webp"
                         alt="Full journey map across Impulsive Buyer, Passionate Explorer, and Planned Shopper personas from START to END"
                         width={1800} height={800}
                         className="h-auto min-w-[720px] w-full"
@@ -456,7 +456,7 @@ export default function DiscoveryToTransactionPage() {
                 <h2 className="text-5xl font-semibold tracking-tight">Analyzing the Problem</h2>
                 <div className="flex justify-center">
                     <Image
-                        src="/projects/discovery-to-transaction/problem-tree.png"
+                        src="/projects/discovery-to-transaction/problem-tree.webp"
                         alt="Problem tree: 99.6% ToFu Leakage, Cognitive State Mismatch, Trust Ceiling, High-Context Market Skepticism"
                         width={0} height={0} sizes="(max-width: 768px) 100vw, 640px"
                         className="w-full max-w-xl h-auto"
@@ -528,7 +528,7 @@ export default function DiscoveryToTransactionPage() {
                     </div>
                     <div className="flex-shrink-0 flex justify-center md:justify-end w-full md:w-auto">
                         <Image
-                            src="/projects/discovery-to-transaction/solution-badge.png"
+                            src="/projects/discovery-to-transaction/solution-badge.webp"
                             alt="Shop Tag — verified seller badge"
                             width={120} height={120}
                             className="w-24 h-24 object-contain"
@@ -540,7 +540,7 @@ export default function DiscoveryToTransactionPage() {
                 <div className="grid md:grid-cols-2 gap-4">
                     <div className="border border-border rounded-xl overflow-hidden">
                         <Image
-                            src="/projects/discovery-to-transaction/mockup-post.png"
+                            src="/projects/discovery-to-transaction/mockup-post.webp"
                             alt="Instagram feed post with helloWORLD verified brand"
                             width={0} height={0} sizes="(max-width: 768px) 100vw, 50vw"
                             className="w-full h-auto"
@@ -548,7 +548,7 @@ export default function DiscoveryToTransactionPage() {
                     </div>
                     <div className="border border-border rounded-xl overflow-hidden">
                         <Image
-                            src="/projects/discovery-to-transaction/mockup-profile.png"
+                            src="/projects/discovery-to-transaction/mockup-profile.webp"
                             alt="Instagram brand profile with HW verified Shop Tag badge"
                             width={0} height={0} sizes="(max-width: 768px) 100vw, 50vw"
                             className="w-full h-auto"
@@ -589,7 +589,7 @@ export default function DiscoveryToTransactionPage() {
                 <div className="flex flex-col md:flex-row gap-6 items-start">
                     <div className="flex-shrink-0 md:w-48">
                         <Image
-                            src="/projects/discovery-to-transaction/conversion-funnel.png"
+                            src="/projects/discovery-to-transaction/conversion-funnel.webp"
                             alt="Conversion funnel showing improved throughput"
                             width={0} height={0} sizes="(max-width: 768px) 100vw, 192px"
                             className="w-full h-auto rounded-xl border border-border"

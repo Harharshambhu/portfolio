@@ -15,8 +15,8 @@ export const projects: (Project | null)[] = [
         year: "2026",
         description: "B2B SaaS platform that replaces WhatsApp-and-spreadsheet event coordination with a communication-first architecture, where channels, forms, tasks, and vendor access are all event-scoped by design.",
         href: "/projects/event-ease",
-        thumbnail: "/projects/EventEase/thumbnail.png",
-        circularThumbnail: "/projects/EventEase/circularthumbnail.png",
+        thumbnail: "/projects/EventEase/thumbnail.webp",
+        circularThumbnail: "/projects/EventEase/circularthumbnail.webp",
     },
     {
         title: "VR Proximity-Based Presence",
@@ -24,8 +24,8 @@ export const projects: (Project | null)[] = [
         year: "2026",
         description: "M.Des. research project proving that procedural animations triggered by user proximity sustain VR engagement more effectively than static high-fidelity environments, without exceeding standalone headset hardware limits.",
         href: "/projects/xr-proximity-based-presence",
-        thumbnail: "/projects/xr-proximity-based-presence/thumbnail.jpg",
-        circularThumbnail: "/projects/xr-proximity-based-presence/circular thumnail.png",
+        thumbnail: "/projects/xr-proximity-based-presence/thumbnail.webp",
+        circularThumbnail: "/projects/xr-proximity-based-presence/circular thumnail.webp",
     },
     {
         title: "Comfort Aid",
@@ -33,8 +33,8 @@ export const projects: (Project | null)[] = [
         year: "2024",
         description: "A slide-mattress system for Indian public hospitals that eliminates the bedsheet lifting method for patient transfers, enabling a single caregiver to complete a safe transfer in five steps.",
         href: "/projects/comfort-aid",
-        thumbnail: "/projects/Comfort Aid/thumbnail.jpeg",
-        circularThumbnail: "/projects/Comfort Aid/circular thumnail.png",
+        thumbnail: "/projects/Comfort Aid/thumbnail.webp",
+        circularThumbnail: "/projects/Comfort Aid/circular thumnail.webp",
     },
     {
         title: "Echo Tiles",
@@ -43,7 +43,7 @@ export const projects: (Project | null)[] = [
         description: "Minesweeper reimagined as a VR spatial puzzle where the player stands inside a hollow 3D cube and navigates mine locations through audio beats instead of visual numbers.",
         href: "/projects/echo-tiles",
         thumbnail: "/projects/Echo-tiles/thumbnail.webp",
-        circularThumbnail: "/projects/Echo-tiles/circularthumbnail.png",
+        circularThumbnail: "/projects/Echo-tiles/circularthumbnail.webp",
     },
     {
         title: "From Discovery to Transaction",
@@ -51,16 +51,16 @@ export const projects: (Project | null)[] = [
         year: "2025",
         description: "UX research into Instagram's Top-of-Funnel leakage in the Indian D2C market, proposing a statutory Shop Tag verification system to bridge the trust gap between passive browsing and purchase.",
         href: "/projects/from-discovery-to-transaction",
-        thumbnail: "/projects/discovery-to-transaction/thumbnail.png",
-        circularThumbnail: "/projects/discovery-to-transaction/CircularThumbnail.png",
+        thumbnail: "/projects/discovery-to-transaction/thumbnail.webp",
+        circularThumbnail: "/projects/discovery-to-transaction/CircularThumbnail.webp",
     },
     {
         title: "Chabad House",
         category: "Narrative Design",
         year: "2023",
         description: " We wanted to find a way to tell Tragic story of Chabad House, preserving the weight of what happened while keeping it accessible as a narrative. Every panel was illustrated and sequenced digitally, designed to be read as an interactive flipbook.",
-        thumbnail: "/projects/chabad-house/01.png",
-        circularThumbnail: "/projects/chabad-house/circularthumbnail.png",
+        thumbnail: "/projects/chabad-house/01.webp",
+        circularThumbnail: "/projects/chabad-house/circularthumbnail.webp",
     },
     {
         title: "Artworks",
@@ -68,7 +68,7 @@ export const projects: (Project | null)[] = [
         year: "",
         description: "Personal illustration work — character concept, creature design, digital painting, and line art. No client, no brief. Each piece started from an idea that needed to exist somewhere.",
         href: "/projects/artworks",
-        thumbnail: "/projects/ArtWorks/beside-a-river0002.jpg",
+        thumbnail: "/projects/ArtWorks/beside-a-river0002.webp",
     },
     {
         title: "3D Immersive Walkthroughs",
@@ -76,7 +76,7 @@ export const projects: (Project | null)[] = [
         year: "2022",
         description: "Five distinct 3D environments — from an eldritch creature gate to a retrofuturistic roadside station — each built as a walkthrough scene exploring different visual languages, atmospheres, and prop design.",
         href: "/projects/3d-immersive-walkthroughs",
-        thumbnail: "/projects/3D-Immersive-Walkthroughs/DemonGate.png",
+        thumbnail: "/projects/3D-Immersive-Walkthroughs/DemonGate.webp",
     },
     {
         title: "Ad Campaigns",
@@ -84,6 +84,6 @@ export const projects: (Project | null)[] = [
         year: "2022",
         description: "Commercial work across three clients — a webtoon comic ad for Blinkit, satirical social and print campaigns for Hubble, and aggressive character-driven logo design for cricket teams.",
         href: "/projects/ad-campaigns",
-        thumbnail: "/projects/AdCapaigns/BlinkitAdComic3.png",
+        thumbnail: "/projects/AdCapaigns/BlinkitAdComic3.webp",
     },
 ];

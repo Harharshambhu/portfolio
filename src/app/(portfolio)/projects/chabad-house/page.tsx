@@ -9,13 +9,13 @@ import SectionLabel from "@/components/SectionLabel";
 import { useState } from "react";
 
 const images = [
-    "/projects/chabad-house/01.png",
-    "/projects/chabad-house/02.png",
-    "/projects/chabad-house/03.png",
-    "/projects/chabad-house/04.png",
-    "/projects/chabad-house/05.png",
-    "/projects/chabad-house/06.png",
-    "/projects/chabad-house/07.png",
+    "/projects/chabad-house/01.webp",
+    "/projects/chabad-house/02.webp",
+    "/projects/chabad-house/03.webp",
+    "/projects/chabad-house/04.webp",
+    "/projects/chabad-house/05.webp",
+    "/projects/chabad-house/06.webp",
+    "/projects/chabad-house/07.webp",
 ];
 
 export default function ChabadHousePage() {

@@ -422,7 +422,7 @@ export default function EventEaseProjectPage() {
                         </p>
                     </div>
                     <div className="relative w-full aspect-[16/9] rounded-xl overflow-hidden border border-border bg-background">
-                        <Image src="/projects/EventEase/STakeholderMap.png" alt="Stakeholder map — all primary actors and management roles in the Indian event agency ecosystem" fill className="object-contain p-4" />
+                        <Image src="/projects/EventEase/STakeholderMap.webp" alt="Stakeholder map — all primary actors and management roles in the Indian event agency ecosystem" fill className="object-contain p-4" />
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
                         {ecosystemStakeholders.map((s) => (
@@ -444,7 +444,7 @@ export default function EventEaseProjectPage() {
                         </p>
                     </div>
                     <div className="relative w-full aspect-[16/9] rounded-xl overflow-hidden border border-border bg-background">
-                        <Image src="/projects/EventEase/EcosystemMapping.png" alt="Ecosystem map — four flow types across all stakeholder relationships" fill className="object-contain p-4" />
+                        <Image src="/projects/EventEase/EcosystemMapping.webp" alt="Ecosystem map — four flow types across all stakeholder relationships" fill className="object-contain p-4" />
                     </div>
                 </div>
 
@@ -458,7 +458,7 @@ export default function EventEaseProjectPage() {
                         </p>
                     </div>
                     <div className="relative w-full aspect-[16/9] rounded-xl overflow-hidden border border-border bg-background">
-                        <Image src="/projects/EventEase/Event-Process-Map.png" alt="Event process map — full lifecycle across all parallel stakeholder swim lanes" fill className="object-contain p-3" />
+                        <Image src="/projects/EventEase/Event-Process-Map.webp" alt="Event process map — full lifecycle across all parallel stakeholder swim lanes" fill className="object-contain p-3" />
                     </div>
                 </div>
 
@@ -492,7 +492,7 @@ export default function EventEaseProjectPage() {
                     </div>
 
                     <div className="relative w-full aspect-[16/9] rounded-xl overflow-hidden border border-border bg-background">
-                        <Image src="/projects/EventEase/GapClosure-Strategy-Map.png" alt="Gap closure strategy — nine market failures and platform responses" fill className="object-contain p-3" />
+                        <Image src="/projects/EventEase/GapClosure-Strategy-Map.webp" alt="Gap closure strategy — nine market failures and platform responses" fill className="object-contain p-3" />
                     </div>
                 </div>
             </motion.section>
@@ -580,7 +580,7 @@ export default function EventEaseProjectPage() {
                     </p>
                 </div>
                 <div className="relative w-full aspect-[16/9] rounded-xl overflow-hidden border border-border bg-background">
-                    <Image src="/projects/EventEase/Information-architecture.png" alt="EventEase — full platform information architecture" fill className="object-contain p-4" />
+                    <Image src="/projects/EventEase/Information-architecture.webp" alt="EventEase — full platform information architecture" fill className="object-contain p-4" />
                 </div>
 
                 <div className="flex flex-col gap-4">
@@ -642,13 +642,13 @@ export default function EventEaseProjectPage() {
                         <div className="flex flex-col gap-2">
                             <span className="text-xs font-sans text-muted uppercase tracking-wider">Module Mapping</span>
                             <div className="relative aspect-video rounded-xl overflow-hidden border border-border bg-background">
-                                <Image src="/projects/EventEase/ModuleMapping.png" alt="Module mapping" fill className="object-contain p-3" />
+                                <Image src="/projects/EventEase/ModuleMapping.webp" alt="Module mapping" fill className="object-contain p-3" />
                             </div>
                         </div>
                         <div className="flex flex-col gap-2">
                             <span className="text-xs font-sans text-muted uppercase tracking-wider">Dashboard Module Map</span>
                             <div className="relative aspect-video rounded-xl overflow-hidden border border-border bg-background">
-                                <Image src="/projects/EventEase/Dashboard-Module-Map.png" alt="Dashboard module map" fill className="object-contain p-3" />
+                                <Image src="/projects/EventEase/Dashboard-Module-Map.webp" alt="Dashboard module map" fill className="object-contain p-3" />
                             </div>
                         </div>
                     </div>
@@ -679,7 +679,7 @@ export default function EventEaseProjectPage() {
                             </div>
                             <div className="flex items-center">
                                 <Image
-                                    src="/projects/EventEase/screenshots/CredentialModuleWidget.png"
+                                    src="/projects/EventEase/screenshots/CredentialModuleWidget.webp"
                                     alt="Credential Module Widget"
                                     width={0}
                                     height={0}
@@ -692,7 +692,7 @@ export default function EventEaseProjectPage() {
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
                             <div className="flex items-center order-2 md:order-1">
                                 <Image
-                                    src="/projects/EventEase/screenshots/Guestslist.png"
+                                    src="/projects/EventEase/screenshots/Guestslist.webp"
                                     alt="Guest List Module"
                                     width={0}
                                     height={0}
@@ -727,7 +727,7 @@ export default function EventEaseProjectPage() {
                             </div>
                             <div className="flex items-center">
                                 <Image
-                                    src="/projects/EventEase/screenshots/Assets.png"
+                                    src="/projects/EventEase/screenshots/Assets.webp"
                                     alt="Assets Module"
                                     width={0}
                                     height={0}
@@ -740,7 +740,7 @@ export default function EventEaseProjectPage() {
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
                             <div className="flex flex-col gap-4 order-2 md:order-1">
                                 <Image
-                                    src="/projects/EventEase/screenshots/TAsksProgress.png"
+                                    src="/projects/EventEase/screenshots/TAsksProgress.webp"
                                     alt="Tasks Progress"
                                     width={0}
                                     height={0}
@@ -748,7 +748,7 @@ export default function EventEaseProjectPage() {
                                     className="w-full h-auto"
                                 />
                                 <Image
-                                    src="/projects/EventEase/screenshots/Form&taskModulewidget.png"
+                                    src="/projects/EventEase/screenshots/Form&taskModulewidget.webp"
                                     alt="Forms & Tasks Module Widget"
                                     width={0}
                                     height={0}
@@ -783,7 +783,7 @@ export default function EventEaseProjectPage() {
                             </div>
                             <div className="flex flex-col gap-4">
                                 <Image
-                                    src="/projects/EventEase/screenshots/Communication.png"
+                                    src="/projects/EventEase/screenshots/Communication.webp"
                                     alt="Communication Module"
                                     width={0}
                                     height={0}

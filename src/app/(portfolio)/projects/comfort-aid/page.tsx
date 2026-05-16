@@ -153,7 +153,7 @@ export default function ComfortAidProjectPage() {
                 className="w-full rounded-2xl overflow-hidden border border-border bg-background"
             >
                 <Image
-                    src="/projects/Comfort Aid/Finalposter-ComfortAid.jpeg"
+                    src="/projects/Comfort Aid/Finalposter-ComfortAid.webp"
                     alt="ComfortAid — Final design poster showing the hybrid mattress system, 5-step protocol, and key statistics"
                     width={1600}
                     height={1130}
