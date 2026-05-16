@@ -167,8 +167,7 @@ export default function ComfortAidProjectPage() {
             {/* ── AT A GLANCE ── */}
             <motion.section
                 initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
+                animate="visible"
                 variants={fade}
                 className="grid grid-cols-1 md:grid-cols-3 gap-px border border-border rounded-xl overflow-hidden"
             >
@@ -188,8 +187,7 @@ export default function ComfortAidProjectPage() {
             {/* ── THE PROBLEM ── */}
             <motion.section
                 initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
+                animate="visible"
                 variants={fade}
                 className="flex flex-col gap-8"
             >
@@ -266,8 +264,7 @@ export default function ComfortAidProjectPage() {
             {/* ── FIELD RESEARCH ── */}
             <motion.section
                 initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
+                animate="visible"
                 variants={fade}
                 className="flex flex-col gap-8"
             >
@@ -288,8 +285,7 @@ export default function ComfortAidProjectPage() {
                         <motion.div
                             key={img.src}
                             initial="hidden"
-                            whileInView="visible"
-                            viewport={{ once: true }}
+                            animate="visible"
                             variants={fade}
                             className="relative aspect-video rounded-xl overflow-hidden border border-border"
                         >
@@ -326,8 +322,7 @@ export default function ComfortAidProjectPage() {
             {/* ── RESEARCH SYNTHESIS ── */}
             <motion.section
                 initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
+                animate="visible"
                 variants={fade}
                 className="flex flex-col gap-8"
             >
@@ -349,8 +344,7 @@ export default function ComfortAidProjectPage() {
                         <motion.div
                             key={img.src}
                             initial="hidden"
-                            whileInView="visible"
-                            viewport={{ once: true }}
+                            animate="visible"
                             variants={fade}
                             className="relative aspect-video rounded-xl overflow-hidden border border-border"
                         >
@@ -386,8 +380,7 @@ export default function ComfortAidProjectPage() {
             {/* ── USER PERSONA ── */}
             <motion.section
                 initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
+                animate="visible"
                 variants={fade}
                 className="rounded-2xl border border-border overflow-hidden"
             >
@@ -422,8 +415,7 @@ export default function ComfortAidProjectPage() {
             {/* ── HOW MIGHT WE ── */}
             <motion.section
                 initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
+                animate="visible"
                 variants={fade}
                 className="flex flex-col gap-6"
             >
@@ -453,8 +445,7 @@ export default function ComfortAidProjectPage() {
             {/* ── IDEATION ── */}
             <motion.section
                 initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
+                animate="visible"
                 variants={fade}
                 className="flex flex-col gap-8"
             >
@@ -518,8 +509,7 @@ export default function ComfortAidProjectPage() {
             {/* ── THE SOLUTION ── */}
             <motion.section
                 initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
+                animate="visible"
                 variants={fade}
                 className="flex flex-col gap-8"
             >
@@ -563,8 +553,7 @@ export default function ComfortAidProjectPage() {
             {/* ── TRANSFER PROTOCOL ── */}
             <motion.section
                 initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
+                animate="visible"
                 variants={fade}
                 className="flex flex-col gap-8"
             >
@@ -592,8 +581,7 @@ export default function ComfortAidProjectPage() {
             {/* ── REFLECTIONS ── */}
             <motion.section
                 initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
+                animate="visible"
                 variants={fade}
                 className="rounded-2xl border border-border overflow-hidden"
             >
@@ -624,8 +612,7 @@ export default function ComfortAidProjectPage() {
             {/* ── TEAM ── */}
             <motion.section
                 initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
+                animate="visible"
                 variants={fade}
                 className="flex flex-col gap-4 p-8 rounded-xl border border-border bg-background"
             >

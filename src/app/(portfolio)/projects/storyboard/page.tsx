@@ -43,8 +43,7 @@ export default function StoryboardPage() {
                     <motion.div
                         key={src}
                         initial="hidden"
-                        whileInView="visible"
-                        viewport={{ once: true, margin: "-100px" }}
+                        animate="visible"
                         variants={fade}
                         className="w-full max-w-5xl rounded-xl overflow-hidden border border-border bg-muted/5"
                     >

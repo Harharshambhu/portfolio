@@ -72,8 +72,7 @@ export default function ArtworksPage() {
                     <motion.div
                         key={art.src}
                         initial={{ opacity: 0, y: 16 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
+                        animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5, delay: (i % 3) * 0.08, ease: "easeOut" }}
                         className="break-inside-avoid mb-3 rounded-xl overflow-hidden border border-border"
                     >

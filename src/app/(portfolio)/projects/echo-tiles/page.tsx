@@ -73,8 +73,7 @@ export default function EchoTilesProjectPage() {
             {/* ── AT A GLANCE ── */}
             <motion.section
                 initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
+                animate="visible"
                 variants={fade}
                 className="grid grid-cols-1 md:grid-cols-3 gap-px border border-border rounded-xl overflow-hidden"
             >
@@ -94,8 +93,7 @@ export default function EchoTilesProjectPage() {
             {/* ── THE CONCEPT ── */}
             <motion.section
                 initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
+                animate="visible"
                 variants={fade}
                 className="flex flex-col gap-12"
             >
@@ -138,8 +136,7 @@ export default function EchoTilesProjectPage() {
             {/* ── WIN / LOSE ── */}
             <motion.section
                 initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
+                animate="visible"
                 variants={fade}
                 className="grid grid-cols-1 md:grid-cols-2 gap-6"
             >
@@ -158,8 +155,7 @@ export default function EchoTilesProjectPage() {
             {/* ── MDA FRAMEWORK ── */}
             <motion.section
                 initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
+                animate="visible"
                 variants={fade}
                 className="flex flex-col gap-8"
             >
@@ -219,8 +215,7 @@ export default function EchoTilesProjectPage() {
             {/* ── PLAYER MECHANICS ── */}
             <motion.section
                 initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
+                animate="visible"
                 variants={fade}
                 className="flex flex-col gap-8"
             >
@@ -277,8 +272,7 @@ export default function EchoTilesProjectPage() {
             {/* ── GAME ENVIRONMENT ── */}
             <motion.section
                 initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
+                animate="visible"
                 variants={fade}
                 className="flex flex-col gap-6"
             >
@@ -297,8 +291,7 @@ export default function EchoTilesProjectPage() {
                         <motion.div
                             key={img.src}
                             initial="hidden"
-                            whileInView="visible"
-                            viewport={{ once: true }}
+                            animate="visible"
                             variants={fade}
                             className="relative aspect-square rounded-xl overflow-hidden border border-border"
                         >
@@ -311,8 +304,7 @@ export default function EchoTilesProjectPage() {
             {/* ── TILE STATES & REVEAL LOGIC ── */}
             <motion.section
                 initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
+                animate="visible"
                 variants={fade}
                 className="flex flex-col gap-8"
             >
@@ -372,8 +364,7 @@ export default function EchoTilesProjectPage() {
             {/* ── USER STUDY VIDEO ── */}
             <motion.section
                 initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
+                animate="visible"
                 variants={fade}
                 className="flex flex-col gap-6"
             >
@@ -401,8 +392,7 @@ export default function EchoTilesProjectPage() {
             {/* ── AUDIO FEEDBACK SYSTEM ── */}
             <motion.section
                 initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
+                animate="visible"
                 variants={fade}
                 className="rounded-2xl border border-border overflow-hidden"
             >
@@ -441,8 +431,7 @@ export default function EchoTilesProjectPage() {
             {/* ── STORYBOARDING ── */}
             <motion.section
                 initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
+                animate="visible"
                 variants={fade}
                 className="flex flex-col gap-8"
             >
@@ -459,8 +448,7 @@ export default function EchoTilesProjectPage() {
                         <motion.div
                             key={src}
                             initial="hidden"
-                            whileInView="visible"
-                            viewport={{ once: true }}
+                            animate="visible"
                             variants={fade}
                             className="relative aspect-video rounded-xl overflow-hidden border border-border bg-background"
                         >
@@ -478,8 +466,7 @@ export default function EchoTilesProjectPage() {
             {/* ── GAME ARCHITECTURE ── */}
             <motion.section
                 initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
+                animate="visible"
                 variants={fade}
                 className="flex flex-col gap-8"
             >

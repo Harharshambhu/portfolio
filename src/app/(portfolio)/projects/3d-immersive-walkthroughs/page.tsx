@@ -142,8 +142,7 @@ export default function ImmersiveWalkthroughsPage() {
                 <motion.section
                     key={env.id}
                     initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true }}
+                    animate="visible"
                     variants={fade}
                     className="flex flex-col gap-8"
                 >
@@ -188,8 +187,7 @@ export default function ImmersiveWalkthroughsPage() {
                                         <motion.div
                                             key={img.src}
                                             initial="hidden"
-                                            whileInView="visible"
-                                            viewport={{ once: true }}
+                                            animate="visible"
                                             variants={fade}
                                             className="relative aspect-video rounded-xl overflow-hidden border border-border"
                                         >
@@ -201,8 +199,7 @@ export default function ImmersiveWalkthroughsPage() {
                                 <>
                                     <motion.div
                                         initial="hidden"
-                                        whileInView="visible"
-                                        viewport={{ once: true }}
+                                        animate="visible"
                                         variants={fade}
                                         className="relative w-full aspect-video rounded-xl overflow-hidden border border-border"
                                     >
@@ -214,8 +211,7 @@ export default function ImmersiveWalkthroughsPage() {
                                                 <motion.div
                                                     key={img.src}
                                                     initial="hidden"
-                                                    whileInView="visible"
-                                                    viewport={{ once: true }}
+                                                    animate="visible"
                                                     variants={fade}
                                                     className="relative aspect-video rounded-xl overflow-hidden border border-border"
                                                 >
@@ -239,8 +235,7 @@ export default function ImmersiveWalkthroughsPage() {
             {/* ── CLOSING NOTE ── */}
             <motion.section
                 initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
+                animate="visible"
                 variants={fade}
                 className="rounded-2xl border border-border overflow-hidden"
             >

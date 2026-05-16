@@ -67,7 +67,7 @@ const galleryImages = [
 
 export default function XRProximityProjectPage() {
     return (
-        <div className="flex flex-col gap-24 pb-24 max-w-4xl mx-auto w-full">
+        <div className="flex flex-col gap-24 pb-24">
 
             {/* ── COVER ── */}
             <motion.section
@@ -100,11 +100,12 @@ export default function XRProximityProjectPage() {
                 </div>
             </motion.section>
 
+            <div className="flex flex-col gap-24 max-w-4xl mx-auto w-full">
+
             {/* ── AT A GLANCE ── */}
             <motion.section
                 initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
+                animate="visible"
                 variants={fade}
                 className="grid grid-cols-1 md:grid-cols-3 gap-px border border-border rounded-xl overflow-hidden"
             >
@@ -124,8 +125,7 @@ export default function XRProximityProjectPage() {
             {/* ── THE PROBLEM ── */}
             <motion.section
                 initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
+                animate="visible"
                 variants={fade}
                 className="flex flex-col gap-8"
             >
@@ -211,8 +211,7 @@ export default function XRProximityProjectPage() {
             {/* ── INHERITED PARADIGM ── */}
             <motion.section
                 initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
+                animate="visible"
                 variants={fade}
                 className="flex flex-col gap-8"
             >
@@ -242,8 +241,7 @@ export default function XRProximityProjectPage() {
             {/* ── KEY INSIGHTS ── */}
             <motion.section
                 initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
+                animate="visible"
                 variants={fade}
                 className="flex flex-col gap-8"
             >
@@ -298,8 +296,7 @@ export default function XRProximityProjectPage() {
             {/* ── RESEARCH DIRECTION ── */}
             <motion.section
                 initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
+                animate="visible"
                 variants={fade}
                 className="flex flex-col gap-8"
             >
@@ -365,8 +362,7 @@ export default function XRProximityProjectPage() {
             {/* ── METHODOLOGY ── */}
             <motion.section
                 initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
+                animate="visible"
                 variants={fade}
                 className="flex flex-col gap-8"
             >
@@ -561,11 +557,12 @@ export default function XRProximityProjectPage() {
                 </div>
             </motion.section>
 
+            </div>
+
             {/* ── USER STUDY VIDEO ── */}
             <motion.section
                 initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
+                animate="visible"
                 variants={fade}
                 className="flex flex-col gap-6"
             >
@@ -582,9 +579,8 @@ export default function XRProximityProjectPage() {
                     <video
                         controls
                         loop
-                        autoPlay
                         muted
-                        preload="auto"
+                        preload="none"
                         className="w-full h-full object-cover"
                     >
                         <source src="/projects/xr-proximity-based-presence/webp-m/proxprojvideo.webm" type="video/webm" />
@@ -592,11 +588,12 @@ export default function XRProximityProjectPage() {
                 </div>
             </motion.section>
 
+            <div className="flex flex-col gap-24 max-w-4xl mx-auto w-full">
+
             {/* ── FINDINGS ── */}
             <motion.section
                 initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
+                animate="visible"
                 variants={fade}
                 className="flex flex-col gap-8"
             >
@@ -665,8 +662,7 @@ export default function XRProximityProjectPage() {
             {/* ── ENVIRONMENT GALLERY ── */}
             <motion.section
                 initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
+                animate="visible"
                 variants={fade}
                 className="flex flex-col gap-6"
             >
@@ -680,8 +676,7 @@ export default function XRProximityProjectPage() {
                         <motion.div
                             key={img.src}
                             initial="hidden"
-                            whileInView="visible"
-                            viewport={{ once: true }}
+                            animate="visible"
                             variants={fade}
                             className="relative aspect-video rounded-xl overflow-hidden border border-border"
                         >
@@ -694,8 +689,7 @@ export default function XRProximityProjectPage() {
             {/* ── CONCLUSION ── */}
             <motion.section
                 initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
+                animate="visible"
                 variants={fade}
                 className="rounded-2xl border border-border overflow-hidden"
             >
@@ -724,6 +718,8 @@ export default function XRProximityProjectPage() {
                     </div>
                 </div>
             </motion.section>
+
+            </div>
 
         </div>
     );

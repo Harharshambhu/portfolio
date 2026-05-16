@@ -75,7 +75,7 @@ const northStarFocus = [
 
 export default function DiscoveryToTransactionPage() {
     return (
-        <div className="flex flex-col gap-20 max-w-4xl mx-auto w-full">
+        <div className="flex flex-col gap-20">
 
             {/* ── Cover ── */}
             <section className="flex flex-col gap-6 items-center text-center">
@@ -122,6 +122,8 @@ export default function DiscoveryToTransactionPage() {
                     priority
                 />
             </motion.div>
+
+            <div className="flex flex-col gap-20 max-w-4xl mx-auto w-full">
 
             {/* ── Overview ── */}
             <motion.section className="flex flex-col gap-18" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fade}>
@@ -620,7 +622,7 @@ export default function DiscoveryToTransactionPage() {
             </motion.section>
 
             {/* ── Trade-Offs ── */}
-            <motion.section className="flex flex-col gap-6" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fade}>
+            <motion.section className="flex flex-col gap-8" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fade}>
                 <h2 className="text-5xl font-semibold tracking-tight">Trade-Offs</h2>
                 <ScrollMagnifier>
                     <p className="text-base leading-relaxed italic">
@@ -632,6 +634,8 @@ export default function DiscoveryToTransactionPage() {
                     <span style={{ color: "var(--accent-blue)" }}>Anirudh Singh</span>
                 </p>
             </motion.section>
+
+            </div>
 
         </div>
     );

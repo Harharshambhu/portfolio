@@ -339,7 +339,7 @@ export default function EventEaseProjectPage() {
             <div className="flex flex-col gap-24 max-w-4xl mx-auto w-full">
 
             {/* 02 — WHAT IS EVENTEASE? */}
-            <motion.section initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fade} className="flex flex-col gap-4">
+            <motion.section initial="hidden" animate="visible" variants={fade} className="flex flex-col gap-4">
                 <h2 className="text-5xl font-semibold tracking-tight">What is EventEase?</h2>
                 <p className="max-w-2xl text-muted leading-relaxed">
                     EventEase is an operational platform built for Indian event management agencies. It replaces the WhatsApp groups, email chains, and spreadsheets that currently hold a live event&apos;s information — with one communication-first workspace where everything is event-scoped, role-gated, and permanently findable. It is not a database you report into after coordination happens. It is the place coordination happens.
@@ -347,7 +347,7 @@ export default function EventEaseProjectPage() {
             </motion.section>
 
             {/* 03 — WHO USES IT? */}
-            <motion.section initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fade} className="flex flex-col gap-6">
+            <motion.section initial="hidden" animate="visible" variants={fade} className="flex flex-col gap-6">
                 <div className="flex flex-col gap-2">
                     <SectionLabel>Who uses it?</SectionLabel>
                     <h3 className="text-5xl font-semibold tracking-tight">Four operator types. One platform.</h3>
@@ -366,7 +366,7 @@ export default function EventEaseProjectPage() {
             </motion.section>
 
             {/* 04 — THE PROBLEM */}
-            <motion.section initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fade} className="flex flex-col gap-8">
+            <motion.section initial="hidden" animate="visible" variants={fade} className="flex flex-col gap-8">
                 <div className="flex flex-col gap-4">
                     <SectionLabel>The Problem</SectionLabel>
                     <h3 className="text-5xl font-semibold tracking-tight">The operational backbone of India&apos;s event industry is WhatsApp.</h3>
@@ -385,7 +385,7 @@ export default function EventEaseProjectPage() {
             </motion.section>
 
             {/* 05 — STAKEHOLDER VOICES */}
-            <motion.section initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fade} className="flex flex-col gap-6">
+            <motion.section initial="hidden" animate="visible" variants={fade} className="flex flex-col gap-6">
                 <div className="flex flex-col gap-2">
                     <SectionLabel>Stakeholder Interviews</SectionLabel>
                     <h3 className="text-5xl font-semibold tracking-tight">Four people. Four different insights.</h3>
@@ -403,7 +403,7 @@ export default function EventEaseProjectPage() {
             </motion.section>
 
             {/* 06 — RESEARCH */}
-            <motion.section initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fade} className="flex flex-col gap-16">
+            <motion.section initial="hidden" animate="visible" variants={fade} className="flex flex-col gap-16">
                 <div className="flex flex-col gap-4">
                     <SectionLabel>Research</SectionLabel>
                     <h3 className="text-5xl font-semibold tracking-tight">Four methods. One conclusion.</h3>
@@ -500,7 +500,7 @@ export default function EventEaseProjectPage() {
             </div>
 
             {/* 11 — PROTOTYPE */}
-            <motion.section initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fade} className="flex flex-col gap-6">
+            <motion.section initial="hidden" animate="visible" variants={fade} className="flex flex-col gap-6">
                 <div className="flex flex-col gap-4">
                     <SectionLabel>Working Prototype</SectionLabel>
                     <h3 className="text-5xl font-semibold tracking-tight">The full agency-side IA, implemented.</h3>
@@ -542,7 +542,7 @@ export default function EventEaseProjectPage() {
             <div className="flex flex-col gap-24 max-w-4xl mx-auto w-full">
 
             {/* 07 — DESIGN THESIS */}
-            <motion.section initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fade} className="flex flex-col gap-8">
+            <motion.section initial="hidden" animate="visible" variants={fade} className="flex flex-col gap-8">
                 <div className="flex flex-col gap-4">
                     <SectionLabel>Design Thesis</SectionLabel>
                     <h2 className="text-5xl font-semibold tracking-tight">Communication is the operating system.</h2>
@@ -571,7 +571,7 @@ export default function EventEaseProjectPage() {
             </motion.section>
 
             {/* 08 — INFORMATION ARCHITECTURE */}
-            <motion.section initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fade} className="flex flex-col gap-8">
+            <motion.section initial="hidden" animate="visible" variants={fade} className="flex flex-col gap-8">
                 <div className="flex flex-col gap-4">
                     <SectionLabel>Information Architecture</SectionLabel>
                     <h2 className="text-5xl font-semibold tracking-tight">Three layers. One coherent system.</h2>
@@ -608,7 +608,7 @@ export default function EventEaseProjectPage() {
             </motion.section>
 
             {/* 09 — SYSTEM ARCHITECTURE */}
-            <motion.section initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fade} className="flex flex-col gap-8">
+            <motion.section initial="hidden" animate="visible" variants={fade} className="flex flex-col gap-8">
                 <div className="flex flex-col gap-4">
                     <SectionLabel>System Architecture</SectionLabel>
                     <h2 className="text-5xl font-semibold tracking-tight">Who can see what. Precisely.</h2>
@@ -657,7 +657,7 @@ export default function EventEaseProjectPage() {
 
             {/* 10 — MODULE DEEP DIVES */}
             {modules.map((mod) => (
-                <motion.section key={mod.id} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fade} className="flex flex-col gap-6">
+                <motion.section key={mod.id} initial="hidden" animate="visible" variants={fade} className="flex flex-col gap-6">
                     <div className="flex flex-col gap-3">
                         <SectionLabel>Module — {mod.title}</SectionLabel>
                         <h2 className="text-4xl font-semibold tracking-tight">{mod.tagline}</h2>
@@ -810,7 +810,7 @@ export default function EventEaseProjectPage() {
 
 
             {/* 12 — CLOSING QUOTE */}
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fade} className="px-2">
+            <motion.div initial="hidden" animate="visible" variants={fade} className="px-2">
                 <p className="text-2xl md:text-3xl font-semibold tracking-tight leading-snug max-w-2xl text-muted">
                     &ldquo;A channel without context is just another WhatsApp group.&rdquo;
                 </p>
