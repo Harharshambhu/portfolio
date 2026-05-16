@@ -101,8 +101,7 @@ export default function AdCampaignsPage() {
             {/* ══ SECTION 01: BLINKIT ══ */}
             <motion.section
                 initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
+                animate="visible"
                 variants={fade}
                 className="flex flex-col gap-8"
             >
@@ -123,8 +122,7 @@ export default function AdCampaignsPage() {
                         <motion.div
                             key={panel.src}
                             initial="hidden"
-                            whileInView="visible"
-                            viewport={{ once: true }}
+                            animate="visible"
                             variants={fade}
                             className="relative aspect-[9/16] rounded-xl overflow-hidden border border-border"
                         >
@@ -141,8 +139,7 @@ export default function AdCampaignsPage() {
                             <motion.div
                                 key={src}
                                 initial="hidden"
-                                whileInView="visible"
-                                viewport={{ once: true }}
+                                animate="visible"
                                 variants={fade}
                                 className="relative aspect-[9/16] rounded-lg overflow-hidden border border-border bg-background"
                             >
@@ -160,8 +157,7 @@ export default function AdCampaignsPage() {
                             <motion.div
                                 key={src}
                                 initial="hidden"
-                                whileInView="visible"
-                                viewport={{ once: true }}
+                                animate="visible"
                                 variants={fade}
                                 className="relative aspect-[9/16] rounded-lg overflow-hidden border border-border bg-background"
                             >
@@ -177,8 +173,7 @@ export default function AdCampaignsPage() {
             {/* ══ SECTION 02: HUBBLE ══ */}
             <motion.section
                 initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
+                animate="visible"
                 variants={fade}
                 className="flex flex-col gap-8"
             >
@@ -220,8 +215,7 @@ export default function AdCampaignsPage() {
                             <motion.div
                                 key={post.src}
                                 initial="hidden"
-                                whileInView="visible"
-                                viewport={{ once: true }}
+                                animate="visible"
                                 variants={fade}
                                 className="relative aspect-video rounded-xl overflow-hidden border border-border"
                             >
@@ -237,8 +231,7 @@ export default function AdCampaignsPage() {
             {/* ══ SECTION 03: HOME-AKRAFT CRICKET LOGOS ══ */}
             <motion.section
                 initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
+                animate="visible"
                 variants={fade}
                 className="flex flex-col gap-8"
             >
@@ -259,8 +252,7 @@ export default function AdCampaignsPage() {
                         <motion.div
                             key={src}
                             initial="hidden"
-                            whileInView="visible"
-                            viewport={{ once: true }}
+                            animate="visible"
                             variants={fade}
                             className="relative aspect-square rounded-xl overflow-hidden border border-border bg-white"
                         >
@@ -285,8 +277,7 @@ export default function AdCampaignsPage() {
                             <motion.div
                                 key={src}
                                 initial="hidden"
-                                whileInView="visible"
-                                viewport={{ once: true }}
+                                animate="visible"
                                 variants={fade}
                                 className="relative aspect-video rounded-xl overflow-hidden border border-border"
                             >

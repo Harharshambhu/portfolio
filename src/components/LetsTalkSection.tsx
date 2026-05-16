@@ -87,26 +87,26 @@ export default function LetsTalkSection() {
                     </a>
                 </div>
 
-                <div className="flex justify-center w-full z-10">
+                <div
+                    className="flex justify-center w-full z-10"
+                    onMouseEnter={() => setIsHovered(true)}
+                    onMouseLeave={() => setIsHovered(false)}
+                >
                     <MotionLink
                         href="/contact"
-                        layout
-                        onMouseEnter={() => setIsHovered(true)}
-                        onMouseLeave={() => setIsHovered(false)}
                         onFocus={handleFocus}
                         onBlur={handleBlur}
                         transition={{ duration: ANIMATION_DURATION, ease: "linear" }}
                         className="relative inline-flex items-center justify-center px-9 py-4 text-2xl font-sans overflow-hidden"
-                        style={{ minWidth: "260px" }}
                         variants={{
                             initial: {
-                                flexGrow: 0,
+                                width: "260px",
                                 borderRadius: "4px",
                                 backgroundColor: "var(--background)",
                                 color: "var(--foreground)",
                             },
                             hover: {
-                                flexGrow: 1,
+                                width: "100%",
                                 borderRadius: "1px",
                                 backgroundColor: "var(--accent-neon)",
                                 color: "var(--foreground)",
