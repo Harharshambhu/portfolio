@@ -75,7 +75,7 @@ const northStarFocus = [
 
 export default function DiscoveryToTransactionPage() {
     return (
-        <div className="flex flex-col gap-20">
+        <div className="flex flex-col gap-20 max-w-4xl mx-auto w-full">
 
             {/* ── Cover ── */}
             <section className="flex flex-col gap-6 items-center text-center">

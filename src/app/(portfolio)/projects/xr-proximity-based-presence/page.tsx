@@ -67,7 +67,7 @@ const galleryImages = [
 
 export default function XRProximityProjectPage() {
     return (
-        <div className="flex flex-col gap-24 pb-24">
+        <div className="flex flex-col gap-24 pb-24 max-w-4xl mx-auto w-full">
 
             {/* ── COVER ── */}
             <motion.section
