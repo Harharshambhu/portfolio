@@ -202,14 +202,23 @@ const TargetCursor: React.FC<TargetCursorProps> = ({
             const mouseX = gsap.getProperty(cursorRef.current, 'x') as number;
             const mouseY = gsap.getProperty(cursorRef.current, 'y') as number;
             updateCircleColor(mouseX, mouseY);
-            if (!activeTarget) return;
+            
             const elementUnderMouse = document.elementFromPoint(mouseX, mouseY);
-            const isStillOverTarget =
-                elementUnderMouse &&
-                (elementUnderMouse === activeTarget || elementUnderMouse.closest(targetSelector) === activeTarget);
-            if (!isStillOverTarget) {
-                if (currentLeaveHandler) {
+            if (!elementUnderMouse) {
+                if (activeTarget && currentLeaveHandler) currentLeaveHandler();
+                return;
+            }
+
+            const newTarget = elementUnderMouse.matches(targetSelector)
+                ? elementUnderMouse
+                : elementUnderMouse.closest(targetSelector);
+
+            if (activeTarget !== newTarget) {
+                if (activeTarget && currentLeaveHandler) {
                     currentLeaveHandler();
+                }
+                if (newTarget) {
+                    enterHandler({ target: newTarget });
                 }
             }
         };
@@ -230,8 +239,9 @@ const TargetCursor: React.FC<TargetCursorProps> = ({
         window.addEventListener('mousedown', mouseDownHandler);
         window.addEventListener('mouseup', mouseUpHandler);
 
-        const enterHandler = (e: MouseEvent) => {
+        const enterHandler = (e: MouseEvent | { target: Element | null }) => {
             const directTarget = e.target as Element;
+            if (!directTarget) return;
             const allTargets: Element[] = [];
             let current: Element | null = directTarget;
             while (current && current !== document.body) {

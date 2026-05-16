@@ -150,13 +150,14 @@ export default function ComfortAidProjectPage() {
                 initial={{ opacity: 0, scale: 0.98 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
-                className="relative w-full aspect-[16/9] rounded-2xl overflow-hidden border border-border bg-background"
+                className="w-full rounded-2xl overflow-hidden border border-border bg-background"
             >
                 <Image
                     src="/projects/Comfort Aid/Finalposter-ComfortAid.jpeg"
                     alt="ComfortAid — Final design poster showing the hybrid mattress system, 5-step protocol, and key statistics"
-                    fill
-                    className="object-contain"
+                    width={1600}
+                    height={1130}
+                    className="w-full h-auto"
                     priority
                 />
             </motion.div>

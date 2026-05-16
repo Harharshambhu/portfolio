@@ -106,6 +106,23 @@ export default function DiscoveryToTransactionPage() {
                 </div>
             </section>
 
+            {/* ── HERO IMAGE ── */}
+            <motion.div
+                initial={{ opacity: 0, scale: 0.98 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="w-full rounded-2xl overflow-hidden border border-border bg-background"
+            >
+                <Image
+                    src="/projects/discovery-to-transaction/thumbnail.png"
+                    alt="From Discovery to Transaction — Case Study Landing Image"
+                    width={1512}
+                    height={1134}
+                    className="w-full h-auto"
+                    priority
+                />
+            </motion.div>
+
             {/* ── Overview ── */}
             <motion.section className="flex flex-col gap-18" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fade}>
                 <div className="flex justify-center">
