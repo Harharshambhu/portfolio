@@ -404,18 +404,12 @@ export default function EventEaseProjectPage() {
 
                 {/* 06 — RESEARCH */}
                 <motion.section initial="hidden" animate="visible" variants={fade} className="flex flex-col gap-16">
-                    <div className="flex flex-col gap-4">
-                        <SectionLabel>Research</SectionLabel>
-                        <h3 className="text-5xl font-semibold tracking-tight">Four methods. One conclusion.</h3>
-                        <p className="max-w-2xl text-muted leading-relaxed">
-                            The research followed four methods, each building on the last. Stakeholder mapping helped us understand who was involved and what they each needed. Ecosystem mapping showed how information actually moved between them. A process map pinpointed where coordination was breaking down in practice. Competitive analysis confirmed that none of the existing platforms had addressed these gaps. From there, each structural failure became a direct design requirement.
-                        </p>
-                    </div>
+
 
                     {/* Stakeholder Map */}
                     <div className="flex flex-col gap-6">
                         <div className="flex flex-col gap-3">
-                            <SectionLabel>Stakeholder Map</SectionLabel>
+                            <SectionLabel>Stakeholder Mapping</SectionLabel>
                             <h3 className="text-5xl font-semibold tracking-tight">Nine primary categories. Twelve agency roles.</h3>
                             <p className="max-w-2xl text-muted leading-relaxed">
                                 Nine primary stakeholder categories were identified across the Indian event ecosystem. Within the agency team alone, twelve distinct management roles were mapped. The key insight: the agency isn&apos;t just a service provider. It&apos;s the <span className="text-foreground font-medium">information router</span> for an entire temporary multi-organisational network.
@@ -495,6 +489,19 @@ export default function EventEaseProjectPage() {
                             <Image src="/projects/EventEase/GapClosure-Strategy-Map.webp" alt="Gap closure strategy — nine market failures and platform responses" fill className="object-contain p-3" />
                         </div>
                     </div>
+
+                    {/* Event Process Map */}
+                    <div className="flex flex-col gap-6">
+                        <div className="flex flex-col gap-3">
+                            <SectionLabel>Research Takeaways</SectionLabel>
+                            <h3 className="text-5xl font-semibold tracking-tight">Everything works well, but they centre around the wrong thing</h3>
+                            <p className="max-w-2xl text-muted leading-relaxed">
+                                The research followed four methods, each building on the last. Stakeholder mapping helped us understand who was involved and what they each needed. Ecosystem mapping showed how information actually moved between them. A process map pinpointed where coordination was breaking down in practice. Competitive analysis confirmed that none of the existing platforms had addressed these gaps. From there, each structural failure became a direct design requirement.
+                            </p>
+                        </div>
+
+                    </div>
+
                 </motion.section>
 
             </div>
