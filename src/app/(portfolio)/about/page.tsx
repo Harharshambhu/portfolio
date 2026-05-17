@@ -13,9 +13,20 @@ function RippleRow({ year, role, company, desc, delay, globalMouse, showBubble =
     const rowRef = useRef<HTMLDivElement>(null);
     const [origin, setOrigin] = useState({ x: 0, y: 0 });
     const [hovered, setHovered] = useState(false);
+    const [bubbleVisible, setBubbleVisible] = useState(false);
+    const bubbleTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+    const showBubbleWithTimeout = () => {
+        setBubbleVisible(true);
+        if (bubbleTimeoutRef.current) clearTimeout(bubbleTimeoutRef.current);
+        bubbleTimeoutRef.current = setTimeout(() => {
+            setBubbleVisible(false);
+            if (isMobile) setHovered(false);
+        }, 3000); // 3 seconds duration
+    };
 
     const updateHoverState = (mouseX: number, mouseY: number) => {
-        if (!rowRef.current) return;
+        if (!rowRef.current || isMobile) return;
         const rect = rowRef.current.getBoundingClientRect();
         const isOver =
             mouseX >= rect.left &&
@@ -26,28 +37,70 @@ function RippleRow({ year, role, company, desc, delay, globalMouse, showBubble =
         if (isOver && !hovered) {
             setHovered(true);
             setOrigin({ x: mouseX - rect.left, y: mouseY - rect.top });
+            showBubbleWithTimeout();
         } else if (!isOver && hovered) {
             setHovered(false);
+            setBubbleVisible(false);
         } else if (isOver && hovered) {
-            // Update origin for ripple center while moving
             setOrigin({ x: mouseX - rect.left, y: mouseY - rect.top });
+            showBubbleWithTimeout();
         }
     };
 
     useEffect(() => {
+        if (isMobile) return;
         const handleScroll = () => updateHoverState(globalMouse.x, globalMouse.y);
         window.addEventListener('scroll', handleScroll, { passive: true });
         return () => window.removeEventListener('scroll', handleScroll);
-    }, [hovered, globalMouse]);
+    }, [hovered, globalMouse, isMobile]);
+
+    useEffect(() => {
+        if (!bubbleVisible || !isMobile) return;
+
+        const handleOutsideClick = (e: MouseEvent | TouchEvent) => {
+            if (rowRef.current && !rowRef.current.contains(e.target as Node)) {
+                setBubbleVisible(false);
+                setHovered(false);
+            }
+        };
+
+        const timer = setTimeout(() => {
+            document.addEventListener('click', handleOutsideClick);
+            document.addEventListener('touchstart', handleOutsideClick);
+        }, 50);
+
+        return () => {
+            clearTimeout(timer);
+            document.removeEventListener('click', handleOutsideClick);
+            document.removeEventListener('touchstart', handleOutsideClick);
+        };
+    }, [bubbleVisible, isMobile]);
+
+    const handleMouseLeave = () => {
+        if (!isMobile) {
+            setHovered(false);
+            setBubbleVisible(false);
+        }
+    };
+
+    const handleClick = (e: React.MouseEvent) => {
+        if (isMobile) {
+            const rect = rowRef.current!.getBoundingClientRect();
+            setOrigin({ x: e.clientX - rect.left, y: e.clientY - rect.top });
+            setHovered(true);
+            showBubbleWithTimeout();
+        }
+    };
 
     return (
         <>
             <div
                 ref={rowRef}
-                className="relative flex flex-col md:flex-row py-4 border-b border-border px-3 -mx-3 rounded-sm overflow-hidden cursor-none"
-                onMouseEnter={() => updateHoverState(globalMouse.x, globalMouse.y)}
-                onMouseMove={(e) => updateHoverState(e.clientX, e.clientY)}
-                onMouseLeave={() => setHovered(false)}
+                className={`relative flex flex-col md:flex-row py-4 border-b border-border px-3 -mx-3 rounded-sm overflow-hidden cursor-pointer`}
+                onMouseEnter={() => { if (!isMobile) updateHoverState(globalMouse.x, globalMouse.y); }}
+                onMouseMove={(e) => { if (!isMobile) updateHoverState(e.clientX, e.clientY); }}
+                onMouseLeave={handleMouseLeave}
+                onClick={handleClick}
                 style={{
                     borderBottomColor: hovered ? "transparent" : undefined,
                     transition: "border-color 0.2s ease",
@@ -94,7 +147,7 @@ function RippleRow({ year, role, company, desc, delay, globalMouse, showBubble =
 
             {/* Floating Green Bubble */}
             <AnimatePresence>
-                {hovered && showBubble && (
+                {hovered && bubbleVisible && showBubble && (
                     <motion.div
                         key="bubble"
                         initial={{ scale: 0, opacity: 0 }}
@@ -104,9 +157,9 @@ function RippleRow({ year, role, company, desc, delay, globalMouse, showBubble =
                         className="fixed pointer-events-none z-[10000] flex items-center justify-center"
                         style={{
                             left: isMobile ? "50%" : globalMouse.x + 10,
-                            top: globalMouse.y < window.innerHeight / 2
-                                ? globalMouse.y + 120
-                                : globalMouse.y - 210,
+                            top: isMobile
+                                ? (globalMouse.y < window.innerHeight / 2 ? globalMouse.y + 280 : globalMouse.y - 280)
+                                : (globalMouse.y < window.innerHeight / 2 ? globalMouse.y + 120 : globalMouse.y - 210),
                             x: isMobile ? "-50%" : "0%",
                             y: "-50%",
                         }}
@@ -210,7 +263,7 @@ export default function About() {
                 <div className="flex items-center justify-between w-full">
                     <SectionLabel>Experience</SectionLabel>
                     <span className="font-semibold text-muted/30 uppercase tracking-wider font-sans" style={{ fontSize: "var(--fs-label)" }}>
-                        Hover to Learn More
+                        {isMobile ? "Tap to Learn More" : "Hover to Learn More"}
                     </span>
                 </div>
                 <div className="flex flex-col border-t border-border">

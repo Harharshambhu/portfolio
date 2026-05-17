@@ -25,6 +25,8 @@ const testimonials = [
 
 
 
+import { useWindowSize } from "@/hooks/useWindowSize";
+
 function SpotlightCard({ children, className }: { children: React.ReactNode; className?: string }) {
     const cardRef = useRef<HTMLDivElement>(null);
     const [spotlight, setSpotlight] = useState({ x: 0, y: 0, visible: false });
@@ -58,6 +60,9 @@ function SpotlightCard({ children, className }: { children: React.ReactNode; cla
 }
 
 export default function TestimonialsSection() {
+    const { width } = useWindowSize();
+    const isMobile = width < 768;
+    
     return (
         <section className="flex flex-col gap-8 overflow-hidden">
             <SectionLabel as="h3">Testimonials</SectionLabel>
@@ -71,7 +76,7 @@ export default function TestimonialsSection() {
                     initial={{ x: "0%" }}
                     animate={{ x: "-50%" }}
                     transition={{
-                        duration: 40,
+                        duration: isMobile ? 80 : 40,
                         ease: "linear",
                         repeat: Infinity,
                         repeatType: "loop",
