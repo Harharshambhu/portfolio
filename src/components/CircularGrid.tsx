@@ -281,7 +281,7 @@ export default function CircularGrid({ projects }: { projects: Project[] }) {
                                     <clipPath id={`clip-${i}`} key={i}>
                                         <motion.path
                                             animate={{ d: sectorPath }}
-                                            transition={{ type: "spring", stiffness: 80, damping: 20, mass: 1.2 }}
+                                            transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
                                         />
                                     </clipPath>
                                 );
@@ -334,7 +334,7 @@ export default function CircularGrid({ projects }: { projects: Project[] }) {
                                                         scale: isHovered ? 1.08 : 1,
                                                         opacity: isHovered ? 1 : 0.92,
                                                     }}
-                                                    transition={{ type: "spring", stiffness: 80, damping: 20, mass: 1.2 }}
+                                                    transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
                                                 >
                                                     <image
                                                         href={project.circularThumbnail}
@@ -348,11 +348,11 @@ export default function CircularGrid({ projects }: { projects: Project[] }) {
                                             )}
                                         </g>
 
-                                        <motion.path animate={{ d: outerArc }} fill="none" stroke="var(--foreground)" strokeWidth="2" opacity={0.4} transition={{ type: "spring", stiffness: 80, damping: 20, mass: 1.2 }} />
-                                        <motion.path animate={{ d: innerArc }} fill="none" stroke="var(--foreground)" strokeWidth="1.5" opacity={0.3} transition={{ type: "spring", stiffness: 80, damping: 20, mass: 1.2 }} />
-                                        <motion.line animate={{ x1: p1Inner.x, y1: p1Inner.y, x2: p1Outer.x, y2: p1Outer.y }} stroke="var(--foreground)" strokeWidth="1.5" opacity={0.2} transition={{ type: "spring", stiffness: 80, damping: 20, mass: 1.2 }} />
-                                        <motion.line animate={{ x1: p2Inner.x, y1: p2Inner.y, x2: p2Outer.x, y2: p2Outer.y }} stroke="var(--foreground)" strokeWidth="1.5" opacity={0.2} transition={{ type: "spring", stiffness: 80, damping: 20, mass: 1.2 }} />
-                                        <motion.circle animate={{ cx: pNode.x, cy: pNode.y }} r={3} fill="var(--accent-blue)" transition={{ type: "spring", stiffness: 80, damping: 20, mass: 1.2 }} />
+                                        <motion.path animate={{ d: outerArc }} fill="none" stroke="var(--foreground)" strokeWidth="2" opacity={0.4} transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }} />
+                                        <motion.path animate={{ d: innerArc }} fill="none" stroke="var(--foreground)" strokeWidth="1.5" opacity={0.3} transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }} />
+                                        <motion.line animate={{ x1: p1Inner.x, y1: p1Inner.y, x2: p1Outer.x, y2: p1Outer.y }} stroke="var(--foreground)" strokeWidth="1.5" opacity={0.2} transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }} />
+                                        <motion.line animate={{ x1: p2Inner.x, y1: p2Inner.y, x2: p2Outer.x, y2: p2Outer.y }} stroke="var(--foreground)" strokeWidth="1.5" opacity={0.2} transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }} />
+                                        <motion.circle animate={{ cx: pNode.x, cy: pNode.y }} r={3} fill="var(--accent-blue)" transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }} />
                                     </motion.g>
                                 </Link>
                             );

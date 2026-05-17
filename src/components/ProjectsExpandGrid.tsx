@@ -6,7 +6,7 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import type { Project } from "@/data/projects";
 
-const FLEX_EASE = "flex 0.55s cubic-bezier(0.4, 0, 0.2, 1)";
+const FLEX_EASE = "flex 0.4s cubic-bezier(0.4, 0, 0.2, 1)";
 const ROW_HEIGHT = 480;
 
 function ExpandRow({ items }: { items: (Project | null)[] }) {
