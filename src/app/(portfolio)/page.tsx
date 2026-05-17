@@ -47,7 +47,7 @@ export default function Home() {
         <CircularGrid projects={gridProjects} />
       </section>
 
-      <section className="flex flex-col gap-8">
+      <section className="flex flex-col gap-8 mt-2 md:mt-0">
         <ScrollReveal delay={0.4}>
           <SectionLabel as="h3">Tools</SectionLabel>
         </ScrollReveal>

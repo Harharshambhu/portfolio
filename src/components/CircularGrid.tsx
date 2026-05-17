@@ -244,7 +244,7 @@ export default function CircularGrid({ projects }: { projects: Project[] }) {
             {/* ── Wheel container ── */}
             <div
                 ref={containerRef}
-                className="flex justify-center items-center py-0 overflow-hidden md:overflow-visible relative group h-[640px] md:h-auto"
+                className="flex justify-center items-center py-0 overflow-hidden md:overflow-visible relative group h-[760px] md:h-auto"
             >
                 <motion.svg
                     width="1000" height="840" viewBox="0 80 1000 840"

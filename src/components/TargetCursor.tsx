@@ -184,6 +184,9 @@ const TargetCursor: React.FC<TargetCursorProps> = ({
             if (nowInFooter !== isInFooter) {
                 isInFooter = nowInFooter;
                 gsap.to(circles, { backgroundColor: nowInFooter ? '#ffffff' : '#000000', duration: 0.35, ease: 'power2.out' });
+                if (cornersRef.current) {
+                    gsap.to(cornersRef.current, { borderColor: nowInFooter ? '#ffffff' : '#000000', duration: 0.35, ease: 'power2.out' });
+                }
             }
         };
 

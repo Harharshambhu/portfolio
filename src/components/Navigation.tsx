@@ -3,9 +3,10 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-import { motion, useScroll, useMotionValueEvent } from "framer-motion";
+import { motion, useScroll, useMotionValueEvent, AnimatePresence } from "framer-motion";
 import { useState, useEffect, useRef } from "react";
 import { useWindowSize } from "@/hooks/useWindowSize";
+import { Menu, X } from "lucide-react";
 
 const links = [
     { href: "/", label: "Home" },
@@ -20,6 +21,7 @@ export default function Navigation() {
     const { scrollY } = useScroll();
     const isHome = pathname === "/";
     const [isScrolled, setIsScrolled] = useState(!isHome);
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
     useMotionValueEvent(scrollY, "change", (latest) => {
         if (isHome) {
@@ -30,6 +32,7 @@ export default function Navigation() {
     // Force scroll to top when navigating to a new page
     useEffect(() => {
         window.scrollTo(0, 0);
+        setIsSidebarOpen(false); // Close sidebar on navigation
     }, [pathname]);
 
     // Reset or force state on path change
@@ -97,36 +100,58 @@ export default function Navigation() {
     const targetFontSize = isScrolled ? compactSize : (isHovered ? enlargedHoveredSize : enlargedUnhoveredSize);
 
     return (
+        <>
         <div className="fixed top-0 left-0 right-0 z-50">
             <motion.nav
                 initial={{ opacity: 0, y: -20 }}
                 animate={{
                     opacity: 1,
                     y: 0,
-                    paddingBottom: isScrolled ? 16 : 0
+                    paddingTop: isScrolled ? (isMobile ? 24 : 32) : (isMobile ? 40 : 32),
+                    paddingBottom: isScrolled ? (isMobile ? 16 : 16) : 0
                 }}
                 transition={{
+                    paddingTop: { type: "spring", stiffness: 100, damping: 20 },
                     paddingBottom: { type: "spring", stiffness: 100, damping: 20 },
                     default: { duration: 0.2, ease: "easeOut" }
                 }}
-                className={`flex flex-col w-full max-w-screen-xl mx-auto items-center pt-10 md:pt-8 bg-background px-6 md:px-6 border-b-2 border-muted`}
+                className={`flex flex-col w-full max-w-screen-xl mx-auto items-center bg-background px-6 md:px-6 border-b-2 border-muted`}
             >
                 <div className="flex w-full items-start justify-between">
-                    <motion.div
-                        className="flex gap-5 md:gap-10 -translate-y-2"
-                        transition={{ duration: 0 }}
-                    >
-                        {links.map((link) => (
-                            <Link
-                                key={link.href}
-                                href={link.href}
-                                className={`hover:text-foreground transition-colors text-sm font-semibold ${pathname === link.href ? "text-foreground" : "text-muted"
-                                    }`}
+                    <AnimatePresence mode="popLayout" initial={false}>
+                        {(!isMobile || !isScrolled) ? (
+                            <motion.div
+                                key="links"
+                                initial={{ opacity: 0, width: 0, filter: "blur(4px)" }}
+                                animate={{ opacity: 1, width: "auto", filter: "blur(0px)" }}
+                                exit={{ opacity: 0, width: 0, filter: "blur(4px)" }}
+                                transition={{ duration: 0.4, ease: "easeInOut" }}
+                                className="flex flex-nowrap gap-3 md:gap-10 -translate-y-2 overflow-hidden items-center"
                             >
-                                {link.label}
-                            </Link>
-                        ))}
-                    </motion.div>
+                                {links.map((link) => (
+                                    <Link
+                                        key={link.href}
+                                        href={link.href}
+                                        className={`hover:text-foreground transition-colors text-sm font-semibold whitespace-nowrap ${pathname === link.href ? "text-foreground" : "text-muted"}`}
+                                    >
+                                        {link.label}
+                                    </Link>
+                                ))}
+                            </motion.div>
+                        ) : (
+                            <motion.button
+                                key="hamburger"
+                                initial={{ opacity: 0, width: 0, scale: 0.8 }}
+                                animate={{ opacity: 1, width: "auto", scale: 1 }}
+                                exit={{ opacity: 0, width: 0, scale: 0.8 }}
+                                transition={{ duration: 0.4, ease: "easeInOut" }}
+                                onClick={() => setIsSidebarOpen(true)}
+                                className="p-2 -mt-3 -ml-3 text-foreground hover:bg-muted/20 rounded-md transition-colors overflow-hidden flex items-center justify-center"
+                            >
+                                <Menu size={24} className="shrink-0" />
+                            </motion.button>
+                        )}
+                    </AnimatePresence>
 
                     {/* Placeholder to keep layout stable when Singh moves */}
                     {isScrolled && <div className="w-[45px]" />}
@@ -134,25 +159,28 @@ export default function Navigation() {
 
                 <motion.div
                     animate={{
-                        marginTop: isScrolled ? -24 : 24,
+                        marginTop: isScrolled ? (isMobile ? -28 : -24) : 24,
                         marginBottom: isScrolled ? 0 : 32
                     }}
-                    className={`flex w-full justify-end cursor-pointer`}
+                    className={`flex w-full justify-end pointer-events-none`}
                     transition={{ type: "spring", stiffness: 100, damping: 20 }}
-                    onMouseEnter={() => {
-                        if (!isHovered) {
-                            setIsHovered(true);
-                            scramble("Sokimevi");
-                        }
-                    }}
-                    onMouseLeave={() => {
-                        if (isHovered) {
-                            setIsHovered(false);
-                            scramble("Hello.");
-                        }
-                    }}
                 >
-                    <Link href="/" className={`block ${!isScrolled ? "no-cursor-interaction" : ""}`}>
+                    <Link 
+                        href="/" 
+                        className={`block pointer-events-auto cursor-pointer ${!isScrolled ? "no-cursor-interaction" : ""}`}
+                        onMouseEnter={() => {
+                            if (!isHovered) {
+                                setIsHovered(true);
+                                scramble("Sokimevi");
+                            }
+                        }}
+                        onMouseLeave={() => {
+                            if (isHovered) {
+                                setIsHovered(false);
+                                scramble("Hello.");
+                            }
+                        }}
+                    >
                         <motion.span
                             animate={{
                                 fontSize: targetFontSize,
@@ -171,5 +199,51 @@ export default function Navigation() {
                 </motion.div>
             </motion.nav>
         </div>
+
+        {/* Mobile Sidebar */}
+        <AnimatePresence>
+            {isMobile && isSidebarOpen && (
+                <>
+                    <motion.div
+                        key="sidebar-overlay"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.2 }}
+                        onClick={() => setIsSidebarOpen(false)}
+                        className="fixed inset-0 bg-background/80 backdrop-blur-sm z-[90] md:hidden"
+                    />
+                    <motion.div
+                        key="sidebar-menu"
+                        initial={{ x: "-100%" }}
+                        animate={{ x: 0 }}
+                        exit={{ x: "-100%" }}
+                        transition={{ type: "spring", damping: 25, stiffness: 200 }}
+                        className="fixed top-0 left-0 bottom-0 w-[70vw] max-w-sm bg-background border-r border-muted z-[100] md:hidden shadow-2xl flex flex-col"
+                    >
+                        <button 
+                            onClick={() => setIsSidebarOpen(false)} 
+                            className="absolute top-4 right-4 p-2 text-foreground hover:bg-muted/20 rounded-md transition-colors"
+                        >
+                            <X size={24} />
+                        </button>
+                        <div className="flex flex-col items-start gap-6 px-6 pt-12 text-lg font-sans font-semibold tracking-tight">
+                            {links.map((link) => (
+                                <Link
+                                    key={link.href}
+                                    href={link.href}
+                                    onClick={() => setIsSidebarOpen(false)}
+                                    className={`transition-colors ${pathname === link.href ? "" : "text-muted hover:text-foreground"}`}
+                                    style={pathname === link.href ? { color: "var(--accent-blue)" } : {}}
+                                >
+                                    {link.label}
+                                </Link>
+                            ))}
+                        </div>
+                    </motion.div>
+                </>
+            )}
+        </AnimatePresence>
+        </>
     );
 }
