@@ -174,10 +174,10 @@ const TargetCursor: React.FC<TargetCursorProps> = ({
         // Switch circles to white inside the dark footer, regardless of whether
         // the change was triggered by mouse movement or page scroll.
         const circles = [c1Ref.current, c2Ref.current, c3Ref.current, c4Ref.current];
-        const footer = document.getElementById('main-footer');
         let isInFooter = false;
 
         const updateCircleColor = (x: number, y: number) => {
+            const footer = document.getElementById('main-footer');
             if (!footer) return;
             const rect = footer.getBoundingClientRect();
             const nowInFooter = x >= rect.left && x <= rect.right && y >= rect.top && y <= rect.bottom;
