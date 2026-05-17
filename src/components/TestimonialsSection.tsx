@@ -98,7 +98,7 @@ export default function TestimonialsSection() {
                                             &ldquo;{item.text}&rdquo;
                                         </p>
                                         <footer className="text-sm font-sans font-medium text-muted">
-                                            — {item.author}
+                                            {item.author}
                                         </footer>
                                     </div>
                                 </SpotlightCard>

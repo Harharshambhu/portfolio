@@ -285,7 +285,7 @@ export default function DiscoveryToTransactionPage() {
                     <div className="md:col-span-4 flex flex-col gap-8">
                         <ScrollMagnifier>
                             <p className="text-base leading-relaxed">
-                                The following data justifies why a <strong>Global</strong> verification strategy—which works efficiently in the US—<em>fails</em> to capture the full potential of the Indian market.
+                                The following data justifies why a <strong>Global</strong> verification strategy that works in the US <em>fails</em> to capture the full potential of the Indian market.
                             </p>
                         </ScrollMagnifier>
                         <ScrollMagnifier>
@@ -496,7 +496,7 @@ export default function DiscoveryToTransactionPage() {
                     <blockquote className="text-base leading-relaxed italic border-l-2 pl-5" style={{ borderColor: "var(--accent-blue)" }}>
                         &quot;How might we <strong>institutionalize <em>statutory accountability</em></strong> for Instagram businesses in India to{" "}
                         <strong>bridge the &apos;Trust Gap,&apos;</strong> thereby assuring the user and collapsing the distance between{" "}
-                        <strong>passive discovery and secure transaction</strong>—while preventing users from exiting the app to <strong>verify</strong> brands elsewhere?&quot;
+                        <strong>passive discovery and secure transaction</strong>, while also keeping users from exiting the app to <strong>verify</strong> brands elsewhere?&quot;
                     </blockquote>
                 </ScrollMagnifier>
                 <div className="grid md:grid-cols-3 gap-4 text-base leading-relaxed">

@@ -13,27 +13,27 @@ const problemClusters = [
     {
         num: "01",
         title: "Constant Manual Lifting",
-        body: "The sheer frequency of manual lifts within a typical shift constitutes a structural hazard. The problem is not any single lift — it is the aggregate of hundreds of lifts over a career.",
+        body: "The number of lifts in a single shift is what makes it dangerous. No individual lift is the problem. It's the cumulative load across hundreds of shifts, over an entire career.",
     },
     {
         num: "02",
         title: "Mishandling of Vulnerable Patients",
-        body: "Pregnant women, post-surgical cases, and trauma patients face disproportionate risk. The improvised bedsheet method provides no differentiation between a stable patient and a critically vulnerable one.",
+        body: "Pregnant women, post-surgical patients, and trauma cases carry the most risk. The bedsheet method doesn't adjust for any of that. A stable patient and a critically vulnerable one get handled the same way.",
     },
     {
         num: "03",
         title: "Insufficient Protocol Implementation",
-        body: "Protocols for safe patient transfer exist. Their implementation does not. The gap is structural: correct procedure requires more time and more people than public ward operations allow.",
+        body: "Safe transfer protocols do exist. They just aren't followed in practice. The correct procedure takes more time and more staff than most public wards can realistically spare.",
     },
     {
         num: "04",
         title: "Equipment Design Gaps",
-        body: "Existing stretchers were designed without adequate consideration of the full transfer workflow. IV lines, oxygen cylinders, and monitoring equipment have no dedicated housing, forcing divided attention during transfer.",
+        body: "The stretchers we observed weren't designed with the full transfer process in mind. There's nowhere to put IV lines, oxygen cylinders, or monitoring equipment, so staff attention is constantly split.",
     },
     {
         num: "05",
         title: "Absent Immobilisation Procedures",
-        body: "No standardised method exists for immobilising specific body parts during lateral transfer. The spine, neck, and injured limbs are all vulnerable during bedsheet-based transfers.",
+        body: "There's no standard method for keeping specific body parts still during a lateral transfer. The spine, neck, and injured limbs are all at risk when the only mechanism is a bedsheet.",
     },
 ];
 
@@ -41,25 +41,25 @@ const scamperItems = [
     {
         letter: "S",
         label: "Substitute",
-        body: "Replace manual lifting entirely with a lateral sliding mechanism — the foundational principle of the final concept.",
+        body: "Replace manual lifting entirely with a lateral sliding mechanism. This ended up being the core principle behind the final concept.",
         color: "var(--accent-blue)",
     },
     {
         letter: "C",
         label: "Combine",
-        body: "Integrate snap-fit alignment feedback so bed and stretcher are correctly positioned before transfer begins.",
+        body: "Add snap-fit alignment feedback so the bed and stretcher are correctly positioned before the transfer even begins.",
         color: "var(--accent-neon)",
     },
     {
         letter: "E",
         label: "Eliminate",
-        body: "Eliminate the vertical lift entirely. If the mattress itself travels from bed to stretcher, the lift is structurally absent from the process.",
+        body: "Get rid of the vertical lift completely. If the mattress moves from the bed to the stretcher, there's nothing left to lift.",
         color: "#a78bfa",
     },
     {
         letter: "A",
         label: "Adapt",
-        body: "Customise the mattress profile for different body types. Adapt sliding resistance based on patient weight to prevent uncontrolled motion.",
+        body: "Adjust the mattress profile for different body types and vary the sliding resistance based on patient weight to keep the motion controlled.",
         color: "#f59e0b",
     },
 ];
@@ -68,42 +68,42 @@ const protocolSteps = [
     {
         step: "01",
         title: "Prepare the Bed",
-        desc: "Straighten to flat horizontal and lower side railings. The swinging mechanism self-corrects the mattress angle — no manual adjustment required.",
+        desc: "Flatten the bed and lower the side railings. The swinging mechanism handles the mattress angle automatically, so there's no manual adjustment needed.",
     },
     {
         step: "02",
         title: "Connect the Stretcher",
-        desc: "Align the stretcher to the telescopic rail. Extend until the snap-fit joint engages — confirmed by audible click and locking resistance.",
+        desc: "Line up the stretcher with the telescopic rail and extend it until the snap-fit joint locks into place. You'll hear it click.",
     },
     {
         step: "03",
         title: "Slide the Mattress",
-        desc: "Apply controlled lateral force. The low-friction base layer and rail work together for single-caregiver motion. Patient stays on the same surface throughout.",
+        desc: "Apply a steady lateral push. The low-friction base and the rail are designed to work together, so a single caregiver can manage this. The patient stays on the same surface throughout.",
     },
     {
         step: "04",
         title: "Secure the Edges",
-        desc: "Activate the rotating side-fold mechanism using the one-finger tap-and-release function. Creates lateral containment for stretcher transport.",
+        desc: "Use the one-finger tap-and-release to raise the side edges. This creates a lateral barrier to keep the patient from rolling during transport.",
     },
     {
         step: "05",
         title: "Verify and Release",
-        desc: "Physically check all safety key locks. Disengage the stretcher from the rail. The rail retracts to stored position. Transfer complete.",
+        desc: "Physically verify all safety key locks. Detach the stretcher from the rail. The rail slides back to its stored position. Transfer done.",
     },
 ];
 
 const reflections = [
     {
         title: "The Cultural Problem Precedes the Physical One",
-        body: "Unsafe transfer practice is maintained not by ignorance but by institutional normalisation. Staff know the risks. A hardware intervention that makes the safe behaviour the easiest behaviour is the only approach robust enough to survive contact with real conditions.",
+        body: "The staff we spoke to weren't uninformed about the risks. Unsafe transfer has become the default simply because it's the fastest option available. A solution only holds up here if it makes the safe option easier than the current one.",
     },
     {
         title: "Context Specificity is Non-Negotiable",
-        body: "Every existing solution was designed for a different context. The Indian public hospital — high volume, limited staff, restricted budget, unreliable infrastructure — is not a degraded version of the Western hospital. It is a distinct operating environment that requires solutions designed from the inside.",
+        body: "Every existing transfer solution we found was built for a different context. The Indian public hospital has its own constraints: high patient volume, limited staff, tight budgets, and unpredictable infrastructure. It's not a lesser version of the Western hospital. It's a genuinely different operating environment, and the design needs to come from inside that context.",
     },
     {
         title: "Simplicity Requires More Work Than Complexity",
-        body: "Arriving at a five-step manual protocol was harder than generating automated alternatives. A manual protocol that is reliably faster, requires no external power, and fails safely — that requires sustained constraint thinking at every design decision.",
+        body: "Getting to a five-step manual protocol honestly took more work than generating automated alternatives. A manual system that's reliably faster, needs no external power, and fails safely is harder to design than it sounds. Every decision had to account for the constraints.",
     },
 ];
 
@@ -125,7 +125,7 @@ export default function ComfortAidProjectPage() {
                     <h1 className="text-6xl md:text-[100px] font-bold tracking-tighter leading-none">Comfort Aid</h1>
                 </div>
                 <p className="max-w-2xl text-xl leading-relaxed text-muted">
-                    A patient transfer system designed to eliminate the physical and clinical risks of manual bed-to-stretcher transfers in Indian public hospitals — without lifting, without improvised bedsheet methods, and without requiring more than one caregiver.
+                    A patient transfer system for Indian public hospitals that gets rid of the risks that come with manual bed-to-stretcher transfers. No lifting, no improvised bedsheet methods, and ideally just one caregiver needed.
                 </p>
                 <p className="max-w-2xl text-base leading-relaxed text-muted">
                     Developed through immersive field research at AIIMS New Delhi, following the Design Thinking process: Empathise → Define → Ideate → Prototype → Test.
@@ -133,7 +133,7 @@ export default function ComfortAidProjectPage() {
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-px border border-border rounded-xl overflow-hidden w-full max-w-2xl mt-2">
                     {[
                         { label: "Role", value: "UX Designer" },
-                        { label: "Scope", value: "Group — 6 Members" },
+                        { label: "Scope", value: "Group · 6 Members" },
                         { label: "Context", value: "IIT Jodhpur" },
                         { label: "Year", value: "2025" },
                     ].map((item) => (
@@ -154,7 +154,7 @@ export default function ComfortAidProjectPage() {
             >
                 <Image
                     src="/projects/Comfort Aid/Finalposter-ComfortAid.webp"
-                    alt="ComfortAid — Final design poster showing the hybrid mattress system, 5-step protocol, and key statistics"
+                    alt="ComfortAid final design poster showing the hybrid mattress system, 5-step protocol, and key statistics"
                     width={1600}
                     height={1130}
                     className="w-full h-auto"
@@ -195,10 +195,10 @@ export default function ComfortAidProjectPage() {
                     <SectionLabel>The Problem</SectionLabel>
                     <h2 className="text-5xl font-semibold tracking-tight">Manual transfer was never designed.</h2>
                     <p className="max-w-2xl text-muted leading-relaxed">
-                        The predominant method — lifting a patient using bedsheets, with two to four staff members coordinating — emerged out of necessity in under-resourced settings and became embedded in institutional practice because no better alternative was accessible or affordable.
+                        The most common method is lifting a patient using bedsheets, with two to four staff coordinating the move. This came about out of necessity in under-resourced settings and stuck around because no better option was accessible or affordable.
                     </p>
                     <p className="max-w-2xl text-muted leading-relaxed">
-                        In high-pressure environments like emergency departments and trauma wards, the volume of transfers required each shift makes it structurally impossible for nurses to apply careful technique to every transfer — even when they know better.
+                        In high-pressure wards like emergency and trauma departments, the number of transfers per shift makes it almost impossible for nurses to be careful every time. Even the ones who know the right technique don't always have the time to use it.
                     </p>
                 </div>
 
@@ -208,7 +208,7 @@ export default function ComfortAidProjectPage() {
                         <div className="relative aspect-video rounded-xl overflow-hidden border border-border">
                             <Image
                                 src="/projects/Comfort Aid/Introduction.webp"
-                                alt="Introduction — context of patient transfer in Indian hospitals"
+                                alt="Introduction context of patient transfer in Indian hospitals"
                                 fill
                                 className="object-cover"
                             />
@@ -272,13 +272,13 @@ export default function ComfortAidProjectPage() {
                     <SectionLabel>Field Research</SectionLabel>
                     <h2 className="text-5xl font-semibold tracking-tight">Two days at AIIMS New Delhi.</h2>
                     <p className="max-w-2xl text-muted leading-relaxed">
-                        Immersive field observation and structured interviews across Emergency, Trauma, Oncology, Neurology, NICU, and Pediatrics. The multi-department scope was intentional — transfer challenges manifest differently across patient profiles and ward contexts.
+                        We spent two days on immersive field observation and structured interviews across Emergency, Trauma, Oncology, Neurology, NICU, and Pediatrics. Covering multiple departments was intentional. Transfer challenges look quite different depending on the patient type and ward.
                     </p>
                 </div>
 
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
                     {[
-                        { src: "/projects/Comfort Aid/AIIMs-visit.webp", alt: "AIIMS New Delhi — field visit" },
+                        { src: "/projects/Comfort Aid/AIIMs-visit.webp", alt: "AIIMS New Delhi field visit" },
                         { src: "/projects/Comfort Aid/Aiims jodhpur photos.webp", alt: "AIIMS field research photographs" },
                         { src: "/projects/Comfort Aid/Group Discussing.webp", alt: "Team discussing research findings" },
                     ].map((img) => (
@@ -330,7 +330,7 @@ export default function ComfortAidProjectPage() {
                     <SectionLabel>Research Synthesis</SectionLabel>
                     <h2 className="text-5xl font-semibold tracking-tight">Affinity Mapping.</h2>
                     <p className="max-w-2xl text-muted leading-relaxed">
-                        All collected data was transcribed and organised through affinity mapping across twelve categories — Stretcher, Bed, Wheelchair, Patient, Problems, Threats, Procedure, Protocols, Suggestions, Manual Lifting, General, Miscellaneous.
+                        After the visit, we transcribed everything and ran an affinity mapping session across twelve categories: Stretcher, Bed, Wheelchair, Patient, Problems, Threats, Procedure, Protocols, Suggestions, Manual Lifting, General, and Miscellaneous.
                     </p>
                 </div>
 
@@ -374,7 +374,7 @@ export default function ComfortAidProjectPage() {
                         className="object-contain p-4"
                     />
                 </div>
-                <p className="text-sm text-muted text-center">Key Insight-to-Action Priority Matrix — translating research findings into design requirements</p>
+                <p className="text-sm text-muted text-center">Key Insight-to-Action Priority Matrix, translating research findings into design requirements</p>
             </motion.section>
 
             {/* ── USER PERSONA ── */}
@@ -388,7 +388,7 @@ export default function ComfortAidProjectPage() {
                     <div className="relative min-h-64 md:min-h-0">
                         <Image
                             src="/projects/Comfort Aid/Raani-persona.webp"
-                            alt="Rajni — User persona for ComfortAid"
+                            alt="Rajni user persona for ComfortAid"
                             fill
                             className="object-cover"
                         />
@@ -400,12 +400,12 @@ export default function ComfortAidProjectPage() {
                             <p className="text-sm text-muted font-mono">Construction labourer · Tier-2 city, Northern India · 4 months pregnant</p>
                         </div>
                         <p className="text-muted leading-relaxed text-sm">
-                            Rajni represents the intersection of the three highest-risk factors in the patient transfer problem: clinical vulnerability (high-risk pregnancy), institutional context (under-resourced public hospital), and advocacy deficit (limited health literacy means she cannot challenge unsafe handling even if she perceives it as risky).
+                            Rajni sits at the intersection of the three highest-risk factors we identified: clinical vulnerability from her high-risk pregnancy, the constraints of an under-resourced public hospital, and limited health literacy that makes it hard for her to push back on how she's being handled, even when something feels wrong.
                         </p>
                         <div className="flex flex-col gap-2 border-t border-border pt-4">
                             <span className="text-xs font-semibold text-muted uppercase tracking-wider">Design Constraint</span>
                             <p className="text-sm text-muted leading-relaxed">
-                                A solution designed to protect Rajni&apos;s safety during transfer — without requiring her to request better treatment or her carers to invest additional time — is a solution that works within the real constraints of the system rather than against them.
+                                A solution that keeps Rajni safe without requiring her to ask for better care, or her caregivers to spend extra time, is one that actually fits the constraints of the system. That&apos;s the kind of design that holds up in practice.
                             </p>
                         </div>
                     </div>
@@ -422,7 +422,7 @@ export default function ComfortAidProjectPage() {
                 <h2 className="text-5xl font-semibold tracking-tight">How Might We</h2>
                 <div className="p-8 md:p-12 rounded-2xl border border-border bg-background">
                     <p className="text-xl md:text-2xl font-semibold tracking-tight leading-snug">
-                        &ldquo;How might we create a human-centred system with improved weight management and balanced ergonomics, ensuring minimal effort and time for staff — incorporating customisable immobilisation — enhancing patient stability, and making it the <em className="font-normal not-italic" style={{ color: "var(--accent-blue)" }}>preferred choice for hospital staff in Indian public healthcare settings?</em>&rdquo;
+                        &ldquo;How might we design a system that&apos;s easier on both staff and patients, reduces the physical load, allows for some customisation around patient stabilisation, and is actually the option that hospital staff want to use in <em className="font-normal not-italic" style={{ color: "var(--accent-blue)" }}>Indian public healthcare settings?</em>&rdquo;
                     </p>
                     <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mt-8">
                         {[
@@ -453,7 +453,7 @@ export default function ComfortAidProjectPage() {
                     <SectionLabel>Ideation</SectionLabel>
                     <h2 className="text-5xl font-semibold tracking-tight">SCAMPER to concept.</h2>
                     <p className="max-w-2xl text-muted leading-relaxed">
-                        Three SCAMPER threads converged on a single concept: a mattress that slides along a rail connecting bed to stretcher. The patient remains on the mattress throughout — the mattress is the mechanism.
+                        Three of our SCAMPER directions kept pointing toward the same idea: a mattress that slides along a rail between the bed and the stretcher. The patient stays on the mattress throughout. The mattress is the transfer mechanism.
                     </p>
                 </div>
 
@@ -498,7 +498,7 @@ export default function ComfortAidProjectPage() {
                     <div className="relative aspect-video rounded-xl overflow-hidden border border-border">
                         <Image
                             src="/projects/Comfort Aid/creativity-exercisiing.webp"
-                            alt="Creativity exercise — design team at work"
+                            alt="Creativity exercise, design team at work"
                             fill
                             className="object-cover"
                         />
@@ -517,16 +517,16 @@ export default function ComfortAidProjectPage() {
                     <SectionLabel>The Solution</SectionLabel>
                     <h2 className="text-5xl font-semibold tracking-tight">A hybrid slide-mattress system.</h2>
                     <p className="max-w-2xl text-muted leading-relaxed">
-                        ComfortAid is a detachable hybrid slide-mattress mounted on a telescopic rail system. The patient does not move relative to the mattress at any point — the mattress, carrying the patient, slides from bed to stretcher.
+                        ComfortAid is a hybrid slide-mattress on a telescopic rail system. The patient never moves relative to the mattress. The mattress itself slides from the bed to the stretcher, carrying the patient with it.
                     </p>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {[
-                        { label: "Hybrid Mattress", desc: "A composite mattress that functions simultaneously as a patient support surface and as the moving element of the transfer mechanism. Four layers: memory e-fibre, e-spring core, EVA foam, and low-friction base." },
-                        { label: "Telescopic Rail", desc: "Retractable rail infrastructure connecting bed to stretcher. Snap-fit joint provides physical connection and audible confirmation of correct alignment before transfer begins." },
-                        { label: "Side-Fold Mechanism", desc: "Lateral edges raise via one-finger tap-and-release. In raised position, creates containment to prevent patient rolling during transfer and stretcher transport." },
-                        { label: "Safety Key Locks", desc: "Keyed locking mechanism at each rail joint. Forced physical verification as the final action before initiating the slide — functions as a mandatory error-prevention checkpoint." },
+                        { label: "Hybrid Mattress", desc: "The mattress works as both the patient support surface and the moving element of the transfer. Four layers make it work: memory e-fibre, an e-spring core, EVA foam, and a low-friction base." },
+                        { label: "Telescopic Rail", desc: "A retractable rail that connects the bed to the stretcher. The snap-fit joint gives a physical lock and an audible click to confirm correct alignment before the transfer starts." },
+                        { label: "Side-Fold Mechanism", desc: "The lateral edges raise with a one-finger tap and release. In raised position, they create containment to stop the patient from rolling during transport." },
+                        { label: "Safety Key Locks", desc: "A keyed lock at each rail joint. You have to physically verify these before the transfer begins. It's a deliberate mandatory step, not an optional one." },
                     ].map((c) => (
                         <div key={c.label} className="flex flex-col gap-3 p-6 rounded-xl border border-border bg-background">
                             <span className="font-semibold" style={{ color: "var(--accent-blue)" }}>{c.label}</span>
@@ -541,7 +541,7 @@ export default function ComfortAidProjectPage() {
                         <div className="relative w-full aspect-video rounded-xl overflow-hidden border border-border">
                             <Image
                                 src="/projects/Comfort Aid/Base-prototyping.webp"
-                                alt="ComfortAid physical prototype — scale model with wooden mannequin"
+                                alt="ComfortAid physical prototype, scale model with wooden mannequin"
                                 fill
                                 className="object-cover"
                             />
@@ -561,12 +561,12 @@ export default function ComfortAidProjectPage() {
                     <SectionLabel>Transfer Protocol</SectionLabel>
                     <h2 className="text-5xl font-semibold tracking-tight">Five steps. One caregiver.</h2>
                     <p className="max-w-2xl text-muted leading-relaxed">
-                        The protocol must be completable by a single trained caregiver in less time than the current bedsheet method with two caregivers. This performance requirement is the threshold for adoption.
+                        For this to actually be used, one trained caregiver needs to complete it faster than two people doing the bedsheet method. That was the benchmark from day one.
                     </p>
                 </div>
 
                 <div className="flex flex-col gap-3">
-                    {protocolSteps.map((s, i) => (
+                    {protocolSteps.map((s) => (
                         <div key={s.step} className="flex gap-6 p-6 rounded-xl border border-border bg-background">
                             <span className="font-mono text-sm text-muted shrink-0 pt-0.5">{s.step}</span>
                             <div className="flex flex-col gap-1">
