@@ -45,7 +45,7 @@ export default function ArtworksPage() {
                     <h1 className="text-6xl md:text-[90px] font-bold tracking-tighter leading-none">Artworks</h1>
                 </div>
                 <p className="max-w-2xl text-base leading-relaxed text-muted">
-                    Personal illustration work — character concept, creature design, digital painting, and line art. No client, no brief. Each piece started from an idea that needed to exist somewhere.
+                    Personal illustration work: character concept, creature design, digital painting, and line art. No client, no brief. Each piece started from an idea that needed to exist somewhere.
                 </p>
                 <div className="grid grid-cols-3 gap-px border border-border rounded-xl overflow-hidden w-full max-w-lg">
                     {[

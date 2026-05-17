@@ -81,7 +81,7 @@ export default function AdCampaignsPage() {
                 </div>
                 <ScrollMagnifier>
                     <p className="max-w-2xl text-base leading-relaxed text-muted">
-                        Commercial work across three clients — a webtoon-format comic ad for Blinkit, satirical social and print campaigns for Hubble, and aggressive character-driven logo design for cricket teams. Different briefs, different registers, same principle: if the ad is forgettable, it failed.
+                        Commercial work across three clients: a webtoon comic ad for Blinkit, satirical social and print campaigns for Hubble, and character-driven logo design for cricket teams. Different briefs, different registers, same principle: if the ad is forgettable, it failed.
                     </p>
                 </ScrollMagnifier>
                 <div className="grid grid-cols-3 gap-px border border-border rounded-xl overflow-hidden w-full max-w-2xl mt-2">
@@ -111,7 +111,7 @@ export default function AdCampaignsPage() {
                     <p className="text-xs font-sans text-muted uppercase tracking-widest">Bedlam Studio · 2022</p>
                     <ScrollMagnifier>
                         <p className="max-w-2xl text-muted leading-relaxed">
-                            The brief was to capture Blinkit's 10-minute delivery in a format people would actually stop scrolling for. The answer was a webtoon — a vertical, panel-driven comic strip built for mobile feeds. The story is mundane by design: someone spills ketchup while watching TV, panics, opens Blinkit, and the delivery is at the door before the mess is even cleaned up. Bold outlines, high-contrast colour panels, and onomatopoeia text — stitched together to move like a comic strip and land like a brand promise.
+                            The brief was to capture Blinkit&apos;s 10-minute delivery in a format people would actually stop scrolling for. The answer was a webtoon, a vertical panel-driven comic strip built for mobile feeds. The story is mundane by design: someone spills ketchup while watching TV, panics, opens Blinkit, and the delivery is at the door before the mess is even cleaned up. Bold outlines, high-contrast colour panels, and onomatopoeia text, all stitched together to move like a comic strip and land like a brand promise.
                         </p>
                     </ScrollMagnifier>
                 </div>
@@ -133,7 +133,7 @@ export default function AdCampaignsPage() {
 
                 {/* Process — V1 rough sketches */}
                 <div className="flex flex-col gap-4">
-                    <p className="text-xs font-sans text-muted uppercase tracking-widest">Draft V1 — Rough Storyboard</p>
+                    <p className="text-xs font-sans text-muted uppercase tracking-widest">Draft V1: Rough Storyboard</p>
                     <div className="grid grid-cols-4 md:grid-cols-8 gap-2">
                         {blinkitDraftsV1.map((src, i) => (
                             <motion.div
@@ -151,7 +151,7 @@ export default function AdCampaignsPage() {
 
                 {/* Process — V2 clean line art */}
                 <div className="flex flex-col gap-4">
-                    <p className="text-xs font-sans text-muted uppercase tracking-widest">Draft V2 — Clean Line Art</p>
+                    <p className="text-xs font-sans text-muted uppercase tracking-widest">Draft V2: Clean Line Art</p>
                     <div className="grid grid-cols-3 md:grid-cols-6 gap-2">
                         {blinkitDraftsV2.map((src, i) => (
                             <motion.div
@@ -183,7 +183,7 @@ export default function AdCampaignsPage() {
                     <p className="text-xs font-sans text-muted uppercase tracking-widest">Hubble · Social Media & Print · 2022</p>
                     <ScrollMagnifier>
                         <p className="max-w-2xl text-muted leading-relaxed">
-                            Rather than running a standard financial savings ad, this campaign made fake ads for well-known brands — then turned them into the joke. "Mat-laay" (Don't buy) parodies Myntra's sale season with "100% loss" copy. "Bus Kar King" riffs on Burger King to say the same money could go toward something worth saving for. Each post sets up a brand the audience already knows, exaggerates its worst pitch, and lets Hubble's saving promise land by contrast. The campaign also included a Hubble × Croma illustrated newspaper spread for Indore — a city-specific print piece mapping local landmarks against earning rewards.
+                            Rather than running a standard financial savings ad, this campaign made fake ads for well-known brands and turned them into the joke. &quot;Mat-laay&quot; (Don&apos;t buy) parodies Myntra&apos;s sale season with &quot;100% loss&quot; copy. &quot;Bus Kar King&quot; riffs on Burger King to say the same money could go toward something worth saving for. Each post sets up a brand the audience already knows, exaggerates its worst pitch, and lets Hubble&apos;s saving promise land by contrast. The campaign also included a Hubble x Croma illustrated newspaper spread for Indore, a city-specific print piece mapping local landmarks against earning rewards.
                         </p>
                     </ScrollMagnifier>
                 </div>
@@ -241,7 +241,7 @@ export default function AdCampaignsPage() {
                     <p className="text-xs font-sans text-muted uppercase tracking-widest">Home-Akraft · Logo Design · 2024</p>
                     <ScrollMagnifier>
                         <p className="max-w-2xl text-muted leading-relaxed">
-                            A series of high-energy sports logos built around reptilian characters — Python, Mamba, Chameleon — each designed to carry a team's identity at any scale, from jersey to scoreboard. The brief called for logos that feel dangerous and memorable, built in Photoshop with the kind of character illustration weight that holds up on merchandise. T-shirt renders were produced to validate how each mark carries on fabric.
+                            A series of high-energy sports logos built around reptilian characters (Python, Mamba, Chameleon), each designed to carry a team's identity at any scale, from jersey to scoreboard. The brief called for logos that feel dangerous and memorable, built in Photoshop with the kind of character illustration weight that holds up on merchandise. T-shirt renders were produced to validate how each mark carries on fabric.
                         </p>
                     </ScrollMagnifier>
                 </div>

@@ -34,7 +34,7 @@ export default function EchoTilesProjectPage() {
                     <h1 className="text-6xl md:text-[120px] font-bold tracking-tighter leading-none">Echo Tiles</h1>
                 </div>
                 <p className="max-w-2xl text-xl leading-relaxed text-muted">
-                    Minesweeper reimagined as a spatial puzzle you stand inside — where numbers become sound, and the grid becomes a room.
+                    Minesweeper, except you&apos;re standing inside the grid. Numbers become sound, and the whole room is the board.
                 </p>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-px border border-border rounded-xl overflow-hidden w-full max-w-2xl mt-2">
                     {[
@@ -78,7 +78,7 @@ export default function EchoTilesProjectPage() {
                 className="grid grid-cols-1 md:grid-cols-3 gap-px border border-border rounded-xl overflow-hidden"
             >
                 {[
-                    { label: "Environment", value: "3D Hollow Cube", sub: "Tiles cover all inner faces — floor, walls, ceiling" },
+                    { label: "Environment", value: "3D Hollow Cube", sub: "Tiles cover the floor, walls, and ceiling" },
                     { label: "Audio System", value: "Beat-Driven Clues", sub: "Mine count replaced by rhythmic audio pulses" },
                     { label: "Interaction", value: "VR Hand Gesture", sub: "Custom sensor gun + proximity reveal logic" },
                 ].map((item) => (
@@ -101,13 +101,13 @@ export default function EchoTilesProjectPage() {
                     <SectionLabel>The Concept</SectionLabel>
                     <h2 className="text-5xl font-semibold tracking-tight">From flat grid to inhabited space.</h2>
                     <p className="max-w-2xl text-muted leading-relaxed">
-                        Classic Minesweeper is a 2D grid on a monitor. Echo Tiles asks a different question — what if you were <em>inside</em> the grid? The flat plane becomes a hollow 9×9×9 cube. Tiles line every inner surface. You stand at the centre, surrounded on all sides.
+                        Classic Minesweeper is a 2D grid on a screen. Echo Tiles came from asking a simple question: what if you were <em>inside</em> the grid instead? The flat grid becomes a hollow 9×9×9 cube with tiles on every inner surface. You stand in the middle, surrounded on all sides.
                     </p>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
                     <div className="flex flex-col gap-3">
-                        <span className="text-xs font-sans text-muted uppercase tracking-wider">Original — Minesweeper (1989)</span>
+                        <span className="text-xs font-sans text-muted uppercase tracking-wider">Original: Minesweeper (1989)</span>
                         <div className="relative aspect-video rounded-xl overflow-hidden border border-border bg-foreground">
                             <Image
                                 src="/projects/Echo-tiles/minesweeperss.webp"
@@ -119,7 +119,7 @@ export default function EchoTilesProjectPage() {
                         <p className="text-sm text-muted">A flat 2D grid. Numbers tell you how many mines are adjacent. Safe cells are clicked one by one.</p>
                     </div>
                     <div className="flex flex-col gap-3">
-                        <span className="text-xs font-sans text-muted uppercase tracking-wider">Reimagined — Echo Tiles (2025)</span>
+                        <span className="text-xs font-sans text-muted uppercase tracking-wider">Reimagined: Echo Tiles (2025)</span>
                         <div className="relative aspect-video rounded-xl overflow-hidden border border-border">
                             <Image
                                 src="/projects/Echo-tiles/Gameenvironment/image 4.webp"
@@ -128,7 +128,7 @@ export default function EchoTilesProjectPage() {
                                 className="object-cover"
                             />
                         </div>
-                        <p className="text-sm text-muted">A 3D hollow cube. Tiles surround you on every face. Numbers are gone — audio beats replace them.</p>
+                        <p className="text-sm text-muted">A 3D hollow cube. Tiles on every face, and no numbers. Audio beats take their place.</p>
                     </div>
                 </div>
             </motion.section>
@@ -190,10 +190,10 @@ export default function EchoTilesProjectPage() {
                             label: "Aesthetics",
                             color: "#a78bfa",
                             items: [
-                                "Immersion — surrounded by the puzzle",
-                                "Tension — no safety of a monitor's distance",
-                                "Discovery — each revealed tile reshapes space",
-                                "Surprise — audio feedback is unexpected and playful",
+                                "Immersion: you're surrounded by the puzzle",
+                                "Tension: there's no screen keeping you at a safe distance",
+                                "Discovery: each revealed tile changes how the space feels",
+                                "Surprise: the audio feedback catches you off guard in a good way",
                             ],
                         },
                     ].map((col) => (
@@ -223,7 +223,7 @@ export default function EchoTilesProjectPage() {
                     <SectionLabel>Player Mechanics</SectionLabel>
                     <h2 className="text-5xl font-semibold tracking-tight">The sensor gun.</h2>
                     <p className="max-w-2xl text-muted leading-relaxed">
-                        The player holds a custom-designed VR sensor gun in their right hand. Hovering over a tile activates its audio feedback — revealing the beat count of adjacent mines. Pressing the trigger reveals the tile.
+                        You hold a custom VR sensor gun in your right hand. Hovering over a tile plays the audio beat pattern that tells you how many mines are nearby. Pressing the trigger reveals the tile.
                     </p>
                 </div>
 
@@ -370,7 +370,7 @@ export default function EchoTilesProjectPage() {
             >
                 <div className="flex flex-col gap-2">
                     <SectionLabel>User Study Recording</SectionLabel>
-                    <h2 className="text-5xl font-semibold tracking-tight">Task-Driven Session — Did the Environment Feel Alive?</h2>
+                    <h2 className="text-5xl font-semibold tracking-tight">Task-Driven Session: Did the Environment Feel Alive?</h2>
                     <p className="max-w-2xl text-muted leading-relaxed">
                         Participants were given a single objective: <strong className="text-foreground">find the key and escape the cell.</strong> The session captures navigation pattern, zone dwell time, and whether users voluntarily return to areas already visited.
                     </p>
@@ -401,14 +401,14 @@ export default function EchoTilesProjectPage() {
                         <SectionLabel>Audio Feedback System</SectionLabel>
                         <h2 className="text-5xl font-semibold tracking-tight">Numbers become rhythm.</h2>
                         <p className="text-muted leading-relaxed">
-                            Visual number clues are replaced entirely by spatial audio. When a player hovers over a revealed tile, it emits a rhythmic beat pattern — one beat per adjacent mine.
+                            Visual number clues are replaced entirely by spatial audio. Hover over a revealed tile and it plays a rhythmic beat pattern, one beat for each adjacent mine.
                         </p>
                         <div className="flex flex-col gap-3">
                             {[
-                                { beats: "No sound", meaning: "Safe tile — no adjacent mines" },
+                                { beats: "No sound", meaning: "Safe tile, no adjacent mines" },
                                 { beats: "1 beat", meaning: "One adjacent mine" },
                                 { beats: "2 beats", meaning: "Two adjacent mines" },
-                                { beats: "3+ beats", meaning: "High-risk zone — proceed carefully" },
+                                { beats: "3+ beats", meaning: "High-risk zone, be careful" },
                             ].map((row) => (
                                 <div key={row.beats} className="flex items-center gap-4 py-3 border-b border-border last:border-0">
                                     <span className="font-sans text-sm text-accent-blue w-20 shrink-0">{row.beats}</span>
@@ -439,7 +439,7 @@ export default function EchoTilesProjectPage() {
                     <SectionLabel>Storyboarding / Flow</SectionLabel>
                     <h2 className="text-5xl font-semibold tracking-tight">Designing the experience arc.</h2>
                     <p className="max-w-2xl text-muted leading-relaxed">
-                        Early storyboards mapped the player journey — from loading screen to first reveal, through the audio system, to win and loss states.
+                        Early storyboards mapped the full player journey, from the loading screen through the first reveal, the audio system, and through to win and loss states.
                     </p>
                 </div>
 
@@ -497,7 +497,7 @@ export default function EchoTilesProjectPage() {
                         {
                             num: "02",
                             name: "TileData.cs",
-                            desc: "Attached to each tile. Holds the tile's current state — Hidden, Safe, Numbered, or Mine — and exposes it to the game manager.",
+                            desc: "Attached to each tile. Stores the tile's current state (Hidden, Safe, Numbered, or Mine) and passes it to the game manager.",
                         },
                         {
                             num: "03",

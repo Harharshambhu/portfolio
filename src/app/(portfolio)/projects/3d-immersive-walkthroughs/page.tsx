@@ -15,7 +15,7 @@ const environments = [
         id: "01",
         title: "Demon Gate",
         label: "Eldritch Horror · Creature Architecture",
-        description: "The gate is not built — it is grown. Two columns of intertwined creature limbs frame a staircase cut into a hillside, with a blinding portal at the threshold. The approach is flanked by demonic flame-like tendrils rising from the ground. In the fully textured render, the surrounding landscape becomes an ecosystem: ground cover made of eye-stalked flora, vine-like organic sprawl, and a soil texture that reads more like skin than earth. The top-down camera angle was chosen deliberately — you never fully see the gate from the front, only descend into it.",
+        description: "The gate isn't built. It's grown. Two columns of intertwined creature limbs frame a staircase cut into a hillside, with a blinding portal at the threshold. The approach is flanked by demonic flame-like tendrils rising from the ground. In the fully textured render, the surrounding landscape becomes an ecosystem: ground cover made of eye-stalked flora, vine-like organic sprawl, and a soil texture that reads more like skin than earth. The top-down camera angle was a deliberate choice. You never fully see the gate from the front, only descend into it.",
         hero: "/projects/3D-Immersive-Walkthroughs/DemonGate3.webp",
         heroAlt: "Grey-box — side perspective of staircase and creature gate with demonic tendrils",
         draftLabel: "Grey-box Blockout",
@@ -35,7 +35,7 @@ const environments = [
         id: "02",
         title: "Enchanted Forest",
         label: "Nature · Ancient Architecture · Photorealism",
-        description: "An ornate stone shrine sits at the centre of a sun-drenched forest clearing. The building takes the form of a compact temple facade — carved decorative panels, round rose windows, layered cornice work — flanked by freestanding columns that have partially separated from the structure over time. A bronze dancer statue stands at the entrance, catching afternoon light through the canopy. The grey-box blockout shows the architectural planning: the building's proportions, column placement, and stepped base. The final render grounds it in a naturalistic setting — deep grass, mature trees, and a sky that feels like early afternoon.",
+        description: "An ornate stone shrine sits at the centre of a sun-drenched forest clearing. The building is a compact temple facade with carved decorative panels, round rose windows, and layered cornice work, flanked by freestanding columns that have partially separated from the structure over time. A bronze dancer statue stands at the entrance, catching afternoon light through the canopy. The grey-box blockout shows the architectural planning: the building's proportions, column placement, and stepped base. The final render grounds it in a naturalistic setting with deep grass, mature trees, and a sky that feels like early afternoon.",
         hero: "/projects/3D-Immersive-Walkthroughs/EnchantedForest1.webp",
         heroAlt: "Full render of the Enchanted Forest shrine — stone temple building with dancer statue in sunlit forest clearing",
         draftLabel: "Blockout & Draft Views",
@@ -53,7 +53,7 @@ const environments = [
         id: "03",
         title: "Gas Station",
         label: "Retrofuturism · Prop Design · PBR Materials",
-        description: "A mid-century roadside station — 'Granny Art Petrol' — left standing while the world moved on and quietly upgraded itself. The canopy and signage belong to a different era: hand-painted octagonal lettering, rusted hoardings, flat prairie horizon. The props tell a different story. A blue electric charging unit with exposed cabling sits where a petrol pump once stood. A yellow plug-in charger — its connector thick with machined detail — is mounted to the side. Hoverboard display racks line the forecourt. Each prop was built as an independent model with full PBR material work before being placed into the scene, treating them as products first and environment pieces second.",
+        description: "A mid-century roadside station called 'Granny Art Petrol', left standing while the world moved on and quietly upgraded itself. The canopy and signage belong to a different era: hand-painted octagonal lettering, rusted hoardings, flat prairie horizon. The props tell a different story. A blue electric charging unit with exposed cabling sits where a petrol pump once stood. A yellow plug-in charger with a connector thick with machined detail is mounted to the side. Hoverboard display racks line the forecourt. Each prop was built as an independent model with full PBR material work before being placed into the scene, treating them as products first and environment pieces second.",
         hero: "/projects/3D-Immersive-Walkthroughs/GasStationHoverBoard-zoomedout.webp",
         heroAlt: "Wide shot of the Granny Art Gas Station — vintage signage, weathered canopy, empty forecourt",
         draftLabel: "Props & Blockout",
@@ -74,7 +74,7 @@ const environments = [
         id: "04",
         title: "Temple",
         label: "Classical Architecture · Geometry Study · White Render",
-        description: "A classical temple interior rendered entirely in white — no textures, no colour, no material differentiation. The decision was deliberate: the rendering removes every visual shortcut and forces all weight to fall on geometry and proportion. Rows of Corinthian columns line a processional nave of considerable depth. Above them, an ornate carved ceiling panel carries heraldic medallions and decorative borders in high relief. The close-up detail of the plinth reveals a different kind of carving — dense, organic, almost coral-like stonework, tentacular forms working beneath the classical exterior. The building knows what it looks like on the surface. The base tells a different story.",
+        description: "A classical temple interior rendered entirely in white, no textures, no colour, no material differentiation. The decision was deliberate: stripping everything back forces all the weight to fall on geometry and proportion. Rows of Corinthian columns line a processional nave of considerable depth. Above them, an ornate carved ceiling panel carries heraldic medallions and decorative borders in high relief. The close-up detail of the plinth reveals something different underneath: dense, organic, almost coral-like stonework with tentacular forms that work against the classical exterior above. The building knows what it looks like on the surface. The base tells a different story.",
         hero: "/projects/3D-Immersive-Walkthroughs/Temple-1.webp",
         heroAlt: "White render of temple interior — long colonnade with Corinthian columns and carved ceiling",
         draftLabel: "Detail Studies",
@@ -88,7 +88,7 @@ const environments = [
         id: "05",
         title: "Old Buried",
         label: "Atmospheric · Prop Study · Cinematic Lighting",
-        description: "A single stone face, colossal in scale, half-submerged in a still dark pool and consumed by vegetation. The proportions suggest a buried deity or monument — something that was once vertical and prominent, now horizontal and forgotten. The environment study focused on the material intersection of stone and organic matter: wet rock catching light differently from dry, ferns and broad-leaf foliage pushing in from every side, and the flat black water surface providing an undisturbed reflection plane. The layout view shows the asset scatter setup — face, water plane, and foliage instances arranged in the editor before final lighting.",
+        description: "A single stone face, colossal in scale, half-submerged in a still dark pool and consumed by vegetation. The proportions suggest a buried deity or monument, something that was once vertical and prominent, now horizontal and forgotten. The environment study focused on the material intersection of stone and organic matter: wet rock catching light differently from dry, ferns and broad-leaf foliage pushing in from every side, and the flat black water surface providing an undisturbed reflection plane. The layout view shows the asset scatter setup, with the face, water plane, and foliage instances arranged in the editor before final lighting.",
         hero: "/projects/3D-Immersive-Walkthroughs/OldBuried-1.webp",
         heroAlt: "Stone deity face half-submerged in dark water, surrounded by dense moss and fern vegetation",
         draftLabel: "Scene Layout",
@@ -119,7 +119,7 @@ export default function ImmersiveWalkthroughsPage() {
                 </div>
                 <ScrollMagnifier>
                     <p className="max-w-2xl text-base leading-relaxed text-muted">
-                        Five environments built as walkthrough scenes — each a study in a different visual language. Horror and creature anatomy. Sunlit classical ruin. Retrofuturistic prop design. Pure white architectural geometry. Atmospheric buried mythology. No shared aesthetic, no common brief — just the question of what a space can make you feel.
+                        Five environments built as walkthrough scenes, each exploring a different visual language: horror and creature anatomy, sunlit classical ruin, retrofuturistic prop design, pure white architectural geometry, atmospheric buried mythology. No shared brief. Just the question of what a space can make you feel.
                     </p>
                 </ScrollMagnifier>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-px border border-border rounded-xl overflow-hidden w-full max-w-2xl mt-2">
@@ -244,7 +244,7 @@ export default function ImmersiveWalkthroughsPage() {
                     <h2 className="text-4xl font-semibold tracking-tight">Early work. Different rules.</h2>
                     <ScrollMagnifier>
                         <p className="text-muted leading-relaxed max-w-2xl">
-                            These environments were built without a brief, a client, or a defined end-use. Each one started from a single visual idea — a creature gate, a buried face, a vintage sign — and the question became: how far can this go before it stops being interesting? The work is from early in my practice, but the instinct behind it has not changed: spaces should feel inhabited, not decorated.
+                            These environments were built without a brief, a client, or a defined end-use. Each one started from a single visual idea (a creature gate, a buried face, a vintage sign) and the question became: how far can this go before it stops being interesting? The work is from early in my practice, but the instinct behind it hasn&apos;t changed: spaces should feel inhabited, not decorated.
                         </p>
                     </ScrollMagnifier>
                     <div className="flex flex-col gap-1 pt-2 border-t border-border">

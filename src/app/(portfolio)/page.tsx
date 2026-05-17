@@ -36,7 +36,7 @@ export default function Home() {
           </ScrollReveal>
           <ScrollReveal delay={0.2}>
             <p className="max-w-xl text-lg leading-relaxed text-muted">
-              Let's Research — Iterate —. And Deliver.
+              Let&apos;s Research, Iterate, and Deliver.
             </p>
           </ScrollReveal>
         </div>
