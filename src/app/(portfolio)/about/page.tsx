@@ -149,7 +149,7 @@ export default function About() {
 
     const introText = `I learned design in fashion studios, but I learned product thinking backstage, where every event runs on chaos that nobody has built proper tools for.`;
     const expandedText1 = ` During my 4 years of bachelors, I participated in fashion shows and corporate events across FDDI and NIFT, which showed me that the most interesting design problems aren’t visual. They’re operational. Working as a freelancer on 3D and AR experiences for event stalls pulled me further toward spatial design.`;
-    const expandedText2 = ` That’s why I went to IIT Jodhpur to do my M.Des in XR Design, to go deeper on both fronts. My thesis research was on why users drop out of standalone VR experiences, and rather than looking it as a hardware limitation, and built a solution around it. The event industry taught me to see broken systems. The M.Des gave me the research rigour and design methodology to fix them.`;
+    const expandedText2 = ` That’s why I went to IIT Jodhpur to do my M.Des in XR Design, to go deeper on both fronts. My thesis research was on why users drop out of standalone VR experiences. And rather than looking it as a hardware limitation, we built a solution around it, respecting the constraints. And that's one of my major believes about good design. Good Design solution is one that is built within the constraints of the system. The event industry taught me to see those broken systems. The M.Des gave me the research rigour and design methodology to fix them.`;
     const closingText = `For career opportunities and project collaborations, feel free to reach out to me at anirudhsingh1441@gmail.com.`;
 
     return (
