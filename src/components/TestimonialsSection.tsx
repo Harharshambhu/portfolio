@@ -17,9 +17,9 @@ const testimonials = [
         image: "/images/testimonials/shikhant.webp",
     },
     {
-        text: "It was great working with Anirudh — he picks up context fast, asks the right questions, and delivers without needing his hand held. Would work with him again without hesitation.",
-        author: "William",
-        image: "/images/testimonials/william.webp",
+        text: "Collaborating with Anirudh on medtech projects was highly productive. He combines strong problem-solving and design thinking skills with a solid understanding of technical architecture, making interdisciplinary work seamless. He is a reliable and highly effective team member.",
+        author: "Umme Abiha",
+        image: "/images/testimonials/umme.webp",
     },
 ];
 
