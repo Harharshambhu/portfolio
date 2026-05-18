@@ -68,8 +68,8 @@ export default function TestimonialsSection() {
             <SectionLabel as="h3">Testimonials</SectionLabel>
 
             <div className="relative w-full overflow-hidden mask-fade">
-                <div className="absolute top-0 left-0 w-20 h-full bg-gradient-to-r from-background to-transparent z-10" />
-                <div className="absolute top-0 right-0 w-20 h-full bg-gradient-to-l from-background to-transparent z-10" />
+                <div className="absolute top-0 left-0 w-8 h-full bg-gradient-to-r from-background to-transparent z-10" />
+                <div className="absolute top-0 right-0 w-8 h-full bg-gradient-to-l from-background to-transparent z-10" />
 
                 <motion.div
                     className="flex w-max"
