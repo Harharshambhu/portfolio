@@ -4,6 +4,7 @@ import "./globals.css";
 import BackgroundGrid from "@/components/BackgroundGrid";
 import TargetCursor from "@/components/TargetCursor";
 import SmoothScroll from "@/components/SmoothScroll";
+import ScrollProgressBar from "@/components/ScrollProgressBar";
 
 const plusJakartaSans = localFont({
   src: [
@@ -73,6 +74,7 @@ export default function RootLayout({
         <SmoothScroll>
           <div className="hidden md:block"><TargetCursor /></div>
           <div className="hidden md:block"><BackgroundGrid /></div>
+          <ScrollProgressBar />
 
           {/* Left mask */}
           <div className="fixed top-0 left-0 h-full bg-background z-0 hidden min-[1330px]:block" style={{ width: 'calc((100vw - 1280px) / 2)' }} />

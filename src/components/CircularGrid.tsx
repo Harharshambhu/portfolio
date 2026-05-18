@@ -1,7 +1,7 @@
 "use client";
 
-import { motion, AnimatePresence, useSpring, useMotionValue } from "framer-motion";
-import { useState, useRef, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { useState, useRef, useEffect, useMemo } from "react";
 import Link from "next/link";
 import type { Project } from "@/data/projects";
 
@@ -15,59 +15,115 @@ const QUOTES = [
     "Trends are a brief. I design for what remains after the trend that created the project has moved on.",
     "Once achieved, maintaining relevance requires constant listening, questioning, prototyping and testing.",
     "Perfection is achieved, not when there is nothing more to add, but when there is nothing left to take away.",
-    "You’ve got to start with the customer experience and work backwards for the technology. You can’t start with the technology and try to figure out where you’re going to try to sell it.",
-    "Good design, when it’s done well, becomes invisible. It’s only when it’s done poorly that we notice it.",
+    "You've got to start with the customer experience and work backwards for the technology. You can't start with the technology and try to figure out where you're going to try to sell it.",
+    "Good design, when it's done well, becomes invisible. It's only when it's done poorly that we notice it.",
     "Testing with one user early in the project is better than testing with 50 near the end.",
     "Pay attention to what users do, not what they say.",
     "Content precedes design. Design in the absence of content is not design, it's decoration.",
 ];
 
+// Module-level constants and pure functions — not recreated on every render
+const outerRadius = 320;
+const innerRadius = 150;
+const centerX = 500;
+const centerY = 500;
+const gapAngle = 4;
+const expansionAngle = 25;
+
+function polarToCartesian(radius: number, angleInDegrees: number) {
+    const rad = ((angleInDegrees - 90) * Math.PI) / 180.0;
+    return { x: centerX + radius * Math.cos(rad), y: centerY + radius * Math.sin(rad) };
+}
+
+function describeArc(radius: number, startAngle: number, endAngle: number) {
+    const start = polarToCartesian(radius, endAngle);
+    const end = polarToCartesian(radius, startAngle);
+    const arcSweep = endAngle - startAngle <= 180 ? "0" : "1";
+    return ["M", start.x, start.y, "A", radius, radius, 0, arcSweep, 0, end.x, end.y].join(" ");
+}
+
+function buildSectorPath(metric: { start: number; end: number }, effectiveOuter: number) {
+    const p1i = polarToCartesian(innerRadius, metric.start);
+    const p2i = polarToCartesian(innerRadius, metric.end);
+    const p1o = polarToCartesian(effectiveOuter, metric.start);
+    const p2o = polarToCartesian(effectiveOuter, metric.end);
+    return [
+        "M", p1i.x, p1i.y,
+        "A", innerRadius, innerRadius, 0, 0, 1, p2i.x, p2i.y,
+        "L", p2o.x, p2o.y,
+        "A", effectiveOuter, effectiveOuter, 0, 0, 0, p1o.x, p1o.y,
+        "Z"
+    ].join(" ");
+}
+
+function computeSegments(points: number, hoveredIdx: number | null) {
+    const availableAngle = 360 - points * gapAngle;
+    const baseAngle = availableAngle / points;
+    const angles: { start: number; end: number; mid: number }[] = [];
+    let currentStart = 0;
+    for (let i = 0; i < points; i++) {
+        let angle: number;
+        if (hoveredIdx === null) {
+            angle = baseAngle;
+        } else if (hoveredIdx === i) {
+            angle = baseAngle + expansionAngle;
+        } else {
+            angle = (availableAngle - (baseAngle + expansionAngle)) / (points - 1);
+        }
+        const start = currentStart + gapAngle / 2;
+        const end = start + angle;
+        const mid = start + angle / 2;
+        angles.push({ start, end, mid });
+        currentStart += angle + gapAngle;
+    }
+    return angles;
+}
+
 export default function CircularGrid({ projects }: { projects: Project[] }) {
     const containerRef = useRef<HTMLDivElement>(null);
+    const rotatingGroupRef = useRef<SVGGElement>(null);
+
     const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
     const [isCenterHovered, setIsCenterHovered] = useState(false);
     const [quoteIdx, setQuoteIdx] = useState(0);
     const isTouchSwipingRef = useRef(false);
-
-    const rotationValue = useMotionValue(0);
-    const smoothRotation = useSpring(rotationValue, { stiffness: 60, damping: 30, mass: 1 });
-    const rotatingGroupRef = useRef<SVGGElement>(null);
+    // Ref mirror of hoveredIdx so the RAF closure ([] deps) can read the latest value
+    const hoveredIdxRef = useRef<number | null>(null);
+    useEffect(() => { hoveredIdxRef.current = hoveredIdx; }, [hoveredIdx]);
 
     const points = projects.length || 5;
-    const outerRadius = 320;
-    const innerRadius = 150;
-    const centerX = 500;
-    const centerY = 500;
-    const gapAngle = 4;
 
-    // Animation + mouse/touch interaction loop
+    const segments = useMemo(() => computeSegments(points, hoveredIdx), [points, hoveredIdx]);
+
+
+    // Direct RAF → setAttribute for rotation.
+    // Removed: useMotionValue → useSpring → on("change") chain (3 layers of overhead).
+    // The physics damping inside this loop is sufficient; the extra spring smoothing
+    // was additive overhead, not meaningful UX improvement.
     useEffect(() => {
+        const container = containerRef.current;
+        if (!container) return;
+
         let lastTime = performance.now();
         let currentRotation = 0;
         let currentVelocity = 0.4;
         let lastMouseAngle = 0;
         let mouseAngularVelocity = 0;
         let isInside = false;
-        let lastTouchX = 0;
-        let lastTouchY = 0;
-        let touchStartX = 0;
-        let touchStartY = 0;
-
-        const container = containerRef.current;
-        if (!container) return;
+        let lastTouchX = 0, lastTouchY = 0;
+        let touchStartX = 0, touchStartY = 0;
+        let rafId: number;
 
         const isMobileDevice = window.matchMedia("(max-width: 767px)").matches;
+        const ambientSpeed = isMobileDevice ? 0.7 : 0.9;
 
-        // ── Desktop mouse handlers ──
         const handleWheel = (e: WheelEvent) => {
             currentVelocity += Math.abs(e.deltaY) * 0.05;
         };
 
         const handleMouseMove = (e: MouseEvent) => {
             const rect = container.getBoundingClientRect();
-            const cx = rect.left + rect.width / 2;
-            const cy = rect.top + rect.height / 2;
-            const angle = Math.atan2(e.clientY - cy, e.clientX - cx) * (180 / Math.PI);
+            const angle = Math.atan2(e.clientY - (rect.top + rect.height / 2), e.clientX - (rect.left + rect.width / 2)) * (180 / Math.PI);
             mouseAngularVelocity = angle - lastMouseAngle;
             if (mouseAngularVelocity > 180) mouseAngularVelocity -= 360;
             if (mouseAngularVelocity < -180) mouseAngularVelocity += 360;
@@ -80,37 +136,28 @@ export default function CircularGrid({ projects }: { projects: Project[] }) {
             isInside = false;
         };
 
-        // ── Mobile touch handlers — vertical drag dials up/down ──
         const handleTouchStart = (e: TouchEvent) => {
-            const touch = e.touches[0];
-            touchStartX = touch.clientX;
-            touchStartY = touch.clientY;
-            lastTouchX = touch.clientX;
-            lastTouchY = touch.clientY;
+            const t = e.touches[0];
+            touchStartX = t.clientX;
+            touchStartY = t.clientY;
+            lastTouchX = t.clientX;
+            lastTouchY = t.clientY;
             isTouchSwipingRef.current = false;
             isInside = true;
-            currentVelocity *= 0.2; // Brake on touch
+            currentVelocity *= 0.2;
         };
 
         const handleTouchMove = (e: TouchEvent) => {
             if (!e.touches.length) return;
-
-            const touch = e.touches[0];
-            const dy = touch.clientY - lastTouchY;
-            lastTouchX = touch.clientX;
-            lastTouchY = touch.clientY;
-
-            const totalMoved = Math.sqrt(
-                Math.pow(touch.clientX - touchStartX, 2) +
-                Math.pow(touch.clientY - touchStartY, 2)
-            );
-
+            const t = e.touches[0];
+            const dy = t.clientY - lastTouchY;
+            lastTouchX = t.clientX;
+            lastTouchY = t.clientY;
+            const totalMoved = Math.hypot(t.clientX - touchStartX, t.clientY - touchStartY);
             if (totalMoved > 8) {
                 isTouchSwipingRef.current = true;
-                setHoveredIdx(null); // Collapse any expanded segment immediately
+                setHoveredIdx(null);
             }
-
-            // Apply dial rotation proportional to vertical drag (always, not just after threshold)
             mouseAngularVelocity = -dy * 1.6;
         };
 
@@ -130,25 +177,27 @@ export default function CircularGrid({ projects }: { projects: Project[] }) {
         }
 
         const animate = (time: number) => {
-            const dt = (time - lastTime) / 1000;
+            const dt = Math.min((time - lastTime) / 1000, 0.05);
             lastTime = time;
 
-            if (isInside) {
-                currentVelocity += (0.01 - currentVelocity) * 0.15;
+            if (hoveredIdxRef.current !== null) {
+                // Segment hovered — ease to full stop
+                currentVelocity += (0 - currentVelocity) * 0.1;
             } else {
-                // Mobile: decay to 0 (no ambient spin). Desktop: drift at 0.9.
-                const ambientSpeed = isMobileDevice ? 0.7 : 0.9;
+                // Ambient rotation whether mouse is inside or outside the section
                 currentVelocity += (ambientSpeed - currentVelocity) * 0.02;
             }
-
             currentVelocity = Math.min(Math.max(currentVelocity, -200), 200);
             currentRotation += currentVelocity * dt * 10;
-            rotationValue.set(currentRotation);
-            requestAnimationFrame(animate);
+
+            rotatingGroupRef.current?.setAttribute("transform", `rotate(${currentRotation}, 500, 500)`);
+            rafId = requestAnimationFrame(animate);
         };
 
-        const animId = requestAnimationFrame(animate);
+        rafId = requestAnimationFrame(animate);
+
         return () => {
+            cancelAnimationFrame(rafId);
             container.removeEventListener('wheel', handleWheel);
             container.removeEventListener('mousemove', handleMouseMove);
             container.removeEventListener('mouseenter', handleMouseEnter);
@@ -158,73 +207,17 @@ export default function CircularGrid({ projects }: { projects: Project[] }) {
                 container.removeEventListener('touchmove', handleTouchMove);
                 container.removeEventListener('touchend', handleTouchEnd);
             }
-            cancelAnimationFrame(animId);
         };
-    }, [rotationValue]);
+    }, []);
 
-    // Drive SVG rotation via native transform attribute — CSS transform-origin is broken on SVG in Safari
     useEffect(() => {
-        const setTransform = (v: number) => {
-            rotatingGroupRef.current?.setAttribute("transform", `rotate(${v}, 500, 500)`);
-        };
-        setTransform(smoothRotation.get());
-        return smoothRotation.on("change", setTransform);
-    }, [smoothRotation]);
-
-    // Quote rotation interval
-    useEffect(() => {
-        const id = setInterval(() => {
-            setQuoteIdx(i => (i + 1) % QUOTES.length);
-        }, 5000);
+        const id = setInterval(() => setQuoteIdx(i => (i + 1) % QUOTES.length), 5000);
         return () => clearInterval(id);
     }, []);
 
-    const polarToCartesian = (radius: number, angleInDegrees: number) => {
-        const angleInRadians = ((angleInDegrees - 90) * Math.PI) / 180.0;
-        return {
-            x: centerX + radius * Math.cos(angleInRadians),
-            y: centerY + radius * Math.sin(angleInRadians),
-        };
-    };
-
-    const describeArc = (radius: number, startAngle: number, endAngle: number) => {
-        const start = polarToCartesian(radius, endAngle);
-        const end = polarToCartesian(radius, startAngle);
-        const arcSweep = endAngle - startAngle <= 180 ? "0" : "1";
-        return ["M", start.x, start.y, "A", radius, radius, 0, arcSweep, 0, end.x, end.y].join(" ");
-    };
-
-    const expansionAngle = 25;
-    const availableAngle = 360 - points * gapAngle;
-    const baseAngle = availableAngle / points;
-
-    const getSegmentMetrics = () => {
-        const angles: { start: number; end: number; mid: number }[] = [];
-        let currentStart = 0;
-        for (let i = 0; i < points; i++) {
-            let angle;
-            if (hoveredIdx === null) {
-                angle = baseAngle;
-            } else if (hoveredIdx === i) {
-                angle = baseAngle + expansionAngle;
-            } else {
-                angle = (availableAngle - (baseAngle + expansionAngle)) / (points - 1);
-            }
-            const start = currentStart + gapAngle / 2;
-            const end = start + angle;
-            const mid = start + angle / 2;
-            angles.push({ start, end, mid });
-            currentStart += angle + gapAngle;
-        }
-        return angles;
-    };
-
-    const segments = getSegmentMetrics();
-
     return (
         <div className="flex flex-col md:block">
-
-            {/* ── Mobile quote — visible only on mobile, sits above the dial ── */}
+            {/* Mobile quote */}
             <div className="md:hidden text-right pt-4 pb-6 h-[220px] overflow-visible flex flex-col justify-start">
                 <div className="w-8 h-px bg-foreground/40 ml-auto mb-3" />
                 <AnimatePresence mode="wait">
@@ -241,19 +234,15 @@ export default function CircularGrid({ projects }: { projects: Project[] }) {
                 </AnimatePresence>
             </div>
 
-            {/* ── Wheel container ── */}
             <div
                 ref={containerRef}
                 className="flex justify-center items-center py-0 overflow-hidden md:overflow-visible relative group h-[760px] md:h-auto"
             >
-                <motion.svg
+                <svg
                     width="1000" height="840" viewBox="0 80 1000 840"
                     className="overflow-visible relative z-10 md:-translate-x-[260px] -translate-x-[180px]"
                 >
-                    {/* Rotating group — driven via SVG transform attribute for Safari compatibility */}
                     <g ref={rotatingGroupRef}>
-
-                        {/* Central hit area (desktop hover only) */}
                         <circle
                             cx={centerX} cy={centerY} r={innerRadius}
                             fill="transparent"
@@ -264,24 +253,13 @@ export default function CircularGrid({ projects }: { projects: Project[] }) {
 
                         <defs>
                             {segments.map((metric, i) => {
-                                const isHovered = hoveredIdx === i;
-                                const effectiveOuterRadius = isHovered ? outerRadius + 50 : outerRadius;
-                                const p1Inner = polarToCartesian(innerRadius, metric.start);
-                                const p2Inner = polarToCartesian(innerRadius, metric.end);
-                                const p1Outer = polarToCartesian(effectiveOuterRadius, metric.start);
-                                const p2Outer = polarToCartesian(effectiveOuterRadius, metric.end);
-                                const sectorPath = [
-                                    "M", p1Inner.x, p1Inner.y,
-                                    "A", innerRadius, innerRadius, 0, 0, 1, p2Inner.x, p2Inner.y,
-                                    "L", p2Outer.x, p2Outer.y,
-                                    "A", effectiveOuterRadius, effectiveOuterRadius, 0, 0, 0, p1Outer.x, p1Outer.y,
-                                    "Z"
-                                ].join(" ");
+                                const eff = hoveredIdx === i ? outerRadius + 50 : outerRadius;
                                 return (
                                     <clipPath id={`clip-${i}`} key={i}>
                                         <motion.path
-                                            animate={{ d: sectorPath }}
-                                            transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
+                                            initial={false}
+                                            animate={{ d: buildSectorPath(metric, eff) }}
+                                            transition={{ duration: 0.45, ease: [0.4, 0, 0.2, 1] }}
                                         />
                                     </clipPath>
                                 );
@@ -291,24 +269,23 @@ export default function CircularGrid({ projects }: { projects: Project[] }) {
                         {segments.map((metric, i) => {
                             const project = projects[i];
                             const isHovered = hoveredIdx === i;
-                            const effectiveOuterRadius = isHovered ? outerRadius + 50 : outerRadius;
+                            const effectiveOuter = isHovered ? outerRadius + 50 : outerRadius;
 
-                            const outerArc = describeArc(effectiveOuterRadius, metric.start, metric.end);
+                            const outerArc = describeArc(effectiveOuter, metric.start, metric.end);
                             const innerArc = describeArc(innerRadius, metric.start, metric.end);
                             const p1Inner = polarToCartesian(innerRadius, metric.start);
-                            const p1Outer = polarToCartesian(effectiveOuterRadius, metric.start);
+                            const p1Outer = polarToCartesian(effectiveOuter, metric.start);
                             const p2Inner = polarToCartesian(innerRadius, metric.end);
-                            const p2Outer = polarToCartesian(effectiveOuterRadius, metric.end);
-                            const pNode = polarToCartesian(effectiveOuterRadius, metric.mid);
-                            const contentRadius = (innerRadius + effectiveOuterRadius) / 2;
-                            const pContent = polarToCartesian(contentRadius, metric.mid);
+                            const p2Outer = polarToCartesian(effectiveOuter, metric.end);
+                            const pNode = polarToCartesian(effectiveOuter, metric.mid);
+                            const pContent = polarToCartesian((innerRadius + effectiveOuter) / 2, metric.mid);
 
-                            const hitAreaRadius = outerRadius + 20;
+                            const hitR = outerRadius + 20;
                             const hitAreaPath = [
                                 "M", polarToCartesian(innerRadius - 40, metric.start).x, polarToCartesian(innerRadius - 40, metric.start).y,
                                 "A", innerRadius - 40, innerRadius - 40, 0, 0, 1, polarToCartesian(innerRadius - 40, metric.end).x, polarToCartesian(innerRadius - 40, metric.end).y,
-                                "L", polarToCartesian(hitAreaRadius, metric.end).x, polarToCartesian(hitAreaRadius, metric.end).y,
-                                "A", hitAreaRadius, hitAreaRadius, 0, 0, 0, polarToCartesian(hitAreaRadius, metric.start).x, polarToCartesian(hitAreaRadius, metric.start).y,
+                                "L", polarToCartesian(hitR, metric.end).x, polarToCartesian(hitR, metric.end).y,
+                                "A", hitR, hitR, 0, 0, 0, polarToCartesian(hitR, metric.start).x, polarToCartesian(hitR, metric.start).y,
                                 "Z"
                             ].join(" ");
 
@@ -323,8 +300,6 @@ export default function CircularGrid({ projects }: { projects: Project[] }) {
 
                                         <g clipPath={`url(#clip-${i})`}>
                                             {project?.circularThumbnail && (
-                                                // motion.g on SVG elements uses the SVG transform attribute (not CSS),
-                                                // so x/y/rotate/scale animate safely in Safari/WebKit
                                                 <motion.g
                                                     initial={false}
                                                     animate={{
@@ -334,7 +309,7 @@ export default function CircularGrid({ projects }: { projects: Project[] }) {
                                                         scale: isHovered ? 1.08 : 1,
                                                         opacity: isHovered ? 1 : 0.92,
                                                     }}
-                                                    transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
+                                                    transition={{ duration: 0.45, ease: [0.4, 0, 0.2, 1] }}
                                                 >
                                                     <image
                                                         href={project.circularThumbnail}
@@ -348,21 +323,20 @@ export default function CircularGrid({ projects }: { projects: Project[] }) {
                                             )}
                                         </g>
 
-                                        <motion.path animate={{ d: outerArc }} fill="none" stroke="var(--foreground)" strokeWidth="2" opacity={0.4} transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }} />
-                                        <motion.path animate={{ d: innerArc }} fill="none" stroke="var(--foreground)" strokeWidth="1.5" opacity={0.3} transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }} />
-                                        <motion.line animate={{ x1: p1Inner.x, y1: p1Inner.y, x2: p1Outer.x, y2: p1Outer.y }} stroke="var(--foreground)" strokeWidth="1.5" opacity={0.2} transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }} />
-                                        <motion.line animate={{ x1: p2Inner.x, y1: p2Inner.y, x2: p2Outer.x, y2: p2Outer.y }} stroke="var(--foreground)" strokeWidth="1.5" opacity={0.2} transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }} />
-                                        <motion.circle animate={{ cx: pNode.x, cy: pNode.y }} r={3} fill="var(--accent-blue)" transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }} />
+                                        <motion.path animate={{ d: outerArc }} fill="none" stroke="var(--foreground)" strokeWidth="2" opacity={0.4} transition={{ duration: 0.45, ease: [0.4, 0, 0.2, 1] }} />
+                                        <motion.path animate={{ d: innerArc }} fill="none" stroke="var(--foreground)" strokeWidth="1.5" opacity={0.3} transition={{ duration: 0.45, ease: [0.4, 0, 0.2, 1] }} />
+                                        <motion.line animate={{ x1: p1Inner.x, y1: p1Inner.y, x2: p1Outer.x, y2: p1Outer.y }} stroke="var(--foreground)" strokeWidth="1.5" opacity={0.2} transition={{ duration: 0.45, ease: [0.4, 0, 0.2, 1] }} />
+                                        <motion.line animate={{ x1: p2Inner.x, y1: p2Inner.y, x2: p2Outer.x, y2: p2Outer.y }} stroke="var(--foreground)" strokeWidth="1.5" opacity={0.2} transition={{ duration: 0.45, ease: [0.4, 0, 0.2, 1] }} />
+                                        <motion.circle animate={{ cx: pNode.x, cy: pNode.y }} r={3} fill="var(--accent-blue)" transition={{ duration: 0.45, ease: [0.4, 0, 0.2, 1] }} />
                                     </motion.g>
                                 </Link>
                             );
                         })}
 
-                        <motion.circle cx={centerX} cy={centerY} r={3} fill="var(--foreground)" initial={{ opacity: 0 }} whileInView={{ opacity: 0.1 }} viewport={{ once: true }} />
+                        <circle cx={centerX} cy={centerY} r={3} fill="var(--foreground)" opacity={0.1} />
+                    </g>
 
-                    </g>{/* end rotating group */}
-
-                    {/* Mobile: "WORKS" — outside rotating group, stays perfectly static */}
+                    {/* Mobile WORKS — outside rotating group, stays static */}
                     <g className="md:hidden">
                         <text
                             x={centerX - 5}
@@ -382,9 +356,9 @@ export default function CircularGrid({ projects }: { projects: Project[] }) {
                             WORKS
                         </text>
                     </g>
-                </motion.svg>
+                </svg>
 
-                {/* ── Desktop: central title overlay ── */}
+                {/* Desktop central title overlay */}
                 <div className="hidden md:flex absolute inset-0 items-center justify-center pointer-events-none z-20 -translate-x-[260px]">
                     <div
                         className="flex flex-col items-center justify-center text-center p-4 relative"
@@ -410,7 +384,7 @@ export default function CircularGrid({ projects }: { projects: Project[] }) {
                     </div>
                 </div>
 
-                {/* ── Desktop: rotating quotes column ── */}
+                {/* Desktop quotes column */}
                 <div className="hidden md:flex absolute right-8 top-[8%] flex-col items-end text-right w-[400px] pointer-events-none z-20 gap-4">
                     <div className="w-10 h-px bg-foreground/70" />
                     <AnimatePresence mode="wait">
@@ -427,12 +401,10 @@ export default function CircularGrid({ projects }: { projects: Project[] }) {
                     </AnimatePresence>
                 </div>
 
-                {/* ── Desktop: hover hint ── */}
                 <p className="quote-text hidden md:flex absolute right-8 top-[45%] !text-[1.5rem] tracking-widest text-muted/40 items-center gap-2 pointer-events-none z-20">
                     <span>&#8592;</span> Hover to see Project Details
                 </p>
 
-                {/* ── Desktop: project summary ── */}
                 <div className="hidden md:block absolute right-8 top-[57%] w-[400px] text-right pointer-events-none z-20">
                     <AnimatePresence mode="wait">
                         {hoveredIdx !== null && (
@@ -449,7 +421,6 @@ export default function CircularGrid({ projects }: { projects: Project[] }) {
                         )}
                     </AnimatePresence>
                 </div>
-
             </div>
         </div>
     );
