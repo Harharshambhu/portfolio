@@ -45,6 +45,9 @@ export default function Navigation() {
         }
     }, [pathname, isHome, scrollY]);
 
+    const swipeTouchStartX = useRef(0);
+    const swipeTouchStartY = useRef(0);
+
     const [isDark, setIsDark] = useState(false);
 
     useEffect(() => {
@@ -98,6 +101,42 @@ export default function Navigation() {
 
     const { width } = useWindowSize();
     const isMobile = width < 768;
+
+    // Document-level edge swipe: open when swipe starts within left 30px
+    useEffect(() => {
+        if (!isMobile) return;
+
+        const onTouchStart = (e: TouchEvent) => {
+            swipeTouchStartX.current = e.touches[0].clientX;
+            swipeTouchStartY.current = e.touches[0].clientY;
+        };
+
+        const onTouchEnd = (e: TouchEvent) => {
+            const dx = e.changedTouches[0].clientX - swipeTouchStartX.current;
+            const dy = Math.abs(e.changedTouches[0].clientY - swipeTouchStartY.current);
+            if (swipeTouchStartX.current < window.innerWidth / 4 && dx > 48 && dy < 100 && !isSidebarOpen) {
+                setIsSidebarOpen(true);
+            }
+        };
+
+        document.addEventListener("touchstart", onTouchStart, { passive: true });
+        document.addEventListener("touchend", onTouchEnd, { passive: true });
+        return () => {
+            document.removeEventListener("touchstart", onTouchStart);
+            document.removeEventListener("touchend", onTouchEnd);
+        };
+    }, [isMobile, isSidebarOpen]);
+
+    const handleSidebarTouchStart = (e: React.TouchEvent) => {
+        swipeTouchStartX.current = e.touches[0].clientX;
+        swipeTouchStartY.current = e.touches[0].clientY;
+    };
+
+    const handleSidebarTouchEnd = (e: React.TouchEvent) => {
+        const dx = e.changedTouches[0].clientX - swipeTouchStartX.current;
+        const dy = Math.abs(e.changedTouches[0].clientY - swipeTouchStartY.current);
+        if (dx < -48 && dy < 100) setIsSidebarOpen(false);
+    };
 
     // Calculate exact pixel sizes to prevent Framer Motion unit-mixing snaps
     const compactSize = 16; // 1rem
@@ -235,6 +274,8 @@ export default function Navigation() {
                         exit={{ x: "-100%" }}
                         transition={{ type: "spring", damping: 25, stiffness: 200 }}
                         className="fixed top-0 left-0 bottom-0 w-[70vw] max-w-sm bg-background border-r border-muted z-[100] md:hidden shadow-2xl flex flex-col"
+                        onTouchStart={handleSidebarTouchStart}
+                        onTouchEnd={handleSidebarTouchEnd}
                     >
                         <button 
                             onClick={() => setIsSidebarOpen(false)} 
@@ -270,6 +311,30 @@ export default function Navigation() {
                         </div>
                     </motion.div>
                 </>
+            )}
+        </AnimatePresence>
+
+        {/* Left-edge swipe handle — mobile only, hidden while sidebar is open */}
+        <AnimatePresence>
+            {isMobile && !isSidebarOpen && (
+                <motion.div
+                    key="swipe-bar"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                    className="fixed left-0 top-0 bottom-0 z-[80] md:hidden flex items-center"
+                    style={{ width: '25vw' }}
+                >
+                    <div
+                        className="w-[4px] h-14 rounded-full ml-3"
+                        style={{
+                            background: 'var(--accent-neon)',
+                            opacity: 0.5,
+                            boxShadow: '0 0 8px var(--accent-neon)',
+                        }}
+                    />
+                </motion.div>
             )}
         </AnimatePresence>
         </>
