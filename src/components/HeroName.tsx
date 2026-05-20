@@ -50,7 +50,7 @@ export default function HeroName() {
                     paddingBottom: "0.2em",
                     marginBottom: "-0.2em",
                     ...(isScrolled && hovering ? {
-                        backgroundImage: `radial-gradient(circle 120px at ${spotlight.x}px ${spotlight.y}px, var(--spotlight-primary) 70%, var(--foreground) 100%)`,
+                        backgroundImage: `radial-gradient(circle 120px at ${spotlight.x}px ${spotlight.y}px, var(--accent-blue) 70%, var(--foreground) 100%)`,
                         backgroundSize: "100% 100%",
                         backgroundRepeat: "no-repeat",
                         WebkitBackgroundClip: "text",

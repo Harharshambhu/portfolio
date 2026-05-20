@@ -1,25 +1,25 @@
 @import "tailwindcss";
 
 :root {
-  --background: rgba(249, 245, 230, 1);
-  --foreground: rgba(38, 66, 43, 1);
-  --muted: rgba(89, 116, 93, 1);
-  --border: rgba(38, 66, 43, 0.14);
-  --hover: rgba(241, 78, 7, 0.08);
-  --accent-neon: rgba(241, 78, 7, 1);
-  --accent-blue: rgba(112, 39, 65, 1);
+  --background: rgba(235, 243, 250, 1);
+  --foreground: rgba(14, 21, 37, 1);
+  --muted: rgba(38, 68, 110, 1);
+  --border: rgba(14, 21, 37, 0.15);
+  --hover: rgba(58, 108, 179, 0.07);
+  --accent-neon: rgba(58, 108, 179, 1);
+  --accent-blue: rgba(24, 41, 82, 1);
 
-  --cursor-color: rgba(38, 66, 43, 1);
+  --cursor-color: rgba(14, 21, 37, 1);
 
   /* Background Grid Controls */
-  --grid-base: rgba(38, 66, 43, 0.10);
-  --grid-hover: rgba(241, 78, 7, 0.25);
+  --grid-base: rgba(14, 21, 37, 0.08);
+  --grid-hover: rgba(58, 108, 179, 0.28);
 
   /* Spotlight & Interaction Controls */
-  --spotlight-primary: #F14E07;
-  --spotlight-secondary: #702741;
-  --text-hover: #F9F5E6;
-  --text-hover-muted: rgba(249, 245, 230, 0.75);
+  --spotlight-primary: #3A6CB3;
+  --spotlight-secondary: #8AABD0;
+  --text-hover: #EBF3FA;
+  --text-hover-muted: rgba(235, 243, 250, 0.75);
 
   /* ============================================================
      TYPOGRAPHY SCALE  (Plus Jakarta Sans + Merriweather)
@@ -35,8 +35,8 @@
   /* Contact Title (Slightly smaller to prevent overflow) */
   --fs-page-title-contact: clamp(4.5rem, 12vw, 160px);
 
-  /* H1 — 34px desktop, 26px mobile */
-  --fs-h1: clamp(1.625rem, 10vw, 5rem);
+  /* H1 — 80px desktop, 32px mobile (raised floor from 26px) */
+  --fs-h1: clamp(2rem, 6vw, 5rem);
 
   /* H2 — 23px desktop, 20px mobile */
   --fs-h2: clamp(1.25rem, 2vw, 1.4375rem);
@@ -53,14 +53,24 @@
   /* Body Large — 16px desktop, 15px mobile */
   --fs-body-lg: clamp(0.9375rem, 1.3vw, 1rem);
 
-  /* Body Regular — 11px desktop & mobile */
-  --fs-body: 0.6875rem;
+  /* Body Regular — 13px (raised from 11px) */
+  --fs-body: 0.8125rem;
 
   /* Body Small — 10px desktop & mobile */
   --fs-body-sm: 0.65rem;
 
   /* UI Label — 11px desktop, 10px mobile */
   --fs-ui: clamp(0.8rem, 0.95vw, 0.95rem);
+
+  /* ── Case study title tokens ── */
+  /* Hero title: 60px mobile → 100px desktop */
+  --fs-cs-title: clamp(3.75rem, 9vw, 6.25rem);
+  /* Major section heading: 30px mobile → 48px desktop */
+  --fs-cs-section: clamp(1.875rem, 4vw, 3rem);
+  /* Sub-section / module heading: 24px mobile → 36px desktop */
+  --fs-cs-module: clamp(1.5rem, 3vw, 2.25rem);
+  /* Stat / data value: 20px mobile → 24px desktop */
+  --fs-cs-stat: clamp(1.25rem, 2vw, 1.5rem);
 }
 
 @theme inline {
@@ -98,13 +108,13 @@ body {
 h1 {
   font-family: var(--font-sans), sans-serif;
   font-size: var(--fs-h1);
-  font-weight: 700;
+  font-weight: 800;
 }
 
 h2 {
   font-family: var(--font-sans), sans-serif;
   font-size: var(--fs-h2);
-  font-weight: 600;
+  font-weight: 700;
 }
 
 h3 {
@@ -130,8 +140,12 @@ blockquote {
 
 /* ── Nav links — lock weight, prevent browser font-synthesis on hover ── */
 nav a {
-  font-weight: 600 !important;
+  font-weight: 600;
   font-synthesis: none;
+}
+
+nav a.active {
+  font-weight: 800;
 }
 
 /* ── Design quote — Merriweather italic, unrestricted size ── */
@@ -158,34 +172,46 @@ table * {
 
 /* ============================================================
    PROJECT CASE STUDY TYPOGRAPHY
-   Single control point for all project pages.
-   Hierarchy rule: each level is 2× the size below it.
-   Weight rule: skip a step going up (600 → 800, no 700).
+   Token-driven. All sizes reference :root variables above.
+   Weight cascade: title 800 → section 700 → module 600.
    ============================================================ */
 
-/* L1 — Section heading: Merriweather ExtraBold 800, 80px desktop */
-.cs-heading {
-  font-family: var(--font-serif);
+/* Project hero title (replaces text-6xl md:text-[100px]) */
+.cs-title {
+  font-family: var(--font-sans), sans-serif;
+  font-size: var(--fs-cs-title);
   font-weight: 800;
-  font-size: clamp(2.5rem, 5.5vw, 5rem);
-  line-height: 1.05;
+  letter-spacing: -0.03em;
+  line-height: 1.0;
+}
+
+/* Major section heading (replaces text-5xl font-semibold tracking-tight) */
+.cs-section {
+  font-family: var(--font-sans), sans-serif;
+  font-size: var(--fs-cs-section);
+  font-weight: 700;
   letter-spacing: -0.025em;
-  color: var(--foreground);
+  line-height: 1.1;
 }
 
-/* L2 — Descriptive subtitle / module title / research sub-label:
-   Plus Jakarta Sans Semibold 600, 40px desktop — exactly half of cs-heading */
-.cs-sub {
-  font-family: var(--font-sans);
+/* Sub-section / module heading (replaces text-4xl font-semibold tracking-tight) */
+.cs-module {
+  font-family: var(--font-sans), sans-serif;
+  font-size: var(--fs-cs-module);
   font-weight: 600;
-  font-size: clamp(1.25rem, 2.75vw, 2.5rem);
-  line-height: 1.2;
-  letter-spacing: -0.01em;
-  color: var(--foreground);
+  letter-spacing: -0.02em;
+  line-height: 1.15;
 }
 
-/* L3 — Body text in project pages: Plus Jakarta Sans Regular
-   Overrides the global Merriweather applied to p/li/blockquote */
+/* Stat / data value (replaces text-2xl font-semibold tracking-tight) */
+.cs-stat {
+  font-family: var(--font-sans), sans-serif;
+  font-size: var(--fs-cs-stat);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+/* Body text in project pages */
 .project-page p,
 .project-page li,
 .project-page blockquote {

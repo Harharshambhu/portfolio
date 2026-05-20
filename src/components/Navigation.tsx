@@ -155,197 +155,197 @@ export default function Navigation() {
 
     return (
         <>
-        <div className="fixed top-0 left-0 right-0 z-50">
-            <motion.nav
-                initial={{ opacity: 0, y: -20 }}
-                animate={{
-                    opacity: 1,
-                    y: 0,
-                    paddingTop: isScrolled ? (isMobile ? 24 : 32) : (isMobile ? 40 : 32),
-                    paddingBottom: isScrolled ? (isMobile ? 16 : 16) : 0
-                }}
-                transition={{
-                    paddingTop: { type: "spring", stiffness: 100, damping: 20 },
-                    paddingBottom: { type: "spring", stiffness: 100, damping: 20 },
-                    default: { duration: 0.2, ease: "easeOut" }
-                }}
-                className={`flex flex-col w-full max-w-screen-xl mx-auto items-center bg-background px-6 md:px-6 border-b-2 border-muted`}
-            >
-                <div className="flex w-full items-start justify-between">
-                    <AnimatePresence mode="popLayout" initial={false}>
-                        {(!isMobile || !isScrolled) ? (
-                            <motion.div
-                                key="links"
-                                initial={{ opacity: 0, width: 0, filter: "blur(4px)" }}
-                                animate={{ opacity: 1, width: "auto", filter: "blur(0px)" }}
-                                exit={{ opacity: 0, width: 0, filter: "blur(4px)" }}
-                                transition={{ duration: 0.4, ease: "easeInOut" }}
-                                className="flex flex-nowrap gap-3 md:gap-10 -translate-y-2 overflow-hidden items-center"
+            <div className="fixed top-0 left-0 right-0 z-50">
+                <motion.nav
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{
+                        opacity: 1,
+                        y: 0,
+                        paddingTop: isScrolled ? (isMobile ? 24 : 32) : (isMobile ? 40 : 32),
+                        paddingBottom: isScrolled ? (isMobile ? 16 : 16) : 0
+                    }}
+                    transition={{
+                        paddingTop: { type: "spring", stiffness: 100, damping: 20 },
+                        paddingBottom: { type: "spring", stiffness: 100, damping: 20 },
+                        default: { duration: 0.2, ease: "easeOut" }
+                    }}
+                    className={`flex flex-col w-full max-w-screen-xl mx-auto items-center bg-background px-6 md:px-6 border-b-2 border-muted`}
+                >
+                    <div className="flex w-full items-start justify-between">
+                        <AnimatePresence mode="popLayout" initial={false}>
+                            {(!isMobile || !isScrolled) ? (
+                                <motion.div
+                                    key="links"
+                                    initial={{ opacity: 0, width: 0, filter: "blur(4px)" }}
+                                    animate={{ opacity: 1, width: "auto", filter: "blur(0px)" }}
+                                    exit={{ opacity: 0, width: 0, filter: "blur(4px)" }}
+                                    transition={{ duration: 0.4, ease: "easeInOut" }}
+                                    className="flex flex-nowrap gap-3 md:gap-10 -translate-y-2 overflow-hidden items-center"
+                                >
+                                    {links.map((link) => (
+                                        <Link
+                                            key={link.href}
+                                            href={link.href}
+                                            className={`hover:text-foreground transition-colors text-sm whitespace-nowrap ${pathname === link.href ? "text-foreground active" : "text-muted font-semibold"}`}
+                                        >
+                                            {link.label}
+                                        </Link>
+                                    ))}
+                                </motion.div>
+                            ) : (
+                                <motion.button
+                                    key="hamburger"
+                                    initial={{ opacity: 0, width: 0, scale: 0.8 }}
+                                    animate={{ opacity: 1, width: "auto", scale: 1 }}
+                                    exit={{ opacity: 0, width: 0, scale: 0.8 }}
+                                    transition={{ duration: 0.4, ease: "easeInOut" }}
+                                    onClick={() => setIsSidebarOpen(true)}
+                                    className="p-2 -mt-3 -ml-3 text-foreground hover:bg-muted/20 rounded-md transition-colors overflow-hidden flex items-center justify-center"
+                                >
+                                    <Menu size={24} className="shrink-0" />
+                                </motion.button>
+                            )}
+                        </AnimatePresence>
+
+                        {/* Placeholder to keep layout stable when Singh moves */}
+                        {isScrolled && <div className="w-[45px]" />}
+                    </div>
+
+                    <motion.div
+                        animate={{
+                            marginTop: isScrolled ? (isMobile ? -28 : -24) : 24,
+                            marginBottom: isScrolled ? 0 : 32
+                        }}
+                        className={`flex w-full justify-end pointer-events-none`}
+                        transition={{ type: "spring", stiffness: 100, damping: 20 }}
+                    >
+                        <Link
+                            href="/"
+                            className={`block pointer-events-auto cursor-pointer ${!isScrolled ? "no-cursor-interaction" : ""}`}
+                            onMouseEnter={() => {
+                                if (!isHovered) {
+                                    setIsHovered(true);
+                                    scramble("Sokimevi");
+                                }
+                            }}
+                            onMouseLeave={() => {
+                                if (isHovered) {
+                                    setIsHovered(false);
+                                    scramble("Hello.");
+                                }
+                            }}
+                        >
+                            <motion.span
+                                animate={{
+                                    fontSize: targetFontSize,
+                                    fontWeight: isScrolled ? 600 : 700,
+                                    letterSpacing: isScrolled ? "0em" : (isHovered ? (isMobile ? "0.15em" : "0.35em") : "-0.05em"),
+                                    color: isHovered ? "var(--accent-blue)" : "var(--foreground)"
+                                }}
+                                transition={{
+                                    type: "spring", stiffness: 60, damping: 14, mass: 1
+                                }}
+                                className={`leading-none block text-right font-sans pb-2`}
                             >
+                                {displayText}
+                            </motion.span>
+                        </Link>
+                    </motion.div>
+                </motion.nav>
+            </div>
+
+            {/* Mobile Sidebar */}
+            <AnimatePresence>
+                {isMobile && isSidebarOpen && (
+                    <>
+                        <motion.div
+                            key="sidebar-overlay"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: 0.2 }}
+                            className="fixed inset-0 bg-background/80 backdrop-blur-sm z-[90] md:hidden pointer-events-none"
+                        />
+                        <motion.div
+                            key="sidebar-close-area"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: 0.2 }}
+                            onClick={() => setIsSidebarOpen(false)}
+                            className="fixed top-0 bottom-0 right-0 z-[95] md:hidden"
+                            style={{ left: "min(70vw, 24rem)" }}
+                        />
+                        <motion.div
+                            key="sidebar-menu"
+                            initial={{ x: "-100%" }}
+                            animate={{ x: 0 }}
+                            exit={{ x: "-100%" }}
+                            transition={{ type: "spring", damping: 25, stiffness: 200 }}
+                            className="fixed top-0 left-0 bottom-0 w-[70vw] max-w-sm bg-background border-r border-muted z-[100] md:hidden shadow-2xl flex flex-col"
+                            onTouchStart={handleSidebarTouchStart}
+                            onTouchEnd={handleSidebarTouchEnd}
+                        >
+                            <button
+                                onClick={() => setIsSidebarOpen(false)}
+                                className="absolute top-4 right-4 p-2 text-foreground hover:bg-muted/20 rounded-md transition-colors"
+                            >
+                                <X size={24} />
+                            </button>
+                            <div className="flex flex-col pt-12 text-lg font-sans font-semibold tracking-tight flex-1">
                                 {links.map((link) => (
                                     <Link
                                         key={link.href}
                                         href={link.href}
-                                        className={`hover:text-foreground transition-colors text-sm font-semibold whitespace-nowrap ${pathname === link.href ? "text-foreground" : "text-muted"}`}
+                                        onClick={() => setIsSidebarOpen(false)}
+                                        className={`w-full px-6 py-3 transition-colors ${pathname === link.href ? "font-bold text-foreground" : "text-muted hover:text-foreground font-semibold"}`}
+                                        style={pathname === link.href ? { color: "var(--accent-blue)" } : {}}
                                     >
                                         {link.label}
                                     </Link>
                                 ))}
-                            </motion.div>
-                        ) : (
-                            <motion.button
-                                key="hamburger"
-                                initial={{ opacity: 0, width: 0, scale: 0.8 }}
-                                animate={{ opacity: 1, width: "auto", scale: 1 }}
-                                exit={{ opacity: 0, width: 0, scale: 0.8 }}
-                                transition={{ duration: 0.4, ease: "easeInOut" }}
-                                onClick={() => setIsSidebarOpen(true)}
-                                className="p-2 -mt-3 -ml-3 text-foreground hover:bg-muted/20 rounded-md transition-colors overflow-hidden flex items-center justify-center"
-                            >
-                                <Menu size={24} className="shrink-0" />
-                            </motion.button>
-                        )}
-                    </AnimatePresence>
+                            </div>
 
-                    {/* Placeholder to keep layout stable when Singh moves */}
-                    {isScrolled && <div className="w-[45px]" />}
-                </div>
-
-                <motion.div
-                    animate={{
-                        marginTop: isScrolled ? (isMobile ? -28 : -24) : 24,
-                        marginBottom: isScrolled ? 0 : 32
-                    }}
-                    className={`flex w-full justify-end pointer-events-none`}
-                    transition={{ type: "spring", stiffness: 100, damping: 20 }}
-                >
-                    <Link 
-                        href="/" 
-                        className={`block pointer-events-auto cursor-pointer ${!isScrolled ? "no-cursor-interaction" : ""}`}
-                        onMouseEnter={() => {
-                            if (!isHovered) {
-                                setIsHovered(true);
-                                scramble("Sokimevi");
-                            }
-                        }}
-                        onMouseLeave={() => {
-                            if (isHovered) {
-                                setIsHovered(false);
-                                scramble("Hello.");
-                            }
-                        }}
-                    >
-                        <motion.span
-                            animate={{
-                                fontSize: targetFontSize,
-                                fontWeight: isScrolled ? 600 : 700,
-                                letterSpacing: isScrolled ? "0em" : (isHovered ? (isMobile ? "0.15em" : "0.35em") : "-0.05em"),
-                                color: isHovered ? "var(--accent-blue)" : "var(--foreground)"
-                            }}
-                            transition={{
-                                type: "spring", stiffness: 60, damping: 14, mass: 1
-                            }}
-                            className={`leading-none block text-right font-sans pb-2`}
-                        >
-                            {displayText}
-                        </motion.span>
-                    </Link>
-                </motion.div>
-            </motion.nav>
-        </div>
-
-        {/* Mobile Sidebar */}
-        <AnimatePresence>
-            {isMobile && isSidebarOpen && (
-                <>
-                    <motion.div
-                        key="sidebar-overlay"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 0.2 }}
-                        className="fixed inset-0 bg-background/80 backdrop-blur-sm z-[90] md:hidden pointer-events-none"
-                    />
-                    <motion.div
-                        key="sidebar-close-area"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 0.2 }}
-                        onClick={() => setIsSidebarOpen(false)}
-                        className="fixed top-0 bottom-0 right-0 z-[95] md:hidden"
-                        style={{ left: "min(70vw, 24rem)" }}
-                    />
-                    <motion.div
-                        key="sidebar-menu"
-                        initial={{ x: "-100%" }}
-                        animate={{ x: 0 }}
-                        exit={{ x: "-100%" }}
-                        transition={{ type: "spring", damping: 25, stiffness: 200 }}
-                        className="fixed top-0 left-0 bottom-0 w-[70vw] max-w-sm bg-background border-r border-muted z-[100] md:hidden shadow-2xl flex flex-col"
-                        onTouchStart={handleSidebarTouchStart}
-                        onTouchEnd={handleSidebarTouchEnd}
-                    >
-                        <button 
-                            onClick={() => setIsSidebarOpen(false)} 
-                            className="absolute top-4 right-4 p-2 text-foreground hover:bg-muted/20 rounded-md transition-colors"
-                        >
-                            <X size={24} />
-                        </button>
-                        <div className="flex flex-col pt-12 text-lg font-sans font-semibold tracking-tight flex-1">
-                            {links.map((link) => (
-                                <Link
-                                    key={link.href}
-                                    href={link.href}
-                                    onClick={() => setIsSidebarOpen(false)}
-                                    className={`w-full px-6 py-3 transition-colors ${pathname === link.href ? "" : "text-muted hover:text-foreground"}`}
-                                    style={pathname === link.href ? { color: "var(--accent-neon)" } : {}}
+                            <div className="px-6 pb-10 border-t border-border pt-6">
+                                <button
+                                    onClick={toggleTheme}
+                                    className="flex items-center gap-3 text-muted hover:text-foreground transition-colors w-full text-sm font-semibold"
                                 >
-                                    {link.label}
-                                </Link>
-                            ))}
-                        </div>
+                                    {isDark
+                                        ? <Sun size={16} />
+                                        : <Moon size={16} />
+                                    }
+                                    <span>{isDark ? "Light mode" : "Dark mode"}</span>
+                                </button>
+                            </div>
+                        </motion.div>
+                    </>
+                )}
+            </AnimatePresence>
 
-                        <div className="px-6 pb-10 border-t border-border pt-6">
-                            <button
-                                onClick={toggleTheme}
-                                className="flex items-center gap-3 text-muted hover:text-foreground transition-colors w-full text-sm font-semibold"
-                            >
-                                {isDark
-                                    ? <Sun size={16} />
-                                    : <Moon size={16} />
-                                }
-                                <span>{isDark ? "Light mode" : "Dark mode"}</span>
-                            </button>
-                        </div>
+            {/* Left-edge swipe handle — mobile only, hidden while sidebar is open */}
+            <AnimatePresence>
+                {isMobile && !isSidebarOpen && (
+                    <motion.div
+                        key="swipe-bar"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.2 }}
+                        className="fixed left-0 top-0 bottom-0 z-[80] md:hidden flex items-center pointer-events-none"
+                        style={{ width: '25vw' }}
+                    >
+                        <div
+                            className="w-[4px] h-14 rounded-full ml-3"
+                            style={{
+                                background: 'var(--accent-neon)',
+                                opacity: 0.5,
+                                boxShadow: '0 0 8px var(--accent-neon)',
+                            }}
+                        />
                     </motion.div>
-                </>
-            )}
-        </AnimatePresence>
-
-        {/* Left-edge swipe handle — mobile only, hidden while sidebar is open */}
-        <AnimatePresence>
-            {isMobile && !isSidebarOpen && (
-                <motion.div
-                    key="swipe-bar"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.2 }}
-                    className="fixed left-0 top-0 bottom-0 z-[80] md:hidden flex items-center pointer-events-none"
-                    style={{ width: '25vw' }}
-                >
-                    <div
-                        className="w-[4px] h-14 rounded-full ml-3"
-                        style={{
-                            background: 'var(--accent-neon)',
-                            opacity: 0.5,
-                            boxShadow: '0 0 8px var(--accent-neon)',
-                        }}
-                    />
-                </motion.div>
-            )}
-        </AnimatePresence>
+                )}
+            </AnimatePresence>
         </>
     );
 }
