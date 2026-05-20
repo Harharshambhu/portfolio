@@ -19,8 +19,8 @@ export const projects: (Project | null)[] = [
         href: "/projects/event-ease",
         thumbnail: "/projects/EventEase/thumbnail.webp",
         circularThumbnail: "/projects/EventEase/circularthumbnail.webp",
-        circularThumbnailOffsetX: -35,
-        circularThumbnailOffsetY: -30,
+        circularThumbnailOffsetX: 0,
+        circularThumbnailOffsetY: 0,
     },
     {
         title: "VR Proximity-Based Presence",
