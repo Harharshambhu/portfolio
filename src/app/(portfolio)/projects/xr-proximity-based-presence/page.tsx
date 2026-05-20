@@ -280,12 +280,12 @@ export default function XRProximityProjectPage() {
                     ))}
                 </div>
 
-                <div className="relative w-full max-w-2xl mx-auto aspect-[4/3] rounded-xl overflow-hidden border border-border bg-background">
+                <div className="w-full max-w-2xl mx-auto rounded-xl overflow-hidden border border-border">
                     <Image
                         src="/projects/xr-proximity-based-presence/webp-m/Priortization.webp"
                         alt="Prioritisation Matrix — comparing problems across user impact, feasibility, and developer control"
-                        fill
-                        className="object-contain p-4"
+                        width={0} height={0} sizes="100vw"
+                        className="w-full h-auto block"
                     />
                 </div>
                 <ScrollMagnifier>
@@ -315,12 +315,12 @@ export default function XRProximityProjectPage() {
                     </ScrollMagnifier>
                 </div>
 
-                <div className="relative w-full max-w-2xl mx-auto aspect-[4/3] rounded-xl overflow-hidden border border-border bg-background">
+                <div className="w-full max-w-2xl mx-auto rounded-xl overflow-hidden border border-border">
                     <Image
                         src="/projects/xr-proximity-based-presence/webp-m/ImmersionvsPresence.webp"
                         alt="Presence vs. Immersion — Framework Diagram"
-                        fill
-                        className="object-contain p-4"
+                        width={0} height={0} sizes="100vw"
+                        className="w-full h-auto block"
                     />
                 </div>
                 <ScrollMagnifier>
@@ -387,12 +387,12 @@ export default function XRProximityProjectPage() {
                             TouchDesigner was linked to Unity via NDI/Spout/OSC protocols. Live audio was decomposed via FFT into spectral frequency bands that drove Unity shader parameters and mesh vertex displacements in real time: bass controlled torch flicker intensity, mid-frequencies drove particle emission, highs drove colour modulation.
                         </p>
                     </ScrollMagnifier>
-                    <div className="relative w-full max-w-2xl mx-auto aspect-[16/9] rounded-xl overflow-hidden border border-border bg-background">
+                    <div className="w-full max-w-2xl mx-auto rounded-xl overflow-hidden border border-border">
                         <Image
                             src="/projects/xr-proximity-based-presence/webp-m/Audio-Reactive Pipeline.webp"
                             alt="Phase 1 — Audio-Reactive Pipeline Architecture"
-                            fill
-                            className="object-contain p-4"
+                            width={0} height={0} sizes="100vw"
+                            className="w-full h-auto block"
                         />
                     </div>
                     <ScrollMagnifier>
@@ -425,12 +425,12 @@ export default function XRProximityProjectPage() {
                             A purpose-built test environment called the &ldquo;Prison Room,&rdquo; designed in native Unity URP. Three interconnected zones: entry cell with warm torch lighting, central corridor with arched openings, and interior study room with grabbable props.
                         </p>
                     </ScrollMagnifier>
-                    <div className="relative w-full aspect-[16/9] rounded-xl overflow-hidden border border-border bg-background">
+                    <div className="w-full rounded-xl overflow-hidden border border-border">
                         <Image
                             src="/projects/xr-proximity-based-presence/webp-m/Three-zoneLayout.webp"
                             alt="Prison Room — Three-Zone Floor Plan"
-                            fill
-                            className="object-contain p-4"
+                            width={0} height={0} sizes="100vw"
+                            className="w-full h-auto block"
                         />
                     </div>
                     <ScrollMagnifier>

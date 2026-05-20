@@ -34,13 +34,14 @@ export default function SpotlightHeading({ children, className, color = "var(--s
                 marginBottom: "-0.2em",
                 ...style,
                 ...(hovering && !isMobile ? {
-                    backgroundImage: `radial-gradient(circle 120px at ${spotlight.x}px ${spotlight.y}px, ${color} 70%, var(--foreground) 100%)`,
-                    backgroundSize: "100% 100%",
+                    backgroundImage: `radial-gradient(circle 300px at ${spotlight.x}px ${spotlight.y}px, ${color} 0%, ${color} 40%, var(--foreground) 75%)`,
                     backgroundRepeat: "no-repeat",
                     WebkitBackgroundClip: "text",
                     WebkitTextFillColor: "transparent",
                     backgroundClip: "text",
-                } : {})
+                } : {
+                    WebkitTextFillColor: "var(--foreground)",
+                })
             }}
         >
             {children}

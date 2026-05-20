@@ -6,6 +6,8 @@ export interface Project {
     description?: string;
     thumbnail?: string;
     circularThumbnail?: string;
+    circularThumbnailOffsetX?: number;
+    circularThumbnailOffsetY?: number;
 }
 
 export const projects: (Project | null)[] = [
@@ -17,6 +19,8 @@ export const projects: (Project | null)[] = [
         href: "/projects/event-ease",
         thumbnail: "/projects/EventEase/thumbnail.webp",
         circularThumbnail: "/projects/EventEase/circularthumbnail.webp",
+        circularThumbnailOffsetX: -35,
+        circularThumbnailOffsetY: -30,
     },
     {
         title: "VR Proximity-Based Presence",
@@ -44,6 +48,7 @@ export const projects: (Project | null)[] = [
         href: "/projects/echo-tiles",
         thumbnail: "/projects/Echo-tiles/thumbnail.webp",
         circularThumbnail: "/projects/Echo-tiles/circularthumbnail.webp",
+        circularThumbnailOffsetY: -25,
     },
     {
         title: "From Discovery to Transaction",

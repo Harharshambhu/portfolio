@@ -27,10 +27,39 @@ export default function BackgroundGrid({
         const ctx = canvas.getContext("2d");
         if (!ctx) return;
 
-        const computedStyle = getComputedStyle(document.documentElement);
-        const gridHoverColor = computedStyle.getPropertyValue('--grid-hover').trim() || 'rgba(200, 200, 255, 0.7)';
-        const gridBaseColor = computedStyle.getPropertyValue('--grid-base').trim() || color;
         const spotlightColor = 'rgba(255, 255, 255, 0.25)';
+
+        const parseColor = (str: string): [number, number, number, number] => {
+            const m = str.match(/rgba?\(\s*([\d.]+)\s*,\s*([\d.]+)\s*,\s*([\d.]+)\s*(?:,\s*([\d.]+))?\s*\)/);
+            if (m) return [+m[1], +m[2], +m[3], m[4] !== undefined ? +m[4] : 1];
+            const hex = str.trim().replace('#', '');
+            const h = hex.length === 3 ? hex.split('').map(c => c + c).join('') : hex;
+            return [parseInt(h.slice(0,2),16), parseInt(h.slice(2,4),16), parseInt(h.slice(4,6),16), 1];
+        };
+
+        // Mutable color state — rebuilt whenever the palette changes
+        const colors = { base: '', table: [] as string[] };
+
+        const rebuildColors = () => {
+            const cs = getComputedStyle(document.documentElement);
+            const hover = cs.getPropertyValue('--grid-hover').trim() || 'rgba(200,200,255,0.7)';
+            const base  = cs.getPropertyValue('--grid-base').trim()  || color;
+            const hp = parseColor(hover);
+            const bp = parseColor(base);
+            // Cap hover alpha so the effect stays subtle regardless of palette values
+            hp[3] = Math.min(hp[3], 0.30);
+            colors.base  = base;
+            colors.table = Array.from({ length: 101 }, (_, i) => {
+                const t = i / 100;
+                const r = Math.round(hp[0] + (bp[0] - hp[0]) * t);
+                const g = Math.round(hp[1] + (bp[1] - hp[1]) * t);
+                const b = Math.round(hp[2] + (bp[2] - hp[2]) * t);
+                const a = +(hp[3] + (bp[3] - hp[3]) * t).toFixed(3);
+                return `rgba(${r},${g},${b},${a})`;
+            });
+        };
+
+        rebuildColors();
 
         let animationFrameId: number;
         let mouseX = -1000;
@@ -39,7 +68,7 @@ export default function BackgroundGrid({
         let delayedMouseY = -1000;
 
         const gridSize = 10;
-        const hoverRadius = 150;
+        const hoverRadius = 180;
         const hoverRadiusSq = hoverRadius * hoverRadius;
         const innerRadiusSq = (hoverRadius * 0.8) ** 2;
         const easing = 0.15;
@@ -79,6 +108,10 @@ export default function BackgroundGrid({
 
                     if (interaction && distSq < hoverRadiusSq) {
                         const dist = Math.sqrt(distSq);
+                        // Circular gradient: t=0 at cursor (hover color), t=1 at edge (base color)
+                        const t = Math.pow(dist / hoverRadius, 0.6);
+                        const dotColor = colors.table[Math.min(100, Math.round(t * 100))];
+
                         const scaling = Math.pow(1 - dist / hoverRadius, 1.5);
                         const angle = Math.atan2(dy, dx);
                         const displacement = dist * scaling;
@@ -98,14 +131,14 @@ export default function BackgroundGrid({
                             const isHorizontal = (r + c) % 2 === 0;
                             const w = isHorizontal ? 2 + stretch : 2;
                             const h = isHorizontal ? 2 : 2 + stretch;
-                            ctx.fillStyle = gridHoverColor;
+                            ctx.fillStyle = dotColor;
                             ctx.fillRect(renderX - w / 2, renderY - h / 2, w, h);
                         } else {
-                            ctx.fillStyle = gridBaseColor;
+                            ctx.fillStyle = dotColor;
                             ctx.fillRect(renderX - 1, renderY - 1, 2, 2);
                         }
                     } else {
-                        ctx.fillStyle = gridBaseColor;
+                        ctx.fillStyle = colors.base;
                         ctx.fillRect(x - 1, y - 1, 2, 2);
                     }
                 }
@@ -173,6 +206,14 @@ export default function BackgroundGrid({
             startRaf();
         };
 
+        // Re-read palette variables whenever PaletteChanger writes to :root style
+        const paletteObserver = new MutationObserver(() => {
+            rebuildColors();
+            lastMoveTime = Date.now();
+            startRaf();
+        });
+        paletteObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['style'] });
+
         handleResize(); // sets canvas size and draws initial static frame
         window.addEventListener("resize", handleResize);
         window.addEventListener("mousemove", handleMouseMove);
@@ -187,6 +228,7 @@ export default function BackgroundGrid({
             window.removeEventListener("resize", handleResize);
             window.removeEventListener("mousemove", handleMouseMove);
             if (resizeObserver) resizeObserver.disconnect();
+            paletteObserver.disconnect();
             cancelAnimationFrame(animationFrameId);
         };
     }, [color, fixed, isProjectCaseStudy]);

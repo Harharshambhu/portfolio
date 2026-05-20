@@ -216,12 +216,12 @@ export default function ComfortAidProjectPage() {
                     </div>
                     <div className="flex flex-col gap-3">
                         <span className="text-xs font-mono text-muted uppercase tracking-wider">Root Causes</span>
-                        <div className="relative aspect-video rounded-xl overflow-hidden border border-border bg-background">
+                        <div className="w-full rounded-xl overflow-hidden border border-border">
                             <Image
                                 src="/projects/Comfort Aid/Cause-Natureof problem.webp"
                                 alt="Cause and nature of the patient transfer problem"
-                                fill
-                                className="object-contain p-3"
+                                width={0} height={0} sizes="100vw"
+                                className="w-full h-auto block"
                             />
                         </div>
                     </div>
@@ -366,12 +366,12 @@ export default function ComfortAidProjectPage() {
                     ))}
                 </div>
 
-                <div className="relative w-full max-w-2xl mx-auto aspect-[4/3] rounded-xl overflow-hidden border border-border bg-background">
+                <div className="w-full max-w-2xl mx-auto rounded-xl overflow-hidden border border-border">
                     <Image
                         src="/projects/Comfort Aid/Action-priortity-matrix.webp"
                         alt="Key Insight-to-Action Priority Matrix"
-                        fill
-                        className="object-contain p-4"
+                        width={0} height={0} sizes="100vw"
+                        className="w-full h-auto block"
                     />
                 </div>
                 <p className="text-sm text-muted text-center">Key Insight-to-Action Priority Matrix, translating research findings into design requirements</p>
