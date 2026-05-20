@@ -138,7 +138,7 @@ export default function LetsTalkSection() {
                                 borderRadius: ["4px", "0px", "0px"],
                                 backgroundColor: "var(--accent-neon)",
                                 color: "var(--background)",
-                                transition: { duration: 1.0, times: [0, 0.1, 1], ease: "easeInOut" }
+                                transition: { duration: 1.0, times: [0, 0.2, 1], ease: "easeInOut" }
                             }
                         }}
                         initial="initial"
