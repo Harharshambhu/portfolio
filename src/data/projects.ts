@@ -48,7 +48,7 @@ export const projects: (Project | null)[] = [
         href: "/projects/echo-tiles",
         thumbnail: "/projects/Echo-tiles/thumbnail.webp",
         circularThumbnail: "/projects/Echo-tiles/circularthumbnail.webp",
-        circularThumbnailOffsetY: -25,
+        circularThumbnailOffsetY: -10,
     },
     {
         title: "From Discovery to Transaction",
