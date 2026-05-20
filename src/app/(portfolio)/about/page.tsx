@@ -115,8 +115,8 @@ function RippleRow({ year, role, company, desc, delay, globalMouse, showBubble =
                             ? `circle(150% at ${origin.x}px ${origin.y}px)`
                             : `circle(0% at ${origin.x}px ${origin.y}px)`,
                         transition: hovered
-                            ? "clip-path 0.55s cubic-bezier(0.4,0,0.2,1)"
-                            : "clip-path 0.4s cubic-bezier(0.4,0,0.2,1)",
+                            ? "clip-path 0.8s cubic-bezier(0.4,0,0.2,1)"
+                            : "clip-path 0.1s cubic-bezier(0.4,0,0.2,1)",
                     }}
                 />
                 <div className="relative md:w-1/4">
