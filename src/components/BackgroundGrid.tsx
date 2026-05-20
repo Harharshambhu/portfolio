@@ -34,7 +34,7 @@ export default function BackgroundGrid({
             if (m) return [+m[1], +m[2], +m[3], m[4] !== undefined ? +m[4] : 1];
             const hex = str.trim().replace('#', '');
             const h = hex.length === 3 ? hex.split('').map(c => c + c).join('') : hex;
-            return [parseInt(h.slice(0,2),16), parseInt(h.slice(2,4),16), parseInt(h.slice(4,6),16), 1];
+            return [parseInt(h.slice(0, 2), 16), parseInt(h.slice(2, 4), 16), parseInt(h.slice(4, 6), 16), 1];
         };
 
         // Mutable color state — rebuilt whenever the palette changes
@@ -43,12 +43,12 @@ export default function BackgroundGrid({
         const rebuildColors = () => {
             const cs = getComputedStyle(document.documentElement);
             const hover = cs.getPropertyValue('--grid-hover').trim() || 'rgba(200,200,255,0.7)';
-            const base  = cs.getPropertyValue('--grid-base').trim()  || color;
+            const base = cs.getPropertyValue('--grid-base').trim() || color;
             const hp = parseColor(hover);
             const bp = parseColor(base);
             // Cap hover alpha so the effect stays subtle regardless of palette values
             hp[3] = Math.min(hp[3], 0.30);
-            colors.base  = base;
+            colors.base = base;
             colors.table = Array.from({ length: 101 }, (_, i) => {
                 const t = i / 100;
                 const r = Math.round(hp[0] + (bp[0] - hp[0]) * t);

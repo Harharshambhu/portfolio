@@ -31,20 +31,20 @@ export const DARK: Palette = {
 export const LIGHT: Palette = {
   id: "light",
   vars: {
-    "--background": "rgba(249,245,230,1)",
-    "--foreground": "rgba(38,66,43,1)",
-    "--muted": "rgba(89,116,93,1)",
-    "--border": "rgba(38,66,43,0.14)",
-    "--hover": "rgba(241,78,7,0.08)",
-    "--accent-neon": "rgba(241,78,7,1)",
-    "--accent-blue": "rgba(112,39,65,1)",
-    "--grid-base": "rgba(38,66,43,0.10)",
-    "--grid-hover": "rgba(241,78,7,0.25)",
-    "--spotlight-primary": "#F14E07",
-    "--spotlight-secondary": "#702741",
-    "--text-hover": "#F9F5E6",
-    "--text-hover-muted": "rgba(249,245,230,0.75)",
-    "--cursor-color": "#26422B",
+    "--background": "rgba(235,243,250,1)",
+    "--foreground": "rgba(14,21,37,1)",
+    "--muted": "rgba(38,68,110,1)",
+    "--border": "rgba(14,21,37,0.15)",
+    "--hover": "rgba(58,108,179,0.07)",
+    "--accent-neon": "rgba(58,108,179,1)",
+    "--accent-blue": "rgba(24,41,82,1)",
+    "--grid-base": "rgba(14,21,37,0.08)",
+    "--grid-hover": "rgba(58,108,179,0.28)",
+    "--spotlight-primary": "#3A6CB3",
+    "--spotlight-secondary": "#8AABD0",
+    "--text-hover": "#EBF3FA",
+    "--text-hover-muted": "rgba(235,243,250,0.75)",
+    "--cursor-color": "#0E1525",
   },
 };
 
@@ -76,8 +76,8 @@ export default function PaletteChanger() {
       <div
         className="pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-200 px-3 py-1.5 rounded text-xs font-medium whitespace-nowrap"
         style={{
-          background: isDark ? "rgba(203,216,220,1)" : "rgba(38,66,43,1)",
-          color: isDark ? "rgba(10,18,24,1)" : "rgba(249,245,230,1)",
+          background: isDark ? "rgba(203,216,220,1)" : "rgba(14,21,37,1)",
+          color: isDark ? "rgba(10,18,24,1)" : "rgba(235,243,250,1)",
         }}
       >
         {isDark ? "Switch to light" : "Too bright? Go dark"}
