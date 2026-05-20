@@ -264,8 +264,17 @@ export default function Navigation() {
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         transition={{ duration: 0.2 }}
+                        className="fixed inset-0 bg-background/80 backdrop-blur-sm z-[90] md:hidden pointer-events-none"
+                    />
+                    <motion.div
+                        key="sidebar-close-area"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.2 }}
                         onClick={() => setIsSidebarOpen(false)}
-                        className="fixed inset-0 bg-background/80 backdrop-blur-sm z-[90] md:hidden"
+                        className="fixed top-0 bottom-0 right-0 z-[95] md:hidden"
+                        style={{ left: "min(70vw, 24rem)" }}
                     />
                     <motion.div
                         key="sidebar-menu"
@@ -283,13 +292,13 @@ export default function Navigation() {
                         >
                             <X size={24} />
                         </button>
-                        <div className="flex flex-col items-start gap-6 px-6 pt-12 text-lg font-sans font-semibold tracking-tight flex-1">
+                        <div className="flex flex-col pt-12 text-lg font-sans font-semibold tracking-tight flex-1">
                             {links.map((link) => (
                                 <Link
                                     key={link.href}
                                     href={link.href}
                                     onClick={() => setIsSidebarOpen(false)}
-                                    className={`transition-colors ${pathname === link.href ? "" : "text-muted hover:text-foreground"}`}
+                                    className={`w-full px-6 py-3 transition-colors ${pathname === link.href ? "" : "text-muted hover:text-foreground"}`}
                                     style={pathname === link.href ? { color: "var(--accent-neon)" } : {}}
                                 >
                                     {link.label}
