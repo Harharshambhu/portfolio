@@ -6,7 +6,8 @@ import { usePathname } from "next/navigation";
 import { motion, useScroll, useMotionValueEvent, AnimatePresence } from "framer-motion";
 import { useState, useEffect, useRef } from "react";
 import { useWindowSize } from "@/hooks/useWindowSize";
-import { Menu, X } from "lucide-react";
+import { Menu, Moon, Sun, X } from "lucide-react";
+import { DARK, LIGHT, applyPalette } from "./PaletteChanger";
 
 const links = [
     { href: "/", label: "Home" },
@@ -43,6 +44,20 @@ export default function Navigation() {
             setIsScrolled(scrollY.get() > 1);
         }
     }, [pathname, isHome, scrollY]);
+
+    const [isDark, setIsDark] = useState(false);
+
+    useEffect(() => {
+        const saved = localStorage.getItem("portfolio-theme");
+        setIsDark(saved === "dark");
+    }, []);
+
+    const toggleTheme = () => {
+        const next = !isDark;
+        applyPalette(next ? DARK : LIGHT);
+        setIsDark(next);
+        localStorage.setItem("portfolio-theme", next ? "dark" : "light");
+    };
 
     const [displayText, setDisplayText] = useState("Hello.");
     const [isHovered, setIsHovered] = useState(false);
@@ -227,18 +242,31 @@ export default function Navigation() {
                         >
                             <X size={24} />
                         </button>
-                        <div className="flex flex-col items-start gap-6 px-6 pt-12 text-lg font-sans font-semibold tracking-tight">
+                        <div className="flex flex-col items-start gap-6 px-6 pt-12 text-lg font-sans font-semibold tracking-tight flex-1">
                             {links.map((link) => (
                                 <Link
                                     key={link.href}
                                     href={link.href}
                                     onClick={() => setIsSidebarOpen(false)}
                                     className={`transition-colors ${pathname === link.href ? "" : "text-muted hover:text-foreground"}`}
-                                    style={pathname === link.href ? { color: "var(--accent-blue)" } : {}}
+                                    style={pathname === link.href ? { color: "var(--accent-neon)" } : {}}
                                 >
                                     {link.label}
                                 </Link>
                             ))}
+                        </div>
+
+                        <div className="px-6 pb-10 border-t border-border pt-6">
+                            <button
+                                onClick={toggleTheme}
+                                className="flex items-center gap-3 text-muted hover:text-foreground transition-colors w-full text-sm font-semibold"
+                            >
+                                {isDark
+                                    ? <Sun size={16} />
+                                    : <Moon size={16} />
+                                }
+                                <span>{isDark ? "Light mode" : "Dark mode"}</span>
+                            </button>
                         </div>
                     </motion.div>
                 </>

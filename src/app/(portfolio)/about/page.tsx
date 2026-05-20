@@ -165,10 +165,13 @@ function RippleRow({ year, role, company, desc, delay, globalMouse, showBubble =
                         }}
                     >
                         <div
-                            className="w-90 h-90 rounded-full backdrop-blur-md border border-white/20 shadow-2xl flex flex-col items-center justify-center p-10 text-center"
-                            style={{ background: "rgba(45, 236, 11, 1)" }}
+                            className="w-90 h-90 rounded-full backdrop-blur-md shadow-2xl flex flex-col items-center justify-center p-10 text-center"
+                            style={{
+                                background: "var(--accent-neon)",
+                                border: "1px solid var(--border)",
+                            }}
                         >
-                            <p className="text-white font-semibold text-lg leading-relaxed max-w-[280px] whitespace-pre-line">
+                            <p className="font-semibold text-lg leading-relaxed max-w-[280px] whitespace-pre-line" style={{ color: "var(--text-hover)" }}>
                                 {desc}
                             </p>
                         </div>

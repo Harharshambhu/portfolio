@@ -415,8 +415,8 @@ export default function EventEaseProjectPage() {
                                 Nine primary stakeholder categories were identified across the Indian event ecosystem. Within the agency team alone, twelve distinct management roles were mapped. The key insight: the agency isn&apos;t just a service provider. It&apos;s the <span className="text-foreground font-medium">information router</span> for an entire temporary multi-organisational network.
                             </p>
                         </div>
-                        <div className="relative w-full aspect-[16/9] rounded-xl overflow-hidden border border-border bg-background">
-                            <Image src="/projects/EventEase/STakeholderMap.webp" alt="Stakeholder map — all primary actors and management roles in the Indian event agency ecosystem" fill className="object-contain p-4" />
+                        <div className="w-full rounded-xl overflow-hidden border border-border">
+                            <Image src="/projects/EventEase/STakeholderMap.webp" alt="Stakeholder map — all primary actors and management roles in the Indian event agency ecosystem" width={0} height={0} sizes="100vw" className="w-full h-auto block" />
                         </div>
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
                             {ecosystemStakeholders.map((s) => (
@@ -437,8 +437,8 @@ export default function EventEaseProjectPage() {
                                 The ecosystem map tracked four types of flows between the agency and everyone around it: goods, services, information, and money. We identified twelve distinct simultaneous information flows. When any of those break down, the result is a communication failure. Not a process problem, not a people problem.
                             </p>
                         </div>
-                        <div className="relative w-full aspect-[16/9] rounded-xl overflow-hidden border border-border bg-background">
-                            <Image src="/projects/EventEase/EcosystemMapping.webp" alt="Ecosystem map — four flow types across all stakeholder relationships" fill className="object-contain p-4" />
+                        <div className="w-full rounded-xl overflow-hidden border border-border">
+                            <Image src="/projects/EventEase/EcosystemMapping.webp" alt="Ecosystem map — four flow types across all stakeholder relationships" width={0} height={0} sizes="100vw" className="w-full h-auto block" />
                         </div>
                     </div>
 
@@ -451,8 +451,8 @@ export default function EventEaseProjectPage() {
                                 We traced the full event lifecycle across every party involved, from the corporate client and agency teams to sponsors, vendors, government bodies, and the venue. An agency is managing at least five distinct workstreams at the same time, with no clear way to know which messages need action, which are just informational, and which are already resolved.
                             </p>
                         </div>
-                        <div className="relative w-full aspect-[16/9] rounded-xl overflow-hidden border border-border bg-background">
-                            <Image src="/projects/EventEase/Event-Process-Map.webp" alt="Event process map — full lifecycle across all parallel stakeholder swim lanes" fill className="object-contain p-3" />
+                        <div className="w-full rounded-xl overflow-hidden border border-border">
+                            <Image src="/projects/EventEase/Event-Process-Map.webp" alt="Event process map — full lifecycle across all parallel stakeholder swim lanes" width={0} height={0} sizes="100vw" className="w-full h-auto block" />
                         </div>
                     </div>
 
@@ -485,8 +485,8 @@ export default function EventEaseProjectPage() {
                             </p>
                         </div>
 
-                        <div className="relative w-full aspect-[16/9] rounded-xl overflow-hidden border border-border bg-background">
-                            <Image src="/projects/EventEase/GapClosure-Strategy-Map.webp" alt="Gap closure strategy — nine market failures and platform responses" fill className="object-contain p-3" />
+                        <div className="w-full rounded-xl overflow-hidden border border-border">
+                            <Image src="/projects/EventEase/GapClosure-Strategy-Map.webp" alt="Gap closure strategy — nine market failures and platform responses" width={0} height={0} sizes="100vw" className="w-full h-auto block" />
                         </div>
                     </div>
 
@@ -586,8 +586,8 @@ export default function EventEaseProjectPage() {
                             The information architecture is organised in three layers. The global navigation has three main destinations: <span className="text-foreground font-medium">Overview</span> (all active events plus an activity feed), <span className="text-foreground font-medium">Events</span> (the directory of events with individual dashboards), and <span className="text-foreground font-medium">DMs</span> (direct messages and group conversations). Within each event, channels are split into three structural zones. Operational modules are accessed from the event dashboard. Each layer maps to one zone, so the structure is learnable and there&apos;s no overlap.
                         </p>
                     </div>
-                    <div className="relative w-full aspect-[16/9] rounded-xl overflow-hidden border border-border bg-background">
-                        <Image src="/projects/EventEase/Information-architecture.webp" alt="EventEase — full platform information architecture" fill className="object-contain p-4" />
+                    <div className="w-full rounded-xl overflow-hidden border border-border">
+                        <Image src="/projects/EventEase/Information-architecture.webp" alt="EventEase — full platform information architecture" width={0} height={0} sizes="100vw" className="w-full h-auto block" />
                     </div>
 
                     <div className="flex flex-col gap-4">
@@ -648,14 +648,14 @@ export default function EventEaseProjectPage() {
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div className="flex flex-col gap-2">
                                 <span className="text-xs font-sans text-muted uppercase tracking-wider">Module Mapping</span>
-                                <div className="relative aspect-video rounded-xl overflow-hidden border border-border bg-background">
-                                    <Image src="/projects/EventEase/ModuleMapping.webp" alt="Module mapping" fill className="object-contain p-3" />
+                                <div className="w-full rounded-xl overflow-hidden border border-border">
+                                    <Image src="/projects/EventEase/ModuleMapping.webp" alt="Module mapping" width={0} height={0} sizes="100vw" className="w-full h-auto block" />
                                 </div>
                             </div>
                             <div className="flex flex-col gap-2">
                                 <span className="text-xs font-sans text-muted uppercase tracking-wider">Dashboard Module Map</span>
-                                <div className="relative aspect-video rounded-xl overflow-hidden border border-border bg-background">
-                                    <Image src="/projects/EventEase/Dashboard-Module-Map.webp" alt="Dashboard module map" fill className="object-contain p-3" />
+                                <div className="w-full rounded-xl overflow-hidden border border-border">
+                                    <Image src="/projects/EventEase/Dashboard-Module-Map.webp" alt="Dashboard module map" width={0} height={0} sizes="100vw" className="w-full h-auto block" />
                                 </div>
                             </div>
                         </div>

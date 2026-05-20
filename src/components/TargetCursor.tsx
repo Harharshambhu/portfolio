@@ -175,6 +175,22 @@ const TargetCursor: React.FC<TargetCursorProps> = ({
         // the change was triggered by mouse movement or page scroll.
         const circles = [c1Ref.current, c2Ref.current, c3Ref.current, c4Ref.current];
         let isInFooter = false;
+        const baseCursorColor = { current: '#000000' };
+
+        const rebuildCursorColor = () => {
+            const color = getComputedStyle(document.documentElement).getPropertyValue('--cursor-color').trim() || '#000000';
+            baseCursorColor.current = color;
+            if (!isInFooter) {
+                gsap.to(circles, { backgroundColor: color, duration: 0.35, ease: 'power2.out' });
+                if (cornersRef.current) {
+                    gsap.to(cornersRef.current, { borderColor: color, duration: 0.35, ease: 'power2.out' });
+                }
+            }
+        };
+        rebuildCursorColor();
+
+        const paletteObserver = new MutationObserver(rebuildCursorColor);
+        paletteObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['style'] });
 
         const updateCircleColor = (x: number, y: number) => {
             const footer = document.getElementById('main-footer');
@@ -183,9 +199,9 @@ const TargetCursor: React.FC<TargetCursorProps> = ({
             const nowInFooter = x >= rect.left && x <= rect.right && y >= rect.top && y <= rect.bottom;
             if (nowInFooter !== isInFooter) {
                 isInFooter = nowInFooter;
-                gsap.to(circles, { backgroundColor: nowInFooter ? '#ffffff' : '#000000', duration: 0.35, ease: 'power2.out' });
+                gsap.to(circles, { backgroundColor: nowInFooter ? '#ffffff' : baseCursorColor.current, duration: 0.35, ease: 'power2.out' });
                 if (cornersRef.current) {
-                    gsap.to(cornersRef.current, { borderColor: nowInFooter ? '#ffffff' : '#000000', duration: 0.35, ease: 'power2.out' });
+                    gsap.to(cornersRef.current, { borderColor: nowInFooter ? '#ffffff' : baseCursorColor.current, duration: 0.35, ease: 'power2.out' });
                 }
             }
         };
@@ -362,6 +378,7 @@ const TargetCursor: React.FC<TargetCursorProps> = ({
             window.removeEventListener('scroll', scrollHandler);
             window.removeEventListener('mousedown', mouseDownHandler);
             window.removeEventListener('mouseup', mouseUpHandler);
+            paletteObserver.disconnect();
 
             if (activeTarget) {
                 cleanupTarget(activeTarget);

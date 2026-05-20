@@ -11,8 +11,8 @@ import { useWindowSize } from "@/hooks/useWindowSize";
 const MotionLink = motion.create(Link);
 
 const SCRAMBLE_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+";
-const INTERVAL_DELAY = 30;
-const ANIMATION_DURATION = 0.15;
+const INTERVAL_DELAY = 40;
+const ANIMATION_DURATION = 0.1;
 
 const PHRASE_DEFAULT = "Let's Talk";
 const PHRASE_HOVER = "START A PROJECT — GET IN TOUCH — ANIRUDH@SINGH";
@@ -131,7 +131,7 @@ export default function LetsTalkSection() {
                                 width: "100%",
                                 borderRadius: "1px",
                                 backgroundColor: "var(--accent-neon)",
-                                color: "var(--foreground)",
+                                color: "rgba(10,10,10,1)",
                             },
                             clicked: {
                                 width: ["260px", "100vw", "100vw"],
@@ -149,7 +149,7 @@ export default function LetsTalkSection() {
                             <motion.div
                                 className="absolute top-1/2 left-1/2 bg-accent-neon z-[-1]"
                                 initial={{ width: "100%", height: "100%" }}
-                                animate={{ 
+                                animate={{
                                     width: ["100%", "200vw", "200vw"],
                                     height: ["100%", "100%", "1500px"],
                                 }}
@@ -158,7 +158,7 @@ export default function LetsTalkSection() {
                             />
                         )}
 
-                        <div 
+                        <div
                             className={`flex items-center w-full z-10 whitespace-nowrap px-4 ${isHovered && !isMobile || isClicked ? "justify-between" : "justify-center gap-4"}`}
                         >
                             <div className={`flex w-full ${isHovered && !isMobile || isClicked ? "justify-between" : "justify-center"}`}>

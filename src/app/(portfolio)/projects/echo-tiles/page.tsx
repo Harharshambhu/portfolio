@@ -108,12 +108,12 @@ export default function EchoTilesProjectPage() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
                     <div className="flex flex-col gap-3">
                         <span className="text-xs font-sans text-muted uppercase tracking-wider">Original: Minesweeper (1989)</span>
-                        <div className="relative aspect-video rounded-xl overflow-hidden border border-border bg-foreground">
+                        <div className="w-full rounded-xl overflow-hidden border border-border bg-foreground">
                             <Image
                                 src="/projects/Echo-tiles/minesweeperss.webp"
                                 alt="Classic Minesweeper game screenshot"
-                                fill
-                                className="object-contain p-2"
+                                width={0} height={0} sizes="100vw"
+                                className="w-full h-auto block"
                             />
                         </div>
                         <p className="text-sm text-muted">A flat 2D grid. Numbers tell you how many mines are adjacent. Safe cells are clicked one by one.</p>
@@ -228,12 +228,12 @@ export default function EchoTilesProjectPage() {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div className="relative aspect-square rounded-xl overflow-hidden border border-border bg-[#8a8a8a]">
+                    <div className="w-full rounded-xl overflow-hidden border border-border bg-[#8a8a8a]">
                         <Image
                             src="/projects/Echo-tiles/gameimages/gun.webp"
                             alt="Echo Tiles VR sensor gun render"
-                            fill
-                            className="object-contain p-8"
+                            width={0} height={0} sizes="100vw"
+                            className="w-full h-auto block"
                         />
                     </div>
                     <div className="relative aspect-square rounded-xl overflow-hidden border border-border">
@@ -478,12 +478,12 @@ export default function EchoTilesProjectPage() {
                     </p>
                 </div>
 
-                <div className="relative w-full aspect-[16/7] rounded-xl overflow-hidden border border-border bg-white">
+                <div className="w-full rounded-xl overflow-hidden border border-border">
                     <Image
                         src="/projects/Echo-tiles/script-arch.webp"
                         alt="Script architecture diagram showing data flow between four C# scripts"
-                        fill
-                        className="object-contain p-6 md:p-10"
+                        width={0} height={0} sizes="100vw"
+                        className="w-full h-auto block"
                     />
                 </div>
 

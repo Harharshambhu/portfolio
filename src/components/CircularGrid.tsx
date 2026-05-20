@@ -313,8 +313,8 @@ export default function CircularGrid({ projects }: { projects: Project[] }) {
                                                 >
                                                     <image
                                                         href={project.circularThumbnail}
-                                                        x={-400}
-                                                        y={-400}
+                                                        x={-400 + (project.circularThumbnailOffsetX ?? 0)}
+                                                        y={-400 + (project.circularThumbnailOffsetY ?? 0)}
                                                         width={800}
                                                         height={800}
                                                         preserveAspectRatio="xMidYMid slice"
