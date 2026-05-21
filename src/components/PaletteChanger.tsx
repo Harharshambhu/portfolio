@@ -31,9 +31,9 @@ export const DARK: Palette = {
 export const LIGHT: Palette = {
   id: "light",
   vars: {
-    "--background": "rgba(235,243,250,1)",
+    "--background": "rgba(243, 245, 247, 1)",
     "--foreground": "rgba(14,21,37,1)",
-    "--muted": "rgba(38,68,110,1)",
+    "--muted": "rgba(61, 92, 135, 1)",
     "--border": "rgba(14,21,37,0.15)",
     "--hover": "rgba(58,108,179,0.07)",
     "--accent-neon": "rgba(58,108,179,1)",
@@ -94,7 +94,7 @@ export default function PaletteChanger() {
         }}
       >
         {isDark
-          ? <Sun  size={18} style={{ color: "rgba(203,216,220,0.8)" }} />
+          ? <Sun size={18} style={{ color: "rgba(203,216,220,0.8)" }} />
           : <Moon size={18} style={{ color: "rgba(10,10,10,0.7)" }} />
         }
       </button>
