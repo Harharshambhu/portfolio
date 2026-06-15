@@ -31,6 +31,7 @@ export default function HeroName() {
         <div className="relative inline-block">
             <motion.h1
                 ref={ref}
+                initial={false}
                 animate={{
                     fontSize: targetFontSize,
                     fontWeight: isScrolled ? 700 : 500,

@@ -157,7 +157,12 @@ export default function Navigation() {
         <>
             <div className="fixed top-0 left-0 right-0 z-50">
                 <motion.nav
-                    initial={{ opacity: 0, y: -20 }}
+                    initial={{
+                        opacity: 0,
+                        y: -20,
+                        paddingTop: isScrolled ? (isMobile ? 24 : 32) : (isMobile ? 40 : 32),
+                        paddingBottom: isScrolled ? (isMobile ? 16 : 16) : 0
+                    }}
                     animate={{
                         opacity: 1,
                         y: 0,
@@ -236,6 +241,7 @@ export default function Navigation() {
                             }}
                         >
                             <motion.span
+                                initial={false}
                                 animate={{
                                     fontSize: targetFontSize,
                                     fontWeight: isScrolled ? 600 : 700,
