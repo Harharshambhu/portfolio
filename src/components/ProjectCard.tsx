@@ -20,8 +20,7 @@ export default function ProjectCard({ project, delay = 0, variant = "square", cl
     return (
         <motion.div
             initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay, ease: [0.16, 1, 0.3, 1] }}
             className={`group ${isTall ? "md:h-full" : ""} ${className}`}
         >
