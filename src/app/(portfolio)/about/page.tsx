@@ -37,13 +37,12 @@ function RippleRow({ year, role, company, desc, delay, globalMouse, showBubble =
         if (isOver && !hovered) {
             setHovered(true);
             setOrigin({ x: mouseX - rect.left, y: mouseY - rect.top });
-            showBubbleWithTimeout();
+            setBubbleVisible(true);
         } else if (!isOver && hovered) {
             setHovered(false);
             setBubbleVisible(false);
         } else if (isOver && hovered) {
             setOrigin({ x: mouseX - rect.left, y: mouseY - rect.top });
-            showBubbleWithTimeout();
         }
     };
 

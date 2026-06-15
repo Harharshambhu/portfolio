@@ -60,6 +60,9 @@ const merriweather = localFont({
 export const metadata: Metadata = {
   title: "Anirudh Singh | Portfolio",
   description: "Product & XR Designer | M.Des at IIT Jodhpur",
+  icons: {
+    icon: "/favicon.svg",
+  },
 };
 
 export default function RootLayout({

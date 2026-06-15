@@ -1,5 +1,4 @@
 
-import ProjectsGrid from "@/components/ProjectsGrid";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import ScrollReveal from "@/components/ScrollReveal";
 import HeroImage from "@/components/HeroImage";
@@ -10,7 +9,6 @@ import CircularGrid from "@/components/CircularGrid";
 import { projects, type Project } from "@/data/projects";
 
 export default function Home() {
-  const selectedProjects = projects.filter((p): p is Project => p !== null).slice(0, 3);
   const gridProjects = projects.filter((p): p is Project =>
     p !== null &&
     p.title !== "From Discovery to Transaction" &&
