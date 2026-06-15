@@ -27,12 +27,10 @@ export default function Home() {
 
         <div className="flex flex-col gap-4 w-full md:w-[60%]">
           <HeroName />
-          <ScrollReveal delay={0.1}>
+          <ScrollReveal delay={0.1} className="flex flex-col gap-4">
             <h2 className="text-xl text-muted">
               I am a Product & UX Designer
             </h2>
-          </ScrollReveal>
-          <ScrollReveal delay={0.2}>
             <p className="max-w-xl text-lg leading-relaxed text-muted">
               Designing for user activeness and spatial presence.
             </p>
