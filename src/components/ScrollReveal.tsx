@@ -1,7 +1,6 @@
 "use client";
 
-import { motion, useInView, UseInViewOptions } from "framer-motion";
-import { useRef } from "react";
+import { motion } from "framer-motion";
 
 interface ScrollRevealProps {
     children: React.ReactNode;
@@ -17,23 +16,17 @@ export default function ScrollReveal({
     className = "",
     delay = 0,
     duration = 0.5,
-    threshold = 0.2, // Trigger when 20% of element is in view
+    threshold = 0.2,
     once = true,
 }: ScrollRevealProps) {
-    const ref = useRef(null);
-    const isInView = useInView(ref, {
-        amount: threshold,
-        once: once
-    });
-
     return (
         <motion.div
-            ref={ref}
             initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once, amount: threshold }}
             transition={{
-                duration: duration,
-                delay: delay,
+                duration,
+                delay,
                 ease: "easeOut"
             }}
             className={className}
