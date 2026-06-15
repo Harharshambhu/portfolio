@@ -126,7 +126,7 @@ export default function DiscoveryToTransactionPage() {
             <div className="flex flex-col gap-20 max-w-4xl mx-auto w-full">
 
             {/* ── Overview ── */}
-            <motion.section className="flex flex-col gap-18" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fade}>
+            <motion.section className="flex flex-col gap-18" initial="hidden" animate="visible"  variants={fade}>
                 <div className="flex justify-center">
                     <Image
                         src="/projects/discovery-to-transaction/instagram-logo.webp"
@@ -164,7 +164,7 @@ export default function DiscoveryToTransactionPage() {
             </motion.section>
 
             {/* ── Market Research ── */}
-            <motion.section className="flex flex-col gap-8" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fade}>
+            <motion.section className="flex flex-col gap-8" initial="hidden" animate="visible"  variants={fade}>
                 <SectionLabel>Market Research</SectionLabel>
                 <h2 className="text-5xl font-semibold tracking-tight">User Psychology</h2>
 
@@ -240,7 +240,7 @@ export default function DiscoveryToTransactionPage() {
             </motion.section>
 
             {/* ── Data & Funnel Analysis ── */}
-            <motion.section className="flex flex-col gap-8" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fade}>
+            <motion.section className="flex flex-col gap-8" initial="hidden" animate="visible"  variants={fade}>
                 <h2 className="text-5xl font-semibold tracking-tight">Data &amp; Funnel Analysis</h2>
                 <ScrollMagnifier>
                     <p className="text-base leading-relaxed">
@@ -313,7 +313,7 @@ export default function DiscoveryToTransactionPage() {
             </motion.section>
 
             {/* ── User Personas ── */}
-            <motion.section className="flex flex-col gap-8" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fade}>
+            <motion.section className="flex flex-col gap-8" initial="hidden" animate="visible"  variants={fade}>
                 <h2 className="text-5xl font-semibold tracking-tight">User Personas</h2>
                 <ScrollMagnifier>
                     <p className="text-base leading-relaxed">
@@ -401,7 +401,7 @@ export default function DiscoveryToTransactionPage() {
             </motion.section>
 
             {/* ── Journey Map ── */}
-            <motion.section className="flex flex-col gap-8" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fade}>
+            <motion.section className="flex flex-col gap-8" initial="hidden" animate="visible"  variants={fade}>
                 <h2 className="text-5xl font-semibold tracking-tight">Personas&apos; Journey Map</h2>
                 <div className="overflow-x-auto rounded-xl border border-border">
                     <Image
@@ -431,7 +431,7 @@ export default function DiscoveryToTransactionPage() {
             </motion.section>
 
             {/* ── Key Insights ── */}
-            <motion.section className="flex flex-col gap-8" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fade}>
+            <motion.section className="flex flex-col gap-8" initial="hidden" animate="visible"  variants={fade}>
                 <h2 className="text-5xl font-semibold tracking-tight">
                     Key <span style={{ color: "var(--accent-blue)" }}>Insights</span> from{" "}
                     <span style={{ color: "var(--accent-blue)" }}>Personas</span>&apos;
@@ -454,7 +454,7 @@ export default function DiscoveryToTransactionPage() {
             </motion.section>
 
             {/* ── Analyzing the Problem ── */}
-            <motion.section className="flex flex-col gap-8" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fade}>
+            <motion.section className="flex flex-col gap-8" initial="hidden" animate="visible"  variants={fade}>
                 <h2 className="text-5xl font-semibold tracking-tight">Analyzing the Problem</h2>
                 <div className="flex justify-center">
                     <Image
@@ -488,7 +488,7 @@ export default function DiscoveryToTransactionPage() {
             </motion.section>
 
             {/* ── The North Star ── */}
-            <motion.section className="flex flex-col gap-8" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fade}>
+            <motion.section className="flex flex-col gap-8" initial="hidden" animate="visible"  variants={fade}>
                 <h2 className="text-5xl font-semibold tracking-tight">
                     The <span style={{ color: "var(--accent-blue)" }}>North</span> Star
                 </h2>
@@ -513,7 +513,7 @@ export default function DiscoveryToTransactionPage() {
             </motion.section>
 
             {/* ── Proposed Solution ── */}
-            <motion.section className="flex flex-col gap-8" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fade}>
+            <motion.section className="flex flex-col gap-8" initial="hidden" animate="visible"  variants={fade}>
                 <h2 className="text-5xl font-semibold tracking-tight">Proposed Solution</h2>
                 <div className="flex flex-col md:flex-row gap-6 items-start">
                     <div className="flex flex-col gap-4 flex-1 text-base leading-relaxed">
@@ -584,7 +584,7 @@ export default function DiscoveryToTransactionPage() {
             </motion.section>
 
             {/* ── Success Metrics ── */}
-            <motion.section className="flex flex-col gap-8" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fade}>
+            <motion.section className="flex flex-col gap-8" initial="hidden" animate="visible"  variants={fade}>
                 <h2 className="text-5xl font-semibold tracking-tight">Success Metrics</h2>
 
                 <h2 className="text-4xl font-semibold tracking-tight">North Star Metric</h2>
@@ -622,7 +622,7 @@ export default function DiscoveryToTransactionPage() {
             </motion.section>
 
             {/* ── Trade-Offs ── */}
-            <motion.section className="flex flex-col gap-8" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fade}>
+            <motion.section className="flex flex-col gap-8" initial="hidden" animate="visible"  variants={fade}>
                 <h2 className="text-5xl font-semibold tracking-tight">Trade-Offs</h2>
                 <ScrollMagnifier>
                     <p className="text-base leading-relaxed italic">
