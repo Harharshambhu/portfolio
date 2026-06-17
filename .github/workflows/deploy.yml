@@ -64,6 +64,6 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          projectName: 'your-cloudflare-project-name' # Replace with your Cloudflare project name
+          projectName: sokimevi
           directory: './out' # Next.js static export directory
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
