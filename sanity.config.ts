@@ -1,5 +1,6 @@
 import { defineConfig } from "sanity";
 import { structureTool } from "sanity/structure";
+import { table } from "@sanity/table";
 import { schemaTypes } from "./src/sanity/schemas";
 
 // Hardcoded rather than read from env: the Sanity CLI's own build (used by
@@ -16,5 +17,5 @@ export default defineConfig({
   schema: {
     types: schemaTypes,
   },
-  plugins: [structureTool()],
+  plugins: [structureTool(), table()],
 });

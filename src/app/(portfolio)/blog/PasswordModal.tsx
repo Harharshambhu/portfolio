@@ -47,7 +47,7 @@ export default function PasswordModal({
       onClick={onClose}
     >
       <div
-        className="flex flex-col gap-4 w-full max-w-sm rounded-sm p-8"
+        className="flex flex-col gap-4 w-full max-w-sm rounded-sm px-8 pt-8 pb-6"
         style={{ backgroundColor: "var(--background)", border: "1px solid var(--border)" }}
         onClick={(e) => e.stopPropagation()}
       >

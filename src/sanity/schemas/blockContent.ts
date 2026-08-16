@@ -10,6 +10,7 @@ export const blockContent = defineType({
       type: "block",
       styles: [
         { title: "Normal", value: "normal" },
+        { title: "H1", value: "h1" },
         { title: "H2", value: "h2" },
         { title: "H3", value: "h3" },
         { title: "H4", value: "h4" },
@@ -69,6 +70,42 @@ export const blockContent = defineType({
         defineField({ name: "code", type: "text", title: "Code" }),
         defineField({ name: "filename", type: "string", title: "Filename (optional)" }),
       ],
+    }),
+    // Table — registered by the @sanity/table plugin
+    { type: "table" },
+    // Embeds — YouTube/Vimeo render as an iframe, anything else as a link card
+    defineField({
+      name: "embed",
+      type: "object",
+      title: "Embed",
+      fields: [
+        defineField({ name: "url", type: "url", title: "URL" }),
+        defineField({ name: "caption", type: "string", title: "Caption (optional)" }),
+      ],
+      preview: {
+        select: { title: "url" },
+      },
+    }),
+    // Toggle / collapsible section
+    defineField({
+      name: "toggle",
+      type: "object",
+      title: "Toggle",
+      fields: [
+        defineField({ name: "title", type: "string", title: "Summary", validation: (Rule) => Rule.required() }),
+        defineField({
+          name: "body",
+          title: "Content",
+          type: "array",
+          of: [{ type: "block" }],
+        }),
+      ],
+      preview: {
+        select: { title: "title" },
+        prepare({ title }: { title?: string }) {
+          return { title: title ? `Toggle: ${title}` : "Toggle" };
+        },
+      },
     }),
   ],
 });

@@ -29,8 +29,87 @@ export async function generateMetadata({
 
 // ─── Portable Text Renderer ───────────────────────────────────────────────────
 
+/** YouTube/Vimeo URLs become an embedded iframe; anything else falls back to a link card. */
+function getEmbedSrc(url: string): string | null {
+  const youtube = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([\w-]+)/);
+  if (youtube) return `https://www.youtube.com/embed/${youtube[1]}`;
+
+  const vimeo = url.match(/vimeo\.com\/(\d+)/);
+  if (vimeo) return `https://player.vimeo.com/video/${vimeo[1]}`;
+
+  return null;
+}
+
 const portableTextComponents: PortableTextComponents = {
   types: {
+    table: ({ value }: { value: { rows?: { cells?: string[] }[] } }) => {
+      const rows = value?.rows ?? [];
+      return (
+        <div className="my-6 overflow-x-auto rounded-xl border border-border">
+          <table className="w-full text-sm" style={{ color: "var(--foreground)" }}>
+            <tbody>
+              {rows.map((row, i) => (
+                <tr key={i} className="border-b border-border last:border-b-0">
+                  {(row.cells ?? []).map((cell, j) => (
+                    <td key={j} className="px-4 py-2.5 align-top">
+                      {cell}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      );
+    },
+    embed: ({ value }: { value: { url?: string; caption?: string } }) => {
+      if (!value?.url) return null;
+      const embedSrc = getEmbedSrc(value.url);
+      return (
+        <figure className="my-8">
+          {embedSrc ? (
+            <div className="relative w-full overflow-hidden rounded-xl border border-border" style={{ paddingTop: "56.25%" }}>
+              <iframe
+                src={embedSrc}
+                className="absolute inset-0 h-full w-full"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
+            </div>
+          ) : (
+            <a
+              href={value.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block rounded-xl border border-border px-5 py-4 text-sm underline underline-offset-2 hover:opacity-70 transition-opacity"
+              style={{ color: "var(--accent-neon)" }}
+            >
+              {value.url}
+            </a>
+          )}
+          {value.caption && (
+            <figcaption className="mt-2 text-center text-xs font-sans" style={{ color: "var(--muted)" }}>
+              {value.caption}
+            </figcaption>
+          )}
+        </figure>
+      );
+    },
+    toggle: ({ value }: { value: { title?: string; body?: Parameters<typeof PortableText>[0]["value"] } }) => (
+      <details className="my-6 rounded-xl border border-border px-5 py-4 group">
+        <summary
+          className="cursor-pointer font-medium select-none list-none"
+          style={{ color: "var(--foreground)" }}
+        >
+          {value?.title}
+        </summary>
+        {value?.body && (
+          <div className="mt-4 prose-content">
+            <PortableText value={value.body} components={portableTextComponents} />
+          </div>
+        )}
+      </details>
+    ),
     inlineImage: ({ value }: { value: { alt?: string; caption?: string; asset?: { _ref?: string } } }) => (
       <figure className="my-8">
         {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -60,6 +139,11 @@ const portableTextComponents: PortableTextComponents = {
     ),
   },
   block: {
+    h1: ({ children }) => (
+      <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight mt-12 mb-5" style={{ color: "var(--foreground)" }}>
+        {children}
+      </h1>
+    ),
     h2: ({ children }) => (
       <h2 className="text-2xl md:text-3xl font-semibold tracking-tight mt-10 mb-4" style={{ color: "var(--foreground)" }}>
         {children}
