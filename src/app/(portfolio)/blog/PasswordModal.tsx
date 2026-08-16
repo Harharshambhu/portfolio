@@ -27,15 +27,21 @@ export default function PasswordModal({
     return () => window.removeEventListener("keydown", handleKey);
   }, [onClose]);
 
+  useEffect(() => {
+    if (!error) return;
+    const timer = setTimeout(() => setError(false), 3000);
+    return () => clearTimeout(timer);
+  }, [error]);
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setError(false);
     startTransition(async () => {
       const ok = await checkBlogPassword(password);
       if (ok) {
         onSuccess();
       } else {
         setError(true);
+        setPassword("");
       }
     });
   };
@@ -63,16 +69,14 @@ export default function PasswordModal({
             ref={inputRef}
             type="password"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(e) => {
+              setPassword(e.target.value);
+              if (error) setError(false);
+            }}
             required
-            className="flex h-[42px] w-full rounded-md px-6 py-2 text-base text-black bg-white text-center focus-visible:outline-none focus-visible:ring-[0.5px] focus-visible:ring-black transition-colors placeholder:text-gray-500"
-            placeholder="Enter password"
+            className={`flex h-[42px] w-full rounded-md px-6 py-2 text-base text-black bg-white text-center focus-visible:outline-none focus-visible:ring-[0.5px] focus-visible:ring-black transition-colors ${error ? "placeholder:text-red-500" : "placeholder:text-gray-500"}`}
+            placeholder={error ? "turn around" : "Enter password"}
           />
-          {error && (
-            <span className="text-sm text-center" style={{ color: "#e05252" }}>
-              Wrong password — try again.
-            </span>
-          )}
           <button
             type="submit"
             disabled={isPending}
