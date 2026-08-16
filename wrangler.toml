@@ -21,6 +21,13 @@ service = "sokimevi"
 pattern = "www.sokimevi.com"
 custom_domain = true
 
+# Throttles the blog password check so a 4-digit PIN can't be brute-forced —
+# without this, all 10,000 combinations are guessable in seconds.
+[[ratelimits]]
+name = "BLOG_AUTH_LIMITER"
+namespace_id = "1001"
+simple = { limit = 5, period = 60 }
+
 [vars]
 # Public env vars can go here — secrets should go in Cloudflare dashboard
 NEXT_PUBLIC_SANITY_PROJECT_ID = "j80py9ok"

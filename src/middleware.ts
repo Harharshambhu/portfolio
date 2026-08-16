@@ -1,17 +1,19 @@
 import { NextRequest, NextResponse } from "next/server";
+import { BLOG_AUTH_COOKIE, deriveBlogAuthToken } from "./lib/blogAuth";
 
-const COOKIE_NAME = "blog_auth";
-
-export function middleware(req: NextRequest) {
+export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
   if (pathname.startsWith("/blog/unlock")) {
     return NextResponse.next();
   }
 
-  const cookie = req.cookies.get(COOKIE_NAME)?.value;
-  if (cookie && cookie === process.env.BLOG_PASSWORD) {
-    return NextResponse.next();
+  const cookie = req.cookies.get(BLOG_AUTH_COOKIE)?.value;
+  if (cookie && process.env.BLOG_PASSWORD) {
+    const expected = await deriveBlogAuthToken(process.env.BLOG_PASSWORD);
+    if (cookie === expected) {
+      return NextResponse.next();
+    }
   }
 
   const url = req.nextUrl.clone();
