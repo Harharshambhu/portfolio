@@ -13,13 +13,13 @@ const hasUnlockCookie = () =>
 // ─── Blog Row — same ripple fill interaction as About page ───────────────────
 
 function BlogRow({
-  idx,
+  serialNo,
   post,
   globalMouse,
   isMobile,
   onLockedClick,
 }: {
-  idx: number;
+  serialNo: number;
   post: Post;
   globalMouse: { x: number; y: number };
   isMobile: boolean;
@@ -102,7 +102,7 @@ function BlogRow({
             transition: "color 0.4s cubic-bezier(0.4,0,0.2,1)",
           }}
         >
-          {String(idx + 1).padStart(2, "0")}
+          {String(serialNo).padStart(2, "0")}
         </span>
       </div>
 
@@ -148,6 +148,66 @@ function BlogRow({
   );
 }
 
+// ─── Pagination — 28 rows per page, sections named by their row range ────────
+
+const PAGE_SIZE = 28;
+
+function Pager({
+  currentPage,
+  totalPages,
+  totalItems,
+  onChange,
+}: {
+  currentPage: number;
+  totalPages: number;
+  totalItems: number;
+  onChange: (page: number) => void;
+}) {
+  return (
+    <div className="flex items-center justify-center gap-2 flex-wrap">
+      <button
+        type="button"
+        onClick={() => onChange(currentPage - 1)}
+        disabled={currentPage === 1}
+        className="px-3 py-1.5 text-xs font-sans uppercase tracking-wider rounded-sm transition-opacity disabled:opacity-30 disabled:cursor-not-allowed hover:opacity-70"
+        style={{ color: "var(--muted)" }}
+      >
+        ← Back
+      </button>
+
+      {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => {
+        const start = (page - 1) * PAGE_SIZE + 1;
+        const end = Math.min(page * PAGE_SIZE, totalItems);
+        const isActive = page === currentPage;
+        return (
+          <button
+            key={page}
+            type="button"
+            onClick={() => onChange(page)}
+            className="px-3 py-1.5 text-xs font-sans tabular-nums rounded-sm transition-colors"
+            style={{
+              color: isActive ? "var(--text-hover)" : "var(--muted)",
+              backgroundColor: isActive ? "var(--accent-blue)" : "transparent",
+            }}
+          >
+            {start}-{end}
+          </button>
+        );
+      })}
+
+      <button
+        type="button"
+        onClick={() => onChange(currentPage + 1)}
+        disabled={currentPage === totalPages}
+        className="px-3 py-1.5 text-xs font-sans uppercase tracking-wider rounded-sm transition-opacity disabled:opacity-30 disabled:cursor-not-allowed hover:opacity-70"
+        style={{ color: "var(--muted)" }}
+      >
+        Next →
+      </button>
+    </div>
+  );
+}
+
 // ─── Blog List (client wrapper for mouse tracking) ────────────────────────────
 
 export default function BlogList({ posts }: { posts: Post[] }) {
@@ -156,6 +216,7 @@ export default function BlogList({ posts }: { posts: Post[] }) {
   const isMobile = width < 768;
   const [globalMouse, setGlobalMouse] = useState({ x: 0, y: 0 });
   const [pendingHref, setPendingHref] = useState<string | null>(null);
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => setGlobalMouse({ x: e.clientX, y: e.clientY });
@@ -190,13 +251,21 @@ export default function BlogList({ posts }: { posts: Post[] }) {
     );
   }
 
+  const totalPages = Math.ceil(posts.length / PAGE_SIZE);
+  const pageStart = (currentPage - 1) * PAGE_SIZE;
+  const visiblePosts = posts.slice(pageStart, pageStart + PAGE_SIZE);
+
   return (
     <>
       <div className="flex flex-col border-t border-border w-3/4 mx-auto">
-        {posts.map((post, idx) => (
+        {visiblePosts.map((post, localIdx) => (
           <BlogRow
             key={post._id}
-            idx={idx}
+            // Chronological, permanent numbering — the first post ever
+            // published is always #1. Since newest stays at the top,
+            // numbers count down as you scroll, oldest post = 01 at the
+            // very bottom. Doesn't shift as new posts get added.
+            serialNo={posts.length - (pageStart + localIdx)}
             post={post}
             globalMouse={globalMouse}
             isMobile={isMobile}
@@ -204,6 +273,20 @@ export default function BlogList({ posts }: { posts: Post[] }) {
           />
         ))}
       </div>
+
+      {totalPages > 1 && (
+        <div className="w-3/4 mx-auto pt-8">
+          <Pager
+            currentPage={currentPage}
+            totalPages={totalPages}
+            totalItems={posts.length}
+            onChange={(page) => {
+              setCurrentPage(page);
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }}
+          />
+        </div>
+      )}
 
       {pendingHref && (
         <PasswordModal
