@@ -18,9 +18,11 @@ export default function BackgroundGrid({
     const canvasRef = useRef<HTMLCanvasElement>(null);
 
     const isProjectCaseStudy = pathname?.startsWith("/projects/") && pathname !== "/projects";
-    // Only the full-page fixed grid (root layout) is hidden on /blog — the
-    // footer CTA and contact-page accents pass fixed={false} and stay put.
-    const isBlogFixedGrid = fixed && pathname?.startsWith("/blog");
+    // Only the full-page fixed grid (root layout) is hidden on subpages of
+    // /blog (individual posts, the unlock gate) — the /blog list page
+    // itself keeps it, and the footer CTA / contact-page accents pass
+    // fixed={false} and stay put regardless.
+    const isBlogFixedGrid = fixed && pathname?.startsWith("/blog/");
     const isHidden = isProjectCaseStudy || isBlogFixedGrid;
 
     useEffect(() => {
