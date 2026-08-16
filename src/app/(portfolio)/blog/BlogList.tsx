@@ -68,7 +68,7 @@ function BlogRow({
       href={`/blog/${post.slug.current}`}
       prefetch={false}
       ref={rowRef}
-      className="relative flex flex-col md:flex-row py-4 border-b border-border px-3 -mx-3 rounded-sm overflow-hidden cursor-pointer no-underline bg-white/70"
+      className="relative flex flex-col md:flex-row md:items-center py-4 border-b border-border px-3 -mx-3 rounded-sm overflow-hidden cursor-pointer no-underline bg-white/70"
       onClick={(e) => {
         const href = `/blog/${post.slug.current}`;
         if (onLockedClick(href)) e.preventDefault();

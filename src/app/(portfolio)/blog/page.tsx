@@ -11,7 +11,7 @@ export default async function BlogIndexPage() {
   const posts = await getAllPosts();
 
   return (
-    <div className="flex flex-col gap-16 pb-24">
+    <div className="flex flex-col gap-24 pb-24">
       {/* Header */}
       <section className="flex flex-col gap-4 items-center text-center pt-16">
         <h1
