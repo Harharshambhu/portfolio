@@ -12,13 +12,6 @@ export const sanityClient = createClient({
 
 // ─── Types ─────────────────────────────────────────────────────────────────
 
-export interface SanityImage {
-  _type: "image";
-  asset: { _ref: string };
-  alt?: string;
-  caption?: string;
-}
-
 export interface Chapter {
   title: string;
   body: unknown[];
@@ -30,7 +23,6 @@ export interface Post {
   slug: { current: string };
   publishedAt: string;
   excerpt?: string;
-  coverImage?: SanityImage;
   tags?: string[];
   chapters?: Chapter[];
 }
@@ -46,8 +38,7 @@ export async function getAllPosts(): Promise<Post[]> {
       slug,
       publishedAt,
       excerpt,
-      tags,
-      coverImage { asset, alt }
+      tags
     }`,
     {},
     { next: { revalidate: 60 } } // ISR-like: revalidate every 60s
@@ -64,7 +55,6 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
       publishedAt,
       excerpt,
       tags,
-      coverImage { asset, alt },
       chapters[] {
         title,
         body
