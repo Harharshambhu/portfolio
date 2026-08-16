@@ -1,7 +1,25 @@
 name = "sokimevi"
+main = ".open-next/worker.js"
 compatibility_date = "2024-09-23"
-compatibility_flags = ["nodejs_compat"]
-pages_build_output_dir = ".open-next/cloudflare"
+compatibility_flags = ["nodejs_compat", "global_fetch_strictly_public"]
+
+# OpenNext Cloudflare deploys as a Worker with static assets, not a
+# classic "Pages" build. The actual worker + assets live at
+# .open-next/worker.js and .open-next/assets — NOT .open-next/cloudflare
+# (which only holds a handful of small runtime helper files). Deploying
+# the wrong directory via `wrangler pages deploy` silently "succeeds"
+# while uploading almost nothing.
+[assets]
+directory = ".open-next/assets"
+binding = "ASSETS"
+
+[[services]]
+binding = "WORKER_SELF_REFERENCE"
+service = "sokimevi"
+
+[[routes]]
+pattern = "www.sokimevi.com"
+custom_domain = true
 
 [vars]
 # Public env vars can go here — secrets should go in Cloudflare dashboard

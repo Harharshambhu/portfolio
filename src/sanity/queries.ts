@@ -1,5 +1,4 @@
 import { createClient } from "next-sanity";
-import { draftMode } from "next/headers";
 
 const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!;
 const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET!;
@@ -55,40 +54,24 @@ export async function getAllPosts(): Promise<Post[]> {
   );
 }
 
-const POST_BY_SLUG_QUERY = `*[_type == "post" && slug.current == $slug][0] {
-  _id,
-  title,
-  slug,
-  publishedAt,
-  excerpt,
-  tags,
-  coverImage { asset, alt },
-  chapters[] {
-    title,
-    body
-  }
-}`;
-
-/**
- * Single post by slug — includes full chapter bodies.
- * Reads unpublished drafts when Next.js draft mode is on (i.e. when
- * viewed inside the Sanity Presentation tool), otherwise published-only.
- */
+/** Single post by slug — includes full chapter bodies */
 export async function getPostBySlug(slug: string): Promise<Post | null> {
-  const { isEnabled: isDraft } = await draftMode();
-
-  const client = isDraft
-    ? sanityClient.withConfig({
-        token: process.env.SANITY_API_TOKEN,
-        useCdn: false,
-        perspective: "previewDrafts",
-      })
-    : sanityClient;
-
-  return client.fetch(
-    POST_BY_SLUG_QUERY,
+  return sanityClient.fetch(
+    `*[_type == "post" && slug.current == $slug][0] {
+      _id,
+      title,
+      slug,
+      publishedAt,
+      excerpt,
+      tags,
+      coverImage { asset, alt },
+      chapters[] {
+        title,
+        body
+      }
+    }`,
     { slug },
-    isDraft ? undefined : { next: { revalidate: 60 } }
+    { next: { revalidate: 60 } }
   );
 }
 

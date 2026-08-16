@@ -1,50 +1,20 @@
 import { defineConfig } from "sanity";
 import { structureTool } from "sanity/structure";
-import { visionTool } from "@sanity/vision";
-import { dashboardTool } from "@sanity/dashboard";
-import { presentationTool, defineLocations } from "sanity/presentation";
-import { projectInfoWidget, projectUsersWidget } from "@sanity/dashboard";
-import { schemaTypes } from "@/sanity/schemas";
+import { schemaTypes } from "./src/sanity/schemas";
 
-const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!;
-const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET!;
+// Hardcoded rather than read from env: the Sanity CLI's own build (used by
+// `sanity deploy`) doesn't load NEXT_PUBLIC_* vars the way Next.js does, so
+// process.env.NEXT_PUBLIC_SANITY_PROJECT_ID resolved to undefined in the
+// deployed Studio bundle. These values are public/non-secret (see .env.local).
+const projectId = "j80py9ok";
+const dataset = "production";
 
 export default defineConfig({
   projectId,
   dataset,
   apiVersion: "2024-01-01",
-  basePath: "/studio",
   schema: {
     types: schemaTypes,
   },
-  plugins: [
-    structureTool(),
-    visionTool(),
-    dashboardTool({
-      widgets: [projectInfoWidget(), projectUsersWidget()],
-    }),
-    presentationTool({
-      resolve: {
-        locations: {
-          post: defineLocations({
-            select: { title: "title", slug: "slug.current" },
-            resolve: (doc) => ({
-              locations: [
-                {
-                  title: doc?.title || "Untitled post",
-                  href: `/blog/${doc?.slug}`,
-                },
-                { title: "Blog index", href: "/blog" },
-              ],
-            }),
-          }),
-        },
-      },
-      previewUrl: {
-        previewMode: {
-          enable: "/api/draft-mode/enable",
-        },
-      },
-    }),
-  ],
+  plugins: [structureTool()],
 });

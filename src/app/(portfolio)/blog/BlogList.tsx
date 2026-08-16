@@ -176,9 +176,14 @@ export default function BlogList({ posts }: { posts: Post[] }) {
         <span className="text-muted text-sm font-sans uppercase tracking-wider">Nothing yet</span>
         <p className="text-muted text-sm max-w-sm leading-relaxed">
           First post coming soon. Write one via the{" "}
-          <Link href="/studio" className="underline underline-offset-2 hover:text-foreground transition-colors">
+          <a
+            href="https://sokimevi.sanity.studio/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline underline-offset-2 hover:text-foreground transition-colors"
+          >
             Studio
-          </Link>
+          </a>
           .
         </p>
       </div>

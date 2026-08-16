@@ -14,12 +14,6 @@ export function middleware(req: NextRequest) {
     return NextResponse.next();
   }
 
-  // Already authenticated via Sanity Studio login (Presentation tool preview) —
-  // draft mode implies the request came from someone with edit access.
-  if (req.cookies.get("__prerender_bypass") && req.cookies.get("__next_preview_data")) {
-    return NextResponse.next();
-  }
-
   const url = req.nextUrl.clone();
   url.pathname = "/blog/unlock";
   url.search = "";
