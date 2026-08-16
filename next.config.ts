@@ -1,8 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  output: "export",
-  turbopack: {},
+  // SSR mode for Cloudflare Pages via @opennextjs/cloudflare
   images: {
     unoptimized: true,
     remotePatterns: [
@@ -13,6 +12,11 @@ const nextConfig: NextConfig = {
       {
         protocol: "https",
         hostname: "images.unsplash.com",
+      },
+      {
+        // Sanity image CDN
+        protocol: "https",
+        hostname: "cdn.sanity.io",
       },
     ],
   },

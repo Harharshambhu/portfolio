@@ -1,0 +1,9 @@
+name = "sokimevi"
+compatibility_date = "2024-09-23"
+compatibility_flags = ["nodejs_compat"]
+pages_build_output_dir = ".open-next/cloudflare"
+
+[vars]
+# Public env vars can go here — secrets should go in Cloudflare dashboard
+NEXT_PUBLIC_SANITY_PROJECT_ID = "j80py9ok"
+NEXT_PUBLIC_SANITY_DATASET = "production"

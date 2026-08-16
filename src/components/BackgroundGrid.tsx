@@ -18,9 +18,13 @@ export default function BackgroundGrid({
     const canvasRef = useRef<HTMLCanvasElement>(null);
 
     const isProjectCaseStudy = pathname?.startsWith("/projects/") && pathname !== "/projects";
+    // Only the full-page fixed grid (root layout) is hidden on /blog — the
+    // footer CTA and contact-page accents pass fixed={false} and stay put.
+    const isBlogFixedGrid = fixed && pathname?.startsWith("/blog");
+    const isHidden = isProjectCaseStudy || isBlogFixedGrid;
 
     useEffect(() => {
-        if (isProjectCaseStudy) return;
+        if (isHidden) return;
         const canvas = canvasRef.current;
         if (!canvas) return;
 
@@ -231,9 +235,9 @@ export default function BackgroundGrid({
             paletteObserver.disconnect();
             cancelAnimationFrame(animationFrameId);
         };
-    }, [color, fixed, isProjectCaseStudy]);
+    }, [color, fixed, isHidden]);
 
-    if (isProjectCaseStudy) {
+    if (isHidden) {
         return null;
     }
 
