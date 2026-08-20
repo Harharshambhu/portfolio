@@ -118,7 +118,7 @@ export default function LetsTalkSection() {
                         onClick={handleClick}
                         onFocus={handleFocus}
                         onBlur={handleBlur}
-                        transition={{ duration: ANIMATION_DURATION, ease: "linear" }}
+                        transition={{ duration: 0.2, ease: "linear" }}
                         className={`relative inline-flex items-center justify-center px-9 py-4 text-2xl font-sans ${isClicked ? "overflow-visible max-w-none" : "overflow-hidden"}`}
                         variants={{
                             initial: {

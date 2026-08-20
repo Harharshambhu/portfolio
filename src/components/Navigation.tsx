@@ -10,13 +10,15 @@ import { Menu, Moon, Sun, X } from "lucide-react";
 import { DARK, LIGHT, applyPalette } from "./PaletteChanger";
 
 const links = [
-    { href: "/", label: "Home" },
-    { href: "/about", label: "About" },
-    { href: "/projects", label: "Projects" },
-    { href: "/blog", label: "My Blogs" },
-    { href: "/resume", label: "Resume" },
-    { href: "/contact", label: "Contact" },
+    { href: "/", label: "Home", tilt: -1.5 },
+    { href: "/about", label: "About", tilt: 3 },
+    { href: "/projects", label: "Projects", tilt: -3 },
+    { href: "/blog", label: "My Blogs", tilt: 4 },
+    { href: "/resume", label: "Resume", tilt: -3.5 },
+    { href: "/contact", label: "Contact", tilt: 3.5 },
 ];
+
+const MotionLink = motion(Link);
 
 export default function Navigation() {
     const pathname = usePathname();
@@ -186,16 +188,36 @@ export default function Navigation() {
                                     animate={{ opacity: 1, width: "auto", filter: "blur(0px)" }}
                                     exit={{ opacity: 0, width: 0, filter: "blur(4px)" }}
                                     transition={{ duration: 0.4, ease: "easeInOut" }}
-                                    className="flex flex-nowrap gap-3 md:gap-10 -translate-y-2 overflow-hidden items-center"
+                                    className="flex flex-nowrap gap-3 md:gap-10 -translate-y-2 overflow-x-clip items-center pt-3 -mt-3"
                                 >
                                     {links.map((link) => (
-                                        <Link
+                                        <MotionLink
                                             key={link.href}
                                             href={link.href}
-                                            className={`hover:text-foreground transition-colors text-sm whitespace-nowrap ${pathname === link.href ? "text-foreground active" : "text-muted font-semibold"}`}
+                                            initial="rest"
+                                            whileHover="hover"
+                                            animate="rest"
+                                            className={`no-cursor-interaction relative hover:text-foreground transition-colors text-sm whitespace-nowrap inline-block ${pathname === link.href ? "text-foreground active" : "text-muted font-semibold"}`}
                                         >
-                                            {link.label}
-                                        </Link>
+                                            <motion.span
+                                                aria-hidden
+                                                className="absolute -inset-x-4 -inset-y-3 -z-10 backdrop-blur-sm"
+                                                style={{
+                                                    background: "radial-gradient(ellipse at center, rgba(127,127,127,0.12), transparent 70%)",
+                                                    WebkitMaskImage: "radial-gradient(ellipse at center, #000 25%, transparent 72%)",
+                                                    maskImage: "radial-gradient(ellipse at center, #000 25%, transparent 72%)",
+                                                }}
+                                                variants={{ rest: { opacity: 0 }, hover: { opacity: 1 } }}
+                                                transition={{ duration: 0.2 }}
+                                            />
+                                            <motion.span
+                                                className="inline-block"
+                                                variants={{ rest: { y: 0, rotate: 0 }, hover: { y: -12, rotate: link.tilt } }}
+                                                transition={{ type: "spring", stiffness: 300, damping: 15 }}
+                                            >
+                                                {link.label}
+                                            </motion.span>
+                                        </MotionLink>
                                     ))}
                                 </motion.div>
                             ) : (
@@ -301,15 +323,35 @@ export default function Navigation() {
                             </button>
                             <div className="flex flex-col pt-12 text-lg font-sans font-semibold tracking-tight flex-1">
                                 {links.map((link) => (
-                                    <Link
+                                    <MotionLink
                                         key={link.href}
                                         href={link.href}
                                         onClick={() => setIsSidebarOpen(false)}
-                                        className={`w-full px-6 py-3 transition-colors ${pathname === link.href ? "font-bold text-foreground" : "text-muted hover:text-foreground font-semibold"}`}
+                                        initial="rest"
+                                        whileHover="hover"
+                                        animate="rest"
+                                        className={`no-cursor-interaction relative w-full px-6 py-3 transition-colors inline-block ${pathname === link.href ? "font-bold text-foreground" : "text-muted hover:text-foreground font-semibold"}`}
                                         style={pathname === link.href ? { color: "var(--accent-blue)" } : {}}
                                     >
-                                        {link.label}
-                                    </Link>
+                                        <motion.span
+                                            aria-hidden
+                                            className="absolute inset-x-2 inset-y-0 -z-10 backdrop-blur-sm"
+                                            style={{
+                                                background: "radial-gradient(ellipse at center, rgba(127,127,127,0.12), transparent 70%)",
+                                                WebkitMaskImage: "radial-gradient(ellipse at center, #000 25%, transparent 72%)",
+                                                maskImage: "radial-gradient(ellipse at center, #000 25%, transparent 72%)",
+                                            }}
+                                            variants={{ rest: { opacity: 0 }, hover: { opacity: 1 } }}
+                                            transition={{ duration: 0.2 }}
+                                        />
+                                        <motion.span
+                                            className="inline-block"
+                                            variants={{ rest: { y: 0, rotate: 0 }, hover: { y: -12, rotate: link.tilt } }}
+                                            transition={{ type: "spring", stiffness: 300, damping: 15 }}
+                                        >
+                                            {link.label}
+                                        </motion.span>
+                                    </MotionLink>
                                 ))}
                             </div>
 

@@ -75,6 +75,7 @@ export default function PasswordModal({
             }}
             required
             className={`flex h-[42px] w-full rounded-md px-6 py-2 text-base text-black bg-white text-center focus-visible:outline-none focus-visible:ring-[0.5px] focus-visible:ring-black transition-colors ${error ? "placeholder:text-red-500" : "placeholder:text-gray-500"}`}
+            style={password ? { fontSize: "2.2rem", letterSpacing: "0.001em", textIndent: "0.075em", lineHeight: "42px", paddingTop: 0, paddingBottom: 8 } : undefined}
             placeholder={error ? "turn around" : "Enter password"}
           />
           <button

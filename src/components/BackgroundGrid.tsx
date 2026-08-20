@@ -79,9 +79,35 @@ export default function BackgroundGrid({
         const innerRadiusSq = (hoverRadius * 0.8) ** 2;
         const easing = 0.15;
         const IDLE_MS = 250;
+        // Max outward displacement a dot can take (~0.186 * hoverRadius, see render).
+        // The dirty-region box is padded by this so displaced dots stay inside it.
+        const dirtyPad = hoverRadius * 0.25;
 
         let lastMoveTime = 0;
         let rafRunning = false;
+
+        // Static base-dot layer, pre-rendered once per resize/palette change.
+        // Each frame we blit this instead of looping over every cell on screen —
+        // only the small region around the cursor is recomputed live.
+        const baseCanvas = document.createElement("canvas");
+        const bctx = baseCanvas.getContext("2d");
+
+        const buildBaseGrid = () => {
+            if (!bctx) return;
+            baseCanvas.width = canvas.width;
+            baseCanvas.height = canvas.height;
+            bctx.clearRect(0, 0, baseCanvas.width, baseCanvas.height);
+            bctx.fillStyle = colors.base;
+            const rows = Math.ceil(baseCanvas.height / gridSize);
+            const cols = Math.ceil(baseCanvas.width / gridSize);
+            for (let r = 0; r < rows; r++) {
+                for (let c = 0; c < cols; c++) {
+                    const x = c * gridSize + gridSize / 2;
+                    const y = r * gridSize + gridSize / 2;
+                    bctx.fillRect(x - 1, y - 1, 2, 2);
+                }
+            }
+        };
 
         const render = () => {
             if (!ctx || !canvas) return;
@@ -99,53 +125,75 @@ export default function BackgroundGrid({
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
             }
 
-            const rows = Math.ceil(canvas.height / gridSize);
-            const cols = Math.ceil(canvas.width / gridSize);
+            // Blit the pre-rendered static base grid in one draw call.
+            ctx.drawImage(baseCanvas, 0, 0);
 
-            for (let r = 0; r < rows; r++) {
-                for (let c = 0; c < cols; c++) {
-                    const x = c * gridSize + gridSize / 2;
-                    const y = r * gridSize + gridSize / 2;
+            // Only the cells within the cursor's hover box are recomputed live.
+            // Everything else is already correct from the blit above.
+            if (interaction) {
+                const R = hoverRadius + dirtyPad;
+                const boxL = Math.max(0, Math.floor(delayedMouseX - R));
+                const boxT = Math.max(0, Math.floor(delayedMouseY - R));
+                const boxR = Math.min(canvas.width, Math.ceil(delayedMouseX + R));
+                const boxB = Math.min(canvas.height, Math.ceil(delayedMouseY + R));
 
-                    const dx = x - delayedMouseX;
-                    const dy = y - delayedMouseY;
-                    // Squared distance check — avoids Math.sqrt for ~95% of dots
-                    const distSq = dx * dx + dy * dy;
+                if (boxR > boxL && boxB > boxT) {
+                    // Clear the box so displaced dots don't double up with the blitted base dots.
+                    ctx.clearRect(boxL, boxT, boxR - boxL, boxB - boxT);
 
-                    if (interaction && distSq < hoverRadiusSq) {
-                        const dist = Math.sqrt(distSq);
-                        // Circular gradient: t=0 at cursor (hover color), t=1 at edge (base color)
-                        const t = Math.pow(dist / hoverRadius, 0.6);
-                        const dotColor = colors.table[Math.min(100, Math.round(t * 100))];
+                    const cStart = Math.floor(boxL / gridSize);
+                    const cEnd = Math.ceil(boxR / gridSize);
+                    const rStart = Math.floor(boxT / gridSize);
+                    const rEnd = Math.ceil(boxB / gridSize);
 
-                        const scaling = Math.pow(1 - dist / hoverRadius, 1.5);
-                        const angle = Math.atan2(dy, dx);
-                        const displacement = dist * scaling;
+                    for (let r = rStart; r < rEnd; r++) {
+                        for (let c = cStart; c < cEnd; c++) {
+                            const x = c * gridSize + gridSize / 2;
+                            const y = r * gridSize + gridSize / 2;
 
-                        const renderX = x + Math.cos(angle) * displacement;
-                        const renderY = y + Math.sin(angle) * displacement;
+                            const dx = x - delayedMouseX;
+                            const dy = y - delayedMouseY;
+                            // Squared distance check — avoids Math.sqrt for ~95% of dots
+                            const distSq = dx * dx + dy * dy;
 
-                        const newDx = renderX - delayedMouseX;
-                        const newDy = renderY - delayedMouseY;
-                        const distToMouseSq = newDx * newDx + newDy * newDy;
+                            if (distSq < hoverRadiusSq) {
+                                const dist = Math.sqrt(distSq);
+                                // Circular gradient: t=0 at cursor (hover color), t=1 at edge (base color)
+                                const t = Math.pow(dist / hoverRadius, 0.6);
+                                const dotColor = colors.table[Math.min(100, Math.round(t * 100))];
 
-                        if (distToMouseSq < innerRadiusSq) {
-                            const distToMouse = Math.sqrt(distToMouseSq);
-                            const innerRadius = hoverRadius * 0.8;
-                            const sizeFactor = 1 - Math.pow(distToMouse / innerRadius, 2);
-                            const stretch = 10 * sizeFactor;
-                            const isHorizontal = (r + c) % 2 === 0;
-                            const w = isHorizontal ? 2 + stretch : 2;
-                            const h = isHorizontal ? 2 : 2 + stretch;
-                            ctx.fillStyle = dotColor;
-                            ctx.fillRect(renderX - w / 2, renderY - h / 2, w, h);
-                        } else {
-                            ctx.fillStyle = dotColor;
-                            ctx.fillRect(renderX - 1, renderY - 1, 2, 2);
+                                const scaling = Math.pow(1 - dist / hoverRadius, 1.5);
+                                const angle = Math.atan2(dy, dx);
+                                const displacement = dist * scaling;
+
+                                const renderX = x + Math.cos(angle) * displacement;
+                                const renderY = y + Math.sin(angle) * displacement;
+
+                                const newDx = renderX - delayedMouseX;
+                                const newDy = renderY - delayedMouseY;
+                                const distToMouseSq = newDx * newDx + newDy * newDy;
+
+                                if (distToMouseSq < innerRadiusSq) {
+                                    const distToMouse = Math.sqrt(distToMouseSq);
+                                    const innerRadius = hoverRadius * 0.8;
+                                    const sizeFactor = 1 - Math.pow(distToMouse / innerRadius, 2);
+                                    const stretch = 10 * sizeFactor;
+                                    const isHorizontal = (r + c) % 2 === 0;
+                                    const w = isHorizontal ? 2 + stretch : 2;
+                                    const h = isHorizontal ? 2 : 2 + stretch;
+                                    ctx.fillStyle = dotColor;
+                                    ctx.fillRect(renderX - w / 2, renderY - h / 2, w, h);
+                                } else {
+                                    ctx.fillStyle = dotColor;
+                                    ctx.fillRect(renderX - 1, renderY - 1, 2, 2);
+                                }
+                            } else {
+                                // Inside the cleared box but outside the hover radius —
+                                // redraw the plain base dot the blit no longer covers.
+                                ctx.fillStyle = colors.base;
+                                ctx.fillRect(x - 1, y - 1, 2, 2);
+                            }
                         }
-                    } else {
-                        ctx.fillStyle = colors.base;
-                        ctx.fillRect(x - 1, y - 1, 2, 2);
                     }
                 }
             }
@@ -176,7 +224,8 @@ export default function BackgroundGrid({
                     canvas.height = rect.height;
                 }
             }
-            // Redraw static frame after resize
+            // Rebuild the static base layer at the new size, then redraw.
+            buildBaseGrid();
             render();
         };
 
@@ -215,6 +264,7 @@ export default function BackgroundGrid({
         // Re-read palette variables whenever PaletteChanger writes to :root style
         const paletteObserver = new MutationObserver(() => {
             rebuildColors();
+            buildBaseGrid();
             lastMoveTime = Date.now();
             startRaf();
         });

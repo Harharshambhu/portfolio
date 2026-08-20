@@ -218,3 +218,8 @@ table * {
   font-family: var(--font-sans), sans-serif;
   line-height: 1.65;
 }
+/* Rotate the system cursor 70deg to the right when hovering nav page links,
+   so the arrow doesn't sit on top of the link text as it tilts/drops. */
+.nav-cursor-tilt:hover {
+  cursor: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='40'%20height='40'%20viewBox='0%200%2040%2040'%3E%3Cg%20transform='rotate(70%2010%2010)'%3E%3Cpath%20d='M10%2010%20L10%2024%20L14%2020.5%20L17%2027%20L19.5%2026%20L16.5%2019.5%20L22%2019.5%20Z'%20fill='black'%20stroke='white'%20stroke-width='1.5'%20stroke-linejoin='round'/%3E%3C/g%3E%3C/svg%3E") 10 10, pointer;
+}

@@ -18,12 +18,14 @@ function BlogRow({
   globalMouse,
   isMobile,
   onLockedClick,
+  unlocked,
 }: {
   serialNo: number;
   post: Post;
   globalMouse: { x: number; y: number };
   isMobile: boolean;
   onLockedClick: (href: string) => boolean;
+  unlocked: boolean;
 }) {
   const rowRef = useRef<HTMLAnchorElement>(null);
   const [origin, setOrigin] = useState({ x: 0, y: 0 });
@@ -66,7 +68,7 @@ function BlogRow({
   return (
     <Link
       href={`/blog/${post.slug.current}`}
-      prefetch={false}
+      prefetch={unlocked ? undefined : false}
       ref={rowRef}
       className="relative flex flex-col md:flex-row md:items-center py-4 border-b border-border px-3 -mx-3 rounded-sm overflow-hidden cursor-pointer no-underline bg-white/70"
       onClick={(e) => {
@@ -217,11 +219,17 @@ export default function BlogList({ posts }: { posts: Post[] }) {
   const [globalMouse, setGlobalMouse] = useState({ x: 0, y: 0 });
   const [pendingHref, setPendingHref] = useState<string | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
+  const [unlocked, setUnlocked] = useState(false);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => setGlobalMouse({ x: e.clientX, y: e.clientY });
     window.addEventListener("mousemove", handleMouseMove);
     return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, []);
+
+  // Once unlocked, let rows prefetch so post pages open warm/instantly.
+  useEffect(() => {
+    setUnlocked(hasUnlockCookie());
   }, []);
 
   // Returns true if the click was intercepted (row is locked, popup opened).
@@ -270,6 +278,7 @@ export default function BlogList({ posts }: { posts: Post[] }) {
             globalMouse={globalMouse}
             isMobile={isMobile}
             onLockedClick={onLockedClick}
+            unlocked={unlocked}
           />
         ))}
       </div>
@@ -294,11 +303,12 @@ export default function BlogList({ posts }: { posts: Post[] }) {
           onSuccess={() => {
             const href = pendingHref;
             setPendingHref(null);
+            setUnlocked(true);
             if (href) {
-              // router.refresh() forces the RSC payload for the target route
-              // to be re-fetched with the just-set cookie, in case a stale
-              // (pre-unlock) response was already cached for it.
-              router.refresh();
+              // No router.refresh() needed: locked rows never navigate (their
+              // click is intercepted below via preventDefault), so the target
+              // route was never fetched pre-unlock — there's no stale cache to
+              // bust. Skipping it drops a full server round-trip from unlock.
               router.push(href);
             }
           }}

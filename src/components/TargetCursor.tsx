@@ -206,40 +206,63 @@ const TargetCursor: React.FC<TargetCursorProps> = ({
             }
         };
 
+        // Coalesce the footer-color check to at most one getBoundingClientRect
+        // per frame — high-poll-rate mice fire mousemove many times per frame,
+        // and the rect read forces layout each time.
+        let colorRafPending = false;
+        let lastColorX = 0, lastColorY = 0;
+        const scheduleColorUpdate = (x: number, y: number) => {
+            lastColorX = x; lastColorY = y;
+            if (colorRafPending) return;
+            colorRafPending = true;
+            requestAnimationFrame(() => {
+                colorRafPending = false;
+                updateCircleColor(lastColorX, lastColorY);
+            });
+        };
+
         const moveHandler = (e: MouseEvent) => {
             moveCursor(e.clientX, e.clientY);
             c1X(e.clientX); c1Y(e.clientY);
             c2X(e.clientX); c2Y(e.clientY);
             c3X(e.clientX); c3Y(e.clientY);
             c4X(e.clientX); c4Y(e.clientY);
-            updateCircleColor(e.clientX, e.clientY);
+            scheduleColorUpdate(e.clientX, e.clientY);
         };
         window.addEventListener('mousemove', moveHandler);
 
+        // Coalesce scroll work to one frame — Lenis smooth-scroll emits many
+        // scroll events per frame, and elementFromPoint also forces layout.
+        let scrollRafPending = false;
         const scrollHandler = () => {
-            if (!cursorRef.current) return;
-            const mouseX = gsap.getProperty(cursorRef.current, 'x') as number;
-            const mouseY = gsap.getProperty(cursorRef.current, 'y') as number;
-            updateCircleColor(mouseX, mouseY);
-            
-            const elementUnderMouse = document.elementFromPoint(mouseX, mouseY);
-            if (!elementUnderMouse) {
-                if (activeTarget && currentLeaveHandler) currentLeaveHandler();
-                return;
-            }
+            if (scrollRafPending) return;
+            scrollRafPending = true;
+            requestAnimationFrame(() => {
+                scrollRafPending = false;
+                if (!cursorRef.current) return;
+                const mouseX = gsap.getProperty(cursorRef.current, 'x') as number;
+                const mouseY = gsap.getProperty(cursorRef.current, 'y') as number;
+                updateCircleColor(mouseX, mouseY);
 
-            const newTarget = elementUnderMouse.matches(targetSelector)
-                ? elementUnderMouse
-                : elementUnderMouse.closest(targetSelector);
+                const elementUnderMouse = document.elementFromPoint(mouseX, mouseY);
+                if (!elementUnderMouse) {
+                    if (activeTarget && currentLeaveHandler) currentLeaveHandler();
+                    return;
+                }
 
-            if (activeTarget !== newTarget) {
-                if (activeTarget && currentLeaveHandler) {
-                    currentLeaveHandler();
+                const newTarget = elementUnderMouse.matches(targetSelector)
+                    ? elementUnderMouse
+                    : elementUnderMouse.closest(targetSelector);
+
+                if (activeTarget !== newTarget) {
+                    if (activeTarget && currentLeaveHandler) {
+                        currentLeaveHandler();
+                    }
+                    if (newTarget) {
+                        enterHandler({ target: newTarget });
+                    }
                 }
-                if (newTarget) {
-                    enterHandler({ target: newTarget });
-                }
-            }
+            });
         };
         window.addEventListener('scroll', scrollHandler, { passive: true });
 
